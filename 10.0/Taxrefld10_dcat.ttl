@@ -1,0 +1,142 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dce: <http://purl.org/dc/elements/1.1/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix void: <http://rdfs.org/ns/void#>.
+
+@prefix taxref: <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property#>.
+
+# DCAT Catalog for TAXREF datasets in all versions and all distributions
+taxref:Catalog
+ a dcat:Catalog;
+ dct:title "Catalog of TAXREF datasets in all versions"@en;
+ rdfs:label "Catalog of TAXREF datasets in all versions"@en;
+ dct:title "Catalogue des jeu de données TAXREF en toutes versions"@fr;
+ rdfs:label "Catalogue des jeu de données TAXREF en toutes versions"@fr;
+ dct:publisher taxref:INPN;
+ foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+ dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
+ dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
+ dcat:dataset <http://taxref.mnhn.fr/lod/Dataset/10.0/>;
+ .
+
+# Publisher of the DCAT catalog and datasets
+taxref:INPN
+ a foaf:Organization;
+ foaf:name "French National Inventory of Natural Heritage"@en;
+ foaf:name "Inventaire National du Patrimoine Naturel"@fr;
+ rdfs:label "French National Inventory of Natural Heritage"@en;
+ rdfs:label "Inventaire National du Patrimoine Naturel"@fr;
+ foaf:homepage <https://inpn.mnhn.fr/?lg=en>;
+ .
+
+# TAXREF 10.0 dataset DCAT definition
+<http://taxref.mnhn.fr/lod/Dataset/10.0/>
+  a dcat:Dataset;
+  dct:title "TAXREF: Taxonomic reference for flora and fauna of mainland France and overseas territories"@en;
+  dct:title "TAXREF : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
+  dct:description <https://inpn.mnhn.fr/docs-web/docs/download/170253>;
+  dct:description "TAXREF est le référentiel taxonomique national pour la faune, la flore et la fonge de France métropolitaine et d’outre-mer, élaboré et diffusé par le Muséum national d’Histoire naturelle (MNHN) dans le cadre de la mise en œuvre du Système d’Information sur la Nature et les Paysages (SINP). Ce référentiel est unique pour la France ; il a pour but de lister et d’organiser les noms scientifiques de l'ensemble des êtres vivants recensés sur le territoire. Le référentiel TAXREF est consultable et téléchargeable sur le site internet de l’Inventaire National du Patrimoine Naturel (INPN) coordonné par le MNHN."@fr;
+  dct:description "TAXREF is the national taxonomical reference for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). This unique reference registers and classifies the scientific names scientifiques of all living beings inventoried on the territory. The TAXREF reference is readable and downloadable from the web site of the National Inventory of Natural Heritage (INPN), coordinated by the MNHN."@en;  
+  dcat:landingPage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+  foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+  dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
+
+  dct:licence <http://creativecommons.org/licenses/by-sa/4.0/>;
+  owl:versionInfo "10.0";
+  dct:issued "2016-11-03"^^xsd:date;
+  dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
+  dce:contributor "F. Michel", "C. Faron-Zucker";
+  dct:publisher taxref:INPN;
+  dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
+  dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
+  dcat:keyword "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences", "schemata", "lod", "provenance-metadata", "published-by-third-party", "license-metadata", "format-rdf", "format-rdfs", "format-skos", "format-dc", "format-foaf", "format-geonames", "format-geospecies", "format-txn", "format-ncbitaxon", "format-dwc";
+  
+  # 3 distributions: downloadable CSV, through a web service, linked data RDF graph
+  dcat:distribution taxref:CSVDownload;
+  dcat:distribution taxref:WebService;
+  dcat:distribution <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+ 
+  dct:spatial <http://sws.geonames.org/3017382/>;
+  dct:spatial <http://sws.geonames.org/3381670/>;
+  dct:spatial <http://sws.geonames.org/3570311/>;
+  dct:spatial <http://sws.geonames.org/3579143/>;
+  dct:spatial <http://sws.geonames.org/3578421/>;
+  dct:spatial <http://sws.geonames.org/3578476/>;
+  dct:spatial <http://sws.geonames.org/3424932/>;
+  dct:spatial <http://sws.geonames.org/1024031/>;
+  dct:spatial <http://sws.geonames.org/935317/>;
+  dct:spatial <http://sws.geonames.org/6690916/>;
+  dct:spatial <http://sws.geonames.org/1546748/>;
+  dct:spatial <http://sws.geonames.org/4030656/>;
+  dct:spatial <http://sws.geonames.org/2139685/>;
+  dct:spatial <http://sws.geonames.org/4034749/>;
+  dct:spatial <http://sws.geonames.org/4020092/>;
+  .
+
+taxref:CSVDownload
+  a dcat:Distribution;
+  rdfs:label "TAXREF Text file";
+  dct:description "Downloadable text file";
+  dcat:mediaType "text/csv";
+  dcat:accessURL <https://inpn.mnhn.fr/telechargement/referentielEspece/referentielTaxo?lg=en>;
+  .
+
+taxref:WebService
+  a dcat:Distribution;
+  a prov:Entity;
+  rdfs:label "TAXREF web service";
+  dct:description "CSV, XML and JSON query web service";
+  dcat:mediaType "text/csv", "application/xml", "application/json";
+  dcat:accessURL <https://taxref.mnhn.fr/taxref-web/>;
+  .
+
+# TAXREF-LD: the Linked Data distribution of the TAXREF 10.0 data set
+<http://taxref.mnhn.fr/lod/Taxref-ld/10.0>
+  a dcat:Distribution;
+  a skos:ConceptScheme;
+  dct:license <https://creativecommons.org/licenses/by-sa/4.0/>;
+  rdfs:label "TAXREF-LD 10.0";
+  dct:description "Representation of the TAXREF taxonomic reference as a linked data set"@en;
+  dct:description "Représentation du référentiel taxonomique TAXREF come un jeu de données liées"@fr;
+  skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
+  
+  a prov:Entity;
+  prov:wasDerivedFrom taxref:WebService;
+  prov:wasGeneratedBy [
+    a prov:Activty;
+	rdfs:label "JSON-to-SKOS transformation";
+    dct:description "Transformation of the JSON version of TAXREF, obtained from the web service, into RDF using the xR2RML mapping language and pocessing engine";
+    prov:used taxref:WebService;
+	prov:wasAssociatedWith taxref:xR2RML;
+  ];
+  .
+
+taxref:xR2RML
+  a prov:SoftwareAgent;
+  foaf:homepage <https://github.com/frmichel/morph-xr2rml/>;
+  dct:description "Implementation of the xR2RML mapping language";
+  dct:creator "Franck MICHEL";
+  .
+  
+# Biota is the taxonomical classification root
+<http://taxref.mnhn.fr/lod/name/349525>
+  a skos:Concept;
+  skos:inScheme <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+  skos:topConceptOf <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+  skos:prefLabel "Biota";
+  taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/349525/10.0>;
+  .
+<http://taxref.mnhn.fr/lod/taxon/349525/10.0>
+  a owl:Class;
+  rdfs:label "Biota";
+  skos:porefLabel "Biota";
+  taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/349525>;
+  .

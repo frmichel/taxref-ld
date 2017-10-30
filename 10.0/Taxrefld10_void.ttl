@@ -1,0 +1,108 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dce: <http://purl.org/dc/elements/1.1/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+
+@prefix taxref: <http://taxref.mnhn.fr/lod/>.
+
+# --- VOID Dataset definition
+<http://taxref.mnhn.fr/lod/Taxref-ld/10.0>
+  a void:Dataset;
+  void:uriSpace "http://taxref.mnhn.fr/lod/";
+  void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
+  void:triples "9624000"^^xsd:integer;
+  #void:dataDump <https://github.com/frmichel/taxref/raw/master/taxref10.0/Taxref10.zip>;
+  void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
+
+  void:vocabulary <http://aims.fao.org/aos/agrovoc>;
+  void:vocabulary <http://lod.taxonconcept.org/ontology/txn.owl>;
+  void:vocabulary <http://purl.obolibrary.org/obo/ncbitaxon.owl>;
+  void:vocabulary <http://purl.obolibrary.org/obo/envo.owl>;
+  void:vocabulary <http://rdf.geospecies.org/ont/geospecies.owl>;
+  void:vocabulary <http://rs.tdwg.org/dwc/terms/>;
+  void:vocabulary <http://sws.geonames.org/>;
+  void:vocabulary <http://rs.tdwg.org/ontology/voc/OccurrenceStatusTerm>;
+  void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonRank>;
+  void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonName>;
+  
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/10.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/10.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2VTO/10.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2GeoSpecies/10.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2Worms/10.0>;
+  .
+
+<http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>
+   a void:Linkset;
+   void:linkPredicate skos:exactMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:Agrovoc;
+   void:triples "4244"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/10.0>
+   a void:Linkset;
+   void:linkPredicate skos:closeMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:TaxonConcept;
+   void:triples "20000"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/10.0>
+   a void:Linkset;
+   void:linkPredicate owl:equivalentClass;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:NcbiTaxon;
+   void:triples "89484"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2VTO/10.0>
+   a void:Linkset;
+   void:linkPredicate owl:equivalentClass;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:VTO;
+   void:triples "12030"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2GeoSpecies/10.0>
+   a void:Linkset;
+   void:linkPredicate skos:closeMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:GeoSpecies;
+   void:triples "4272"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2Worms/10.0>
+   a void:Linkset;
+   void:linkPredicate skos:exactMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:objectsTarget taxref:Worms;
+   void:triples "137125"^^xsd:integer;
+   .
+
+taxref:Agrovoc
+   a void:Dataset;
+   rdfs:label " AGROVOC Multilingual agricultural thesaurus"@en;
+   foaf:homepage <http://aims.fao.org/agrovoc>, <https://datahub.io/dataset/agrovoc-skos>.
+taxref:TaxonConcept
+   a void:Dataset;
+   rdfs:label "TaxonConcept Knowledge Base"@en;
+   foaf:homepage <http://www.taxonconcept.org/>, <https://datahub.io/dataset/taxonconcept>.
+taxref:NcbiTaxon
+   a void:Dataset;
+   rdfs:label "NCBI Organismal Classification"@en;
+   foaf:homepage <http://bioportal.bioontology.org/ontologies/NCBITAXON>, <https://datahub.io/dataset/bioportal-ncbitaxon>.
+taxref:VTO
+   a void:Dataset;
+   rdfs:label "Vertebrate Taxonomy Ontology"@en;
+   foaf:homepage <http://www.ontobee.org/ontology/VTO>, <http://phenoscape.org/wiki/Ontologies#Vertebrate_Taxonomy_Ontology>.
+taxref:GeoSpecies
+   a void:Dataset;
+   rdfs:label "GeoSpecies Knowledge Base"@en;
+   foaf:homepage <https://datahub.io/dataset/geospecies>.
+taxref:Worms
+   a void:Dataset;
+   rdfs:label "World Register of Marine Species"@en;
+   foaf:homepage <http://www.marinespecies.org>.
