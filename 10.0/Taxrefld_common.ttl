@@ -1,0 +1,635 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dce: <http://purl.org/dc/elements/1.1/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+@prefix dwc:    <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+
+@prefix taxref: <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank#>.
+@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat#>.
+@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus#>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property#>.
+
+# ============================================================
+# Imported from other ontologies:
+#
+# ENVO - Environment Ontology: types of habitat (https://www.ebi.ac.uk/ols/ontologies/envo)
+#   Class http://purl.obolibrary.org/obo/ENVO_00002149: Sea water
+#   Class http://purl.obolibrary.org/obo/ENVO_01000320: Marine Environment
+#   Class http://purl.obolibrary.org/obo/ENVO_00002011: Fresh water
+#   Class http://purl.obolibrary.org/obo/ENVO_00002019: Brackish water
+#   Class http://purl.obolibrary.org/obo/ENVO_00000446: Terrestrial biome
+#
+# RO - Relations Ontology (http://www.ontobee.org/ontology/RO)
+#   Property http://purl.obolibrary.org/obo/RO_0002303: has habitat
+#
+# TaxonConcept Ontology:
+#   Property http://lod.taxonconcept.org/ontology/txn.owl#habitat: links a taxon to its habitat
+#   Top-class of habitats: http://lod.taxonconcept.org/ontology/txn.owl#Habitat
+#   Classes of habitats: http://lod.taxonconcept.org/ontology/txn.owl#*Habitat
+#   Property http://lod.taxonconcept.org/ontology/txn.owl#authority: authority of a taxon e.g. "Heinrich, 1952"
+#   Classes of Taxonomical ranks: http://lod.taxonconcept.org/ontology/txn.owl#Rank*
+#
+# NCBI organismal classification (http://www.ontobee.org/ontology/NCBITaxon): <http://purl.obolibrary.org/obo/ncbitaxon.owl>
+#   Property http://purl.obolibrary.org/obo/ncbitaxon#has_rank: associates a taxonomical rank to a taxon
+#   Classes of Taxonomical ranks: http://purl.obolibrary.org/obo/NCBITaxon_*
+#
+# GeoSpecies Knowledge Base (https://bioportal.bioontology.org/ontologies/GEOSPECIES): <http://rdf.geospecies.org/ont/geospecies.owl>
+#   Classes of taxonomical ranks: http://rdf.geospecies.org/ont/geospecies#TaxonRank_*
+#   Property http://rdf.geospecies.org/ont/geospecies#hasVernacularName
+#
+# TDWG Ontology (https://github.com/tdwg/ontology)
+#   Occurrence Status Terms (https://github.com/tdwg/ontology/blob/master/ontology/voc/OccurrenceStatusTerm.rdf):
+#     Values of occurrence statuses, aka. biogeographical statuses: <http://rs.tdwg.org/ontology/voc/OccurrenceStatusTerm>
+#     (note that these are deprecated).
+#   Class <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>
+#   Class <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> (class of all scientific names, in add. to skos:Concept)
+#
+# Darwin Core Terms (http://rs.tdwg.org/dwc/terms/ and http://rs.tdwg.org/dwc/iri/):
+#   Property http://rs.tdwg.org/dwc/iri/occurrenceStatus
+#   Property http://rs.tdwg.org/dwc/terms/locationID (http://terms.tdwg.org/wiki/dwc:locationID)
+#      No longer used in this RDF representation.
+#      May be used with values from TDWG and WOEID as recommended by GBIF: http://rs.gbif.org/areas/.
+#   Property http://rs.tdwg.org/dwc/terms/vernacularName
+#   Property http://rs.tdwg.org/dwc/terms/taxonRank
+#   Property http://rs.tdwg.org/dwc/iri/habitat
+#   Property http://rs.tdwg.org/dwc/terms/scientificName
+#
+# URIs and identifiers of geographical places:
+#   - Geonames: URIs of France mainland and overseas territories
+#   - TDWG World Geographical Scheme for Recording Plant Distributions
+#       https://github.com/tdwg/prior-standards/tree/master/world-geographical-scheme-for-recording-plant-distributions
+#   - Yahoo! Where On Earth ID (WOEID)
+#
+# VTO
+#   Property http://purl.obolibrary.org/obo/vto#has_rank
+
+# May be used:
+#   http://lod.taxonconcept.org/ontology/txn.owl#occurrenceHasArea
+
+# ============================================================
+# ==== Properties used for taxa and labels
+# ============================================================
+
+taxrefprop:hasRank
+ a rdfs:Property;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/vto#has_rank>;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/ncbitaxon#has_rank>;
+ rdfs:seeAlso dwc:taxonRank;
+ rdfs:comment "Not equivalent property of dwc:taxonRank which is expected to be used only with literal values (see http://rs.tdwg.org/dwc/terms/guides/rdf/index.htm, section 3.5)"@en;
+ rdfs:label "has taxonomic rank"@en;
+ dct:description "Relates a scientific name or a taxon to a taxonimical rank"@en.
+
+taxrefprop:hasAuthority
+ a rdfs:Property;
+ owl:equivalentProperty <http://lod.taxonconcept.org/ontology/txn.owl#authority>;
+ owl:equivalentProperty <http://rs.tdwg.org/ontology/voc/TaxonName#authorship>;
+ rdfs:label "has scientific name authority"@en;
+ rdfs:seeAlso dwc:scientificNameAuthorship;
+ dct:description "Provides the authorship information of a scientific name"@en;
+ rdfs:comment "TDWG ontology's property http://rs.tdwg.org/ontology/voc/TaxonName#authorship is preferably associated with a scientific name (http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName), which is in line with TAXREF-LD's modelling. By contrast, DwC's scientificNameAuthorship property is associated with a taxon (dwc:Taxon), and its object shoud be a literal (DwC does not have a class for taxon names). Therefore, TAXREF-LD's hasAuthority property is not aligned with the latter."@en.
+
+taxrefprop:hasReferenceName
+ a rdfs:Property;
+ rdfs:subPropertyOf dwc:scientificName;
+ rdfs:label "has reference name"@en;
+ dct:description "Relates a taxon to its reference (valid) scientific name"@en;
+ rdfs:comment "DwC's scientificName property is meant to be used with a literal object, and does not distinguish between reference vs. synonym names. Hence, in TAXREF-LD, we extend it with rdfs:subPropertyOf instead of asserting an equivalence."@en.
+
+taxrefprop:isReferenceNameOf
+ a rdfs:Property;
+ owl:inverse taxrefprop:hasReferenceName;
+ rdfs:label "is the reference name of"@en;
+ dct:description "Relates a scientific name to the taxon for which it is the reference (valid) name"@en.
+
+taxrefprop:hasSynonym
+ a rdfs:Property;
+ rdfs:subPropertyOf dwc:scientificName;
+ rdfs:label "has synonym"@en;
+ dct:description "Relates a taxon to one of its synonyms"@en;
+ rdfs:comment "DwC's scientificName property is meant to be used with a literal object, and does not distinguish between reference vs. synonym names. Hence, in TAXREF-LD, we extend it with rdfs:subPropertyOf instead of asserting an equivalence."@en.
+  
+taxrefprop:isSynonymOf 
+ a rdfs:Property;
+ owl:inverse taxrefprop:hasSynonym;
+ rdfs:label "is a synonym of"@en;
+ dct:description "Relates a scientific name to a taxon for which it is a synonym"@en.
+ 
+taxrefprop:vernacularName 
+ a rdfs:Property;
+ owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasVernacularName>;
+ owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasCommonName>;
+ owl:equivalentProperty dwc:vernacularName;
+ rdfs:label "has vernacular name"@en;
+ dct:description "Relates a name to one of its vernacular (common) names"@en.
+ 
+taxrefprop:bioGeoStatusIn
+ a rdfs:Property;
+ rdfs:label "has biogeograpical status"@en;
+ dct:description "Relates a taxon to a biogeograpical status within a certain region"@en;
+ rdfs:range taxrefbgs:BioGeographicalStatus.
+ 
+taxrefprop:habitat
+ a rdfs:Property;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/RO_0002303>;
+ owl:equivalentProperty dwciri:habitat;
+ rdfs:range taxrefhab:Habitat;
+ rdfs:label "has habitat"@en;
+ dct:description "Relates a taxon to an habitat in which it lives"@en;
+ rdfs:seeAlso <http://lod.taxonconcept.org/ontology/txn.owl#habitat>.
+
+<http://lod.taxonconcept.org/ontology/txn.owl#habitat>
+ rdfs:subPropertyOf taxrefprop:habitat;
+ rdfs:comment "Property http://lod.taxonconcept.org/ontology/txn.owl#habitat is defined as an equivalent property of http://purl.org/ontology/wo/habitat (BBC WO) whose domain is http://purl.org/ontology/wo/TaxonRank. This is probably a mistake, since an habitat should typically be associated with a species (an instance of taxon rank Species), not with a rank. Hence, to avoid any unexpected inference, we define TAXREF-LD's habitat property as a super-property of http://lod.taxonconcept.org/ontology/txn.owl#habitat with no domain restriction."@en.
+
+ 
+# ============================================================
+# ==== Taxonomical ranks linked with equivalent ranks from other ontologies
+# ============================================================
+
+taxrefrk:TaxonomicRank
+ rdfs:subClassOf skos:Concept;
+ owl:equivalentClass <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>;
+ rdfs:label "Class of taxonomical ranks"@en;
+ dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en.
+ 
+taxrefrk:Domain
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Domain"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankDomain>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000037>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_domain>.
+ 
+taxrefrk:Superkingdom
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Super-kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superkingdom>.
+
+taxrefrk:Kingdom
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankKingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_kingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000017>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_kingdom>.
+
+taxrefrk:SubKingdom
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000029>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subkingdom>.
+
+taxrefrk:InfraKingdom
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Infra-kingdom"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000044>;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankIngrakingdom>.
+
+taxrefrk:Phylum
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Phylum"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankPhylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_phylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000001>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_phylum>.
+
+taxrefrk:SubPhylum
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-phylum"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubphylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subphylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000008>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subphylum>.
+
+taxrefrk:InfraPhylum
+ a taxrefrk:TaxonomicRank;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000040>;
+ skos:prefLabel "Infra-phylum"@en.
+
+taxrefrk:Division
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Division"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankDivision>.
+
+taxrefrk:SubDivision
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-division"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubdivision>.
+
+taxrefrk:SuperClass
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Super-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superclass>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superclass>.
+
+taxrefrk:Cladus
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Cladus"@en.
+
+taxrefrk:Class
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankClass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_class>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000002>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_lass>.
+
+taxrefrk:SubClass
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000007>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subclass>.
+
+taxrefrk:InfraClass
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Infra-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000019>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_infraclass>.
+
+taxrefrk:Legio
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Legio"@en.
+
+taxrefrk:SuperOrder
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Super-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superorder>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superorder>.
+
+taxrefrk:Cohort
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Cohort"@en.
+
+taxrefrk:Order
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankOrder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_order>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000003>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_order>.
+ 
+taxrefrk:SubOrder
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuborder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_suborder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000014>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_suborder>.
+ 
+taxrefrk:InfraOrder
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Infra-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_infraorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000013>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_infraorder>.
+ 
+taxrefrk:SuperFamily
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Super-family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superfamily>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superfamily>.
+
+taxrefrk:Family
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankFamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_family>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000004>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_family>.
+
+taxrefrk:SubFamily
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000024>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subfamily>.
+
+taxrefrk:Tribe
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Tribe"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankTribe>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_tribe>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_tribe>.
+
+taxrefrk:SubTribe
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-tribe"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subtribe>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subtribe>.
+
+taxrefrk:Genus
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Genus"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankGenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_genus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000005>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_genus>.
+
+taxrefrk:SubGenus
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-genus"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubgenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subgenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000009>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subgenus>.
+
+taxrefrk:Section
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Section"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000030>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_section>.
+
+taxrefrk:SubSection
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-section"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000053>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subsection>.
+
+taxrefrk:Series
+ a taxrefrk:TaxonomicRank;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000031>;
+ skos:prefLabel "Series"@en.
+
+taxrefrk:SubSeries
+ a taxrefrk:TaxonomicRank;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000054>;
+ skos:prefLabel "Sub-series"@en.
+
+taxrefrk:Agregate
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Agregate"@en.
+
+taxrefrk:Species
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Species"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSpecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_species>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000006>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_species>.
+
+taxrefrk:SemiSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Semi-species"@en.
+
+taxrefrk:MicroSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Micro-species"@en.
+
+taxrefrk:SubSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-species"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubpecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subspecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000023>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subspecies>.
+
+taxrefrk:Natio
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Natio"@en.
+
+taxrefrk:Varietas
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Varietas"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankVariety>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_varietas>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_variety>.
+
+taxrefrk:SubVarietas
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-varietas"@en;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subvariety>.
+
+taxrefrk:Forma
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Forma"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_forma>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000026>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_form>.
+
+taxrefrk:SubForma
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Sub-forma"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000059>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subform>.
+
+taxrefrk:FormaSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Forma species"@en.
+
+taxrefrk:Linea
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Linea"@en.
+
+taxrefrk:Clone
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Clone"@en.
+
+taxrefrk:Race
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Race"@en.
+
+taxrefrk:Cultivar
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Cultivar"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000034>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_cultivar>.
+
+taxrefrk:Morpha
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Morpha"@en.
+
+taxrefrk:Abberatio
+ a taxrefrk:TaxonomicRank;
+ skos:prefLabel "Abberatio"@en.
+
+
+# ============================================================
+# ==== Types of Habitat
+# ============================================================
+
+taxrefhab:Habitat
+ rdfs:subClassOf skos:Concept;
+ owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
+ rdfs:label "Class of habitats"@en;
+ dct:description "Class of types of habitat (subclass of skos:Concept)"@en.
+
+taxrefhab:Marine
+ a taxrefhab:Habitat;
+ rdfs:label "Marine habitat"@en;
+ skos:prefLabel "Marine habitat"@en;
+ skos:prefLabel "Milieu marin"@fr;
+ skos:definition "Species living exclusively in marine habitat"@en;
+ skos:definition "Espèces vivant uniquement en milieu marin"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002149>;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/ENVO_01000320>;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#MarineHabitat>.
+
+taxrefhab:FreshWater
+ a taxrefhab:Habitat;
+ rdfs:label "Freshwater"@en;
+ skos:prefLabel "Freshwater"@en;
+ skos:prefLabel "Eau douce"@fr;
+ skos:definition "Species living exclusively in freshwater"@en;
+ skos:definition "Espèces vivant uniquement en eau douce"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002011>;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#FreshwaterHabitat>.
+
+taxrefhab:BrackishWater
+ a taxrefhab:Habitat;
+ rdfs:label "Brackish water"@en;
+ skos:prefLabel "Brackish water"@en;
+ skos:prefLabel "Eau saumâtre"@fr;
+ skos:definition "Species living exclusively in brackish water"@en;
+ skos:definition "Espèces vivant uniquement en eau saumâtre"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002019>.
+
+taxrefhab:Terrestrial
+ a taxrefhab:Habitat;
+ rdfs:label "Terrestrial"@en;
+ skos:prefLabel "Terrestrial"@en;
+ skos:prefLabel "Terrestre"@fr;
+ skos:definition "Species living exclusively in terrestrial habitat"@en;
+ skos:definition "Espèces vivant uniquement en milieu terrestre"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00000446>;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#TerrestrialHabitat>.
+
+# ============================================================
+# ==== Biogeographical statuses
+# ============================================================
+
+taxrefbgs:BioGeographicalStatus
+ rdfs:subClassOf skos:Concept;
+ rdfs:label "Class of biogeographical status values"@en;
+ dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en.
+ 
+taxrefbgs:P
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "présent (indigène ou indéterminé)"@fr;
+ rdfs:label "present"@en;
+ skos:definition "Taxon présent dans la zone géographique considérée, i.e. taxon indigène ou taxon dont on ne sait pas s’il appartient à l'une des autres catégories. Le défaut de connaissance profite donc à l’indigénat. Par indigène on entend : taxon qui est issu de la zone géographique considérée et qui s’y est naturellement développé sans contribution humaine, ou taxon qui est arrivé là sans intervention humaine (intentionnelle ou non) à partir d’une zone dans laquelle il est indigène 6 . (NB : exclus les hybrides dont l’un des parents au moins est introduit dans la zone considérée). Sont regroupés sous ce statut tous les taxons catégorisés natif ou autochtone. Les taxons hivernant quelques mois de l’année entrent dans cette catégorie."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#DoubtfullyNative>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Native>.
+
+taxrefbgs:B
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "occasionnel"@fr;
+ rdfs:label "occasional"@en;
+ skos:definition "Taxon occasionnel, non nicheur, accidentel dans la zone géographique considérée (par exemple migrateur de passage)."@fr.
+
+taxrefbgs:E
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "endémique"@fr;
+ rdfs:label "endemic"@en;
+ skos:definition "Taxon naturellement restreint à la zone géographique considérée."@fr;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Endemic>.
+
+taxrefbgs:S
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "subendémique"@fr;
+ rdfs:label "subendemic"@en;
+ skos:definition "Taxon naturellement restreint à une zone un peu plus grande que la zone géographique considérée mais dont les principales populations se situent dans la zone géographique considérée. Pour l’Outre-mer, on applique ce statut à l’endémisme régional : pour la Guyane française = endémique du plateau des Guyanes ; pour les Antilles françaises = endémique des petites Antilles ; pour Mayotte = endémique des Comores ; pour la Réunion = endémique des Mascareignes ; pour les TAAF = endémique de la South Indian Ocean Province."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Endemic>.
+
+taxrefbgs:C
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "cryptogène"@fr;
+ rdfs:label "cryptogenic"@en;
+ skos:definition "Taxon dont l’aire d’origine est inconnue et dont on ne peut donc pas dire s’il est indigène ou introduit"@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#DoubtfullyNative>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#DoubtfullyIntroduced>.
+
+taxrefbgs:I
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "Introduit"@fr;
+ rdfs:label "Introduced"@en;
+ skos:definition "Taxon introduit (établi ou possiblement établi) dans la zone géographique considérée. Par introduit on entend : taxon dont la présence dans la zone géographique considérée est due à une intervention humaine, intentionnelle ou non, ou taxon qui est arrivé dans la zone sans intervention humaine mais à partir d’une zone dans laquelle il est introduit. Par établi (terme pour la faune, = naturalisé pour la flore) on entend : taxon introduit qui forme des populations viables (se reproduisant) et durables qui se maintiennent dans le milieu naturel sans besoin d’intervention humaine. Sont regroupés sous ce statut tous les taxons catégorisés non-indigène, exotique, exogène, allogène, allochtone, non-natif, naturalisé (en anglais : alien) dans une publication scientifique."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Introduced>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Naturalized>.
+
+taxrefbgs:J
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "introduit envahissant"@fr;
+ rdfs:label "invasive"@en;
+ skos:definition "Taxon introduit dans la zone géographique considérée, qui produit des descendants fertiles souvent en grand nombre, et qui a le potentiel pour s’étendre de façon exponentielle sur une grande aire, augmentant ainsi rapidement son aire de répartition 6 . Cela induit souvent des conséquences écologiques, économiques ou sanitaires négatives (IUCN, 2000). Sont regroupés sous ce statut tous les taxons catégorisés introduite envahissante, exotique envahissant ou invasif (invasive en anglais) dans une publication scientifique."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Introduced>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Naturalized>.
+
+taxrefbgs:M
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "introduit non établi (dont domestique)"@fr;
+ rdfs:label "introduced casual"@en;
+ skos:definition "Taxon introduit qui peut occasionnellement se reproduire en dehors de son aire de culture ou de captivité, mais qui ne peut se maintenir à l’état sauvage car ne pouvant former de populations viables sans intervention humaine, et qui dépend donc d’introductions répétées pour se maintenir dans la nature. Sont regroupés sous ce statut tous les taxons catégorisés introduit occasionnel, subspontané, échappé de culture ou de captivité (en anglais : casual alien)). Ce statut inclut les taxons strictement domestiques (faune) ou uniquement cultivés (flore)."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Introduced>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Cultivated>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#CasualAlien>.
+
+taxrefbgs:D
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "douteux"@fr;
+ rdfs:label "doubtful"@en;
+ skos:definition "Taxon dont la présence dans la zone géographique considérée n’est pas avérée (en attente de confirmation)."@fr;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Questionable>.
+
+taxrefbgs:A
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "absent"@fr;
+ rdfs:label "absent"@en;
+ skos:definition "Taxon non présent dans la zone géographique considérée."@fr.
+
+taxrefbgs:W
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "disparu"@fr;
+ rdfs:label "disappeared"@en;
+ skos:definition "Taxon qui n’est plus présent à l’état sauvage dans la zone géographique considérée mais qui n’est pas globalement éteint. Rq : en cas de doute sur la présence ancienne ou non du taxon à l’état sauvage, utiliser le statut absent (A)."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
+
+taxrefbgs:X
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "éteint"@fr;
+ rdfs:label "extinct"@en;
+ skos:definition "Taxon globalement éteint (= ayant totalement disparu de la surface du globe terrestre)."@fr;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
+
+taxrefbgs:Y
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "introduit éteint/disparu"@fr;
+ rdfs:label "introduced extinct/disappeared"@en;
+ skos:definition "Taxon introduit par le passé mais aujourd’hui disparu de la zone géographique considérée (W) ou éteint (X)."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Introduced>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
+
+taxrefbgs:Z
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "endémique éteint"@fr;
+ rdfs:label "endemic extinct"@en;
+ skos:definition "Taxon endémique et aujourd’hui disparu, donc globalement éteint (X)."@fr;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Endemic>;
+ skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
+
+taxrefbgs:Q
+ a taxrefbgs:BioGeographicalStatus;
+ rdfs:label "mentionné par erreur "@fr;
+ rdfs:label "reported in error"@en;
+ skos:definition "Taxon mentionné par erreur comme présent sur le territoire considéré."@fr;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#AbsentButReportedInError>.
+
+# (i) 439 Triples
