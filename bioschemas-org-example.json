@@ -1,0 +1,37 @@
+{
+    "@context": {
+        "@vocab": "http://schema.org/",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "dc": "http://purl.org/dc/terms/",
+        "dwc": "http://rs.tdwg.org/dwc/terms/",
+        "dwc:vernacularName": { "@container": "@language" }
+    },
+
+    "@type": ["BioChemEntity", "dwc:Taxon"],
+
+    "identifier": "http://taxref.mnhn.fr/lod/taxon/60878/10.0",
+    "name": "Delphinus delphis",
+    "dwc:scientificName": "Delphinus delphis Linnaeus, 1758",
+    "dwc:scientificNameAuthorship": "Linnaeus, 1758",
+    "dwc:taxonRank": "species",
+
+    "image": "https://inpn.mnhn.fr/photos/uploads/webtofs/inpn/ant/103133.jpg",
+
+    "dwc:vernacularName": [
+        { "@language": "en", "@value": "Common dolphin" },
+        { "@language": "en", "@value": "Short-beaked common dolphin" },
+        { "@language": "fr", "@value": "Dauphin commun" },
+        { "@language": "fr", "@value": "Dauphin commun à bec court" }
+    ],
+    "foaf:page": [
+        "http://eol.org/pages/328541",
+        "http://en.wikipedia.org/w/index.php?title=Beluga_whale",
+        "http://www.catalogueoflife.org/annual-checklist/details/species/id/6850357",
+        "http://www.iucnredlist.org/details/6335"
+    ],
+    "sameAs": [
+        "http://lod.geospecies.org/ses/enwsi",
+        "http://lod.taxonconcept.org/ses/enwsi.html#Species",
+        "http://aims.fao.org/aos/agrovoc/c_48963"
+    ]
+}
