@@ -7,7 +7,7 @@
         "dwc:vernacularName": { "@container": "@language" }
     },
 
-    "@type": ["BioChemEntity", "dwc:Taxon"],
+    "@type": "dwc:Taxon",
 
     "identifier": "http://taxref.mnhn.fr/lod/taxon/60878/10.0",
     "name": "Delphinus delphis",
