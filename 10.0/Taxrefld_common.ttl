@@ -13,10 +13,10 @@
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
 
 @prefix taxref: <http://taxref.mnhn.fr/lod/>.
-@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank#>.
-@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat#>.
-@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus#>.
-@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property#>.
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
 
 # ============================================================
 # Imported from other ontologies:

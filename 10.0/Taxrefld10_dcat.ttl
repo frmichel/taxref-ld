@@ -11,7 +11,7 @@
 @prefix void: <http://rdfs.org/ns/void#>.
 
 @prefix taxref: <http://taxref.mnhn.fr/lod/>.
-@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property#>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
 
 # DCAT Catalog for TAXREF datasets in all versions and all distributions
 taxref:Catalog
