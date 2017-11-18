@@ -11,7 +11,8 @@
 
     
     "@type": "dwc:Taxon",
-    "identifier": "http://taxref.mnhn.fr/60932",
+    "@id": "http://taxref.mnhn.fr/60932",
+    "identifier": "60932",
     "name": "Delphinapterus leucas",
     "mainEntityOfPage": "https://inpn.mnhn.fr/espece/cd_nom/60932?lg=en",
     "image": "https://inpn.mnhn.fr/photos/uploads/webtofs/inpn/3/181473.jpg",
