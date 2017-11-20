@@ -12,7 +12,7 @@
 @prefix taxref: <http://taxref.mnhn.fr/lod/>.
 
 # --- VOID Dataset definition
-<http://taxref.mnhn.fr/lod/Taxref-ld/10.0>
+<http://taxref.mnhn.fr/lod/taxref-ld/10.0>
   a void:Dataset;
   void:uriSpace "http://taxref.mnhn.fr/lod/";
   void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
@@ -42,42 +42,42 @@
 <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>
    a void:Linkset;
    void:linkPredicate skos:exactMatch;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:Agrovoc;
    void:triples "4244"^^xsd:integer;
    .
 <http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/10.0>
    a void:Linkset;
    void:linkPredicate skos:closeMatch;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:TaxonConcept;
    void:triples "20000"^^xsd:integer;
    .
 <http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/10.0>
    a void:Linkset;
    void:linkPredicate owl:equivalentClass;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:NcbiTaxon;
    void:triples "89484"^^xsd:integer;
    .
 <http://taxref.mnhn.fr/lod/Taxref2VTO/10.0>
    a void:Linkset;
    void:linkPredicate owl:equivalentClass;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:VTO;
    void:triples "12030"^^xsd:integer;
    .
 <http://taxref.mnhn.fr/lod/Taxref2GeoSpecies/10.0>
    a void:Linkset;
    void:linkPredicate skos:closeMatch;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:GeoSpecies;
    void:triples "4272"^^xsd:integer;
    .
 <http://taxref.mnhn.fr/lod/Taxref2Worms/10.0>
    a void:Linkset;
    void:linkPredicate skos:exactMatch;
-   void:subjectsTarget <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:Worms;
    void:triples "137125"^^xsd:integer;
    .

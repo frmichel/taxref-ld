@@ -49,7 +49,7 @@ taxref:INPN
   foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
   dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
 
-  dct:licence <http://creativecommons.org/licenses/by-sa/4.0/>;
+  dct:licence <http://opendatacommons.org/licenses/odbl/>;
   owl:versionInfo "10.0";
   dct:issued "2016-11-03"^^xsd:date;
   dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
@@ -62,7 +62,7 @@ taxref:INPN
   # 3 distributions: downloadable CSV, through a web service, linked data RDF graph
   dcat:distribution taxref:CSVDownload;
   dcat:distribution taxref:WebService;
-  dcat:distribution <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+  dcat:distribution <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
  
   dct:spatial <http://sws.geonames.org/3017382/>;
   dct:spatial <http://sws.geonames.org/3381670/>;
@@ -99,10 +99,11 @@ taxref:WebService
   .
 
 # TAXREF-LD: the Linked Data distribution of the TAXREF 10.0 data set
-<http://taxref.mnhn.fr/lod/Taxref-ld/10.0>
+<http://taxref.mnhn.fr/lod/Taxref-ld/10.0> owl:sameAs <http://taxref.mnhn.fr/lod/taxref-ld/10.0>.
+<http://taxref.mnhn.fr/lod/taxref-ld/10.0>
   a dcat:Distribution;
   a skos:ConceptScheme;
-  dct:license <https://creativecommons.org/licenses/by-sa/4.0/>;
+  dct:licence <http://opendatacommons.org/licenses/odbl/>;
   rdfs:label "TAXREF-LD 10.0";
   dct:description "Representation of the TAXREF taxonomic reference as a linked data set"@en;
   dct:description "Représentation du référentiel taxonomique TAXREF come un jeu de données liées"@fr;
@@ -129,8 +130,8 @@ taxref:xR2RML
 # Biota is the taxonomical classification root
 <http://taxref.mnhn.fr/lod/name/349525>
   a skos:Concept;
-  skos:inScheme <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
-  skos:topConceptOf <http://taxref.mnhn.fr/lod/Taxref-ld/10.0>;
+  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+  skos:topConceptOf <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
   skos:prefLabel "Biota";
   taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/349525/10.0>;
   .
