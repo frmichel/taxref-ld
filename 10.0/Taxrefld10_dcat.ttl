@@ -103,7 +103,7 @@ taxref:WebService
 <http://taxref.mnhn.fr/lod/taxref-ld/10.0>
   a dcat:Distribution;
   a skos:ConceptScheme;
-  dct:licence <http://opendatacommons.org/licenses/odbl/>;
+  dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
   rdfs:label "TAXREF-LD 10.0";
   dct:description "Representation of the TAXREF taxonomic reference as a linked data set"@en;
   dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées"@fr;
