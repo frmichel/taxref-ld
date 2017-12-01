@@ -41,7 +41,7 @@
 
 <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>
    a void:Linkset;
-   void:linkPredicate skos:exactMatch;
+   void:linkPredicate skos:closeMatch;
    void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:Agrovoc;
    void:triples "4244"^^xsd:integer;

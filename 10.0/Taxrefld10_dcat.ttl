@@ -49,7 +49,7 @@ taxref:INPN
   foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
   dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
 
-  dct:licence <http://opendatacommons.org/licenses/odbl/>;
+  dct:license <http://opendatacommons.org/licenses/odbl/>;
   owl:versionInfo "10.0";
   dct:issued "2016-11-03"^^xsd:date;
   dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
@@ -106,13 +106,13 @@ taxref:WebService
   dct:licence <http://opendatacommons.org/licenses/odbl/>;
   rdfs:label "TAXREF-LD 10.0";
   dct:description "Representation of the TAXREF taxonomic reference as a linked data set"@en;
-  dct:description "Représentation du référentiel taxonomique TAXREF come un jeu de données liées"@fr;
+  dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées"@fr;
   skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
   
   a prov:Entity;
   prov:wasDerivedFrom taxref:WebService;
   prov:wasGeneratedBy [
-    a prov:Activty;
+    a prov:Activity;
 	rdfs:label "JSON-to-SKOS transformation";
     dct:description "Transformation of the JSON version of TAXREF, obtained from the web service, into RDF using the xR2RML mapping language and pocessing engine";
     prov:used taxref:WebService;
