@@ -2,7 +2,7 @@
 
 This directory provides simple and preliminary examples of how a Bioschemas.org profile for biodiversity data could be used to annotate web pages.
 
-It use the case of a [web page describing the beluga](https://inpn.mnhn.fr/espece/cd_nom/60932?lg=en) (_Delphinapterus leucas_) on the french National Museum of Natural History web portal.
+It uses the case of a [web page describing the beluga](https://inpn.mnhn.fr/espece/cd_nom/60932?lg=en) (_Delphinapterus leucas_) on the french National Museum of Natural History web portal.
 It leverages current works within Bioshemas.org as well as the work achieved by Encyclopedia of Life (EoL) to provide JSON-LD harvested by Google to enrich their search result snippets. See the [JSON-LD produced by the EoL](http://eol.org/api/traits/328541) API for the beluga.
 
 ## Issues to be discussed:
@@ -26,7 +26,7 @@ Since the entities we model are taxa, the parent cannot be a web page but anothe
 ## File example1.json
 
 Example 1 is written according to the following choices (numbers refer to the questions in the previous question):
-1. **Type of the entity represented**. A taxon as an instance of dwc:Taxon
+1. **Type of the entity represented**. A taxon as an instance of dwc:Taxon.
 2. **@id, identifier vs. url**. The entity IRI is given by @id, http://schema.org/identifier provides an custom data provider identifier.
 3. **sameAs vs. subjectOf vs. mainEntityOfPage**. http://schema.org/subjectOf links to related web pages, http://schema.org/subjectOf links to the current web page URL.
 4. **Links to LOD cloud resources**. Property rdfs:sameAs links to equivalent resources.

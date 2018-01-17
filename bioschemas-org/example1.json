@@ -1,9 +1,9 @@
 {
     "@context": {
         "@vocab": "http://schema.org/",
-        "dc": "http://purl.org/dc/terms/",
         "dwc": "http://rs.tdwg.org/dwc/terms/",
         "tc": "http://rs.tdwg.org/ontology/voc/TaxonConcept#",
+        "taxrefprop": "http://taxref.mnhn.fr/lod/property/hasRank",
         
         "dwc:vernacularName": { "@container": "@language" },
         "tc:rank": { "@type": "@id" }
@@ -30,13 +30,10 @@
     "tc:rank": "http://rs.tdwg.org/ontology/voc/TaxonRank#Species",
     "dwc:parentNameUsageID": "http://taxref.mnhn.fr/191588",
     "dwc:vernacularName": [
-        { "@language": "en", "@value": "Common dolphin" },
-        { "@language": "en", "@value": "Short-beaked common dolphin" },
-        { "@language": "fr", "@value": "Dauphin commun" },
-        { "@language": "fr", "@value": "Dauphin commun à bec court" },
-        { "@language": "fr", "@value": "Dauphin commun à bec long" }
+        { "@language": "en", "@value": "Beluga Whale" },
+        { "@language": "en", "@value": "Bélouga" }
     ],
-    
+
     
     "taxrefprop:hasRank": "http://taxref.mnhn.fr/lod/taxrank/Species",
     "taxrefprop:hasAuthority": "(Pallas, 1776)",
