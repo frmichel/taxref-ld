@@ -49,7 +49,7 @@ taxref:INPN
   foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
   dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
 
-  dct:license <http://opendatacommons.org/licenses/odbl/>;
+  dct:licence <http://opendatacommons.org/licenses/odbl/>;
   owl:versionInfo "10.0";
   dct:issued "2016-11-03"^^xsd:date;
   dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
@@ -103,7 +103,7 @@ taxref:WebService
 <http://taxref.mnhn.fr/lod/taxref-ld/10.0>
   a dcat:Distribution;
   a skos:ConceptScheme;
-  dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
+  dct:licence <http://opendatacommons.org/licenses/odbl/>;
   rdfs:label "TAXREF-LD 10.0";
   dct:description "Representation of the TAXREF taxonomic reference as a linked data set"@en;
   dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées"@fr;
