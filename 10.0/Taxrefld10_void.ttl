@@ -8,6 +8,7 @@
 @prefix dcat: <http://www.w3.org/ns/dcat#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
 @prefix void: <http://rdfs.org/ns/void#>.
+@prefix schema: <http://schema.org/>.
 
 @prefix taxref: <http://taxref.mnhn.fr/lod/>.
 
@@ -17,8 +18,8 @@
   void:uriSpace "http://taxref.mnhn.fr/lod/";
   void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
   void:triples "9624000"^^xsd:integer;
-  #void:dataDump <https://github.com/frmichel/taxref/raw/master/taxref10.0/Taxref10.zip>;
   void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
+  void:dataDump <https://github.com/frmichel/taxref/raw/master/taxref-ld/10.0/taxref10.zip>;
 
   void:vocabulary <http://aims.fao.org/aos/agrovoc>;
   void:vocabulary <http://lod.taxonconcept.org/ontology/txn.owl>;
@@ -31,6 +32,11 @@
   void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonRank>;
   void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonName>;
   
+  void:vocabulary <http://purl.org/ontology/bibo/>;
+  void:vocabulary <http://xmlns.com/foaf/0.1/>;
+  void:vocabulary <http://www.w3.org/2004/02/skos/core>;
+  void:vocabulary <http://purl.org/dc/terms/>;
+
   void:subset <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>;
   void:subset <http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/10.0>;
   void:subset <http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/10.0>;
@@ -41,7 +47,7 @@
 
 <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>
    a void:Linkset;
-   void:linkPredicate skos:closeMatch;
+   void:linkPredicate skos:exactMatch;
    void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
    void:objectsTarget taxref:Agrovoc;
    void:triples "4244"^^xsd:integer;

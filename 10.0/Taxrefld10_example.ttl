@@ -40,7 +40,7 @@
     
 <http://taxref.mnhn.fr/lod/name/60878>
     a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
-    skos:inScheme               <http://taxref.mnhn.fr/lod/Taxref-ld/10.0> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
     skos:broader                <http://taxref.mnhn.fr/lod/name/191591> ;
     rdfs:label                  "Delphinus delphis Linnaeus, 1758" ;
     skos:prefLabel              "Delphinus delphis" ;
@@ -52,7 +52,7 @@
 
 <http://taxref.mnhn.fr/lod/name/361079>
     a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
-    skos:inScheme               <http://taxref.mnhn.fr/lod/Taxref-ld/10.0> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
     rdfs:label                  "Delphinus capensis Gray, 1828" ;
     skos:prefLabel              "Delphinus capensis" ;
     dwc:scientificName          "Delphinus capensis" ;
@@ -71,7 +71,7 @@
 
 <http://taxref.mnhn.fr/lod/name/191591>
     a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
-    skos:inScheme               <http://taxref.mnhn.fr/lod/Taxref-ld/10.0> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
     skos:broader                <http://taxref.mnhn.fr/lod/name/186227> ;
     rdfs:label                  "Delphinus Linnaeus, 1758" ;
     skos:prefLabel              "Delphinus" ;

@@ -110,8 +110,8 @@ taxref:WebService
   skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
   
   a prov:Entity;
-  prov:wasDerivedFrom taxref:WebService;
-  prov:wasGeneratedBy [
+    prov:wasDerivedFrom taxref:WebService;
+    prov:wasGeneratedBy [
     a prov:Activity;
 	rdfs:label "JSON-to-SKOS transformation";
     dct:description "Transformation of the JSON version of TAXREF, obtained from the web service, into RDF using the xR2RML mapping language and pocessing engine";
@@ -138,6 +138,6 @@ taxref:xR2RML
 <http://taxref.mnhn.fr/lod/taxon/349525/10.0>
   a owl:Class;
   rdfs:label "Biota";
-  skos:porefLabel "Biota";
+  skos:prefLabel "Biota";
   taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/349525>;
   .
