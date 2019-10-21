@@ -1,0 +1,250 @@
+@prefix xrr:    <http://i3s.unice.fr/xr2rml#>.
+@prefix rr:     <http://www.w3.org/ns/r2rml#>.
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#>.
+
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#>.
+@prefix dct:    <http://purl.org/dc/terms/>.
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl:    <http://www.w3.org/2002/07/owl#>.
+@prefix foaf:   <http://xmlns.com/foaf/0.1/>.
+
+@prefix wdt:    <http://www.wikidata.org/entity/>.
+@prefix bibo:   <http://purl.org/ontology/bibo/>.
+
+@prefix taxrefstatus: <http://taxref.mnhn.fr/lod/status/>.
+@prefix taxrefprop:   <http://taxref.mnhn.fr/lod/property/>.
+
+
+#========================================== Association statuses and taxa ======================================
+
+<#SM_Taxon>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}".
+
+# Associate a taxon with a part (article or annex) of legal document
+# (international convention, protection, european directive or regulation)
+
+<#TM_Taxon_listedIn>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query 
+      """db.statuses.find({statusTypeGroup: { $in:  ['Réglementation', 'Protection', 'Directives européennes', 'Conventions internationales']}})""" ];
+    rr:subjectMap <#SM_Taxon>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:listedIn;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}" ];
+    ].
+
+# Reification to say that the listedIn statement applies to a specific geographical location.
+# The reified statement is a blank node.
+<#TM_Statement_listedIn>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query 
+      """db.statuses.find({statusTypeGroup: { $in:  ['Réglementation', 'Protection', 'Directives européennes', 'Conventions internationales']}})""" ];
+    rr:subjectMap [ 
+        rr:template "STAT_{$.statusCode}_{$.taxon.referenceId}_{$.locationId}"; 
+        rr:termType rr:BlankNode; 
+        rr:class rdf:Statement 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:subject;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:predicate;
+        rr:objectMap [ rr:constant taxrefprop:listedIn; rr:termType rr:IRI ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:object;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate wdt:P3005;                    # (valid in place)
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate dct:description; 
+        rr:objectMap [ 
+            rr:template "{$.taxon.scientificName} is listed in: {$.statusName} ({$.statusTypeName})";
+            rr:termType rr:Literal
+        ];
+    ];
+    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "listed in (statement)" ];
+    .
+
+#=========================== RedList Statuses =============================
+
+<#SM_RedListStatus>
+    a rr:SubjectMap;
+    rr:template "RL_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}";
+    rr:class taxrefstatus:RedListQualifiedStatus;
+    rr:termType rr:BlankNode.
+
+# For every status in the group 'Liste rouge', associate the taxon with a new QualifiedStatus instance
+<#TM_Taxon_RedListStatuses>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Liste rouge', statusCode: { $ne: 'NE' }})""" ];
+    rr:subjectMap <#SM_Taxon>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:hasStatus;
+        rr:objectMap [ rr:template "RL_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}"; rr:termType rr:BlankNode ];
+    ];
+    .
+
+# Create a QualifiedStatus instance for each record with status group 'Liste rouge'
+<#TM_RedListStatus_Common>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Liste rouge', statusCode: { $ne: 'NE' }})""" ];;
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate wdt:P3005;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:source;            # (or wdt:P248 stated in)
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:redListType;
+        # To be considered: would http://dbpedia.org/ontology/conservationStatusSystem be of interest here?
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}" ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate dct:description; 
+        rr:objectMap [ rr:template "{$.taxon.scientificName} has IUCN Red List status {$.statusCode}"; rr:termType rr:Literal ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label; 
+        rr:objectMap [ rr:template "IUCN Red List status {$.statusCode}"; rr:termType rr:Literal ];
+    ];
+    .
+
+# Create a QualifiedStatus instance for each record with status a TAXREF-specific red list status value
+<#TM_RedListStatus_Customized>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: {$in:  ['RE', 'RE?', 'CR*', 'NA']}})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/RedList/{$.statusCode}" ];
+    ].
+
+<#TM_RedListStatus_LC>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'LC'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q211005; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_NT>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'NT'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q719675; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_VU>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'VU'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q278113; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_EN>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'EN'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q11394; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_CR>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'CR'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q219127; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_EW>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'EW'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q239509; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_EX>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: {$in: ['EX', 'Ex']}})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q237350; rr:termType rr:IRI ]
+    ].
+
+<#TM_RedListStatus_DD>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'DD' })""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q3245245; rr:termType rr:IRI ]
+    ].
+
+
+#=========================== Biogeographical Statuses =============================
+<#TM_Taxon_BioGeographicalStatuses>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Statut biogéographique'})""" ];
+    rr:subjectMap <#SM_Taxon>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:hasStatus;
+        rr:objectMap [ rr:template "BG_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}"; rr:termType rr:BlankNode ];
+    ].
+
+<#TM_BioGeographicalStatus>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Statut biogéographique'})""" ];
+    rr:subjectMap [ 
+        rr:template "BG_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}"; 
+        rr:termType rr:BlankNode;
+        rr:class taxrefstatus:BioGeographicalQualifiedStatus;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate wdt:P3005;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:source;            #    (or wdt:P248 stated in)
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bioGeoStatus/{$.statusCode}" ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate dct:description; 
+        rr:objectMap [
+            rr:template "{$.taxon.scientificName} has biogeographical status {$.statusCode} ({$.statusName}) in {$.locationName}";
+            rr:termType rr:Literal
+        ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label; 
+        rr:objectMap [
+            rr:template "Biogeographical status {$.statusCode} ({$.statusName}) in {$.locationName}";
+            rr:termType rr:Literal
+        ];
+    ];
+    .

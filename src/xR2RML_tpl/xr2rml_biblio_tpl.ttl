@@ -1,0 +1,94 @@
+@prefix xrr:  <http://i3s.unice.fr/xr2rml#> .
+@prefix rr:   <http://www.w3.org/ns/r2rml#> .
+@prefix rml:  <http://semweb.mmlab.be/ns/rml#> .
+
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix dct:  <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix schema: <http://schema.org/>.
+@prefix wdt: <http://www.wikidata.org/entity/>.
+
+<#LS>
+    a xrr:LogicalSource;
+    xrr:query """db.biblio.find( {} )""";
+    xrr:uniqueRef "$.id" .
+
+<#SM>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/bib/{$.id}";
+    rr:class bibo:Document, schema:CreativeWork.
+
+<#TM>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS>;
+    rr:subjectMap <#SM>;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:isDefinedBy;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:issued, schema:datePublished;
+        rr:objectMap [ xrr:reference "$.year"; rr:datatype xsd:gYear ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:bibliographicCitation;
+        rr:objectMap [ xrr:reference "$.fullCitation"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label, schema:headline, dct:title;
+        rr:objectMap [ xrr:reference "$.shortCitation"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate bibo:doi;
+        rr:objectMap [ xrr:reference "$.doi"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:sameAs;
+        rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
+        rr:objectMap [ xrr:reference "$.zooBankUri"; rr:termType rr:IRI ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate bibo:abstract, dct:abstract;
+        rr:objectMap [ xrr:reference "$.abstract" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "ZB_{$.zooBankId}"; rr:termType rr:BlankNode ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "DOI_{$.doi}"; rr:termType rr:BlankNode ];
+    ];
+    .
+
+<#TM_PropertyValue>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS>;
+    rr:subjectMap [ rr:template "ZB_{$.zooBankId}"; rr:termType rr:BlankNode; rr:class schema:PropertyValue ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant wdt:P2007; rr:termType rr:IRI ];	# Zoobank publication id
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.zooBankId" ];
+    ];
+    .
+<#TM_PropertyValue_DOI>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS>;
+    rr:subjectMap [ rr:template "DOI_{$.doi}"; rr:termType rr:BlankNode; rr:class schema:PropertyValue ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant wdt:P356; rr:termType rr:IRI ];	# DOI
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.doi" ];
+    ];
+    .

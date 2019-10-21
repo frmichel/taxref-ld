@@ -1,0 +1,92 @@
+@prefix xrr:        <http://i3s.unice.fr/xr2rml#> .
+@prefix rr:         <http://www.w3.org/ns/r2rml#> .
+@prefix rml:        <http://semweb.mmlab.be/ns/rml#> .
+
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:        <http://www.w3.org/2002/07/owl#>.
+@prefix dct:        <http://purl.org/dc/terms/>.
+@prefix foaf:       <http://xmlns.com/foaf/0.1/>.
+@prefix schema:     <http://schema.org/>.
+@prefix wdt:	    <http://www.wikidata.org/entity/>.
+
+@prefix taxrefrk:   <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefhab:  <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefbgs:  <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
+
+<#SM_Taxon>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxrefId}/{{TAXREFVER}}".
+<#SM_Taxon_BN>
+    a rr:SubjectMap;
+    rr:template "taxon-{$.taxrefId}{$.externalDbName}{$.externalId}";
+    rr:termType rr:BlankNode;
+    rr:class schema:PropertyValue.
+
+<#SM_Name>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/name/{$.taxrefId}".
+<#SM_Name_BN>
+    a rr:SubjectMap;
+    rr:template "name-{$.taxrefId}{$.externalDbName}{$.externalId}";
+    rr:termType rr:BlankNode;
+    rr:class schema:PropertyValue.
+
+# -------------------------------------------------------------------------------------
+
+<#TM_Taxon_XRef>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}"}, $where: 'this.taxrefId == this.taxonReferenceId'})""" ];
+    rr:subjectMap <#SM_Taxon>;
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "taxon-{$.taxrefId}{$.externalDbName}{$.externalId}"; rr:termType rr:BlankNode ];
+    ];
+	.
+<#TM_Taxon_XRef_BN>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}", $where: 'this.taxrefId == this.taxonReferenceId'})""" ];
+    rr:subjectMap <#SM_Taxon_BN>;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:object "{{EXTDBNAME}} id";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant {{WDTPROP}}; rr:termType rr:IRI ];      # Wikidata property for the id in that database
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.externalId" ];
+    ];
+	.
+    
+# -------------------------------------------------------------------------------------
+
+<#TM_Name_XRef>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}"})""" ];
+    rr:subjectMap <#SM_Name>;
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "name-{$.taxrefId}{$.externalDbName}{$.externalId}"; rr:termType rr:BlankNode ];
+    ];
+	.
+<#TM_Name_XRef_BN>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}"})""" ];
+    rr:subjectMap <#SM_Name_BN>;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:object "{{EXTDBNAME}} id";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant {{WDTPROP}}; rr:termType rr:IRI ];      # Wikidata property for the id in that database
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.externalId" ];
+    ];
+	.

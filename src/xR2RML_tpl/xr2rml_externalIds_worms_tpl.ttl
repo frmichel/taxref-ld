@@ -1,0 +1,33 @@
+@prefix xrr: <http://i3s.unice.fr/xr2rml#> .
+@prefix rr:  <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix schema: <http://schema.org/>.
+
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/>.
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
+
+<#SM_Name>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/name/{$.taxrefId}";
+    .
+
+<#TM_WoRMS_Name>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: 'WoRMS'})""" ];
+    rr:subjectMap <#SM_Name>;
+    rr:predicateObjectMap [
+        rr:predicate skos:exactMatch;
+        rr:objectMap [ rr:template "urn:lsid:marinespecies.org:taxname:{$.externalId}"; rr:termType rr:IRI ];
+    ];
+	.
