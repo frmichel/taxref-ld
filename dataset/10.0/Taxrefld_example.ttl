@@ -1,0 +1,82 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix dce: <http://purl.org/dc/elements/1.1/>.
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+
+@prefix dwc:    <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+
+@prefix taxref: <http://taxref.mnhn.fr/lod/> .
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
+
+<http://taxref.mnhn.fr/lod/taxon/60878/10.0>
+    a                           owl:Class ;
+    rdfs:subClassOf             <http://taxref.mnhn.fr/lod/taxon/191591/10.0> ;
+    rdfs:label                  "Delphinus delphis" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/60878> ;
+    taxrefprop:hasSynonym       <http://taxref.mnhn.fr/lod/name/361079> ;
+    taxrefprop:vernacularName   "Common Dolphin"@en, "Short-beaked common dolphin"@en ;
+    taxrefprop:habitat          taxrefhab:Marine ;
+    taxrefprop:bioGeoStatusIn [
+        rdfs:label              "Biogeographical status in French Polynesia" ;
+        dwciri:inDescribedPlace <http://sws.geonames.org/4030656/> ;
+        dwciri:occurrenceStatus taxrefbgs:D ] ;
+    taxrefprop:bioGeoStatusIn [
+        rdfs:label              "Biogeographical status in Guadeloupe" ;
+        dwciri:inDescribedPlace <http://sws.geonames.org/3579143/> ;
+        dwciri:occurrenceStatus taxrefbgs:B ] ;
+    foaf:page               <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> .
+
+    
+<http://taxref.mnhn.fr/lod/name/60878>
+    a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
+    skos:broader                <http://taxref.mnhn.fr/lod/name/191591> ;
+    rdfs:label                  "Delphinus delphis Linnaeus, 1758" ;
+    skos:prefLabel              "Delphinus delphis" ;
+    dwc:scientificName          "Delphinus delphis" ;
+    taxrefprop:hasAuthority     "Linnaeus, 1758" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/60878/10.0> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> .
+
+<http://taxref.mnhn.fr/lod/name/361079>
+    a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
+    rdfs:label                  "Delphinus capensis Gray, 1828" ;
+    skos:prefLabel              "Delphinus capensis" ;
+    dwc:scientificName          "Delphinus capensis" ;
+    taxrefprop:hasAuthority     "Gray, 1828" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:isSynonymOf      <http://taxref.mnhn.fr/lod/taxon/60878/10.0> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/361079/?lg=en> .
+
+<http://taxref.mnhn.fr/lod/taxon/191591/10.0>
+    a                           owl:Class ;
+    rdfs:subClassOf             <http://taxref.mnhn.fr/lod/taxon/186227/10.0> ;
+    rdfs:label                  "Delphinus" ;
+    taxrefprop:hasRank          taxrefrk:Genus ;
+    taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/191591> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/191591/?lg=en> .
+
+<http://taxref.mnhn.fr/lod/name/191591>
+    a                           skos:Concept, <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/10.0> ;
+    skos:broader                <http://taxref.mnhn.fr/lod/name/186227> ;
+    rdfs:label                  "Delphinus Linnaeus, 1758" ;
+    skos:prefLabel              "Delphinus" ;
+    dwc:scientificName          "Delphinus" ;
+    taxrefprop:hasAuthority     "Linnaeus, 1758" ;
+    taxrefprop:hasRank          taxrefrk:Genus ;
+    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/191591/10.0> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/191591/?lg=en> .
