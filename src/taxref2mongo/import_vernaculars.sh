@@ -1,8 +1,27 @@
 #!/bin/bash
-# Import TAXREF SOURCES into MongoDB
+# Import dumps of the TAXREF Web API into MongoDB
+#
+# Input arguments:
+# - TAXREF version, e.g. "12.0"
+# - MongoDB database name, e.g. "taxrefv12"
+#
+# Author: F. Michel, UCA, CNRS, Inria
 
-version=12.0
-db=taxrefv12
+help()
+{
+  exe=$(basename $0)
+  echo "Usage: $exe <TAXREF version> <MongoDB database name>"
+  echo "Call example:"
+  echo "   $exe 12.0 taxrefv12"
+  exit 1
+}
+
+version=$1
+if [[ -z "$version" ]] ; then help; fi
+
+db=$2
+if [[ -z "$db" ]] ; then help; fi
+
 collection=vernaculars
 
 mongo --eval "db.${collection}.drop()" localhost/$db

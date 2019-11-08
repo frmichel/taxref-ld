@@ -1,12 +1,14 @@
 db.statusCodes.drop()
 
-/* Problem with sourceId:
+/* 
+ * Add to each status in collection statuses a field statusTypeCode that comes 
+ * from statusTypes.
  *
+ * Problem with sourceId:
  *  - sourceId: {$addToSet: "$sourceId"}:
  *    Create an array with all values. But when reading source ids with Moph-xR2RML, they are obtained as
  *    decimals ending with ".0". Hence the links created are wrong. Example:
  *    <http://taxref.mnhn.fr/lod/status/BARC/AIBA2> dct:source <http://taxref.mnhn.fr/lod/bib/204009.0> .
- *
  *  - sourceId: {$first: "$sourceId"}
  *    One option is to not create an array but take only the first value instead, which seems to
  *    be good enough for the documents that are concerned. The aggregate step then becomes simply
