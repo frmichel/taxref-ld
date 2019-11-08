@@ -1,0 +1,177 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix dct:  <http://purl.org/dc/terms/>.
+
+@prefix dwc:    <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+@prefix wdt:    <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+@prefix wd:     <http://www.wikidata.org/entity/>.           # Wikibase entity - item or property
+
+@prefix taxref: <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefstatus: <http://taxref.mnhn.fr/lod/status/>.
+
+# ============================================================
+# Resources imported from other ontologies:
+#
+# ENVO - Environment Ontology: types of habitat (https://www.ebi.ac.uk/ols/ontologies/envo)
+#   Class http://purl.obolibrary.org/obo/ENVO_00002149: Sea water
+#   Class http://purl.obolibrary.org/obo/ENVO_01000320: Marine Environment
+#   Class http://purl.obolibrary.org/obo/ENVO_00002011: Fresh water
+#   Class http://purl.obolibrary.org/obo/ENVO_00002019: Brackish water
+#   Class http://purl.obolibrary.org/obo/ENVO_00000446: Terrestrial biome
+#
+# RO - Relations Ontology (http://www.ontobee.org/ontology/RO)
+#   Property http://purl.obolibrary.org/obo/RO_0002303: has habitat
+#   + properties of interactions between species (preys on, symbiotically interacts with, parasite of, etc.)
+#
+# TaxonConcept Ontology:
+#   Property http://lod.taxonconcept.org/ontology/txn.owl#habitat: links a taxon to its habitat
+#   Top-class of habitats: http://lod.taxonconcept.org/ontology/txn.owl#Habitat
+#   Classes of habitats: http://lod.taxonconcept.org/ontology/txn.owl#*Habitat
+#   Property http://lod.taxonconcept.org/ontology/txn.owl#authority: authority of a taxon e.g. "Heinrich, 1952"
+#   Classes of Taxonomical ranks: http://lod.taxonconcept.org/ontology/txn.owl#Rank*
+#
+# NCBI organismal classification (http://www.ontobee.org/ontology/NCBITaxon): <http://purl.obolibrary.org/obo/ncbitaxon.owl>
+#   Property http://purl.obolibrary.org/obo/ncbitaxon#has_rank: associates a taxonomical rank to a taxon
+#   Classes of Taxonomical ranks: http://purl.obolibrary.org/obo/NCBITaxon_*
+#
+# GeoSpecies Knowledge Base (https://bioportal.bioontology.org/ontologies/GEOSPECIES): <http://rdf.geospecies.org/ont/geospecies.owl>
+#   Classes of taxonomical ranks: http://rdf.geospecies.org/ont/geospecies#TaxonRank_*
+#   Class http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus
+#   Property http://rdf.geospecies.org/ont/geospecies#hasVernacularName
+#
+# TDWG Ontology (https://github.com/tdwg/ontology)
+#   Occurrence Status Terms (https://github.com/tdwg/ontology/blob/master/ontology/voc/OccurrenceStatusTerm.rdf):
+#     Values of occurrence statuses, aka. biogeographical statuses: <http://rs.tdwg.org/ontology/voc/OccurrenceStatusTerm>
+#     (note that these are deprecated).
+#   Class <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>
+#   Class <http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName> (class of all scientific names, in add. to skos:Concept)
+#
+# Darwin Core Terms (http://rs.tdwg.org/dwc/terms/ and http://rs.tdwg.org/dwc/iri/):
+#   Property http://rs.tdwg.org/dwc/iri/occurrenceStatus
+#   Property http://rs.tdwg.org/dwc/terms/locationID (http://terms.tdwg.org/wiki/dwc:locationID)
+#      No longer used in this RDF representation.
+#      May be used with values from TDWG and WOEID as recommended by GBIF: http://rs.gbif.org/areas/.
+#   Property http://rs.tdwg.org/dwc/terms/vernacularName
+#   Property http://rs.tdwg.org/dwc/terms/taxonRank
+#   Property http://rs.tdwg.org/dwc/iri/habitat
+#   Property http://rs.tdwg.org/dwc/terms/scientificName
+#
+# URIs and identifiers of geographical places:
+#   Geonames: URIs of France mainland and overseas territories
+#   TDWG World Geographical Scheme for Recording Plant Distributions
+#     https://github.com/tdwg/prior-standards/tree/master/world-geographical-scheme-for-recording-plant-distributions
+#   Yahoo! Where On Earth ID (WOEID)
+#
+# VTO (Vertebrate Taxon O,ntology)
+#   Property http://purl.obolibrary.org/obo/vto#has_rank
+#
+# BIBO - Bibliographic Ontology (http://bibliographic-ontology.org/bibo/bibo.php)
+#   Class http://purl.org/ontology/bibo/Article
+#   Property http://purl.org/ontology/bibo/doi
+# 
+# HAL
+#   Class https://data.archives-ouvertes.fr/doctype/Article
+#
+# Dublim Core Terms
+#   Property dct:bibliographicCitation
+#   Property dct:issued
+#
+# BioTop Ontology - https://github.com/BioTopOntology/biotop/
+#   Property http://purl.org/biotop/biotop.owl#OrganismInteraction
+#
+# Wikidata
+#   Property P248 "stated in" - statuses, interactions
+#   Property P3005 "valid in place" - statuses
+#   Indiv. for Red List statuses
+#   ...TBC...
+
+
+# ============================================================
+# ==== Properties used for taxa and labels
+# ============================================================
+
+taxrefprop:hasRank
+ a owl:ObjectProperty;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/vto#has_rank>;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/ncbitaxon#has_rank>;
+ owl:equivalentProperty wdt:P105;
+ rdfs:seeAlso dwc:taxonRank;
+ rdfs:comment "This property is not equivalent to dwc:taxonRank which is expected to be used only with literal values (see http://rs.tdwg.org/dwc/terms/guides/rdf/index.htm, section 3.5)"@en;
+ rdfs:seeAlso <http://rs.tdwg.org/ontology/voc/TaxonName#rank>;
+ rdfs:seeAlso <http://rs.tdwg.org/ontology/voc/TaxonConcept#rank>;
+ rdfs:comment "This property is not equivalent to http://rs.tdwg.org/ontology/voc/TaxonConcept#rank nor http://rs.tdwg.org/ontology/voc/TaxonName#rank whose domains are http://rs.tdwg.org/ontology/voc/TaxonConcept#TaxonConcept and http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName respectively, whereas we want to use taxrefprop:hasRank with taxa implemented as owl:Classes as well as scientific names implemented as instances of skos:Concept. "@en;
+ rdfs:label "has taxonomic rank"@en;
+ dct:description "Relates a scientific name or a taxon to a taxonimical rank"@en.
+
+taxrefprop:hasAuthority
+ a owl:DatatypeProperty;
+ owl:equivalentProperty <http://lod.taxonconcept.org/ontology/txn.owl#authority>;
+ owl:equivalentProperty <http://rs.tdwg.org/ontology/voc/TaxonName#authorship>;
+ rdfs:label "has scientific name authority"@en;
+ rdfs:seeAlso dwc:scientificNameAuthorship;
+ dct:description "Provides the authorship information of a scientific name"@en;
+ rdfs:comment "TDWG ontology's property http://rs.tdwg.org/ontology/voc/TaxonName#authorship is preferably associated with a scientific name (http://rs.tdwg.org/ontology/voc/TaxonName#TaxonName), which is in line with TAXREF-LD's modelling. By contrast, DwC's scientificNameAuthorship property is associated with a taxon (dwc:Taxon), and its object shoud be a literal (DwC does not have a class for taxon names). Therefore, TAXREF-LD's hasAuthority property is not aligned with the latter."@en.
+
+taxrefprop:hasReferenceName
+ a owl:ObjectProperty;
+ rdfs:subPropertyOf dwc:scientificName;
+ rdfs:label "has reference name"@en;
+ dct:description "Relates a taxon to its reference (valid) scientific name"@en;
+ rdfs:comment "DwC's scientificName property is recommended to be used with a literal object, and does not distinguish between reference vs. synonym names. Hence, TAXREF-LD extends it (rdfs:subPropertyOf) instead of asserting an equivalence."@en.
+
+taxrefprop:isReferenceNameOf
+ a owl:ObjectProperty;
+ owl:inverse taxrefprop:hasReferenceName;
+ rdfs:label "is the reference name of"@en;
+ dct:description "Relates a scientific name to the taxon for which it is the reference (valid) name"@en.
+
+taxrefprop:hasSynonym
+ a owl:ObjectProperty;
+ rdfs:subPropertyOf dwc:scientificName;
+ rdfs:label "has synonym"@en;
+ dct:description "Relates a taxon to one of its synonyms"@en;
+ rdfs:comment "DwC's scientificName property is recommended to be used with a literal object, and does not distinguish between reference vs. synonym names. Hence, in TAXREF-LD, we extend it with rdfs:subPropertyOf instead of asserting an equivalence."@en.
+  
+taxrefprop:isSynonymOf 
+ a owl:ObjectProperty;
+ owl:inverse taxrefprop:hasSynonym;
+ rdfs:label "is a synonym of"@en;
+ dct:description "Relates a scientific name to a taxon for which it is a synonym"@en.
+ 
+taxrefprop:vernacularName 
+ a owl:DatatypeProperty;
+ owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasVernacularName>;
+ owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasCommonName>;
+ owl:equivalentProperty dwc:vernacularName;
+ owl:equivalentProperty wdt:P1843;
+ rdfs:label "has vernacular name"@en;
+ dct:description "Relates a name to one of its vernacular (common) names"@en.
+ 
+taxrefprop:habitat
+ a owl:ObjectProperty;
+ owl:equivalentProperty <http://purl.obolibrary.org/obo/RO_0002303>;
+ owl:equivalentProperty dwciri:habitat;
+ owl:equivalentProperty wdt:P2974;
+ rdfs:range taxrefhab:Habitat;
+ rdfs:label "has habitat"@en;
+ dct:description "Relates a taxon to an habitat in which it lives"@en;
+ rdfs:seeAlso <http://lod.taxonconcept.org/ontology/txn.owl#habitat>.
+
+<http://lod.taxonconcept.org/ontology/txn.owl#habitat>
+ rdfs:subPropertyOf taxrefprop:habitat;
+ rdfs:comment "Property http://lod.taxonconcept.org/ontology/txn.owl#habitat is defined as an equivalent property of http://purl.org/ontology/wo/habitat (BBC WO) whose domain is http://purl.org/ontology/wo/TaxonRank. This is possibly a mistake, since an habitat should typically be associated with a species (an instance of taxon rank Species), not with a rank. Hence, to avoid any unexpected inference, TAXREF-LD defines the habitat property as a super-property of http://lod.taxonconcept.org/ontology/txn.owl#habitat with no domain restriction."@en.
+
+# --- Deprecated terms ---
+taxrefprop:bioGeoStatusIn
+ a owl:ObjectProperty;
+ rdfs:label "has biogeograpical status"@en;
+ dct:description "(deprecated). Relates a taxon to a biogeograpical status within a certain region. As of TAXREF v12, this property should no longer be used. Instead use class taxrefstatus:BioGeographicalQualifiedStatus"@en;
+ owl:deprecated "true"^^xsd:boolean;
+ rdfs:range taxrefbgs:BioGeographicalStatus.
+ 

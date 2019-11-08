@@ -1,0 +1,49 @@
+@prefix dct:        <http://purl.org/dc/terms/> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:        <http://www.w3.org/2002/07/owl#>.
+
+@prefix wdt:        <http://www.wikidata.org/entity/>.
+@prefix igeo:       <http://rdf.insee.fr/def/geo#>.
+@prefix geofla:     <http://data.ign.fr/id/geofla/>.
+
+@prefix taxrefloc:  <http://taxref.mnhn.fr/lod/loc/>.
+
+
+taxrefloc:MaritimeArea
+    rdfs:subClassOf wdt:Q1496967, wdt:Q15324;        # Q1496967 = territorial entity, Q15324 = body of water
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    rdfs:label "Maritime area"@en;
+    dct:description "Maritime area different from seas, oceans, territorial waters and EEZ."@en;
+    rdfs:comment "A maritime area, generally surrounding a landmass, that does not correspond to any specific sea or ocean, nor to any internationally recognized administrative subdivision (i.e. territorial waters or EEZ)"@en.
+
+# --------------- Mapping between Wikidata classes and INSEE/IGN counterparts -------------
+
+wdt:Q192498
+    a owl:Class;
+    owl:equivalentClass igeo:TerritoireFrancais, geofla:UniteAdministrative.
+    
+wdt:Q702842
+    a owl:Class;
+    owl:equivalentClass igeo:ArrondissementMunicipal.
+    
+wdt:Q484170
+    a owl:Class;
+    owl:equivalentClass igeo:Commune, geofla:Commune.
+
+wdt:Q6465
+    a owl:Class;
+    owl:equivalentClass igeo:Departement, geofla:Departement.
+
+wdt:Q36784
+    a owl:Class;
+    owl:equivalentClass igeo:Region, geofla:Region.
+
+wdt:Q719487
+    a owl:Class;
+    owl:equivalentClass igeo:CollectiviteDOutreMer.
+    
+wdt:Q3624078
+    a owl:Class;
+    owl:equivalentClass igeo:Pays.

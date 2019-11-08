@@ -1,0 +1,488 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#>.
+@prefix dct:  <http://purl.org/dc/terms/>.
+
+@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
+
+# --- Taxonomical ranks linked with equivalent ranks from other ontologies
+
+taxrefrk:TaxonomicRank
+ rdfs:subClassOf skos:Concept;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ owl:equivalentClass <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>;
+ rdfs:label "Class of taxonomical ranks"@en;
+ dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en.
+ 
+taxrefrk:Domain
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Domain"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankDomain>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000037>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_domain>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Domain>;
+ .
+ 
+taxrefrk:Superkingdom
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Super-kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superkingdom>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#SuperKingdom>;
+ .
+
+taxrefrk:Kingdom
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankKingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_kingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000017>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_kingdom>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Kingdom>;
+ .
+
+taxrefrk:SubKingdom
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-kingdom"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subkingdom>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000029>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subkingdom>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subkingdom>;
+ .
+
+taxrefrk:InfraKingdom
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Infra-kingdom"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000044>;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankIngrakingdom>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Infrakingdom>;
+ .
+
+taxrefrk:Phylum
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Phylum"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankPhylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_phylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000001>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_phylum>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Phylum>;
+ .
+
+taxrefrk:SubPhylum
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-phylum"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubphylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subphylum>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000008>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subphylum>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Superphylum>;
+ .
+
+taxrefrk:InfraPhylum
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Infra-phylum"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000040>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Infraphylum>;
+ .
+
+taxrefrk:Division
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Division"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankDivision>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Division>;
+ .
+
+taxrefrk:SubDivision
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-division"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubdivision>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subdivision>;
+ .
+
+taxrefrk:SuperClass
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Super-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superclass>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superclass>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Superclass>;
+ .
+
+taxrefrk:Cladus
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Cladus"@en.
+
+taxrefrk:Class
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankClass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_class>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000002>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_lass>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Class>;
+ .
+
+taxrefrk:SubClass
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000007>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subclass>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subclass>;
+ .
+
+taxrefrk:InfraClass
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Infra-class"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraclass>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000019>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_infraclass>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Infraclass>;
+ .
+
+taxrefrk:Legio
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Legio"@en.
+
+taxrefrk:SuperOrder
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Super-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superorder>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superorder>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Superorder>;
+ .
+
+taxrefrk:Cohort
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Cohort"@en.
+
+taxrefrk:Order
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankOrder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_order>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000003>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_order>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Order>;
+ .
+ 
+taxrefrk:SubOrder
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuborder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_suborder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000014>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_suborder>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Suborder>;
+ .
+ 
+taxrefrk:InfraOrder
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Infra-order"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_infraorder>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000013>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_infraorder>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Infraorder>;
+ .
+ 
+taxrefrk:SuperFamily
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Super-family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_superfamily>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_superfamily>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Superfamily>;
+ .
+
+taxrefrk:Family
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankFamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_family>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000004>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_family>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Family>;
+ .
+
+taxrefrk:SubFamily
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-family"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subfamily>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000024>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subfamily>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subfamily>;
+ .
+
+taxrefrk:Tribe
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Tribe"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankTribe>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_tribe>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_tribe>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Tribe>;
+ .
+
+taxrefrk:SubTribe
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-tribe"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subtribe>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subtribe>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subtribe>;
+ .
+
+taxrefrk:Genus
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Genus"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankGenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_genus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000005>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_genus>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Genus>;
+ .
+
+taxrefrk:SubGenus
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-genus"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubgenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subgenus>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000009>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subgenus>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subgenus>;
+ .
+
+taxrefrk:Section
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Section"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000030>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_section>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Section>;
+ .
+
+taxrefrk:SubSection
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-section"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000053>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subsection>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subsection>;
+ .
+
+taxrefrk:Series
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Series"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000031>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Series>;
+ .
+
+taxrefrk:SubSeries
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-series"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000054>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subseries>;
+ .
+
+taxrefrk:Agregate
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Agregate"@en;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#SpeciesAggregate>;
+ .
+
+taxrefrk:Species
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Species"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSpecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_species>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000006>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_species>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Species>;
+ .
+
+taxrefrk:SemiSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Semi-species"@en.
+
+taxrefrk:MicroSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Micro-species"@en.
+
+taxrefrk:SubSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-species"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubpecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subspecies>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000023>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subspecies>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subspecies>;
+ .
+
+taxrefrk:Natio
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Natio"@en.
+
+taxrefrk:Varietas
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Varietas"@en;
+ skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankVariety>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_varietas>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_variety>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Variety>;
+ .
+
+taxrefrk:SubVarietas
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-varietas"@en;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subvariety>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Sub-Variety>;
+ .
+
+taxrefrk:Forma
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Forma"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_forma>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000026>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_form>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Form>;
+ .
+
+taxrefrk:SubForma
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Sub-forma"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000059>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subform>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Subform>;
+ .
+
+taxrefrk:FormaSpecies
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Forma species"@en.
+
+taxrefrk:Linea
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Linea"@en.
+
+taxrefrk:Clone
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Clone"@en.
+
+taxrefrk:Race
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Race"@en.
+
+taxrefrk:Cultivar
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Cultivar"@en;
+ skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000034>;
+ skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_cultivar>;
+ skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#Cultivar>;
+ .
+
+taxrefrk:Morpha
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Morpha"@en.
+
+taxrefrk:Abberatio
+ a taxrefrk:TaxonomicRank;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:prefLabel "Abberatio"@en.
