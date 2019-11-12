@@ -9,7 +9,7 @@
 help()
 {
   exe=$(basename $0)
-  echo "Usage: $exe <TAXREF version> <external DB name> <predcate>"
+  echo "Usage: $exe <TAXREF version> <external DB name> <predicate>"
   echo "Call example:"
   echo "   $exe 12.0 AlgaeBase wdt:P1348"
   exit 1

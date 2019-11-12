@@ -48,7 +48,7 @@
         rr:objectMap [ xrr:reference "$.doi"; ];
     ];
     rr:predicateObjectMap [
-        rr:predicate schema:sameAs;
+        rr:predicate schema:sameAs, foaf:page;
         rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
         rr:objectMap [ xrr:reference "$.zooBankUri"; rr:termType rr:IRI ];
     ];

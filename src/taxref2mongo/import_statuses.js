@@ -2,7 +2,6 @@
 // This requires doing a join (lookup) with the statusTypes collection.
 
 db.statuses_tmp.drop()
-
 db.statuses.aggregate([
 
     { $lookup:

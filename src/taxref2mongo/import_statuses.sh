@@ -22,7 +22,7 @@ if [[ -z "$version" ]] ; then help; fi
 db=$2
 if [[ -z "$db" ]] ; then help; fi
 
-collection=statuses_raw
+collection=statuses
 
 mongo --eval "db.${collection}.drop()" localhost/$db
 
@@ -38,3 +38,9 @@ mongo --eval "db.${collection}.createIndex({statusTypeName: 1})" localhost/$db
 
 # Add a field statusTypeCode to the status documents
 mongo localhost/$db import_statuses.js
+
+# Create a collection of all status codes
+mongo localhost/$db import_status_codes.js
+
+# Create a collection of all bibliographic references associated with statuses
+mongo localhost/$db import_status_biblio.js

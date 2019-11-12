@@ -34,6 +34,3 @@ echo -n "" > $log
 
 ./query_statuses.sh         $TAXREFVER          >> $log
 ./import_statuses.sh        $TAXREFVER $DBNAME  >> $log
-
-./query_status_codes.sh     $TAXREFVER          >> $log
-./import_status_codes.sh    $TAXREFVER $DBNAME  >> $log

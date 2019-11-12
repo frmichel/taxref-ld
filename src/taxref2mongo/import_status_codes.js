@@ -1,8 +1,5 @@
-db.statusCodes.drop()
-
 /* 
- * Add to each status in collection statuses a field statusTypeCode that comes 
- * from statusTypes.
+ * Create a collection to list all status codes.
  *
  * Problem with sourceId:
  *  - sourceId: {$addToSet: "$sourceId"}:
@@ -15,20 +12,26 @@ db.statusCodes.drop()
  *    sourceId: {$first: "$sourceId"}
  */
 
-var a =
-    db.statuses.aggregate([{
-        $group: {
-            _id: {$concat: ["$statusCode", " - ", "$statusName"]},
-            statusCode: {$first: "$statusCode"},
-            statusName: {$first: "$statusName"},
-            statusTypeName: {$first: "$statusTypeName"},
-            statusTypeGroup: {$first: "$statusTypeGroup"},
-            sourceId: {$first: "$sourceId"}
-        }
-    }]).toArray();
+db.statusCodes.drop()
+db.statuses.aggregate([
+    { $group: 
+        { _id: {$concat: ["$statusCode", " - ", "$statusName"]},
+          statusCode: {$first: "$statusCode"},
+          statusName: {$first: "$statusName"},
+          statusTypeName: {$first: "$statusTypeName"},
+          statusTypeGroup: {$first: "$statusTypeGroup"},
+          sourceId: {$first: "$sourceId"} }
+    },
+    
+    { $lookup:
+        { from:"statusTypes", localField:"statusTypeName", foreignField:"name", as:"statusTypeFull" }
+    },
+    
+    { $addFields: { statusTypeFull0: { $arrayElemAt: ["$statusTypeFull", 0] }}},
+    { $addFields: { statusTypeCode: "$statusTypeFull0.id" }},
+    { $project: { statusTypeFull: 0, statusTypeFull0: 0 }},
+    
+    { $out: "statusCodes" }
+])
 
-for (var i = 0; i < a.length; i++) {
-    a[i].statusTypeCode = db.statusTypes.distinct("id", {name: a[i].statusTypeName})[0]
-}
-
-db.statusCodes.insertMany(a)
+db.statusCodes.createIndex({statusCode: 1})

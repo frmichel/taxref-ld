@@ -17,60 +17,94 @@
 @prefix taxrefprop:   <http://taxref.mnhn.fr/lod/property/>.
 
 
-#========================================== Association statuses and taxa ======================================
+#================= Statuses from legal documents (reglementations, directives, conventions) ================
 
 <#SM_Taxon>
     a rr:SubjectMap;
     rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}".
 
-# Associate a taxon with a part (article or annex) of legal document
-# (international convention, protection, european directive or regulation)
+#=========================== Legal Status =============================
 
-<#TM_Taxon_listedIn>
+<#SM_LegalStatus>
+    a rr:SubjectMap;
+    rr:template "LegalStatus_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}";
+    rr:class taxrefstatus:LegalStatus;
+    rr:termType rr:BlankNode.
+
+# For every status associate the taxon with a blank node of type TaxonStatus
+<#TM_Taxon_LegalStatus>
     a rr:TriplesMap;
     xrr:logicalSource [ xrr:query 
       """db.statuses.find({statusTypeGroup: { $in:  ['Réglementation', 'Protection', 'Directives européennes', 'Conventions internationales']}})""" ];
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
-        rr:predicate taxrefprop:listedIn;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}" ];
-    ].
+        rr:predicate taxrefprop:hasStatus;
+        rr:objectMap [ rr:template "LegalStatus_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}"; rr:termType rr:BlankNode ];
+    ];
+    .
 
-# Reification to say that the listedIn statement applies to a specific geographical location.
-# The reified statement is a blank node.
-<#TM_Statement_listedIn>
+# Create a LegalStatus blank node instance for each status
+<#TM_LegalStatus_Common>
     a rr:TriplesMap;
     xrr:logicalSource [ xrr:query 
       """db.statuses.find({statusTypeGroup: { $in:  ['Réglementation', 'Protection', 'Directives européennes', 'Conventions internationales']}})""" ];
-    rr:subjectMap [ 
-        rr:template "STAT_{$.statusCode}_{$.taxon.referenceId}_{$.locationId}"; 
-        rr:termType rr:BlankNode; 
-        rr:class rdf:Statement 
-    ];
+    rr:subjectMap <#SM_LegalStatus>;
     rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}" ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefprop:listedIn; rr:termType rr:IRI ]
-    ];
-    rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}" ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate wdt:P3005;                    # (valid in place)
+        rr:predicate dct:coverage, wdt:P3005;        # wdt:P3005 = valid in place
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:source, wdt:P248;           # wdt:P248 = stated in
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
     ];
     rr:predicateObjectMap [ 
         rr:predicate dct:description; 
-        rr:objectMap [ 
-            rr:template "{$.taxon.scientificName} is listed in: {$.statusName} ({$.statusTypeName})";
-            rr:termType rr:Literal
-        ];
+        rr:objectMap [ rr:template "{$.taxon.scientificName} has legal status {$.statusCode}"; rr:termType rr:Literal ];
     ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "listed in (statement)" ];
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label; 
+        rr:objectMap [ rr:template "Legal status {$.statusCode}"; rr:termType rr:Literal ];
+    ];
+    .
+    
+<#TM_LegalStatus_EuropeanDirective>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Directives européennes'})""" ];
+    rr:subjectMap <#SM_LegalStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusType;
+        rr:objectMap [ rr:constant taxrefstatus:EuropeanDirective; rr:termType rr:IRI  ];
+    ];
+    .
+    
+<#TM_LegalStatus_InternConvention>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Conventions internationales'})""" ];
+    rr:subjectMap <#SM_LegalStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusType;
+        rr:objectMap [ rr:constant taxrefstatus:InternationalConvention; rr:termType rr:IRI  ];
+    ];
+    .
+
+<#TM_LegalStatus_Regulation>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Réglementation'})""" ];
+    rr:subjectMap <#SM_LegalStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusType;
+        rr:objectMap [ rr:constant taxrefstatus:Regulation; rr:termType rr:IRI  ];
+    ];
+    .
+
+<#TM_LegalStatus_Protection>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Protection'})""" ];
+    rr:subjectMap <#SM_LegalStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusType;
+        rr:objectMap [ rr:constant taxrefstatus:Protection; rr:termType rr:IRI  ];
+    ];
     .
 
 #=========================== RedList Statuses =============================
@@ -78,10 +112,10 @@
 <#SM_RedListStatus>
     a rr:SubjectMap;
     rr:template "RL_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}";
-    rr:class taxrefstatus:RedListQualifiedStatus;
+    rr:class taxrefstatus:RedListStatus;
     rr:termType rr:BlankNode.
 
-# For every status in the group 'Liste rouge', associate the taxon with a new QualifiedStatus instance
+# For every status associate the taxon with a blank node of type TaxonStatus
 <#TM_Taxon_RedListStatuses>
     a rr:TriplesMap;
     xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Liste rouge', statusCode: { $ne: 'NE' }})""" ];
@@ -92,23 +126,19 @@
     ];
     .
 
-# Create a QualifiedStatus instance for each record with status group 'Liste rouge'
+# Create a ConservationStatus blank node instance for each status
 <#TM_RedListStatus_Common>
     a rr:TriplesMap;
+    # Consider all Red List statuses except when status is NE = Non évalue (not assessed)
     xrr:logicalSource [ xrr:query """db.statuses.find({statusTypeGroup: 'Liste rouge', statusCode: { $ne: 'NE' }})""" ];;
     rr:subjectMap <#SM_RedListStatus>;
     rr:predicateObjectMap [
-        rr:predicate wdt:P3005;
+        rr:predicate dct:coverage, wdt:P3005;        # wdt:P3005 = valid in place
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
     ];
     rr:predicateObjectMap [
-        rr:predicate dct:source;            # (or wdt:P248 stated in)
+        rr:predicate dct:source, wdt:P248;           # wdt:P248 = stated in
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate taxrefprop:redListType;
-        # To be considered: would http://dbpedia.org/ontology/conservationStatusSystem be of interest here?
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}" ];
     ];
     rr:predicateObjectMap [ 
         rr:predicate dct:description; 
@@ -120,10 +150,10 @@
     ];
     .
 
-# Create a QualifiedStatus instance for each record with status a TAXREF-specific red list status value
+# Create a ConservationStatus instance for each record with status a TAXREF-specific red list status value
 <#TM_RedListStatus_Customized>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: {$in:  ['RE', 'RE?', 'CR*', 'NA']}})""" ];
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: {$in:  ['RE?', 'CR*', 'NA']}})""" ];
     rr:subjectMap <#SM_RedListStatus>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:statusValue;
@@ -193,6 +223,15 @@
         rr:objectMap [ rr:constant wdt:Q237350; rr:termType rr:IRI ]
     ].
 
+<#TM_RedListStatus_RE>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'RE'})""" ];
+    rr:subjectMap <#SM_RedListStatus>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:statusValue;
+        rr:objectMap [ rr:constant wdt:Q10594853; rr:termType rr:IRI ]
+    ].
+
 <#TM_RedListStatus_DD>
     a rr:TriplesMap;
     xrr:logicalSource [ xrr:query """db.statuses.find({statusCode: 'DD' })""" ];
@@ -219,14 +258,14 @@
     rr:subjectMap [ 
         rr:template "BG_QS_{$.taxon.referenceId}_{$.statusCode}_{$.locationId}"; 
         rr:termType rr:BlankNode;
-        rr:class taxrefstatus:BioGeographicalQualifiedStatus;
+        rr:class taxrefstatus:BioGeographicalStatus;
     ];
     rr:predicateObjectMap [
-        rr:predicate wdt:P3005;
+        rr:predicate dct:coverage, wdt:P3005;        # wdt:P3005 = valid in place
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}" ];
     ];
     rr:predicateObjectMap [
-        rr:predicate dct:source;            #    (or wdt:P248 stated in)
+        rr:predicate dct:source, wdt:P248;           # wdt:P248 = stated in
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
     ];
     rr:predicateObjectMap [
