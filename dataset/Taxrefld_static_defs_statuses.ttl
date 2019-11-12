@@ -75,41 +75,6 @@ taxrefstatus:Protection
     skos:prefLabel "Protection"@en;
     skos:prefLabel "Protection"@fr.    
     
-taxrefstatus:RedList
-    a skos:Concept;
-    skos:broader taxrefstatus:TaxonStatusType;
-    skos:closeMatch wdt:Q32059;            # IUCN red list
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:prefLabel "IUCN Red list"@en;
-    skos:prefLabel "Liste rouge"@fr.    
-
-taxrefstatus:LRM
-    a skos:Concept;
-    skos:broader    taxrefstatus:RedList;
-    skos:inScheme   <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:prefLabel  "IUCN World Red list"@en;
-    skos:prefLabel  "Liste rouge mondiale"@fr .
-
-taxrefstatus:LRE
-    skos:broader    taxrefstatus:RedList;
-    skos:inScheme   <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:prefLabel  "IUCN European Red list"@en;
-    skos:prefLabel  "Liste rouge européenne"@fr .
-
-taxrefstatus:LRN
-    a skos:Concept;
-    skos:broader    taxrefstatus:RedList;
-    skos:inScheme   <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:prefLabel  "IUCN French National Red list"@en;
-    skos:prefLabel  "Liste rouge nationale française"@fr .
-
-taxrefstatus:LRR
-    a skos:Concept;
-    skos:broader    taxrefstatus:RedList;
-    skos:inScheme   <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:prefLabel  "IUCN French Regional Red list"@en;
-    skos:prefLabel  "Liste rouge régionale française"@fr .
-
 
 #---------------------- Status values for TAXREF-specific Red List statuses ----------------
 # - RE?: Disappeared at regional level?
@@ -155,14 +120,14 @@ taxrefprop:statusValue
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
     rdfs:label "status value"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
-    dct:description "Relates a qualified status with the actual value of the biogeographical or conservation status which may be an instance of wdt:Q82673 (in the case of a conservation status = red list status), or an instance of taxrefbgs:BioGeographicalStatus"@en.
+    dct:description "Relates a taxon status with the actual value of the biogeographical or conservation status which may be an instance of wdt:Q82673 (in the case of a conservation status = red list status), or an instance of taxrefbgs:BioGeographicalStatus"@en.
     
 taxrefprop:statusType
     a owl:ObjectProperty;
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
     rdfs:label "status type"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
-    dct:description "Relates a qualified status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
+    dct:description "Relates a taxon status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
 
 # --------------------------- Biogeographical status values -------------------------------
 

@@ -88,6 +88,7 @@
 # Wikidata
 #   Property P248 "stated in" - statuses, interactions
 #   Property P3005 "valid in place" - statuses
+#   Red List types (world, european, national, regional)
 #   Indiv. for Red List statuses
 #   ...TBC...
 

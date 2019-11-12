@@ -1,0 +1,81 @@
+@prefix wdt:          <http://www.wikidata.org/entity/>.
+@prefix rdfs:         <http://www.w3.org/2000/01/rdf-schema#>.
+
+wdt:P105 rdfs:label "taxon rank (Wikidata)".
+wdt:P1843 rdfs:label "taxon common name (Wikidata)".
+wdt:P2974 rdfs:label "habitat (Wikidata)".
+wdt:P3005 rdfs:label "valid in place (Wikidata)".
+wdt:P248 rdfs:label "stated in (Wikidata)".
+wdt:P2561 rdfs:label "name (Wikidata)".
+wdt:P298 rdfs:label "ISO 3166-1 alpha-3 code (Wikidata)".
+wdt:P300 rdfs:label "ISO 3166-2 code (Wikidata)".
+wdt:P276 rdfs:label "location (Wikidata)".
+wdt:P2007 rdfs:label "Zoobank publication id (Wikidata)".
+wdt:P356 rdfs:label "DOI (Wikidata)".
+
+# ======= IUCN Red lists
+wdt:Q32059 rdfs:label "IUCN Red List (Wikidata)".
+wdt:Q73996204 rdfs:label "IUCN European Red List (Wikidata)".
+wdt:Q73999284 rdfs:label "IUCN French Red List (Wikidata)".
+wdt:Q74002580 rdfs:label "IUCN French Regional Red List (Wikidata)".
+
+# ======= IUCN Red list statuses
+wdt:Q82673 rdfs:label "conservation status (Wikidata)".
+wdt:Q211005 rdfs:label "least concern (Wikidata)".
+wdt:Q719675 rdfs:label "near threatened (Wikidata)".
+wdt:Q278113 rdfs:label "vulnerable (Wikidata)".
+wdt:Q11394 rdfs:label "endangered species (Wikidata)".
+wdt:Q219127 rdfs:label "critically endangered (Wikidata)".
+wdt:Q239509 rdfs:label "extinct in the Wild (Wikidata)".
+wdt:Q237350 rdfs:label "extinct (Wikidata)".
+wdt:Q3245245 rdfs:label "data deficient (Wikidata)".
+
+# ======= Geopgraphic entities
+wdt:Q702842 rdfs:label "municipal arrondissement (Wikidata)".
+wdt:Q484170 rdfs:label "commune of France (Wikidata)".
+wdt:Q6465 rdfs:label "department of France (Wikidata)".
+wdt:Q36784 rdfs:label "region of France (Wikidata)".
+wdt:Q719487 rdfs:label "overseas collectivity (Wikidata)".
+wdt:Q3624078 rdfs:label "sovereign state (Wikidata)".
+wdt:Q192498 rdfs:label "administrative territorial entity of France (Wikidata)".
+wdt:Q1496967 rdfs:label "territorial entity (Wikidata)".
+wdt:Q33837 rdfs:label "archipelago (Wikidata)".
+wdt:Q23442 rdfs:label "island (Wikidata)".
+wdt:Q15324 rdfs:label "body of water (Wikidata)".
+
+# ======= ID in third party DBs
+wdt:P1348 rdfs:label "AlgaeBase ID (Wikidata)".
+wdt:P5354 rdfs:label "Amphibian Species of the World ID (Wikidata)".
+wdt:P2026 rdfs:label "Avibase ID (Wikidata)".
+wdt:P5257 rdfs:label "BirdLife ID (Wikidata)".
+wdt:P3105 rdfs:label "Tela Botanica ID".
+wdt:P6052 rdfs:label "Cockroach\r Species File Online ID (Wikidata)".
+wdt:P6053 rdfs:label "Coreoidea Species File Online ID (Wikidata)".
+wdt:P4630 rdfs:label "DORIS ID (Wikidata)".
+wdt:P3031 rdfs:label "EPPO Global Database ID (Wikidata)".
+wdt:P1895 rdfs:label "Fauna Europaea ID (Wikidata)".
+wdt:P938 rdfs:label "FishBase ID (Wikidata)".
+wdt:P846 rdfs:label "GBIF ID (Wikidata)".
+wdt:P5626 rdfs:label "Global Invasive Species Database ID (Wikidata)".
+wdt:P961 rdfs:label "IPNI ID (Wikidata)".
+wdt:P1391 rdfs:label "Index Fungorum ID (Wikidata)".
+wdt:P2794 rdfs:label "Index Hepaticarum ID (Wikidata)".
+wdt:P959 rdfs:label "Mammal Species of the World ID (Wikidata)".
+wdt:P6055 rdfs:label "Mantodea Species File Online ID (Wikidata)".
+wdt:P962 rdfs:label "Mycobank ID (Wikidata)".
+wdt:P6050 rdfs:label "Orthoptera Species File Online ID (Wikidata)".
+wdt:P5037 rdfs:label "POWO ID (Wikidata)".
+wdt:P4855 rdfs:label "Phasmida Species File Online ID (Wikidata)".
+wdt:P6376 rdfs:label "Psyl'list ID (Wikidata)".
+wdt:P1717 rdfs:label "SANDRE ID (Wikidata)".
+wdt:P6018 rdfs:label "SeaLifeBase ID (Wikidata)".
+wdt:P6057 rdfs:label "Systematic Catalog of Culicidae ID (Wikidata)".
+wdt:P960 rdfs:label "TROPICOS ID (Wikidata)".
+wdt:P3064 rdfs:label "The Global Lepidoptera Names Index ID (Wikidata)".
+wdt:P1070 rdfs:label "The Plant List (TPL) ID (Wikidata)".
+wdt:P3288 rdfs:label "The World Spider Catalog ID (Wikidata)".
+wdt:P1745 rdfs:label "VASCAN ID (Wikidata)".
+wdt:P850 rdfs:label "WoRMS ID (Wikidata)".
+wdt:P3591 rdfs:label "World Checklist of Selected Plant Families ID (Wikidata)".
+wdt:P1746 rdfs:label "ZooBank ID (Wikidata)".
+wdt:P1076 rdfs:label "International Committee on Taxonomy of Viruses ID (Wikidata)".
