@@ -168,6 +168,31 @@ taxrefprop:habitat
  rdfs:subPropertyOf taxrefprop:habitat;
  rdfs:comment "Property http://lod.taxonconcept.org/ontology/txn.owl#habitat is defined as an equivalent property of http://purl.org/ontology/wo/habitat (BBC WO) whose domain is http://purl.org/ontology/wo/TaxonRank. This is possibly a mistake, since an habitat should typically be associated with a species (an instance of taxon rank Species), not with a rank. Hence, to avoid any unexpected inference, TAXREF-LD defines the habitat property as a super-property of http://lod.taxonconcept.org/ontology/txn.owl#habitat with no domain restriction."@en.
 
+
+#----------------- Properties to relate a taxon with its statuses ----------------------#
+
+taxrefprop:hasStatus
+    a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    rdfs:label "has status"@en;
+    rdfs:range taxrefstatus:TaxonStatus;
+    dct:description "Relates a taxon to one of its biogeographical, red list or legal statuses."@en.
+
+taxrefprop:statusValue
+    a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    rdfs:label "status value"@en;
+    rdfs:domain taxrefstatus:TaxonStatus; 
+    dct:description "Relates a taxon status with the actual status value which may be an instance of wdt:Q82673 (red list status) or an instance of taxrefbgs:BioGeographicalStatus (biogeographical status values)"@en.
+    
+taxrefprop:statusType
+    a owl:ObjectProperty;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    rdfs:label "status type"@en;
+    rdfs:domain taxrefstatus:TaxonStatus; 
+    dct:description "Relates a taxon status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
+
+
 # --- Deprecated terms ---
 taxrefprop:bioGeoStatusIn
  a owl:ObjectProperty;

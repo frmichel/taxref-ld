@@ -106,29 +106,6 @@ taxrefstatus:Protection
     dct:description "Taxon was introduced artificially in a region. Red list status does not apply in that case."@en.
 
 
-#----------------- Properties to relate a taxon with its statuses ----------------------#
-
-taxrefprop:hasStatus
-    a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    rdfs:label "has status"@en;
-    rdfs:range taxrefstatus:TaxonStatus;
-    dct:description "Relates a taxon to one of its biogeographical, conservation or legal statuses."@en.
-
-taxrefprop:statusValue
-    a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    rdfs:label "status value"@en;
-    rdfs:domain taxrefstatus:TaxonStatus; 
-    dct:description "Relates a taxon status with the actual value of the biogeographical or conservation status which may be an instance of wdt:Q82673 (in the case of a conservation status = red list status), or an instance of taxrefbgs:BioGeographicalStatus"@en.
-    
-taxrefprop:statusType
-    a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    rdfs:label "status type"@en;
-    rdfs:domain taxrefstatus:TaxonStatus; 
-    dct:description "Relates a taxon status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
-
 # --------------------------- Biogeographical status values -------------------------------
 
 taxrefbgs:BioGeographicalStatus
