@@ -152,9 +152,8 @@
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "ectoparasite of (statement)" ];
     rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
     rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
-    rr:predicateObjectMap [ rr:predicate rdf:predicate;     rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
         rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
@@ -166,9 +165,8 @@
     rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002633; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} has ectoparasite {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Endoparasite of
@@ -203,7 +201,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002635; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} has endoparasite {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
     
 
 # -------------------------------------------------------------------------
@@ -274,7 +272,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002469; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} provides nutrients for {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Parasite of
@@ -309,7 +307,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002445; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is parasitized by {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Parasitoide of
@@ -344,7 +342,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002209; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} has parasitoid {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Phoretic of (transports)
@@ -398,7 +396,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002456; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is pollinated by {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
     
 # -------------------------------------------------------------------------
 # Preys on
@@ -433,5 +431,5 @@
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002458; rr:termType rr:IRI ]];
     rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is preyed upon by {$.target.scientificName}"; rr:termType rr:Literal ]].
+        rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
