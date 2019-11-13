@@ -38,6 +38,13 @@
   void:vocabulary <http://purl.org/ontology/bibo/>;
   void:vocabulary <http://www.wikidata.org/>;
   void:vocabulary <http://sws.geonames.org/>;
+  
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/12.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/12.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/12.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2VTO/12.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2GeoSpecies/12.0>;
+  void:subset <http://taxref.mnhn.fr/lod/Taxref2Worms/12.0>;
   .
 
 # --- TAXREF-LD v10 VOID definition
@@ -75,6 +82,34 @@
   void:subset <http://taxref.mnhn.fr/lod/Taxref2Worms/10.0>;
   .
 
+# --- Linksets
+
+taxref:Agrovoc
+   a void:Dataset;
+   rdfs:label " AGROVOC Multilingual agricultural thesaurus"@en;
+   foaf:homepage <http://aims.fao.org/agrovoc>, <https://datahub.io/dataset/agrovoc-skos>.
+taxref:TaxonConcept
+   a void:Dataset;
+   rdfs:label "TaxonConcept Knowledge Base"@en;
+   foaf:homepage <http://www.taxonconcept.org/>, <https://datahub.io/dataset/taxonconcept>.
+taxref:NcbiTaxon
+   a void:Dataset;
+   rdfs:label "NCBI Organismal Classification"@en;
+   foaf:homepage <http://bioportal.bioontology.org/ontologies/NCBITAXON>, <https://datahub.io/dataset/bioportal-ncbitaxon>.
+taxref:VTO
+   a void:Dataset;
+   rdfs:label "Vertebrate Taxonomy Ontology"@en;
+   foaf:homepage <http://www.ontobee.org/ontology/VTO>, <http://phenoscape.org/wiki/Ontologies#Vertebrate_Taxonomy_Ontology>.
+taxref:GeoSpecies
+   a void:Dataset;
+   rdfs:label "GeoSpecies Knowledge Base"@en;
+   foaf:homepage <https://datahub.io/dataset/geospecies>.
+taxref:Worms
+   a void:Dataset;
+   rdfs:label "World Register of Marine Species"@en;
+   foaf:homepage <http://www.marinespecies.org>.
+   
+   
 <http://taxref.mnhn.fr/lod/Taxref2Agrovoc/10.0>
    a void:Linkset;
    void:linkPredicate skos:exactMatch;
@@ -118,27 +153,46 @@
    void:triples "137125"^^xsd:integer;
    .
 
-taxref:Agrovoc
-   a void:Dataset;
-   rdfs:label " AGROVOC Multilingual agricultural thesaurus"@en;
-   foaf:homepage <http://aims.fao.org/agrovoc>, <https://datahub.io/dataset/agrovoc-skos>.
-taxref:TaxonConcept
-   a void:Dataset;
-   rdfs:label "TaxonConcept Knowledge Base"@en;
-   foaf:homepage <http://www.taxonconcept.org/>, <https://datahub.io/dataset/taxonconcept>.
-taxref:NcbiTaxon
-   a void:Dataset;
-   rdfs:label "NCBI Organismal Classification"@en;
-   foaf:homepage <http://bioportal.bioontology.org/ontologies/NCBITAXON>, <https://datahub.io/dataset/bioportal-ncbitaxon>.
-taxref:VTO
-   a void:Dataset;
-   rdfs:label "Vertebrate Taxonomy Ontology"@en;
-   foaf:homepage <http://www.ontobee.org/ontology/VTO>, <http://phenoscape.org/wiki/Ontologies#Vertebrate_Taxonomy_Ontology>.
-taxref:GeoSpecies
-   a void:Dataset;
-   rdfs:label "GeoSpecies Knowledge Base"@en;
-   foaf:homepage <https://datahub.io/dataset/geospecies>.
-taxref:Worms
-   a void:Dataset;
-   rdfs:label "World Register of Marine Species"@en;
-   foaf:homepage <http://www.marinespecies.org>.
+
+<http://taxref.mnhn.fr/lod/Taxref2Agrovoc/12.0>
+   a void:Linkset;
+   void:linkPredicate skos:exactMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:Agrovoc;
+   void:triples "2377"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2TaxonConcept/12.0>
+   a void:Linkset;
+   void:linkPredicate skos:closeMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:TaxonConcept;
+   void:triples "25524"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2NcbiTaxon/12.0>
+   a void:Linkset;
+   void:linkPredicate owl:equivalentClass;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:NcbiTaxon;
+   void:triples "56025"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2VTO/12.0>
+   a void:Linkset;
+   void:linkPredicate owl:equivalentClass;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:VTO;
+   void:triples "8110"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2GeoSpecies/12.0>
+   a void:Linkset;
+   void:linkPredicate skos:closeMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:GeoSpecies;
+   void:triples "5024"^^xsd:integer;
+   .
+<http://taxref.mnhn.fr/lod/Taxref2Worms/12.0>
+   a void:Linkset;
+   void:linkPredicate skos:exactMatch;
+   void:subjectsTarget <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+   void:objectsTarget taxref:Worms;
+   void:triples "21763"^^xsd:integer;
+   .
