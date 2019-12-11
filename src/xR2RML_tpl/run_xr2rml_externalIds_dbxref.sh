@@ -31,7 +31,7 @@ if [[ -z "$WDTPROP" ]] ; then help; fi
 log=logs/run_xr2rml_${DATATYPE}_${EXTDBNAME//[^[:alnum:]]/_}.log
 echo -n "" > $log
 
-    # Substitute placeholders
+# Substitute placeholders
 awk "{ gsub(/{{TAXREFVER}}/, \"$TAXREFVER\"); gsub(/{{EXTDBNAME}}/, \"$EXTDBNAME\"); gsub(/{{WDTPROP}}/, \"$WDTPROP\"); print }" $XR2RML/xr2rml_${DATATYPE}_tpl.ttl > $XR2RML/xr2rml_${DATATYPE}.ttl
 echo "-- xR2RML mapping file --" >> $log
 cat $XR2RML/xr2rml_${DATATYPE}.ttl >> $log

@@ -55,7 +55,7 @@
     ];
     rr:predicateObjectMap [
         rr:predicate dct:source, wdt:P248;           # wdt:P248 = stated in
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}" ];
     ];
     rr:predicateObjectMap [ 
         rr:predicate dct:description; 
