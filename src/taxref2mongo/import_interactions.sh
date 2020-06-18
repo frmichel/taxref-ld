@@ -31,6 +31,8 @@ for FILE in `ls taxref_interactions_${version}_*.json`; do
 
     awk -f import_interactions.awk $FILE > ${FILE}.tmp
     mongoimport --db $db --collection $collection --type json --jsonArray --file ${FILE}.tmp
+    echo -n "**** Current nb of documents: "
+    mongo --quiet --eval "db.${collection}.count()" localhost/$db
     rm -f ${FILE}.tmp
 done
 

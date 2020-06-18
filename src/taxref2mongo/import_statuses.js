@@ -1,4 +1,13 @@
-// Add a field statusTypeCode to each document in the statuses.
+// Together with each status, the statuses service provides
+// the status type name and status type group, e.g.:
+//    "statusTypeName" : "Statut biogéographique territorial (TAXREF)",
+//	  "statusTypeGroup" : "Statut biogéographique"
+// but not the status type code, e.g.:
+//	"statusTypeCode" : "TAXREF_STATUT_BIOGEO",
+// But we need the status type code to build the URIs of legal statuses sources documents, e.g.:
+//    http://taxref.mnhn.fr/lod/status/BONN/IBOAC
+//
+// Therefore, this scrpit adds a field statusTypeCode to each document in the statuses.
 // This requires doing a join (lookup) with the statusTypes collection.
 
 db.statuses_tmp.drop()
