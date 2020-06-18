@@ -1,19 +1,33 @@
-@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix owl:  <http://www.w3.org/2002/07/owl#>.
-@prefix dct:  <http://purl.org/dc/terms/>.
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
 
-@prefix dwc:    <http://rs.tdwg.org/dwc/terms/> .
-@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
-@prefix wdt:    <http://www.wikidata.org/prop/direct/>.      # truthy assertions
-@prefix wd:     <http://www.wikidata.org/entity/>.           # Wikibase entity - item or property
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
 
-@prefix taxref: <http://taxref.mnhn.fr/lod/>.
-@prefix taxrefrk: <http://taxref.mnhn.fr/lod/taxrank/>.
-@prefix taxrefhab: <http://taxref.mnhn.fr/lod/habitat/>.
-@prefix taxrefbgs: <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
-@prefix taxrefprop: <http://taxref.mnhn.fr/lod/property/>.
-@prefix taxrefstatus: <http://taxref.mnhn.fr/lod/status/>.
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
 
 # ============================================================
 # Resources imported from other ontologies:
@@ -144,7 +158,7 @@ taxrefprop:isSynonymOf
  owl:inverse taxrefprop:hasSynonym;
  rdfs:label "is a synonym of"@en;
  dct:description "Relates a scientific name to a taxon for which it is a synonym"@en.
- 
+
 taxrefprop:vernacularName 
  a owl:DatatypeProperty;
  owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasVernacularName>;
@@ -152,7 +166,12 @@ taxrefprop:vernacularName
  owl:equivalentProperty dwc:vernacularName;
  owl:equivalentProperty wdt:P1843;
  rdfs:label "has vernacular name"@en;
- dct:description "Relates a name to one of its vernacular (common) names"@en.
+ dct:description "Relates a taxon to one of its vernacular (common) names"@en.
+ 
+taxrefprop:vernacularNameXL
+ rdfs:subPropertyOf skosxl:altLabel;
+ rdfs:label "has extended vernacular name"@en;
+ dct:description "Relates a taxon to one of its vernacular (common) names in the form of a SKOS extended label"@en.
  
 taxrefprop:habitat
  a owl:ObjectProperty;
@@ -183,7 +202,7 @@ taxrefprop:statusValue
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
     rdfs:label "status value"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
-    dct:description "Relates a taxon status with the actual status value which may be an instance of wdt:Q82673 (red list status) or an instance of taxrefbgs:BioGeographicalStatus (biogeographical status values)"@en.
+    dct:description "Relates a taxon status with the actual status value which may be an instance of wd:Q82673 (red list status) or an instance of taxrefbgs:BioGeographicalStatus (biogeographical status values)"@en.
     
 taxrefprop:statusType
     a owl:ObjectProperty;
