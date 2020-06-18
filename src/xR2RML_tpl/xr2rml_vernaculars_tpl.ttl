@@ -1,438 +1,290 @@
-@prefix xrr: <http://i3s.unice.fr/xr2rml#> .
-@prefix rr:  <http://www.w3.org/ns/r2rml#> .
-@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
 
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rdf: 	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-@prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
 
-@prefix dct: <http://purl.org/dc/terms/>.
-@prefix dce: <http://purl.org/dc/elements/1.1/>.
-@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
 
-@prefix dwc:    <http://rs.tdwg.org/dwc/terms/> .
-@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+@prefix xrr:            <http://i3s.unice.fr/xr2rml#> .
+@prefix rr:             <http://www.w3.org/ns/r2rml#> .
+@prefix rml:            <http://semweb.mmlab.be/ns/rml#> .
 
-@prefix wdt: <http://www.wikidata.org/entity/>.
-
-@prefix taxrefp: <http://taxref.mnhn.fr/lod/property/>.
-@prefix taxref: <http://taxref.mnhn.fr/lod/>.
-
-# All vernacular names in languages whose id can be used as a language tag
-<#LS>
-	a xrr:LogicalSource;
-    xrr:query """db.vernaculars.find({'langageId': {$nin: ['fra', 'eng', 'bis', 'bre', 'cos', 'eus', 'oci', 'tah', 'por']}} )""";
-    .	
-<#LS_Reif>
-	a xrr:LogicalSource;
-    xrr:query """db.vernaculars.find({'langageId': {$nin: ['fra', 'eng', 'bis', 'bre', 'cos', 'eus', 'oci', 'tah', 'por']}, $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]} )""";
-    .	
 
 <#SM_Taxon>
     a rr:SubjectMap;
     rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}".
 
+
+#============== Direct link taxon --taxrefprop:vernacularName--> name    ===============
+
+
 <#TM_Taxon>
     a rr:TriplesMap;
-    xrr:logicalSource <#LS>;
+    xrr:logicalSource [ xrr:query """db.vernaculars.find({'langageId': {$nin: ['bis', 'bre', 'cos', 'eng', 'eus', 'fra', 'oci', 'tah', 'por']}} )""" ];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];	
-    ];
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];    
+    ].
+    
 # Bislame
 <#TM_Taxon_bis>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'bis'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "bi" ];	
-    ];
-	.
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "bi" ];    
+    ].
 
 # Breton
 <#TM_Taxon_bre>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'bre'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "br" ];	
-    ];	
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "br" ];    
+    ].
+    
 # Corse
 <#TM_Taxon_cos>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'cos'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "co" ];	
-    ];	
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "co" ];    
+    ].
+    
 # English
 <#TM_Taxon_eng>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'eng'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "en" ];	
-    ];	
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "en" ];    
+    ].
+    
 # Basque
 <#TM_Taxon_eus>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'eus'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "eu" ];	
-    ];	
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "eu" ];    
+    ].
+    
 # French
 <#TM_Taxon_cos>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'fra'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "fr" ];	
-    ];
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "fr" ];    
+    ].
+    
 # Occitane
 <#TM_Taxon_oci>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'oci'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "oc" ];	
-    ];
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "oc" ];    
+    ].
+    
 # Tahitian
 <#TM_Taxon_tah>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'tah'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "ty" ];	
-    ];	
-	.
-	
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "ty" ];    
+    ].
+    
 # Portuguese
 <#TM_Taxon_por>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'por'})"""];
     rr:subjectMap <#SM_Taxon>;
-	rr:predicateObjectMap [
-        rr:predicate taxrefp:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "pt" ];	
-    ];
-	.
-	
-#============== Reification to add info about location and bibliographic source	===============
-	
-<#SM_Reif>
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularName;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "pt" ];    
+    ].
+    
+    
+#============== Turn vernacular names as SKOS-XL labels to add location and bibliographic source    ===============
+    
+<#SM_XLabel>
     a rr:SubjectMap;
     rr:template "{$.id}_{$.taxon.referenceId}";
     rr:termType rr:BlankNode;
-    rr:class rdf:Statement;
-    .
+    rr:class skosxl:Label.
+
+
+<#TM_Taxon>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.vernaculars.find({$or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]} )""" ];
+    rr:subjectMap <#SM_Taxon>;
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:vernacularNameXL;
+        rr:objectMap [ rr:template "{$.id}_{$.taxon.referenceId}"; rr:termType rr:BlankNode ];
+    ].
+
+
+#-------- Common properties of vernacular names
+
+<#TM_XLabel_All>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.vernaculars.find({$or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]} )""" ];
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skos:inScheme ;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:coverage, wdt:P3005;                 # (valid in place)
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:source, wdt:P248;                    # (stated in)
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
+    ];
+    rr:predicateObjectMap [ 
+        rr:predicate rdfs:label;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string ];
+    ].
+    
     
 #-------- Vernacular names in languages whose id can be used as a language tag
 
-<#TM_Statement_lang>
+<#TM_XLabel_lang>
     a rr:TriplesMap;
-    xrr:logicalSource <#LS_Reif>;
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];	
+    xrr:logicalSource [ 
+        xrr:query """db.vernaculars.find({'langageId': {$nin: ['bis', 'bre', 'cos', 'eng', 'eus', 'fra', 'oci', 'tah', 'por']}, $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]} )"""
     ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-     .
-	
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];
+    ].
+
 #------- Vernacular names in languages whose id can not be used as a language tag
-	
+    
 # Bislame
-<#TM_Statement_bis>
+<#TM_XLabel_bis>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'bis', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "bi" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "bi" ];    
+    ].
 
 # Breton
-<#TM_Statement_bre>
+<#TM_XLabel_bre>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'bre', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "br" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "br" ];    
+    ].
+    
 # Corse
-<#TM_Statement_cos>
+<#TM_XLabel_cos>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'cos', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "co" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place) 
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "co" ];    
+    ].
+    
 # English
-<#TM_Statement_eng>
+<#TM_XLabel_eng>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'eng', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "en" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place) 
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "en" ];    
+    ].
+    
 # Basque
-<#TM_Statement_eus>
+<#TM_XLabel_eus>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'eus', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "eu" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place) 
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "eu" ];    
+    ].
+    
 # French
-<#TM_Statement_fra>
+<#TM_XLabel_fra>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'fra', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "fr" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place) 
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "fr" ];    
+    ].
+    
 # Occitane
-<#TM_Statement_oci>
+<#TM_XLabel_oci>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'oci', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "oc" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "oc" ];    
+    ].
 
 # Tahiatian
-<#TM_Statement_tah>
+<#TM_XLabel_tah>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'tah', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "ty" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
-	
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "ty" ];    
+    ].
+    
 # Portuguese
-<#TM_Statement_por>
+<#TM_XLabel_por>
     a rr:TriplesMap;
     xrr:logicalSource [xrr:query """db.vernaculars.find({'langageId': 'por', $or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]})"""];
-    rr:subjectMap <#SM_Reif>;
-	rr:predicateObjectMap [
-        rr:predicate rdf:object;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "pt" ];	
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:subject;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}"; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate rdf:predicate;
-        rr:objectMap [ rr:constant taxrefp:vernacularName; rr:termType rr:IRI ];		
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P3005;					# (valid in place)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/location/{$.locationId}"; rr:termType rr:IRI; ];
-    ];
-	rr:predicateObjectMap [
-        rr:predicate wdt:P248;					# (stated in)
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}"; rr:termType rr:IRI; ];
-    ];
-    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:object "vernacular name (statement)" ];
-	.
+    rr:subjectMap <#SM_XLabel>;
+    rr:predicateObjectMap [
+        rr:predicate skosxl:literalForm;
+        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "pt" ];    
+    ].

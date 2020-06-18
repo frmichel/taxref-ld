@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: F. Michel, UCA, CNRS, Inria
 
-TAXREFVER=12.0
+TAXREFVER=13.0
 
 ./run_xr2rml.sh biblio               $TAXREFVER
 ./run_xr2rml.sh externalIds_webpages $TAXREFVER
@@ -15,24 +15,24 @@ TAXREFVER=12.0
 ./run_xr2rml.sh taxonomy_concepts    $TAXREFVER
 ./run_xr2rml.sh vernaculars          $TAXREFVER
 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "AlgaeBase" "wdt:P1348"
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Avibase" "wdt:P2026" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "BDTFX" "wdt:P3105" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Fauna Europaea" "wdt:P1895" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "FishBase" "wdt:P938" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "GBIF" "wdt:P846"
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "IPNI" "wdt:P961"
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Index Fungorum" "wdt:P1391" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Mantodea Species File Online" "wdt:P6055" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Orthoptera Species File Online" "wdt:P6050" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Phasmida Species File Online" "wdt:P4855" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Psyl'list" "wdt:P6376" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "SANDRE" "wdt:P1717" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "TROPICOS" "wdt:P960" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "The Plant List (TPL)" "wdt:P1070" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "The World Spider Catalog" "wdt:P3288" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "VASCAN" "wdt:P1745" 
-./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "WoRMS" "wdt:P850" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "AlgaeBase"                       "wdt:P1348"
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Avibase"                         "wdt:P2026" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "BDTFX"                           "wdt:P3105" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Fauna Europaea"                  "wdt:P1895" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "FishBase"                        "wdt:P938" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "GBIF"                            "wdt:P846"
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "IPNI"                            "wdt:P961"
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Index Fungorum"                  "wdt:P1391" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Mantodea Species File Online"    "wdt:P6055" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Orthoptera Species File Online"  "wdt:P6050" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Phasmida Species File Online"    "wdt:P4855" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "Psyl'list"                       "wdt:P6376" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "SANDRE"                          "wdt:P1717" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "TROPICOS"                        "wdt:P960" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "The Plant List (TPL)"            "wdt:P1070" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "The World Spider Catalog"        "wdt:P3288" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "VASCAN"                          "wdt:P1745" 
+./run_xr2rml_externalIds_dbxref.sh $TAXREFVER "WoRMS"                           "wdt:P850" 
 
 # > db.externalIds.distinct("externalDbName").sort()
 

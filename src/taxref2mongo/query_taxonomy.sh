@@ -20,8 +20,8 @@ if [[ -z "$TAXREFVER" ]] ; then help; fi
 api_version=1
 page=1
 start=0
-size=50000
-limit=570623
+size=5000
+limit=595373
 
 while [ "$start" -lt "$limit" ]
 do
