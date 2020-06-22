@@ -14,7 +14,7 @@ help()
   exit 1
 }
 
-XR2RML=$HOME/TAXREF-LD/xR2RML_tpl
+XR2RML=$(pwd)
 
 # Read input arguments
 DATATYPE=$1

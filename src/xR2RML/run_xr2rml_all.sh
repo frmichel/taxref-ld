@@ -8,6 +8,7 @@ TAXREFVER=13.0
 ./run_xr2rml.sh externalIds_worms    $TAXREFVER
 ./run_xr2rml.sh interactions         $TAXREFVER
 ./run_xr2rml.sh locations            $TAXREFVER
+./run_xr2rml.sh media                $TAXREFVER
 ./run_xr2rml.sh statuses             $TAXREFVER
 ./run_xr2rml.sh statusCodes          $TAXREFVER
 ./run_xr2rml.sh statusBiblio         $TAXREFVER

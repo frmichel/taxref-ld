@@ -15,7 +15,7 @@ help()
   exit 1
 }
 
-XR2RML=$HOME/TAXREF-LD/xR2RML_tpl
+XR2RML=$(pwd)
 DATATYPE=externalIds_dbxref
 
 # Read input arguments

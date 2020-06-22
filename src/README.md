@@ -16,7 +16,7 @@ Directory [taxref2mongo](taxref2mongo) provides the scripts involved in this ste
 
 In a second step, the translation to RDF is carried out using [Morph-xR2RML](https://github.com/frmichel/morph-xr2rml/), an implementation of the [xR2RML mapping language](http://i3s.unice.fr/~fmichel/xr2rml_specification.html) [1] for MongoDB databases.
 
-The scripts, configuration and mapping files are provided in directory [xR2RML_tpl](xR2RML_tpl).
+The scripts, configuration and mapping files are provided in directory [xR2RML](xR2RML).
 
 
 ### References
