@@ -19,6 +19,9 @@ echo -n "" > $log
 ./query_vernaculars.sh      $TAXREFVER          &>> $log
 ./import_vernaculars.sh     $TAXREFVER $DBNAME  &>> $log
 
+./query_media.sh            $TAXREFVER          &>> $log
+./import_media.sh           $TAXREFVER $DBNAME  &>> $log
+
 
 
 ./query_taxonomy.sh         $TAXREFVER          &>> $log

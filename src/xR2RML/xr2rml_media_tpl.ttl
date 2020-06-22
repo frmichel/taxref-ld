@@ -43,7 +43,7 @@
     rr:subjectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}" ];
     rr:predicateObjectMap [
         rr:predicate schema:image;
-        rr:objectMap [ rr:template "$._links.self.href"; rr:termType rr:BlankNode ];
+        rr:objectMap [ rr:template "{$._links.self.href}"; rr:termType rr:BlankNode ];
     ].
     
 
@@ -51,13 +51,9 @@
     a rr:TriplesMap;
     xrr:logicalSource <#LS>;
     rr:subjectMap [
-        rr:template "$._links.self.href"; 
+        rr:template "{$._links.self.href}"; 
         rr:termType rr:BlankNode;
         rr:class    schema:ImageObject;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate rdfs:isDefinedBy;
-        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
         rr:predicate rdfs:label, dct:title;
@@ -66,11 +62,11 @@
     
     rr:predicateObjectMap [
         rr:predicate schema:contentUrl;
-        rr:objectMap [ xrr:reference "$._links.file.href"; ];
+        rr:objectMap [ xrr:reference "$._links.file.href"; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
         rr:predicate schema:thumbnail;
-        rr:objectMap [ xrr:reference "$._links.thumbnailFile.href"; ];
+        rr:objectMap [ xrr:reference "$._links.thumbnailFile.href"; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
         rr:predicate schema:encodingFormat;
@@ -79,11 +75,11 @@
     
     rr:predicateObjectMap [
         rr:predicate schema:copyrightHolder;
-        rr:objectMap [ rr:template "$._links.self.href - $.copyright"; rr:termType rr:BlankNode ];
+        rr:objectMap [ rr:template "{$._links.self.href} - {$.copyright}"; rr:termType rr:BlankNode ];
     ];
     rr:predicateObjectMap [
         rr:predicate dct:license, schema:license;
-        rr:objectMap [ xrr:reference "$.license"; ];
+        rr:objectMap [ xrr:reference "$.licence_url"; rr:termType rr:IRI ];
     ];
     .
 
@@ -92,7 +88,7 @@
     a rr:TriplesMap;
     xrr:logicalSource <#LS>;
     rr:subjectMap [
-        rr:template "$._links.self.href - $.copyright"; 
+        rr:template "{$._links.self.href} - {$.copyright}"; 
         rr:termType rr:BlankNode;
         rr:class    schema:Person;
     ];

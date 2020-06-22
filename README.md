@@ -33,7 +33,7 @@ TAXREF-LD was first released as a translation of TAXREF 10.0. It may not be upda
 
 ### Downloading and SPARQL Querying
 
-The dataset is downloadable as a set of RDF dumps (in Turtle syntax) provided in directory [/dataset](/dataset).
+The dataset is downloadable as a set of RDF dumps (in Turtle syntax) provided in directory [dataset](dataset).
 
 Additional files (`Taxrefld_static*.ttl`) define various terms (classes, concepts, properties) used to represent taxonomic data. Whenever possible, these terms are aligned with counterparts in thrid-party ontologies.
 
