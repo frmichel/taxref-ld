@@ -16,6 +16,8 @@ This RDF modeling is detailed are provided in [1], that applies to TAXREF-LD v10
 
 As of version 12.0, additional information is provided: **species interactions**, **legal statuses** (conventions, directives, regulations, protections), **conservation statuses** (international/european/national/regional red lists), **location and bibliographical sources for vernacular names**, **cross-references to other datasources** by means of external IDs and webpages, **media** (photos of taxa).
 
+The modelling is exemplified in directory [dataset/example](dataset/example).
+
 
 ### Interlinking with other taxonomic registries and biodiversity sources
 

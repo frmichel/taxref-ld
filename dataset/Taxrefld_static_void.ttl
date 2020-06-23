@@ -34,7 +34,7 @@
   a void:Dataset;
   void:uriSpace "http://taxref.mnhn.fr/lod/";
   void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
-  void:triples "23900000"^^xsd:integer;
+  void:triples "26773706"^^xsd:integer;
   void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
   void:dataDump <https://github.com/frmichel/taxref-ld/tree/13.0/dataset>;
   

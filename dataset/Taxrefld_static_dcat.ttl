@@ -199,7 +199,7 @@ taxref:antoniaettorre a schema:Person;
 
     dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
     owl:versionInfo "13.0";
-    dct:issued "2020"^^xsd:gYear; schema:datePublished "2020"^^xsd:gYear;
+    dct:issued "2020-06-23"^^xsd:date; schema:datePublished "2020-06-23"^^xsd:date;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
     schema:subjectOf taxref:hal01617708;
 
@@ -215,7 +215,7 @@ taxref:antoniaettorre a schema:Person;
     a prov:Entity;
     prov:wasDerivedFrom <http://taxref.mnhn.fr/lod/taxref/13.0>;
     prov:wasGeneratedBy taxref:RdfGeneration;
-    prov:wasGeneratedAtTime "2020-06-23"^^xsd:dateTime;
+    prov:wasGeneratedAtTime "2020-06-23"^^xsd:date;
 
     dct:spatial <http://sws.geonames.org/3017382/>;
     dct:spatial <http://sws.geonames.org/3381670/>;
@@ -270,7 +270,7 @@ taxref:antoniaettorre a schema:Person;
 
     dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
     owl:versionInfo "12.0";
-    dct:issued "2019"^^xsd:gYear; schema:datePublished "2019"^^xsd:gYear;
+    dct:issued "2019-08-29"^^xsd:date; schema:datePublished "2019-08-29"^^xsd:date;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
     schema:subjectOf taxref:hal01617708;
 
@@ -286,7 +286,7 @@ taxref:antoniaettorre a schema:Person;
     a prov:Entity;
     prov:wasDerivedFrom <http://taxref.mnhn.fr/lod/taxref/12.0>;
     prov:wasGeneratedBy taxref:RdfGeneration;
-    prov:wasGeneratedAtTime "2019-08-29"^^xsd:dateTime;
+    prov:wasGeneratedAtTime "2019-08-29"^^xsd:date;
 
     dct:spatial <http://sws.geonames.org/3017382/>;
     dct:spatial <http://sws.geonames.org/3381670/>;

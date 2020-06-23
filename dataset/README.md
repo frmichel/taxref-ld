@@ -22,3 +22,9 @@ Description of the ressources themseleves (taxa, names etc.) are provided by mea
 - `taxrefld-core.zip`: descripton of taxa (OWL classes), scientific names (SKOS concepts), as well as bibliographic resources, locations (regions, tepartements, territories etc.), media files, species interactions, vernacular names;
 - `taxrefld-dbxref.zip`: cross-references to third-party data sources by means of identifiers (in GBIF, WoRMS, the Plant List etc.) and webpages;
 - `taxrefld-statuses.zip`: taxa statuses (legal, biogeographical, red list) and description of the set of values of legal statuses  (international convetion, european directive, protection and regulation).
+
+
+## Example
+
+Directory [dataset/example](dataset/example) provides a few files with typical example of how a taxon and its related information are represented.
+
