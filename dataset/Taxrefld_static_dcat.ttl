@@ -43,6 +43,7 @@ taxref:Catalog
     dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
     dcat:dataset <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
     dcat:dataset <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    dcat:dataset <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
     .
 
 # Publisher of the DCAT catalog and datasets
@@ -160,10 +161,10 @@ taxref:antoniaettorre a schema:Person;
 # Biota is the taxonomical classification root
 <http://taxref.mnhn.fr/lod/name/349525>
     a skos:Concept;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>, <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
-    skos:topConceptOf <http://taxref.mnhn.fr/lod/taxref-ld/10.0>, <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>, <http://taxref.mnhn.fr/lod/taxref-ld/12.0>, <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:topConceptOf <http://taxref.mnhn.fr/lod/taxref-ld/10.0>, <http://taxref.mnhn.fr/lod/taxref-ld/12.0>, <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
     skos:prefLabel "Biota"; rdfs:label "Biota";
-    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/349525/10.0>, <http://taxref.mnhn.fr/lod/taxon/349525/12.0>;
+    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/349525/10.0>, <http://taxref.mnhn.fr/lod/taxon/349525/12.0>, <http://taxref.mnhn.fr/lod/taxon/349525/13.0>;
     .
   
 <http://taxref.mnhn.fr/lod/taxon/349525/10.0>
@@ -177,37 +178,44 @@ taxref:antoniaettorre a schema:Person;
     rdfs:label "Biota";
     taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/349525>;
     .
-  
+
+<http://taxref.mnhn.fr/lod/taxon/349525/13.0>
+    a owl:Class;
+    rdfs:label "Biota";
+    taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/349525>;
+    .
+
 # ---------------------------------------------------------------------------------------------------
 
-# TAXREF-LD 10.0 dataset DCAT definition
-<http://taxref.mnhn.fr/lod/taxref-ld/10.0>
+# TAXREF-LD 13.0 dataset DCAT definition
+<http://taxref.mnhn.fr/lod/taxref-ld/13.0>
     a dcat:Dataset;
     a owl:Ontology;
     a skos:ConceptScheme; skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
 
-    dct:title "TAXREF-LD 10.0"; rdfs:label "TAXREF-LD 10.0"; schema:name "TAXREF-LD 10.0";
-    dct:description "Representation of the TAXREF 10.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientfic names attached to the taxa."@en;
-    dct:description "Représentation du référentiel taxonomique TAXREF 10.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
+    dct:title "TAXREF-LD 13.0"; rdfs:label "TAXREF-LD 13.0"; schema:name "TAXREF-LD 13.0";
+    dct:description "Representation of the TAXREF 13.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientific names attached to the taxa."@en;
+    dct:description "Représentation du référentiel taxonomique TAXREF 13.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
 
     dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
-    owl:versionInfo "10.0";
-    dct:issued "2017"^^xsd:gYear; schema:datePublished "2017"^^xsd:gYear;
+    owl:versionInfo "13.0";
+    dct:issued "2020"^^xsd:gYear; schema:datePublished "2020"^^xsd:gYear;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
     schema:subjectOf taxref:hal01617708;
 
-    dct:creator taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron;
-    schema:author taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron;
+    dct:creator taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron, taxref:antoniaettorre;
+    schema:author taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron, taxref:antoniaettorre;
 
     dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
     dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
     dcat:keyword "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences", "schemata", "lod";
     dcat:keyword "deref-vocab", "vocab-mappings", "provenance-metadata", "published-by-producer", "license-metadata";
-    dcat:keyword "format-rdf", "format-rdfs", "format-skos", "format-dc", "format-foaf", "format-schema", "format-geonames", "format-geospecies", "format-txn", "format-ncbitaxon", "format-dwc";
+    dcat:keyword "format-rdf", "format-rdfs", "format-skos", "format-dc", "format-foaf", "format-schema", "format-geonames", "format-geospecies", "format-txn", "format-ncbitaxon", "format-dwc", "format-ro", "format-bibo";
 
     a prov:Entity;
-    prov:wasDerivedFrom <http://taxref.mnhn.fr/lod/taxref/10.0>;
+    prov:wasDerivedFrom <http://taxref.mnhn.fr/lod/taxref/13.0>;
     prov:wasGeneratedBy taxref:RdfGeneration;
+    prov:wasGeneratedAtTime "2020-06-23"^^xsd:dateTime;
 
     dct:spatial <http://sws.geonames.org/3017382/>;
     dct:spatial <http://sws.geonames.org/3381670/>;
@@ -226,27 +234,28 @@ taxref:antoniaettorre a schema:Person;
     dct:spatial <http://sws.geonames.org/4020092/>;
     .
 
-# TAXREF 10.0 dataset DCAT definition
-<http://taxref.mnhn.fr/lod/taxref/10.0>
+# TAXREF 13.0 dataset DCAT definition
+<http://taxref.mnhn.fr/lod/taxref/13.0>
     a dcat:Dataset;
-    dct:title "TAXREF 10.0: Taxonomic register for flora and fauna of mainland France and overseas territories"@en;
-    dct:title "TAXREF 10.0 : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
-    dct:description <https://inpn.mnhn.fr/docs-web/docs/download/170253>;
+    dct:title "TAXREF 13.0: Taxonomic register for flora and fauna of mainland France and overseas territories"@en;
+    dct:title "TAXREF 13.0 : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
     dct:description "TAXREF est le référentiel taxonomique national pour la faune, la flore et la fonge de France métropolitaine et d’outre-mer, élaboré et diffusé par le Muséum national d’Histoire naturelle (MNHN). TAXREF est téléchargeable depuis le site Web du MNHN. TAXREF-LD, la représentation Linked Data de TAXREF, est une initiative conjointe du MNHN et du laboratoire I3S (Université Côte d'Azur, CNRS, Inria)."@fr;
-    dct:description "TAXREF is the national taxonomical register for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). TAXREF is downloadable from the MNHN Web site and can be queriesd through a Web service. TAXREF-LD, the Linked Data representation of TAXREF, is a joint initiative of MNHN and the I3S laboratory (Université Côte d'Azur, CNRS, Inria)."@en;
+    dct:description "TAXREF is the national taxonomical register for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). TAXREF is downloadable from the MNHN Web site and can be queriesd through a Web service. TAXREF-LD, the Linked Data representation of TAXREF, is a joint initiative of MNHN and the I3S laboratory (Université Côte d'Azur, CNRS, Inria)."@en;  
 
     dcat:landingPage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     schema:sameAs <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
 
     dct:license <http://opendatacommons.org/licenses/odbl/>;
-    owl:versionInfo "10.0";
-    dct:issued "2016-11-03"^^xsd:date;
+    owl:versionInfo "13.0";
+    dct:issued "2019-12-06"^^xsd:date;
     dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
     dct:publisher taxref:INPN;
+    schema:subjectOf taxref:taxrefv12methodo;
     dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
     .
-  
+
+
 # ---------------------------------------------------------------------------------------------------
 
 # TAXREF-LD 12.0 dataset DCAT definition
@@ -314,5 +323,74 @@ taxref:antoniaettorre a schema:Person;
     dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
     dct:publisher taxref:INPN;
     schema:subjectOf taxref:taxrefv12methodo;
+    dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
+    .
+
+# ---------------------------------------------------------------------------------------------------
+
+# TAXREF-LD 10.0 dataset DCAT definition
+<http://taxref.mnhn.fr/lod/taxref-ld/10.0>
+    a dcat:Dataset;
+    a owl:Ontology;
+    a skos:ConceptScheme; skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
+
+    dct:title "TAXREF-LD 10.0"; rdfs:label "TAXREF-LD 10.0"; schema:name "TAXREF-LD 10.0";
+    dct:description "Representation of the TAXREF 10.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientfic names attached to the taxa."@en;
+    dct:description "Représentation du référentiel taxonomique TAXREF 10.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
+
+    dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
+    owl:versionInfo "10.0";
+    dct:issued "2017"^^xsd:gYear; schema:datePublished "2017"^^xsd:gYear;
+    dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
+    schema:subjectOf taxref:hal01617708;
+
+    dct:creator taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron;
+    schema:author taxref:franckmichel, taxref:oliviergargominy, taxref:sandrinetercerie, taxref:catherinefaron;
+
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
+    dcat:keyword "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences", "schemata", "lod";
+    dcat:keyword "deref-vocab", "vocab-mappings", "provenance-metadata", "published-by-producer", "license-metadata";
+    dcat:keyword "format-rdf", "format-rdfs", "format-skos", "format-dc", "format-foaf", "format-schema", "format-geonames", "format-geospecies", "format-txn", "format-ncbitaxon", "format-dwc";
+
+    a prov:Entity;
+    prov:wasDerivedFrom <http://taxref.mnhn.fr/lod/taxref/10.0>;
+    prov:wasGeneratedBy taxref:RdfGeneration;
+
+    dct:spatial <http://sws.geonames.org/3017382/>;
+    dct:spatial <http://sws.geonames.org/3381670/>;
+    dct:spatial <http://sws.geonames.org/3570311/>;
+    dct:spatial <http://sws.geonames.org/3579143/>;
+    dct:spatial <http://sws.geonames.org/3578421/>;
+    dct:spatial <http://sws.geonames.org/3578476/>;
+    dct:spatial <http://sws.geonames.org/3424932/>;
+    dct:spatial <http://sws.geonames.org/1024031/>;
+    dct:spatial <http://sws.geonames.org/935317/>;
+    dct:spatial <http://sws.geonames.org/6690916/>;
+    dct:spatial <http://sws.geonames.org/1546748/>;
+    dct:spatial <http://sws.geonames.org/4030656/>;
+    dct:spatial <http://sws.geonames.org/2139685/>;
+    dct:spatial <http://sws.geonames.org/4034749/>;
+    dct:spatial <http://sws.geonames.org/4020092/>;
+    .
+
+# TAXREF 10.0 dataset DCAT definition
+<http://taxref.mnhn.fr/lod/taxref/10.0>
+    a dcat:Dataset;
+    dct:title "TAXREF 10.0: Taxonomic register for flora and fauna of mainland France and overseas territories"@en;
+    dct:title "TAXREF 10.0 : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
+    dct:description <https://inpn.mnhn.fr/docs-web/docs/download/170253>;
+    dct:description "TAXREF est le référentiel taxonomique national pour la faune, la flore et la fonge de France métropolitaine et d’outre-mer, élaboré et diffusé par le Muséum national d’Histoire naturelle (MNHN). TAXREF est téléchargeable depuis le site Web du MNHN. TAXREF-LD, la représentation Linked Data de TAXREF, est une initiative conjointe du MNHN et du laboratoire I3S (Université Côte d'Azur, CNRS, Inria)."@fr;
+    dct:description "TAXREF is the national taxonomical register for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). TAXREF is downloadable from the MNHN Web site and can be queriesd through a Web service. TAXREF-LD, the Linked Data representation of TAXREF, is a joint initiative of MNHN and the I3S laboratory (Université Côte d'Azur, CNRS, Inria)."@en;
+
+    dcat:landingPage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+    schema:sameAs <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+    foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+
+    dct:license <http://opendatacommons.org/licenses/odbl/>;
+    owl:versionInfo "10.0";
+    dct:issued "2016-11-03"^^xsd:date;
+    dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
+    dct:publisher taxref:INPN;
     dct:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
     .

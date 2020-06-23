@@ -29,6 +29,36 @@
 @prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
 
 
+# --- TAXREF-LD v13 VOID definition
+<http://taxref.mnhn.fr/lod/taxref-ld/13.0>
+  a void:Dataset;
+  void:uriSpace "http://taxref.mnhn.fr/lod/";
+  void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
+  void:triples "23900000"^^xsd:integer;
+  void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
+  void:dataDump <https://github.com/frmichel/taxref-ld/tree/13.0/dataset>;
+  
+  void:vocabulary <http://aims.fao.org/aos/agrovoc/>;
+  void:vocabulary <http://lod.taxonconcept.org/ontology/txn.owl>;
+  void:vocabulary <http://purl.obolibrary.org/obo/ncbitaxon.owl>;
+  void:vocabulary <http://purl.obolibrary.org/obo/envo.owl>;
+  void:vocabulary <http://rdf.geospecies.org/ont/geospecies.owl>;
+  void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonRank>;
+  void:vocabulary <http://rs.tdwg.org/ontology/voc/TaxonName>;
+  void:vocabulary <http://rs.tdwg.org/dwc/terms/>;
+  void:vocabulary <http://www.ontobee.org/ontology/RO>;
+
+  void:vocabulary <http://www.w3.org/2004/02/skos/core>;
+  void:vocabulary <http://purl.org/dc/terms/>;
+  void:vocabulary <http://xmlns.com/foaf/0.1/>;
+  void:vocabulary <http://schema.org>;
+  void:vocabulary <http://purl.org/ontology/bibo/>;
+  void:vocabulary <http://www.wikidata.org/>;
+  void:vocabulary <http://sws.geonames.org/>;
+
+  .
+  
+
 # --- TAXREF-LD v12 VOID definition
 <http://taxref.mnhn.fr/lod/taxref-ld/12.0>
   a void:Dataset;
@@ -36,7 +66,7 @@
   void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
   void:triples "23900000"^^xsd:integer;
   void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
-  void:dataDump <https://github.com/frmichel/taxref-ld/raw/master/dataset/12.0/taxref12.zip>;
+  void:dataDump <https://github.com/frmichel/taxref-ld/tree/12.0/dataset/12.0>;
   
   void:vocabulary <http://aims.fao.org/aos/agrovoc/>;
   void:vocabulary <http://lod.taxonconcept.org/ontology/txn.owl>;
@@ -71,7 +101,7 @@
   void:rootResource <http://taxref.mnhn.fr/lod/name/349525>;
   void:triples "9624000"^^xsd:integer;
   void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
-  void:dataDump <https://github.com/frmichel/taxref-ld/raw/master/dataset/10.0/taxref10.zip>;
+  void:dataDump <https://github.com/frmichel/taxref-ld/tree/10.0/dataset/10.0>;
 
   void:vocabulary <http://aims.fao.org/aos/agrovoc>;
   void:vocabulary <http://lod.taxonconcept.org/ontology/txn.owl>;

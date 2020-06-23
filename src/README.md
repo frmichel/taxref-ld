@@ -5,11 +5,11 @@ Several steps are involved in the generation of the TAXREF-LD RDF dataset. This 
 
 ### Downloading TAXREF and loading it into MongoDB
 
-In a first step, the pipeline queries the [TAXREF Web API](https://taxref.mnhn.fr/taxref-web/api/doc) to fetch relevant data about all the taxa available in TAXREF.
+In a first step, the pipeline queries the [TAXREF Web API](https://taxref.mnhn.fr/taxref-web/api/doc) to fetch relevant data available in TAXREF about all the taxa.
 
-The JSON content retrieved from the TAXREF Web API is then uploaded into a MongoDB database, and pre-processed with MongoDB aggregation queries to prepare the JSON documents for the next step.
+The JSON content retrieved from the Web API is then uploaded to a MongoDB database, and pre-processed with MongoDB aggregation queries to prepare the JSON documents for the next step.
 
-Directory [taxref2mongo](taxref2mongo) provides the scripts involved in this step, together will further details.
+Directory [taxref2mongo](taxref2mongo) provides the scripts involved in this step, together will further documentation.
 
 
 ### RDF files generation
@@ -17,6 +17,12 @@ Directory [taxref2mongo](taxref2mongo) provides the scripts involved in this ste
 In a second step, the translation to RDF is carried out using [Morph-xR2RML](https://github.com/frmichel/morph-xr2rml/), an implementation of the [xR2RML mapping language](http://i3s.unice.fr/~fmichel/xr2rml_specification.html) [1] for MongoDB databases.
 
 The scripts, configuration and mapping files are provided in directory [xR2RML](xR2RML).
+
+
+### RDF files import into Virtuoso
+
+RDF files generated at the previous step are imported into a Virtuoso OS instance as separate named graphs. 
+The scripts involved are provided in directory [virtuoso](virtuoso).
 
 
 ### References

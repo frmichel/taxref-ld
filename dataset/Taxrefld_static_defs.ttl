@@ -213,10 +213,11 @@ taxrefprop:statusType
 
 
 # --- Deprecated terms ---
+
 taxrefprop:bioGeoStatusIn
  a owl:ObjectProperty;
  rdfs:label "has biogeograpical status"@en;
- dct:description "(deprecated). Relates a taxon to a biogeograpical status within a certain region. As of TAXREF v12, this property should no longer be used. Instead use class taxrefstatus:BioGeographicalQualifiedStatus"@en;
+ dct:description "(deprecated). Relates a taxon to a biogeograpical status within a certain region. As of TAXREF v12, this property should no longer be used. Instead use class taxrefstatus:BioGeographicalStatus"@en;
  owl:deprecated "true"^^xsd:boolean;
  rdfs:range taxrefbgs:BioGeographicalStatus.
  

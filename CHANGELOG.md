@@ -1,16 +1,16 @@
 # TAXREF-LD changelog
 
-## [13.0] 2020-06-18
+## [13.0] 2020-06-23
 
 ### Added
 - Update with TAXREF version 13.0
-- Added media (photos) associated with taxa
+- Added media files associated with taxa
 - Added direct link to external identifiers (in addition to `schema:identifier`) (issue #3)
 
 ### Changed
 - Vernacular names modelled as instances of `skosxl:Label` instead of using reification. New property `taxrefprop:vernacularNamesXL` (issue #2)
 - Added documentation describing Turtle archives and generation pipeline (issue #4)
-- Older versions managed with tags instead of keeping separate folders in dataset
+- Older versions managed with tags instead of keeping separate versioned folders in directory `dataset`
 - Fixed bug in external identifiers: Wikidata properties were in namespace `http://www.wikidata.org/entity/`, changed to `http://www.wikidata.org/prop/direct/`
 - External identifiers forced to type string
 

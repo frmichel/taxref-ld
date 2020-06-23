@@ -1,0 +1,49 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
+
+# ================================== Interaction between two species =====================================
+
+# Direct link to the vernacular name (here: pollinates)
+<http://taxref.mnhn.fr/lod/taxon/838621/13.0> ;
+    ro:RO_0002455               <http://taxref.mnhn.fr/lod/taxon/630004/13.0> ;
+
+# Reified link to the vernacular name (adds location and bibliographic reference)
+<http://taxref.mnhn.fr/lod/interact/838621-630004-178398>
+    a                           <http://purl.org/biotop/biotop.owl#OrganismInteraction> , rdf:Statement ;
+    rdfs:label                  "pollinates (statement)" ;
+    dct:description             "Melissodes martinicensis pollinates Lantana involucrata" ;
+
+    rdf:subject                 <http://taxref.mnhn.fr/lod/taxon/838621/13.0> ;
+    rdf:predicate               ro:RO_0002455 ;
+    rdf:object                  <http://taxref.mnhn.fr/lod/taxon/630004/13.0> ;
+    
+    # Bibliographic resource
+    wdt:P248                    <http://taxref.mnhn.fr/lod/bib/178398> .

@@ -14,7 +14,7 @@ The main modelling choices in TAXREF-LD are as follows:
 Additional information is provided for each taxon such as its taxonomic rank, parent taxon, vernacular names, habitat and biogeographical statuses.
 This RDF modeling is detailed are provided in [1], that applies to TAXREF-LD v10.0.
 
-As of version 12.0, additional information is provided: **species interactions**, **legal statuses** (conventions, directives, regyulations, protections), **conservation statuses** (international/european/national/regional red lists), **location and bibliographical sources for vernacular names**, **cross-references to other datasources** by means of external IDs and webpages.
+As of version 12.0, additional information is provided: **species interactions**, **legal statuses** (conventions, directives, regulations, protections), **conservation statuses** (international/european/national/regional red lists), **location and bibliographical sources for vernacular names**, **cross-references to other datasources** by means of external IDs and webpages, **media** (photos of taxa).
 
 
 ### Interlinking with other taxonomic registries and biodiversity sources
@@ -35,9 +35,23 @@ TAXREF-LD was first released as a translation of TAXREF 10.0. It may not be upda
 
 The dataset is downloadable as a set of RDF dumps (in Turtle syntax) provided in directory [dataset](dataset).
 
-Additional files (`Taxrefld_static*.ttl`) define various terms (classes, concepts, properties) used to represent taxonomic data. Whenever possible, these terms are aligned with counterparts in thrid-party ontologies.
+Additional files (`dataset/Taxrefld_static*.ttl`) provide DCAT and VOID dataset descriptions, and define various terms (classes, concepts, properties) used to represent taxonomic data. Whenever possible, these terms are aligned with counterparts in thrid-party ontologies.
 
-TAXREF-LD can also be queried through our Virtuoso OS SPARQL endpoint http://taxref.mnhn.fr/sparql.
+Alternatively, TAXREF-LD can be queried through our Virtuoso OS SPARQL endpoint http://taxref.mnhn.fr/sparql, that contains the following **named graphs**:
+- `http://taxref.mnhn.fr/lod/graph/metadata`: DCAT and VOID dataset descriptions + definition of various classes, concepts, properties (content of files `dataset/Taxrefld_static*.ttl`).
+- `http://taxref.mnhn.fr/lod/graph/biblio`: bibliographic resources
+- `http://taxref.mnhn.fr/lod/graph/locations`: regions, tepartements, territories etc.
+- `http://taxref.mnhn.fr/lod/graph/biblio`: media (photos) linked to taxa
+- `http://taxref.mnhn.fr/lod/graph/statusCodes`: description of the status values of types international convetion, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `Taxrefld_statusCodes.ttl` and `Taxrefld_statusBiblio.ttl`)
+- `http://taxref.mnhn.fr/lod/graph/interactions/{TAXREF version}`: species interactions
+- `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}`: description of taxa as OWL classes 
+- `http://taxref.mnhn.fr/lod/graph/concepts/{TAXREF version}`: description of scientific names as SKOS concepts
+- `http://taxref.mnhn.fr/lod/graph/statuses/{TAXREF version}`: all taxa statuses (legal, biogeographical, red list)
+- `http://taxref.mnhn.fr/lod/graph/vernacular/{TAXREF version}`: taxa vernacular names (direct and as SKOSXL labels)
+- `http://taxref.mnhn.fr/lod/graph/dbxref/{TAXREF version}`: cross-references to third-party data sources such as GBIF, WoRMS, the Plant List etc.
+- `http://taxref.mnhn.fr/lod/graph/webpages/{TAXREF version}`: `foaf:page` links to webpages
+- `http://taxref.mnhn.fr/lod/graph/links-*/{TAXREF version}`: interllinking graphs where `links-*` stands for several values like `links-agrovoc`, `links-ncbi` etc.
+
 
 You may also use the [Faceted Browser](http://sparks-vm33.i3s.unice.fr:8890/fct/) to look up text or URIs.
 As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878/12.0](http://taxref.mnhn.fr/lod/taxon/60878/12.0).

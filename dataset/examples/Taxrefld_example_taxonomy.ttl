@@ -1,0 +1,125 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
+
+# ================================== Common taxonomic information =====================================
+
+# --- Description of taxon Delphinus delphis
+<http://taxref.mnhn.fr/lod/taxon/60878/13.0>
+    a                           owl:Class ;
+    rdfs:isDefinedBy            <http://taxref.mnhn.fr/lod/taxref-ld/13.0> ;
+    rdfs:subClassOf             <http://taxref.mnhn.fr/lod/taxon/191591/13.0> ;
+    rdfs:label                  "Delphinus delphis" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:habitat          taxrefhab:Marine ;
+    taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/60878> ;
+    taxrefprop:hasSynonym       <http://taxref.mnhn.fr/lod/name/361079> ;
+    schema:mainEntityOfPage     <https://inpn.mnhn.fr/espece/cd_nom/60878?lg=en> ;
+    
+    # Links to webpages from 3rd-party data sources
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en>, <https://www.gbif.org/species/8324617> ;
+
+    # GBIF identifier (direct)
+    wdt:P846 "8324617" .
+
+    # GBIF identifier (through schema:identifier)
+    schema:identifier [
+        a                       schema:PropertyValue ;
+        rdfs:label              "GBIF id" ;
+        schema:propertyID       wdt:P846 ;
+        schema:value            "8324617"
+    ] .
+
+
+# --- Description of two scientific names of taxon Delphinus delphis
+<http://taxref.mnhn.fr/lod/name/60878>
+    a                           skos:Concept, tn:TaxonName ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/13.0> ;
+    skos:broader                <http://taxref.mnhn.fr/lod/name/191591> ;
+    rdfs:label                  "Delphinus delphis Linnaeus, 1758" ;
+    skos:prefLabel              "Delphinus delphis" ;
+    dwc:scientificName          "Delphinus delphis" ;
+    taxrefprop:hasAuthority     "Linnaeus, 1758" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/60878/13.0> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> .
+
+<http://taxref.mnhn.fr/lod/name/361079>
+    a                           skos:Concept, tn:TaxonName ;
+    skos:inScheme               <http://taxref.mnhn.fr/lod/taxref-ld/13.0> ;
+    rdfs:label                  "Delphinus capensis Gray, 1828" ;
+    skos:prefLabel              "Delphinus capensis" ;
+    dwc:scientificName          "Delphinus capensis" ;
+    taxrefprop:hasAuthority     "Gray, 1828" ;
+    taxrefprop:hasRank          taxrefrk:Species ;
+    taxrefprop:isSynonymOf      <http://taxref.mnhn.fr/lod/taxon/60878/13.0> ;
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/361079/?lg=en> .
+
+
+# ================================== Vernacular names =====================================
+    
+# Direct link to the vernacular name
+<http://taxref.mnhn.fr/lod/taxon/60878/13.0>
+    taxrefprop:vernacularName   "Dauphin commun à bec long"@fr .
+
+# Extended vernacular name with location and biliographic reference
+<http://taxref.mnhn.fr/lod/taxon/60878/13.0>
+    taxrefprop:vernacularNameXL
+    [   a                       skosxl:Label ;
+        skos:inScheme           <http://taxref.mnhn.fr/lod/taxref-ld/13.0> ;
+        rdfs:label              "Dauphin commun à bec long" ;
+        skosxl:literalForm      "Dauphin commun à bec long"@fr ;
+        
+        # Geographic location where the vernacular name applies
+        dct:coverage            <http://taxref.mnhn.fr/lod/location/ETATFRA> ;
+        wdt:P3005               <http://taxref.mnhn.fr/lod/location/ETATFRA> ;
+        
+        # Bibliographic resource about the vernacular name
+        dct:source              <http://taxref.mnhn.fr/lod/bib/123456> ;
+        wdt:P248                <http://taxref.mnhn.fr/lod/bib/123456> ;
+    ] .
+
+
+# ================================== Media files =====================================
+
+<http://taxref.mnhn.fr/lod/taxon/60878/13.0>
+    schema:image [
+        a                           schema:ImageObject ;
+        dct:license                 <https://creativecommons.org/licenses/by-nc-sa/3.0/fr/> ;
+        schema:license              <https://creativecommons.org/licenses/by-nc-sa/3.0/fr/> ;
+        schema:copyrightHolder [ 
+            a                       schema:Person ;
+            rdfs:label              "V. Prié - Association Caracol" ;
+            schema:name             "V. Prié - Association Caracol"
+        ] ;
+        schema:encodingFormat       "image/jpeg" ;
+        schema:contentUrl           <https://taxref.mnhn.fr/api/media/download/inpn/152199> ;
+        schema:thumbnail            <https://taxref.mnhn.fr/api/media/download/thumbnail/152199>
+    ] .

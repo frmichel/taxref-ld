@@ -21,6 +21,9 @@ graph="http://taxref.mnhn.fr/lod/graph/locations"
 graph="http://taxref.mnhn.fr/lod/graph/statuscodes"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_statusCodes.ttl Taxrefld_statusBiblio.ttl
 
+graph="http://taxref.mnhn.fr/lod/graph/media"
+./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_media.ttl
+
 
 # Main content versioned graphs
 graph="http://taxref.mnhn.fr/lod/graph/interactions/${TAXREFVER}"
