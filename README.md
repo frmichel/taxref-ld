@@ -16,7 +16,7 @@ This RDF modeling is detailed are provided in [1], that applies to TAXREF-LD v10
 
 As of version 12.0, additional information is provided: **species interactions**, **legal statuses** (conventions, directives, regulations, protections), **conservation statuses** (international/european/national/regional red lists), **location and bibliographical sources for vernacular names**, **cross-references to other datasources** by means of external IDs and webpages, **media** (photos of taxa).
 
-The modelling is exemplified in directory [dataset/example](dataset/example).
+The modelling is exemplified in directory [dataset/examples](dataset/examples).
 
 
 ### Interlinking with other taxonomic registries and biodiversity sources
@@ -42,9 +42,9 @@ Additional files (`dataset/Taxrefld_static*.ttl`) provide DCAT and VOID dataset 
 Alternatively, TAXREF-LD can be queried through our Virtuoso OS SPARQL endpoint http://taxref.mnhn.fr/sparql, that contains the following **named graphs**:
 - `http://taxref.mnhn.fr/lod/graph/metadata`: DCAT and VOID dataset descriptions + definition of various classes, concepts, properties (content of files `dataset/Taxrefld_static*.ttl`).
 - `http://taxref.mnhn.fr/lod/graph/biblio`: bibliographic resources
-- `http://taxref.mnhn.fr/lod/graph/locations`: regions, tepartements, territories etc.
+- `http://taxref.mnhn.fr/lod/graph/locations`: regions, departements, territories etc.
 - `http://taxref.mnhn.fr/lod/graph/biblio`: media (photos) linked to taxa
-- `http://taxref.mnhn.fr/lod/graph/statusCodes`: description of the status values of types international convetion, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `Taxrefld_statusCodes.ttl` and `Taxrefld_statusBiblio.ttl`)
+- `http://taxref.mnhn.fr/lod/graph/statusCodes`: description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `Taxrefld_statusCodes.ttl` and `Taxrefld_statusBiblio.ttl`)
 - `http://taxref.mnhn.fr/lod/graph/interactions/{TAXREF version}`: species interactions
 - `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}`: description of taxa as OWL classes 
 - `http://taxref.mnhn.fr/lod/graph/concepts/{TAXREF version}`: description of scientific names as SKOS concepts
@@ -56,7 +56,7 @@ Alternatively, TAXREF-LD can be queried through our Virtuoso OS SPARQL endpoint 
 
 
 You may also use the [Faceted Browser](http://sparks-vm33.i3s.unice.fr:8890/fct/) to look up text or URIs.
-As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878/12.0](http://taxref.mnhn.fr/lod/taxon/60878/12.0).
+As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878/13.0](http://taxref.mnhn.fr/lod/taxon/60878/13.0).
 
 
 ## License
