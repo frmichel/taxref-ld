@@ -1,6 +1,12 @@
 # TAXREF-LD changelog
 
-## [13.0] 2020-06-23
+## [LATEST] 2020-07-07 - TAXREF version 13
+
+### Changed
+- Add direct link to image files with `foaf:depiction` (in addition to instances of `schema:ImageObject` with `schema:image`) (issue #6)
+
+
+## [13.0] 2020-06-23 - TAXREF version 13
 
 ### Added
 - Update with TAXREF version 13.0
@@ -15,10 +21,10 @@
 - External identifiers forced to type string
 
 
-## [12.0] 2019-11-12
+## [12.0] 2019-11-12 - TAXREF version 12
 
 ### Added
-- Update with TAXREF version 12.0
+- Update with TAXREF version 12
 - Added legal statuses (directives, conventions, regulations, protections)
 - Added conservation statuses (from international/european/national/regional red lists)
 - Added species interactions

@@ -42,6 +42,10 @@
     xrr:logicalSource <#LS>;
     rr:subjectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}" ];
     rr:predicateObjectMap [
+        rr:predicate foaf:depiction;
+        rr:objectMap [ xrr:reference "$._links.file.href"; rr:termType rr:IRI ];
+    ];
+    rr:predicateObjectMap [
         rr:predicate schema:image;
         rr:objectMap [ rr:template "{$._links.self.href}"; rr:termType rr:BlankNode ];
     ].

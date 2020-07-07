@@ -110,6 +110,10 @@
 # ================================== Media files =====================================
 
 <http://taxref.mnhn.fr/lod/taxon/60878/13.0>
+    # Direct link to the image file
+    foaf:depiction                  <https://taxref.mnhn.fr/api/media/download/inpn/152199>;
+
+    # ImageObject providing more metadata about the media
     schema:image [
         a                           schema:ImageObject ;
         dct:license                 <https://creativecommons.org/licenses/by-nc-sa/3.0/fr/> ;
