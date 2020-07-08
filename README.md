@@ -43,7 +43,7 @@ Alternatively, TAXREF-LD can be queried through our Virtuoso OS SPARQL endpoint 
 - `http://taxref.mnhn.fr/lod/graph/metadata`: DCAT and VOID dataset descriptions + definition of various classes, concepts, properties (content of files `dataset/Taxrefld_static*.ttl`).
 - `http://taxref.mnhn.fr/lod/graph/biblio`: bibliographic resources
 - `http://taxref.mnhn.fr/lod/graph/locations`: regions, departements, territories etc.
-- `http://taxref.mnhn.fr/lod/graph/biblio`: media (photos) linked to taxa
+- `http://taxref.mnhn.fr/lod/graph/media`: media (photos) linked to taxa
 - `http://taxref.mnhn.fr/lod/graph/statusCodes`: description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `Taxrefld_statusCodes.ttl` and `Taxrefld_statusBiblio.ttl`)
 - `http://taxref.mnhn.fr/lod/graph/interactions/{TAXREF version}`: species interactions
 - `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}`: description of taxa as OWL classes 
@@ -61,7 +61,7 @@ As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878/13.0
 
 ## License
 
-See the [LICENSE file](LICENSE).
+This dataset is made available under the terms of the [Creative Commons Attribution 3.0 France](https://creativecommons.org/licenses/by/3.0/fr/) (CC BY 3.0 FR) license.
 
 
 ### Reference(s)

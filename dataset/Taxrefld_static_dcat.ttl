@@ -197,7 +197,7 @@ taxref:antoniaettorre a schema:Person;
     dct:description "Representation of the TAXREF 13.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientific names attached to the taxa."@en;
     dct:description "Représentation du référentiel taxonomique TAXREF 13.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
 
-    dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
+    dct:licence <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "13.0";
     dct:issued "2020-06-23"^^xsd:date; schema:datePublished "2020-06-23"^^xsd:date;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
@@ -246,7 +246,7 @@ taxref:antoniaettorre a schema:Person;
     schema:sameAs <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
 
-    dct:license <http://opendatacommons.org/licenses/odbl/>;
+    dct:license <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "13.0";
     dct:issued "2019-12-06"^^xsd:date;
     dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
@@ -268,7 +268,7 @@ taxref:antoniaettorre a schema:Person;
     dct:description "Representation of the TAXREF 12.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientific names attached to the taxa."@en;
     dct:description "Représentation du référentiel taxonomique TAXREF 12.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
 
-    dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
+    dct:licence <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "12.0";
     dct:issued "2019-08-29"^^xsd:date; schema:datePublished "2019-08-29"^^xsd:date;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
@@ -317,7 +317,7 @@ taxref:antoniaettorre a schema:Person;
     schema:sameAs <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
 
-    dct:license <http://opendatacommons.org/licenses/odbl/>;
+    dct:license <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "12.0";
     dct:issued "2018-10-23"^^xsd:date;
     dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
@@ -338,7 +338,7 @@ taxref:antoniaettorre a schema:Person;
     dct:description "Representation of the TAXREF 10.0 taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientfic names attached to the taxa."@en;
     dct:description "Représentation du référentiel taxonomique TAXREF 10.0 comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
 
-    dct:licence <https://creativecommons.org/licenses/by-nc/4.0/>;
+    dct:licence <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "10.0";
     dct:issued "2017"^^xsd:gYear; schema:datePublished "2017"^^xsd:gYear;
     dct:publisher taxref:INPN, "Université Côte d'Azur, Inria, CNRS";
@@ -387,7 +387,7 @@ taxref:antoniaettorre a schema:Person;
     schema:sameAs <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     foaf:homepage <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
 
-    dct:license <http://opendatacommons.org/licenses/odbl/>;
+    dct:license <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "10.0";
     dct:issued "2016-11-03"^^xsd:date;
     dct:creator "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
