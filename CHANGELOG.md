@@ -1,10 +1,10 @@
 # TAXREF-LD changelog
 
-## [LATEST] 2020-07-07 - TAXREF version 13
+## [LATEST] 2020-08-14 - TAXREF version 13
 
 ### Changed
 - Add direct link to image files with `foaf:depiction` (in addition to instances of `schema:ImageObject` with `schema:image`) (issue #6)
-
+- Add `dct:identifier` to taxa and names with TAXREF identifier
 
 ## [13.0] 2020-06-23 - TAXREF version 13
 

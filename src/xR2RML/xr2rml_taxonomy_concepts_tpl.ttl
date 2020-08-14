@@ -74,13 +74,18 @@
     ];
     rr:predicateObjectMap [
         rr:predicate skos:broader;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.codeParent}"; ];
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.parentId}"; ];
     ];
     rr:predicateObjectMap [
         rr:predicate foaf:page;
         rr:objectMap [ rr:template "https://inpn.mnhn.fr/espece/cd_nom/{$.id}?lg=en"; ];
     ];
+    rr:predicateObjectMap [
+        rr:predicate dct:identifier;
+        rr:objectMap [ xrr:reference "$.id"; xsd:datatype xsd:string ];
+    ];
 	.
+
 
 <#TM_Synonym_Name>
     a rr:TriplesMap;
@@ -114,7 +119,12 @@
         rr:predicate foaf:page;
         rr:objectMap [ rr:template "https://inpn.mnhn.fr/espece/cd_nom/{$.id}?lg=en"; ];
     ];
+    rr:predicateObjectMap [
+        rr:predicate dct:identifier;
+        rr:objectMap [ xrr:reference "$.id"; xsd:datatype xsd:string ];
+    ];
 	.
+
 
 # ---------------------------------------------------------------------------------
 # Taxonomical rank for names

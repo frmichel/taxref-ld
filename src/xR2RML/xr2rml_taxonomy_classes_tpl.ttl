@@ -73,6 +73,10 @@
         rr:predicate foaf:homepage, schema:mainEntityOfPage;
         rr:objectMap [ rr:template "https://inpn.mnhn.fr/espece/cd_nom/{$.id}?lg=en"; ];
     ];
+    rr:predicateObjectMap [
+        rr:predicate dct:identifier;
+        rr:objectMap [ xrr:reference "$.id"; xsd:datatype xsd:string ];
+    ];
 	.
 
 <#TM_Taxon_HasSynonym>
@@ -83,6 +87,7 @@
         rr:predicate taxrefprop:hasSynonym;
         rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.id}" ];
     ].
+
 
 # ---------------------------------------------------------------------------------
 # Taxonomical rank for taxa

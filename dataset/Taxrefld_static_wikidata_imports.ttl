@@ -71,6 +71,7 @@ wdt:P6376   rdfs:label "Psyl'list ID (Wikidata)".
 wdt:P1717   rdfs:label "SANDRE ID (Wikidata)".
 wdt:P6018   rdfs:label "SeaLifeBase ID (Wikidata)".
 wdt:P6057   rdfs:label "Systematic Catalog of Culicidae ID (Wikidata)".
+wdt:P3186   rdfs:label "TAXREF ID (Wikidata)".
 wdt:P960    rdfs:label "TROPICOS ID (Wikidata)".
 wdt:P3064   rdfs:label "The Global Lepidoptera Names Index ID (Wikidata)".
 wdt:P1070   rdfs:label "The Plant List (TPL) ID (Wikidata)".

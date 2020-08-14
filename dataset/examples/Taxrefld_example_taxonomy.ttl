@@ -42,6 +42,7 @@
     taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/60878> ;
     taxrefprop:hasSynonym       <http://taxref.mnhn.fr/lod/name/361079> ;
     schema:mainEntityOfPage     <https://inpn.mnhn.fr/espece/cd_nom/60878?lg=en> ;
+    dct:identifier              "60878";
     
     # Links to webpages from 3rd-party data sources
     foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en>, <https://www.gbif.org/species/8324617> ;
@@ -55,8 +56,11 @@
         rdfs:label              "GBIF id" ;
         schema:propertyID       wdt:P846 ;
         schema:value            "8324617"
-    ] .
-
+    ];
+    
+    # IDs from other datasources...
+    .
+    
 
 # --- Description of two scientific names of taxon Delphinus delphis
 <http://taxref.mnhn.fr/lod/name/60878>
@@ -70,6 +74,7 @@
     taxrefprop:hasRank          taxrefrk:Species ;
     taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/60878/13.0> ;
     foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> .
+    dct:identifier              "60878";
 
 <http://taxref.mnhn.fr/lod/name/361079>
     a                           skos:Concept, tn:TaxonName ;

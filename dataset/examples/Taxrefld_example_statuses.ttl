@@ -70,6 +70,7 @@
 # --- Legal status (Bern Convention)
 <http://taxref.mnhn.fr/lod/taxon/60878/13.0>
     taxrefprop:hasStatus [
+        a                       taxrefstatus:LegalStatus;
         rdfs:label              "Legal status IBO1" ;
         dct:description         "Delphinus delphis has legal status IBO1" ;
         taxrefprop:statusType   taxrefstatus:InternationalConvention ;

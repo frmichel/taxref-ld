@@ -69,7 +69,7 @@ taxref:xR2RML
     dct:description "Implementation of the xR2RML mapping language";
     dct:creator taxref:franckmichel; schema:author taxref:franckmichel;
     dct:licence <http://www.apache.org/licenses/LICENSE-2.0>;
-    owl:versionInfo "1.1-RC";
+    owl:versionInfo "1.2";
     schema:subjectOf taxref:hal01207828.
   
 taxref:RdfGeneration
