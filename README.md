@@ -2,7 +2,7 @@
 
 TAXREF-LD is the Linked Data representation of [TAXREF](https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en), the French national taxonomical register for fauna, flora and fungus, that covers mainland France and overseas territories. It accounts for 590000+ scientific names.
 
-TAXREF-LD is a joint initiative of the [UMR Patrinat](http://www.patrinat.fr/) of the [National Museum of Natural History](http://www.mnhn.fr/) and the [I3S laboratory](http://www.i3s.unice.fr/), Université Côte d'Azur, Inria, CNRS.
+TAXREF-LD is a joint initiative of the [UMS Patrinat](http://www.patrinat.fr/) of the [National Museum of Natural History](http://www.mnhn.fr/) and the [I3S laboratory](http://www.i3s.unice.fr/), Université Côte d'Azur, Inria, CNRS.
 
 
 ### Modelling
