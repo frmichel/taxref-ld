@@ -1,5 +1,6 @@
 #!/bin/bash
-# Commands to be run from directory 'virtuoso'
+#
+# WARNING - Run the commands below from directory 'virtuoso'
 
 CURRENT_DIR=$(pwd)
 DATASET_DIR=$CURRENT_DIR/../xR2RML
