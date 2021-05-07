@@ -35,6 +35,3 @@ for FILE in `ls taxref_media_${version}_*.json`; do
     mongo --quiet --eval "db.${collection}.count()" localhost/$db
     rm -f ${FILE}.tmp
 done
-
-# Add a field licence_url
-mongo localhost/$db import_media.js

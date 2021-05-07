@@ -47,7 +47,7 @@
     ];
     rr:predicateObjectMap [
         rr:predicate schema:image;
-        rr:objectMap [ rr:template "{$._links.self.href}"; rr:termType rr:BlankNode ];
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/media/{$.id}" ];
     ].
     
 
@@ -55,8 +55,7 @@
     a rr:TriplesMap;
     xrr:logicalSource <#LS>;
     rr:subjectMap [
-        rr:template "{$._links.self.href}"; 
-        rr:termType rr:BlankNode;
+        rr:template "http://taxref.mnhn.fr/lod/media/{$.id}";
         rr:class    schema:ImageObject;
     ];
     rr:predicateObjectMap [
@@ -83,7 +82,7 @@
     ];
     rr:predicateObjectMap [
         rr:predicate dct:license, schema:license;
-        rr:objectMap [ xrr:reference "$.licence_url"; rr:termType rr:IRI ];
+        rr:objectMap [ xrr:reference "$.licenceUrl"; rr:termType rr:IRI ];
     ];
     .
 
