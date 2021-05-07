@@ -33,16 +33,14 @@
 
 taxrefhab:Habitat
  rdfs:subClassOf skos:Concept;
- rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
- rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
  owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
  rdfs:label "Class of habitats"@en;
  dct:description "Class of types of habitat (subclass of skos:Concept)"@en.
 
 taxrefhab:Marine
  a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
  rdfs:label "Marine habitat"@en;
  skos:prefLabel "Marine habitat"@en;
  skos:prefLabel "Milieu marin"@fr;
@@ -54,8 +52,7 @@ taxrefhab:Marine
 
 taxrefhab:FreshWater
  a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
  rdfs:label "Freshwater"@en;
  skos:prefLabel "Freshwater"@en;
  skos:prefLabel "Eau douce"@fr;
@@ -66,8 +63,7 @@ taxrefhab:FreshWater
 
 taxrefhab:BrackishWater
  a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
  rdfs:label "Brackish water"@en;
  skos:prefLabel "Brackish water"@en;
  skos:prefLabel "Eau saumâtre"@fr;
@@ -77,8 +73,7 @@ taxrefhab:BrackishWater
 
 taxrefhab:Terrestrial
  a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
  rdfs:label "Terrestrial"@en;
  skos:prefLabel "Terrestrial"@en;
  skos:prefLabel "Terrestre"@fr;

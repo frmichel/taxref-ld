@@ -34,8 +34,7 @@
 
 taxrefloc:MaritimeArea
     rdfs:subClassOf wd:Q1496967, wd:Q15324;        # Q1496967 = territorial entity, Q15324 = body of water
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
     rdfs:label "Maritime area"@en;
     dct:description "Maritime area different from seas, oceans, territorial waters and EEZ."@en;
     rdfs:comment "A maritime area, generally surrounding a landmass, that does not correspond to any specific sea or ocean, nor to any internationally recognized administrative subdivision (i.e. territorial waters or EEZ)"@en.

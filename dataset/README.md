@@ -7,12 +7,12 @@ This folder provides the TAXREF-LD dataset as a set of downloadable RDF dumps (i
 
 #### Dataset description 
 
-Files `Taxrefld_static_dcat.ttl` and `Taxrefld_static_void.ttl` provide the dataset's DCAT and VOID descriptions respectively.
+File `Taxrefld_static_dataset_description.ttl` provides the dataset's descriptions represented using vocabularies DCAT, VOID and SPARQL Description.
 
 
 #### Vocabulary definition
 
-Files `Taxrefld_static_defs*.ttl` provide the definition of several terms (classes, concepts and properties) used in TAXREF-LD to represent taxonomic data, locations, statuses etc. Whenever possible, these terms are aligned with counterparts from thrid-party ontologies.
+Files `Taxrefld_static_defs*.ttl` define several terms (classes, concepts and properties) used in TAXREF-LD to represent taxonomic data, locations, statuses etc. Whenever possible, these terms are aligned with counterparts from thrid-party ontologies.
 
 
 ## Resources description
