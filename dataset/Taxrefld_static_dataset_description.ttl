@@ -1,6 +1,7 @@
 @prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix sd:             <http://www.w3.org/ns/sparql-service-description#>.
 @prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
 @prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
 @prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
@@ -87,7 +88,7 @@ taxref:INPN
 
 <https://orcid.org/0000-0001-9064-0463>
     a foaf:Person; 
-    foaf:name "Franck MICHEL".
+    foaf:name "Franck MICHEL";
     schema:name "Franck MICHEL";
     foaf:homepage <https://w3id.org/people/franckmichel>;
     schema:sameAs <https://cv.archives-ouvertes.fr/fmichel/>, <https://www.researchgate.net/profile/Franck_Michel3>.
