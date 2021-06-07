@@ -26,5 +26,5 @@ Description of the ressources themseleves (taxa, names etc.) are provided by mea
 
 ## Example
 
-Directory [example](example) provides a few files with typical example of how a taxon and its related information are represented.
+Directory [examples](examples) provides a few files with typical example of how a taxon and its related information are represented.
 
