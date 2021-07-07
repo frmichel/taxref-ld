@@ -21,7 +21,19 @@ api_version=1
 page=1
 start=0
 size=10000
-limit=1515726
+limit=0
+
+echo "Retrieving page $page ($size entries starting at $start)..."
+    curl -H "Accept: application/hal+json;version=${api_version}" \
+         -o taxref_externalIds_${TAXREFVER}_${start}.json \
+         -X GET "https://taxref.mnhn.fr/api/taxa/externalIds?page=${page}&size=${size}"
+
+limit=$(jq 'getpath(["page","totalElements"])' taxref_externalIds_${TAXREFVER}_${start}.json) 
+
+echo -e "\ndownloading $limit elements\n"
+
+start=$(($start + $size))
+page=$(($page + 1))
 
 while [ "$start" -lt "$limit" ]
 do
