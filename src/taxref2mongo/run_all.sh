@@ -1,8 +1,8 @@
 #!/bin/bash
 # Author: F. Michel, UCA, CNRS, Inria
 
-TAXREFVER=13.0
-DBNAME=taxrefv13
+TAXREFVER=14.0
+DBNAME=taxrefv14
 
 log=run_all.log
 echo -n "" > $log
@@ -37,3 +37,6 @@ echo -n "" > $log
 
 ./query_statuses.sh         $TAXREFVER          &>> $log
 ./import_statuses.sh        $TAXREFVER $DBNAME  &>> $log
+
+# To archive jsons when no longer used
+# tar cvfz taxref_taxonomy_14.json.tgz  taxref_taxonomy_14.*.json

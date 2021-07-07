@@ -21,11 +21,23 @@ api_version=1
 page=1
 start=0
 size=5000
-limit=595373
+limit=0
+
+echo "Retrieving page $page ($size entries starting at $start)..."
+    curl -H "Accept: application/hal+json;version=${api_version}" \
+         -o taxref_taxonomy_${TAXREFVER}_${start}.json \
+         -X GET "https://taxref.mnhn.fr/api/taxa/search?version=${taxref_version}&page=${page}&size=${size}"
+
+limit=$(jq 'getpath(["page","totalElements"])' taxref_taxonomy_${TAXREFVER}_${start}.json) 
+
+echo -e "\ndownloading $limit elements\n"
+
+start=$(($start + $size))
+page=$(($page + 1))
 
 while [ "$start" -lt "$limit" ]
 do
-    echo "Retrieving page $page ($size entries starting at $start)..."
+  echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_taxonomy_${TAXREFVER}_${start}.json \
          -X GET "https://taxref.mnhn.fr/api/taxa/search?version=${taxref_version}&page=${page}&size=${size}"
