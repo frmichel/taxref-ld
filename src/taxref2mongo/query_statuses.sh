@@ -25,10 +25,10 @@ limit=0
 
 echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
-         -o taxref_status_${TAXREFVER}_${start}.json \
+         -o taxref_statuses_${TAXREFVER}_${start}.json \
          -X GET "https://taxref.mnhn.fr/api/taxa/status?page=${page}&size=${size}"
 
-limit=$(jq 'getpath(["page","totalElements"])' taxref_status_${TAXREFVER}_${start}.json) 
+limit=$(jq 'getpath(["page","totalElements"])' taxref_statuses_${TAXREFVER}_${start}.json) 
 
 echo -e "\ndownloading $limit elements\n"
 
@@ -39,7 +39,7 @@ while [ "$start" -lt "$limit" ]
 do
   echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
-         -o taxref_status_${TAXREFVER}_${start}.json \
+         -o taxref_statuses_${TAXREFVER}_${start}.json \
          -X GET "https://taxref.mnhn.fr/api/taxa/status?page=${page}&size=${size}"
      start=$(($start + $size))
      page=$(($page + 1))
