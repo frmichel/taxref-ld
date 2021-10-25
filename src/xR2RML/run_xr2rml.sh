@@ -35,7 +35,7 @@ echo "--------------------------------------------------------------------------
 date  >> $log
 java -Xmx4g \
      -Dlog4j.configuration=file:$XR2RML/log4j.properties \
-     -jar "$XR2RML/morph-xr2rml-dist-1.2-jar-with-dependencies.jar" \
+     -jar "$XR2RML/morph-xr2rml-dist-1.3.2-SNAPSHOT-jar-with-dependencies.jar" \
      --configDir $XR2RML \
      --configFile xr2rml.properties \
      --mappingFile xr2rml_${DATATYPE}.ttl \

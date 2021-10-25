@@ -1,11 +1,12 @@
 #!/bin/bash
 # Author: F. Michel, UCA, CNRS, Inria
 
-TAXREFVER=13.0
+TAXREFVER=14.0
 
 ./run_xr2rml.sh biblio               $TAXREFVER
 ./run_xr2rml.sh externalIds_webpages $TAXREFVER
 ./run_xr2rml.sh externalIds_worms    $TAXREFVER
+./run_xr2rml.sh habitats             $TAXREFVER
 ./run_xr2rml.sh interactions         $TAXREFVER
 ./run_xr2rml.sh locations            $TAXREFVER
 ./run_xr2rml.sh media                $TAXREFVER
