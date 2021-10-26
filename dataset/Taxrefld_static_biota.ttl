@@ -1,0 +1,46 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix sd:             <http://www.w3.org/ns/sparql-service-description#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
+# ------------------------------------------------------------------------------
+# Biota is the taxonomical classification root
+<http://taxref.mnhn.fr/lod/name/349525>
+    a skos:Concept;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+    skos:topConceptOf <http://taxref.mnhn.fr/lod/taxref-ld>;
+    skos:prefLabel "Biota"; rdfs:label "Biota";
+    taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/349525>;
+    .
+  
+<http://taxref.mnhn.fr/lod/taxon/349525>
+    a owl:Class;
+    rdfs:label "Biota";
+    taxrefprop:hasReferenceName <http://taxref.mnhn.fr/lod/name/349525>;
+    .

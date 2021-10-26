@@ -35,24 +35,24 @@
 
 taxrefstatus:TaxonStatus
     a owl:Class;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Biogeographical, conservation or legal status of a taxon"@en;
     rdfs:comment "Relates a biogeographical, conservation or legal status of a taxon with the geographical location where this status is valid and the bibliographic source that assigned this status to that taxon"@en.
 
 taxrefstatus:RedListStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "IUCN Red List status of a taxon in a geographical area, according to a bibliographic source"@en.
 
 taxrefstatus:BioGeographicalStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Biogeographical status of a taxon in a geographical area, according to a bibliographic source"@en;
     rdfs:comment "Relates a biogeographical status of a taxon with the geographical area where this status applies and the bibliographic source that assigned this status to that taxon"@en.
 
 taxrefstatus:LegalStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Status of a taxon attested by a legal document"@en;
     rdfs:comment "To be used jointly with http://taxref.mnhn.fr/lod/status/TaxonStatusType whose narrower concepts represent directives, conventions, regulations or protections"@en.
     
@@ -61,34 +61,34 @@ taxrefstatus:LegalStatus
 
 taxrefstatus:TaxonStatusType
     a skos:Concept;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "Top concept for types of taxon statuses"@en.
     
 taxrefstatus:InternationalConvention
     a skos:Concept;
     skos:broader taxrefstatus:TaxonStatusType ;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "International Convention"@en;
     skos:prefLabel "Convention internationale"@fr.
     
 taxrefstatus:EuropeanDirective
     a skos:Concept;
     skos:broader taxrefstatus:TaxonStatusType ;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "European Directive"@en;
     skos:prefLabel "Directive européenne"@fr.    
     
 taxrefstatus:Regulation
     a skos:Concept;
     skos:broader taxrefstatus:TaxonStatusType ;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "Regulation"@en;
     skos:prefLabel "Règlementation"@fr.
     
 taxrefstatus:Protection
     a skos:Concept;
     skos:broader taxrefstatus:TaxonStatusType ;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "Protection"@en;
     skos:prefLabel "Protection"@fr.    
     
@@ -103,21 +103,21 @@ taxrefstatus:Protection
     
 <http://taxref.mnhn.fr/lod/status/RedList/RE%3F>
     a wd:Q82673;        # (conservation status)
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Probably extinct regionaly"@en;
     rdfs:label "Probablement disparue au niveau régional"@fr;
     dct:description "Taxon is not extinct worldwide but may be extinct in a specific region"@en.
 
 <http://taxref.mnhn.fr/lod/status/RedList/CR%2A>
     a wd:Q82673;        # (conservation status)
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Extinct regionaly and possibly extinct worldwide"@en;
     rdfs:label "Disparue au niveau régional mais on ne sait pas si elle est éteinte au niveau mondial"@fr;
     dct:description "Taxon is certainly disappeared regionally and possibly extinct worldwide"@en.    
 
 <http://taxref.mnhn.fr/lod/status/RedList/NA>
     a wd:Q82673;        # (conservation status)
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Not applicable"@en;
     rdfs:label "Non applicable"@fr;
     dct:description "Taxon was introduced artificially in a region. Red list status does not apply in that case."@en.
@@ -127,13 +127,13 @@ taxrefstatus:Protection
 
 taxrefbgs:BioGeographicalStatus
  rdfs:subClassOf skos:Concept;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Class of biogeographical status values"@en;
  dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en.
  
 taxrefbgs:P
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "présent (indigène ou indéterminé)"@fr;
  rdfs:label "present"@en;
  skos:definition "Taxon présent dans la zone géographique considérée, i.e. taxon indigène ou taxon dont on ne sait pas s’il appartient à l'une des autres catégories. Le défaut de connaissance profite donc à l’indigénat. Par indigène on entend : taxon qui est issu de la zone géographique considérée et qui s’y est naturellement développé sans contribution humaine, ou taxon qui est arrivé là sans intervention humaine (intentionnelle ou non) à partir d’une zone dans laquelle il est indigène 6 . (NB : exclus les hybrides dont l’un des parents au moins est introduit dans la zone considérée). Sont regroupés sous ce statut tous les taxons catégorisés natif ou autochtone. Les taxons hivernant quelques mois de l’année entrent dans cette catégorie."@fr;
@@ -143,7 +143,7 @@ taxrefbgs:P
 
 taxrefbgs:B
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "occasionnel"@fr;
  rdfs:label "occasional"@en;
  skos:definition "Taxon occasionnel, non nicheur, accidentel dans la zone géographique considérée (par exemple migrateur de passage)."@fr;
@@ -152,7 +152,7 @@ taxrefbgs:B
 
 taxrefbgs:E
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "endémique"@fr;
  rdfs:label "endemic"@en;
  skos:definition "Taxon naturellement restreint à la zone géographique considérée."@fr;
@@ -160,7 +160,7 @@ taxrefbgs:E
 
 taxrefbgs:S
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "subendémique"@fr;
  rdfs:label "subendemic"@en;
  skos:definition "Taxon naturellement restreint à une zone un peu plus grande que la zone géographique considérée mais dont les principales populations se situent dans la zone géographique considérée. Pour l’Outre-mer, on applique ce statut à l’endémisme régional : pour la Guyane française = endémique du plateau des Guyanes ; pour les Antilles françaises = endémique des petites Antilles ; pour Mayotte = endémique des Comores ; pour la Réunion = endémique des Mascareignes ; pour les TAAF = endémique de la South Indian Ocean Province."@fr;
@@ -168,7 +168,7 @@ taxrefbgs:S
 
 taxrefbgs:C
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "cryptogène"@fr;
  rdfs:label "cryptogenic"@en;
  skos:definition "Taxon dont l’aire d’origine est inconnue et dont on ne peut donc pas dire s’il est indigène ou introduit"@fr;
@@ -177,7 +177,7 @@ taxrefbgs:C
 
 taxrefbgs:I
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Introduit"@fr;
  rdfs:label "Introduced"@en;
  skos:definition "Taxon introduit (établi ou possiblement établi) dans la zone géographique considérée. Par introduit on entend : taxon dont la présence dans la zone géographique considérée est due à une intervention humaine, intentionnelle ou non, ou taxon qui est arrivé dans la zone sans intervention humaine mais à partir d’une zone dans laquelle il est introduit. Par établi (terme pour la faune, = naturalisé pour la flore) on entend : taxon introduit qui forme des populations viables (se reproduisant) et durables qui se maintiennent dans le milieu naturel sans besoin d’intervention humaine. Sont regroupés sous ce statut tous les taxons catégorisés non-indigène, exotique, exogène, allogène, allochtone, non-natif, naturalisé (en anglais : alien) dans une publication scientifique."@fr;
@@ -186,7 +186,7 @@ taxrefbgs:I
 
 taxrefbgs:J
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit envahissant"@fr;
  rdfs:label "introduced invasive"@en;
  skos:definition "Taxon introduit dans la zone géographique considérée, qui produit des descendants fertiles souvent en grand nombre, et qui a le potentiel pour s’étendre de façon exponentielle sur une grande aire, augmentant ainsi rapidement son aire de répartition 6 . Cela induit souvent des conséquences écologiques, économiques ou sanitaires négatives (IUCN, 2000). Sont regroupés sous ce statut tous les taxons catégorisés introduite envahissante, exotique envahissant ou invasif (invasive en anglais) dans une publication scientifique."@fr;
@@ -195,7 +195,7 @@ taxrefbgs:J
 
 taxrefbgs:M
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit non établi (dont domestique)"@fr;
  rdfs:label "introduced casual"@en;
  skos:definition "Taxon introduit qui peut occasionnellement se reproduire en dehors de son aire de culture ou de captivité, mais qui ne peut se maintenir à l’état sauvage car ne pouvant former de populations viables sans intervention humaine, et qui dépend donc d’introductions répétées pour se maintenir dans la nature. Sont regroupés sous ce statut tous les taxons catégorisés introduit occasionnel, subspontané, échappé de culture ou de captivité (en anglais : casual alien)). Ce statut inclut les taxons strictement domestiques (faune) ou uniquement cultivés (flore)."@fr;
@@ -205,7 +205,7 @@ taxrefbgs:M
 
 taxrefbgs:D
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "douteux"@fr;
  rdfs:label "doubtful"@en;
  skos:definition "Taxon dont la présence dans la zone géographique considérée n’est pas avérée (en attente de confirmation)."@fr;
@@ -214,7 +214,7 @@ taxrefbgs:D
 
 taxrefbgs:A
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "absent"@fr;
  rdfs:label "absent"@en;
  skos:definition "Taxon non présent dans la zone géographique considérée."@fr;
@@ -222,7 +222,7 @@ taxrefbgs:A
 
 taxrefbgs:W
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "disparu"@fr;
  rdfs:label "disappeared"@en;
  skos:definition "Taxon qui n’est plus présent à l’état sauvage dans la zone géographique considérée mais qui n’est pas globalement éteint. Rq : en cas de doute sur la présence ancienne ou non du taxon à l’état sauvage, utiliser le statut absent (A)."@fr;
@@ -230,7 +230,7 @@ taxrefbgs:W
 
 taxrefbgs:X
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "éteint"@fr;
  rdfs:label "extinct"@en;
  skos:definition "Taxon globalement éteint (= ayant totalement disparu de la surface du globe terrestre)."@fr;
@@ -239,7 +239,7 @@ taxrefbgs:X
 
 taxrefbgs:Y
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit éteint/disparu"@fr;
  rdfs:label "introduced extinct/disappeared"@en;
  skos:definition "Taxon introduit par le passé mais aujourd’hui disparu de la zone géographique considérée (W) ou éteint (X)."@fr;
@@ -248,7 +248,7 @@ taxrefbgs:Y
 
 taxrefbgs:Z
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "endémique éteint"@fr;
  rdfs:label "endemic extinct"@en;
  skos:definition "Taxon endémique et aujourd’hui disparu, donc globalement éteint (X)."@fr;
@@ -257,7 +257,7 @@ taxrefbgs:Z
 
 taxrefbgs:Q
  a taxrefbgs:BioGeographicalStatus;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "mentionné par erreur "@fr;
  rdfs:label "reported in error"@en;
  skos:definition "Taxon mentionné par erreur comme présent sur le territoire considéré."@fr;

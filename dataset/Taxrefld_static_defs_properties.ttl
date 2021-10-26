@@ -113,6 +113,7 @@
 
 taxrefprop:hasRank
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:equivalentProperty <http://purl.obolibrary.org/obo/vto#has_rank>;
  owl:equivalentProperty <http://purl.obolibrary.org/obo/ncbitaxon#has_rank>;
  owl:equivalentProperty wdt:P105;
@@ -126,6 +127,7 @@ taxrefprop:hasRank
 
 taxrefprop:hasAuthority
  a owl:DatatypeProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:equivalentProperty <http://lod.taxonconcept.org/ontology/txn.owl#authority>;
  owl:equivalentProperty <http://rs.tdwg.org/ontology/voc/TaxonName#authorship>;
  rdfs:label "has scientific name authority"@en;
@@ -135,6 +137,7 @@ taxrefprop:hasAuthority
 
 taxrefprop:hasReferenceName
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:subPropertyOf dwc:scientificName;
  rdfs:label "has reference name"@en;
  dct:description "Relates a taxon to its reference (valid) scientific name"@en;
@@ -142,12 +145,14 @@ taxrefprop:hasReferenceName
 
 taxrefprop:isReferenceNameOf
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:inverse taxrefprop:hasReferenceName;
  rdfs:label "is the reference name of"@en;
  dct:description "Relates a scientific name to the taxon for which it is the reference (valid) name"@en.
 
 taxrefprop:hasSynonym
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:subPropertyOf dwc:scientificName;
  rdfs:label "has synonym"@en;
  dct:description "Relates a taxon to one of its synonyms"@en;
@@ -155,12 +160,14 @@ taxrefprop:hasSynonym
   
 taxrefprop:isSynonymOf 
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:inverse taxrefprop:hasSynonym;
  rdfs:label "is a synonym of"@en;
  dct:description "Relates a scientific name to a taxon for which it is a synonym"@en.
 
 taxrefprop:vernacularName 
  a owl:DatatypeProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasVernacularName>;
  owl:equivalentProperty <http://rdf.geospecies.org/ont/geospecies#hasCommonName>;
  owl:equivalentProperty dwc:vernacularName;
@@ -169,12 +176,14 @@ taxrefprop:vernacularName
  dct:description "Relates a taxon to one of its vernacular (common) names"@en.
  
 taxrefprop:vernacularNameXL
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:subPropertyOf skosxl:altLabel;
  rdfs:label "has extended vernacular name"@en;
  dct:description "Relates a taxon to one of its vernacular (common) names in the form of a SKOS extended label"@en.
  
 taxrefprop:habitat
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:equivalentProperty <http://purl.obolibrary.org/obo/RO_0002303>;
  owl:equivalentProperty dwciri:habitat;
  owl:equivalentProperty wdt:P2974;
@@ -192,21 +201,21 @@ taxrefprop:habitat
 
 taxrefprop:hasStatus
     a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "has status"@en;
     rdfs:range taxrefstatus:TaxonStatus;
     dct:description "Relates a taxon to one of its biogeographical, red list or legal statuses."@en.
 
 taxrefprop:statusValue
     a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "status value"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
     dct:description "Relates a taxon status with the actual status value"@en.
     
 taxrefprop:statusType
     a owl:ObjectProperty;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld/13.0>;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "status type"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
     dct:description "Relates a taxon status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
@@ -216,6 +225,7 @@ taxrefprop:statusType
 
 taxrefprop:bioGeoStatusIn
  a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "has biogeograpical status"@en;
  dct:description "(deprecated). Relates a taxon to a biogeograpical status within a certain region. As of TAXREF v12, this property should no longer be used. Instead use class taxrefstatus:BioGeographicalStatus"@en;
  owl:deprecated "true"^^xsd:boolean;
