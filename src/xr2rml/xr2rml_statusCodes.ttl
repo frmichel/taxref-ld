@@ -33,46 +33,31 @@
 @prefix rml:            <http://semweb.mmlab.be/ns/rml#> .
 
 
-<#LS_ReferenceName>
-    a xrr:LogicalSource;
-    xrr:query """db.externalIds.find( { $where: 'this.taxrefId == this.taxonReferenceId' } )""".
-<#LS_SynonymName>
-    a xrr:LogicalSource;
-    xrr:query """db.externalIds.find( { $where: 'this.taxrefId != this.taxonReferenceId' } )""".
+#================================= Representation of all possible status values =============================
+# Status values in groups Conventions internationales, Directives européennes, Protection and Réglementation
+# are represented as instances of the class bibo:DocumentPart. 
+# E.g.: http://taxref.mnhn.fr/lod/status/BONN/IBOAC
+# They are related to the bibliographic source describing the document with property dct:isPartOf.
+#
+# Status types in other groups (SENSIBILITE, Plan national, ZNIEFF, SCAP, etc.) are not considered.
 
-<#SM_Taxon>
-    a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxrefId}/{{TAXREFVER}}".
-<#SM_Name>
-    a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/name/{$.taxrefId}".
-
-<#TM_Url_Taxon>
+<#TM_StatusValues>
     a rr:TriplesMap;
-    xrr:logicalSource <#LS_ReferenceName>;
-    rr:subjectMap <#SM_Taxon>;
-    rr:predicateObjectMap [
-        rr:predicate foaf:page;
-        rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
+    xrr:logicalSource [ xrr:query """db.statusCodes.find( {statusTypeGroup: { $in:  ['Réglementation', 'Protection', 'Directives européennes', 'Conventions internationales']}} )""" ];
+    rr:subjectMap [
+        rr:template "http://taxref.mnhn.fr/lod/status/{$.statusTypeCode}/{$.statusCode}";
+        rr:class bibo:DocumentPart;
     ];
-	.
-
-<#TM_Url_Name>
-    a rr:TriplesMap;
-    xrr:logicalSource <#LS_ReferenceName>;
-    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
-        rr:predicate foaf:page;
-        rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
+        rr:predicate rdfs:isDefinedBy;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI ];
     ];
-	.
-
-<#TM_Url_Name2>
-    a rr:TriplesMap;
-    xrr:logicalSource <#LS_SynonymName>;
-    rr:subjectMap <#SM_Name>;
-    rr:predicateObjectMap [
-        rr:predicate foaf:page;
-        rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
+	rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [ xrr:reference "$.statusName"; rr:datatype xsd:string; rr:language "fr" ];
     ];
-	.
+	rr:predicateObjectMap [
+        rr:predicate dct:isPartOf;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/bib/{$.sourceId}" ];
+    ];
+    .

@@ -43,7 +43,7 @@
     rr:subjectMap <#SM>;
     rr:predicateObjectMap [
         rr:predicate rdfs:isDefinedBy;
-        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI ];
     ];
 	rr:predicateObjectMap [
         rr:predicate rdfs:label, wdt:P2561;             # P2561 = name

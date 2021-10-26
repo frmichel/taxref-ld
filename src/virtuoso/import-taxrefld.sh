@@ -5,7 +5,7 @@
 CURRENT_DIR=$(pwd)
 DATASET_DIR=$CURRENT_DIR/../xR2RML
 ALIGN_DIR=$CURRENT_DIR/../alignments
-TAXREFVER=13.0
+
 
 # Static metadata graph
 graph="http://taxref.mnhn.fr/lod/graph/metadata"
@@ -25,47 +25,51 @@ graph="http://taxref.mnhn.fr/lod/graph/statuscodes"
 graph="http://taxref.mnhn.fr/lod/graph/media"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_media.ttl
 
-
-# Main content versioned graphs
-graph="http://taxref.mnhn.fr/lod/graph/interactions/${TAXREFVER}"
-./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_interactions.ttl
-
-graph="http://taxref.mnhn.fr/lod/graph/classes/${TAXREFVER}"
-./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_taxonomy_classes.ttl
-
-graph="http://taxref.mnhn.fr/lod/graph/concepts/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/concepts"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_taxonomy_concepts.ttl
 
-graph="http://taxref.mnhn.fr/lod/graph/statuses/${TAXREFVER}"
+
+
+# Main content versioned graphs
+graph="http://taxref.mnhn.fr/lod/graph/classes"
+./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_taxonomy_classes.ttl
+
+graph="http://taxref.mnhn.fr/lod/graph/habitats"
+./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_habitats.ttl
+
+graph="http://taxref.mnhn.fr/lod/graph/statuses"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_statuses.ttl
 
-graph="http://taxref.mnhn.fr/lod/graph/vernacular/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/vernacular"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_vernaculars.ttl
 
-graph="http://taxref.mnhn.fr/lod/graph/dbxref/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/interactions"
+./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_interactions.ttl
+
+graph="http://taxref.mnhn.fr/lod/graph/dbxref"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_externalIds_dbxref_%.ttl
 
-graph="http://taxref.mnhn.fr/lod/graph/webpages/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/webpages"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_externalIds_webpages.ttl
 
 
 # WoRMS links
-graph="http://taxref.mnhn.fr/lod/graph/links-worms/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-worms"
 ./virtuoso-import.sh --cleargraph --path $DATASET_DIR --graph $graph    Taxrefld_externalIds_worms.ttl
 
 
 # Calculated links
-graph="http://taxref.mnhn.fr/lod/graph/links-agrovoc/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-agrovoc"
 ./virtuoso-import.sh --cleargraph --path $ALIGN_DIR   --graph $graph    links-agrovoc.nt
 
-graph="http://taxref.mnhn.fr/lod/graph/links-geospecies/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-geospecies"
 ./virtuoso-import.sh --cleargraph --path $ALIGN_DIR   --graph $graph    links-geospecies.nt
 
-graph="http://taxref.mnhn.fr/lod/graph/links-ncbi/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-ncbi"
 ./virtuoso-import.sh --cleargraph --path $ALIGN_DIR   --graph $graph    links-ncbi.nt
 
-graph="http://taxref.mnhn.fr/lod/graph/links-taxonconcept/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-taxonconcept"
 ./virtuoso-import.sh --cleargraph --path $ALIGN_DIR   --graph $graph    links-taxonconcept.nt
 
-graph="http://taxref.mnhn.fr/lod/graph/links-vto/${TAXREFVER}"
+graph="http://taxref.mnhn.fr/lod/graph/links-vto"
 ./virtuoso-import.sh --cleargraph --path $ALIGN_DIR   --graph $graph    links-vto.nt

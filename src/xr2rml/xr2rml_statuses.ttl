@@ -37,7 +37,7 @@
 
 <#SM_Taxon>
     a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}".
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}".
 
 #=========================== Legal Status =============================
 

@@ -35,7 +35,7 @@
 
 <#SM_Taxon>
     a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.id}/{{TAXREFVER}}";
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.id}";
     rr:class owl:Class.
 
 

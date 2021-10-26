@@ -35,72 +35,80 @@
 
 <#LS>
     a xrr:LogicalSource;
-    xrr:query """db.media.find( {} )""".
+    xrr:query """db.biblio.find( {} )""";
+    xrr:uniqueRef "$.id" .
 
-<#TM_Taxon>
+<#SM>
+    a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/bib/{$.id}";
+    rr:class bibo:Document, schema:CreativeWork.
+
+<#TM>
     a rr:TriplesMap;
     xrr:logicalSource <#LS>;
-    rr:subjectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}" ];
+    rr:subjectMap <#SM>;
     rr:predicateObjectMap [
-        rr:predicate foaf:depiction;
-        rr:objectMap [ xrr:reference "$._links.file.href"; rr:termType rr:IRI ];
+        rr:predicate rdfs:isDefinedBy;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
-        rr:predicate schema:image;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/media/{$.id}" ];
-    ].
-    
-
-<#TM_Image>
-    a rr:TriplesMap;
-    xrr:logicalSource <#LS>;
-    rr:subjectMap [
-        rr:template "http://taxref.mnhn.fr/lod/media/{$.id}";
-        rr:class    schema:ImageObject;
+        rr:predicate dct:issued, schema:datePublished;
+        rr:objectMap [ xrr:reference "$.year"; rr:datatype xsd:gYear ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:bibliographicCitation;
+        rr:objectMap [ xrr:reference "$.fullCitation"; ];
     ];
     rr:predicateObjectMap [
         rr:predicate rdfs:label, dct:title;
-        rr:objectMap [ xrr:reference "$.title"; ];
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate schema:contentUrl;
-        rr:objectMap [ xrr:reference "$._links.file.href"; rr:termType rr:IRI ];
+        rr:objectMap [ xrr:reference "$.shortCitation"; ];
     ];
     rr:predicateObjectMap [
-        rr:predicate schema:thumbnail;
-        rr:objectMap [ xrr:reference "$._links.thumbnailFile.href"; rr:termType rr:IRI ];
+        rr:predicate bibo:doi;
+        rr:objectMap [ xrr:reference "$.doi"; ];
     ];
     rr:predicateObjectMap [
-        rr:predicate schema:encodingFormat;
-        rr:objectMap [ xrr:reference "$.mimeType"; ];
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate schema:copyrightHolder;
-        rr:objectMap [ rr:template "{$._links.self.href} - {$.copyright}"; rr:termType rr:BlankNode ];
+        rr:predicate schema:sameAs, foaf:page;
+        rr:objectMap [ xrr:reference "$.url"; rr:termType rr:IRI ];
+        rr:objectMap [ xrr:reference "$.zooBankUri"; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
-        rr:predicate dct:license, schema:license;
-        rr:objectMap [ xrr:reference "$.licenceUrl"; rr:termType rr:IRI ];
+        rr:predicate bibo:abstract, dct:abstract;
+        rr:objectMap [ xrr:reference "$.abstract" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "ZB_{$.zooBankId}"; rr:termType rr:BlankNode ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate schema:identifier;
+        rr:objectMap [ rr:template "DOI_{$.doi}"; rr:termType rr:BlankNode ];
     ];
     .
 
-
-<#TM_CopyrightHolder>
+<#TM_PropertyValue_ZB>
     a rr:TriplesMap;
     xrr:logicalSource <#LS>;
-    rr:subjectMap [
-        rr:template "{$._links.self.href} - {$.copyright}"; 
-        rr:termType rr:BlankNode;
-        rr:class    schema:Person;
+    rr:subjectMap [ rr:template "ZB_{$.zooBankId}"; rr:termType rr:BlankNode; rr:class schema:PropertyValue ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant wdt:P2007; rr:termType rr:IRI ];	# Zoobank publication id
     ];
     rr:predicateObjectMap [
-        rr:predicate schema:name;
-        rr:objectMap [ xrr:reference "$.copyright" ];
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.zooBankId" ];
+    ];
+    .
+<#TM_PropertyValue_DOI>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS>;
+    rr:subjectMap [ rr:template "DOI_{$.doi}"; rr:termType rr:BlankNode; rr:class schema:PropertyValue ];
+    rr:predicateObjectMap [
+        rr:predicate schema:propertyID;
+        rr:objectMap [ rr:constant wdt:P356; rr:termType rr:IRI ];	# DOI
     ];
     rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [ xrr:reference "$.copyright" ];
+        rr:predicate schema:value;
+        rr:objectMap [ xrr:reference "$.doi" ];
     ];
     .

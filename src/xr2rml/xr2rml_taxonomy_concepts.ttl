@@ -42,35 +42,42 @@
     xrr:query """db.taxonomy.find( { $where: 'this.id != this.referenceId' } )""";
     xrr:uniqueRef "$.id".
 
-<#SM_Taxon>
+<#SM_Name>
     a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.id}/{{TAXREFVER}}";
-    rr:class owl:Class.
+    rr:template "http://taxref.mnhn.fr/lod/name/{$.id}";
+    rr:class skos:Concept, tn:TaxonName.
 
 
-# Create a taxon for each reference name
-<#TM_Taxon>
+<#TM_Reference_Name>
     a rr:TriplesMap;
     xrr:logicalSource <#LS_ReferenceName>;
-    rr:subjectMap <#SM_Taxon>;
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
-        rr:predicate rdfs:isDefinedBy;
-        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate rdfs:subClassOf;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.parentId}/{{TAXREFVER}}" ];
+        rr:predicate skos:inScheme ;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
+        rr:objectMap [ xrr:reference "$.fullName"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate skos:prefLabel, dwc:scientificName, tn:nameComplete;
         rr:objectMap [ xrr:reference "$.scientificName"; ];
     ];
     rr:predicateObjectMap [
-        rr:predicate taxrefprop:hasReferenceName;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.id}"; ];
+        rr:predicate taxrefprop:hasAuthority;
+        rr:objectMap [ xrr:reference "$.authority"; ];
     ];
     rr:predicateObjectMap [
-        rr:predicate foaf:homepage, schema:mainEntityOfPage;
+        rr:predicate taxrefprop:isReferenceNameOf;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.id}"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate skos:broader;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.parentId}"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate foaf:page;
         rr:objectMap [ rr:template "https://inpn.mnhn.fr/espece/cd_nom/{$.id}?lg=en"; ];
     ];
     rr:predicateObjectMap [
@@ -79,447 +86,477 @@
     ];
 	.
 
-<#TM_Taxon_HasSynonym>
+
+<#TM_Synonym_Name>
     a rr:TriplesMap;
     xrr:logicalSource <#LS_SynonymName>;
-    rr:subjectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.referenceId}/{{TAXREFVER}}"; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
-        rr:predicate taxrefprop:hasSynonym;
-        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.id}" ];
-    ].
+        rr:predicate skos:inScheme ;
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [ xrr:reference "$.fullName"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate skos:prefLabel;
+        rr:objectMap [ xrr:reference "$.scientificName"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dwc:scientificName;
+        rr:objectMap [ xrr:reference "$.scientificName"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:hasAuthority;
+        rr:objectMap [ xrr:reference "$.authority"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate taxrefprop:isSynonymOf;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.referenceId}"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate foaf:page;
+        rr:objectMap [ rr:template "https://inpn.mnhn.fr/espece/cd_nom/{$.id}?lg=en"; ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dct:identifier;
+        rr:objectMap [ xrr:reference "$.id"; xsd:datatype xsd:string ];
+    ];
+	.
 
 
 # ---------------------------------------------------------------------------------
-# Taxonomical rank for taxa
+# Taxonomical rank for names
 # ---------------------------------------------------------------------------------
 
-<#TM_Taxon_TaxonomicalRank_SuperKingdom>
+<#TM_Name_TaxonomicalRank_SuperKingdom>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SPRG'} )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SPRG'} )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:superkingdom; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Kingdom>
+<#TM_Name_TaxonomicalRank_Kingdom>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'KD' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'KD' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:kingdom; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubKingdom>
+<#TM_Name_TaxonomicalRank_SubKingdom>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSRG' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSRG' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:subkingdom; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_InfraKingdom>
+<#TM_Name_TaxonomicalRank_InfraKingdom>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'IFRG' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'IFRG' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Infrakingdom; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Phylum>
+<#TM_Name_TaxonomicalRank_Phylum>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'PH' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'PH' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Phylum; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubPhylum>
+<#TM_Name_TaxonomicalRank_SubPhylum>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBPH' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBPH' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubPhylum; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_InfraPhylum>
+<#TM_Name_TaxonomicalRank_InfraPhylum>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'IFPH' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'IFPH' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:InfraPhylum; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Division>
+<#TM_Name_TaxonomicalRank_Division>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'DV' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'DV' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Division; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubDivision>
+<#TM_Name_TaxonomicalRank_SubDivision>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBDV' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBDV' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubDivision; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SuperClass>
+<#TM_Name_TaxonomicalRank_SuperClass>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SPCL' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SPCL' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SuperClass; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Cladus>
+<#TM_Name_TaxonomicalRank_Cladus>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'CLAD' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'CLAD' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Cladus; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Class>
+<#TM_Name_TaxonomicalRank_Class>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'CL' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'CL' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Class; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubClass>
+<#TM_Name_TaxonomicalRank_SubClass>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBCL' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBCL' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubClass; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_InfraClass>
+<#TM_Name_TaxonomicalRank_InfraClass>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'IFCL' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'IFCL' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:InfraClass; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Legio>
+<#TM_Name_TaxonomicalRank_Legio>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'LEG' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'LEG' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Legio; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SuperOrder>
+<#TM_Name_TaxonomicalRank_SuperOrder>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SPOR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SPOR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SuperOrder; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Cohorte>
+<#TM_Name_TaxonomicalRank_Cohorte>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'COH' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'COH' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Cohort; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Order>
+<#TM_Name_TaxonomicalRank_Order>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'OR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'OR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Order; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubOrder>
+<#TM_Name_TaxonomicalRank_SubOrder>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBOR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBOR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubOrder; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_InfraOrder>
+<#TM_Name_TaxonomicalRank_InfraOrder>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'IFOR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'IFOR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:InfraOrder; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SuperFamily>
+<#TM_Name_TaxonomicalRank_SuperFamily>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SPFM' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SPFM' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SuperFamily; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Family>
+<#TM_Name_TaxonomicalRank_Family>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'FM' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'FM' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Family; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubFamily>
+<#TM_Name_TaxonomicalRank_SubFamily>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBFM' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBFM' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubFamily; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Tribe>
+<#TM_Name_TaxonomicalRank_Tribe>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'TR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'TR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Tribe; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubTribe>
+<#TM_Name_TaxonomicalRank_SubTribe>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSTR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSTR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubTribe; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Genus>
+<#TM_Name_TaxonomicalRank_Genus>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'GN' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'GN' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Genus; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubGenus>
+<#TM_Name_TaxonomicalRank_SubGenus>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSGN' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSGN' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubGenus; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Section>
+<#TM_Name_TaxonomicalRank_Section>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SC' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SC' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Section; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubSection>
+<#TM_Name_TaxonomicalRank_SubSection>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SBSC' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SBSC' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubSection; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Series>
+<#TM_Name_TaxonomicalRank_Series>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SER' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SER' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Series; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubSeries>
+<#TM_Name_TaxonomicalRank_SubSeries>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSER' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSER' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubSeries; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Agregate>
+<#TM_Name_TaxonomicalRank_Agregate>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'AGES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'AGES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Agregate; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Species>
+<#TM_Name_TaxonomicalRank_Species>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'ES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'ES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Species; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SemiSpecies>
+<#TM_Name_TaxonomicalRank_SemiSpecies>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SMES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SMES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SemiSpecies; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_MicroSpecies>
+<#TM_Name_TaxonomicalRank_MicroSpecies>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'MES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'MES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:MicroSpecies; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubSpecies>
+<#TM_Name_TaxonomicalRank_SubSpecies>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubSpecies; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Natio>
+<#TM_Name_TaxonomicalRank_Natio>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'NAT' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'NAT' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Natio; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Varietas>
+<#TM_Name_TaxonomicalRank_Varietas>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'VAR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'VAR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Varietas; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubVarietas>
+<#TM_Name_TaxonomicalRank_SubVarietas>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SVAR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SVAR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubVarietas; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Forma>
+<#TM_Name_TaxonomicalRank_Forma>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'FO' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'FO' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Forma; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_SubForma>
+<#TM_Name_TaxonomicalRank_SubForma>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'SSFO' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'SSFO' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:SubForma; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_FormaSpecies>
+<#TM_Name_TaxonomicalRank_FormaSpecies>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'FOES' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'FOES' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:FormaSpecies; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Linea>
+<#TM_Name_TaxonomicalRank_Linea>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'LIN' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'LIN' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Linea; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Clone>
+<#TM_Name_TaxonomicalRank_Clone>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'CLO' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'CLO' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Clone; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Race>
+<#TM_Name_TaxonomicalRank_Race>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'RACE' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'RACE' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Race; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Cultivar>
+<#TM_Name_TaxonomicalRank_Cultivar>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'CAR' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'CAR' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Cultivar; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Morpha>
+<#TM_Name_TaxonomicalRank_Morpha>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'MO' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'MO' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Morpha; rr:termType rr:IRI; ];
     ].
 
-<#TM_Taxon_TaxonomicalRank_Abberation>
+<#TM_Name_TaxonomicalRank_Abberation>
     a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.taxonomy.find( {$where: 'this.id == this.referenceId', 'rankId' : 'AB' } )"""; ];
-    rr:subjectMap <#SM_Taxon>;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find( {'rankId' : 'AB' } )"""; ];
+    rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
         rr:objectMap [ rr:constant taxrefrk:Abberatio; rr:termType rr:IRI; ];

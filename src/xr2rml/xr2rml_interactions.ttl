@@ -66,8 +66,8 @@
     rr:template "http://taxref.mnhn.fr/lod/interact/{$.target.id}-{$.taxon.id}-{$.source.id}";
     rr:class <http://purl.org/biotop/biotop.owl#OrganismInteraction>, rdf:Statement.
 
-<#TPL_TAXON_SOURCE> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}/{{TAXREFVER}}".
-<#TPL_TAXON_TARGET> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}/{{TAXREFVER}}".
+<#TPL_TAXON_SOURCE> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}".
+<#TPL_TAXON_TARGET> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}".
 <#TPL_DOC>          rr:template "http://taxref.mnhn.fr/lod/bib/{$.source.id}".
 
 # See doc on https://taxref.mnhn.fr/taxref-web/api/doc about https://taxref.mnhn.fr/api/interactions/types

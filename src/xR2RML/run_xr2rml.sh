@@ -1,16 +1,15 @@
 #!/bin/bash
 # Input argument:
 # - arg1: data type
-# - arg2: TAXREF version
 #
 # Author: F. Michel, UCA, CNRS, Inria
 
 help()
 {
   exe=$(basename $0)
-  echo "Usage: $exe <data type> <TAXREF version>"
+  echo "Usage: $exe <data type>"
   echo "Call example:"
-  echo "   $exe biblio 12.0"
+  echo "   $exe biblio"
   exit 1
 }
 
@@ -20,14 +19,10 @@ XR2RML=$(pwd)
 DATATYPE=$1
 if [[ -z "$DATATYPE" ]] ; then help; fi
 
-TAXREFVER=$2
-if [[ -z "$TAXREFVER" ]] ; then help; fi
-
 log=logs/run_xr2rml_${DATATYPE}.log
 echo -n "" > $log
 
 # Substitute placeholders
-awk "{ gsub(/{{TAXREFVER}}/, \"$TAXREFVER\"); print }" $XR2RML/xr2rml_${DATATYPE}_tpl.ttl > $XR2RML/xr2rml_${DATATYPE}.ttl
 echo "-- xR2RML mapping file --" >> $log
 cat $XR2RML/xr2rml_${DATATYPE}.ttl >> $log
 

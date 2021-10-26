@@ -35,7 +35,7 @@
 
 <#SM_Taxon>
     a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}/{{TAXREFVER}}".
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}".
 
 
 #============== Direct link taxon --taxrefprop:vernacularName--> name    ===============
@@ -168,7 +168,7 @@
     rr:subjectMap <#SM_XLabel>;
     rr:predicateObjectMap [
         rr:predicate skos:inScheme ;
-        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld/{{TAXREFVER}}>; rr:termType rr:IRI ];
+        rr:objectMap [ rr:constant <http://taxref.mnhn.fr/lod/taxref-ld>; rr:termType rr:IRI ];
     ];
     rr:predicateObjectMap [
         rr:predicate dct:coverage, wdt:P3005;                 # (valid in place)
