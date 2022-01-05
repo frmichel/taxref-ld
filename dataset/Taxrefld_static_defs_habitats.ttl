@@ -32,52 +32,60 @@
 # --- Types of Habitat
 
 taxrefhab:Habitat
- rdfs:subClassOf skos:Concept;
- rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
- owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
- rdfs:label "Class of habitats"@en;
- dct:description "Class of types of habitat (subclass of skos:Concept)"@en.
+    rdfs:subClassOf skos:Concept;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
+    rdfs:label "Class of habitats"@en;
+    dct:description "Class of types of habitat (subclass of skos:Concept)"@en;
+    owl:deprecated "true"^^xsd:boolean.
+
+
+taxrefhab:HabitatCollection
+    a skos:Collection;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Collection of habitat concepts"@en;
+    skos:member taxrefhab:Marine, taxrefhab:FreshWater, taxrefhab:BrackishWater, taxrefhab:Terrestrial.
 
 taxrefhab:Marine
- a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "Marine habitat"@en;
- skos:prefLabel "Marine habitat"@en;
- skos:prefLabel "Milieu marin"@fr;
- skos:definition "Species living exclusively in marine habitat"@en;
- skos:definition "Espèces vivant uniquement en milieu marin"@fr;
- skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002149>;
- skos:relatedMatch <http://purl.obolibrary.org/obo/ENVO_01000320>;
- skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#MarineHabitat>.
+    a skos:Concept;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Marine habitat"@en;
+    skos:prefLabel "Marine habitat"@en;
+    skos:prefLabel "Milieu marin"@fr;
+    skos:definition "Species living exclusively in marine habitat"@en;
+    skos:definition "Espèces vivant uniquement en milieu marin"@fr;
+    skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002149>;
+    skos:relatedMatch <http://purl.obolibrary.org/obo/ENVO_01000320>;
+    skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#MarineHabitat>.
 
 taxrefhab:FreshWater
- a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "Freshwater"@en;
- skos:prefLabel "Freshwater"@en;
- skos:prefLabel "Eau douce"@fr;
- skos:definition "Species living exclusively in freshwater"@en;
- skos:definition "Espèces vivant uniquement en eau douce"@fr;
- skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002011>;
- skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#FreshwaterHabitat>.
+    a skos:Concept;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Freshwater"@en;
+    skos:prefLabel "Freshwater"@en;
+    skos:prefLabel "Eau douce"@fr;
+    skos:definition "Species living exclusively in freshwater"@en;
+    skos:definition "Espèces vivant uniquement en eau douce"@fr;
+    skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002011>;
+    skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#FreshwaterHabitat>.
 
 taxrefhab:BrackishWater
- a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "Brackish water"@en;
- skos:prefLabel "Brackish water"@en;
- skos:prefLabel "Eau saumâtre"@fr;
- skos:definition "Species living exclusively in brackish water"@en;
- skos:definition "Espèces vivant uniquement en eau saumâtre"@fr;
- skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002019>.
+    a skos:Concept;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Brackish water"@en;
+    skos:prefLabel "Brackish water"@en;
+    skos:prefLabel "Eau saumâtre"@fr;
+    skos:definition "Species living exclusively in brackish water"@en;
+    skos:definition "Espèces vivant uniquement en eau saumâtre"@fr;
+    skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00002019>.
 
 taxrefhab:Terrestrial
- a taxrefhab:Habitat;
- skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "Terrestrial"@en;
- skos:prefLabel "Terrestrial"@en;
- skos:prefLabel "Terrestre"@fr;
- skos:definition "Species living exclusively in terrestrial habitat"@en;
- skos:definition "Espèces vivant uniquement en milieu terrestre"@fr;
- skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00000446>;
- skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#TerrestrialHabitat>.
+    a skos:Concept;
+    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Terrestrial"@en;
+    skos:prefLabel "Terrestrial"@en;
+    skos:prefLabel "Terrestre"@fr;
+    skos:definition "Species living exclusively in terrestrial habitat"@en;
+    skos:definition "Espèces vivant uniquement en milieu terrestre"@fr;
+    skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00000446>;
+    skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#TerrestrialHabitat>.

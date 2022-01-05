@@ -57,7 +57,7 @@ taxrefstatus:LegalStatus
     rdfs:comment "To be used jointly with http://taxref.mnhn.fr/lod/status/TaxonStatusType whose narrower concepts represent directives, conventions, regulations or protections"@en.
     
     
-#------------------ Types of taxon statuses -------------------
+#------------------ Types of taxon legal statuses -------------------
 
 taxrefstatus:TaxonStatusType
     a skos:Concept;
@@ -127,12 +127,20 @@ taxrefstatus:Protection
 
 taxrefbgs:BioGeographicalStatus
  rdfs:subClassOf skos:Concept;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Class of biogeographical status values"@en;
- dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en.
- 
+ dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en;
+ owl:deprecated "true"^^xsd:boolean.
+
+
+taxrefbgs:BioGeographicalStatusCollection
+    a skos:Collection;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Collection of biogeographical status values"@en;
+    skos:member taxrefbgs:P, taxrefbgs:B, taxrefbgs:E, taxrefbgs:S, taxrefbgs:C, taxrefbgs:I, taxrefbgs:J, taxrefbgs:M, taxrefbgs:D, taxrefbgs:A, taxrefbgs:W, taxrefbgs:X, taxrefbgs:Y, taxrefbgs:Z, taxrefbgs:Q.
+
 taxrefbgs:P
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "présent (indigène ou indéterminé)"@fr;
  rdfs:label "present"@en;
@@ -142,7 +150,7 @@ taxrefbgs:P
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Native>.
 
 taxrefbgs:B
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "occasionnel"@fr;
  rdfs:label "occasional"@en;
@@ -151,7 +159,7 @@ taxrefbgs:B
  skos:closeMatch <http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus_rare>.
 
 taxrefbgs:E
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "endémique"@fr;
  rdfs:label "endemic"@en;
@@ -159,7 +167,7 @@ taxrefbgs:E
  skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Endemic>.
 
 taxrefbgs:S
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "subendémique"@fr;
  rdfs:label "subendemic"@en;
@@ -167,7 +175,7 @@ taxrefbgs:S
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Endemic>.
 
 taxrefbgs:C
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "cryptogène"@fr;
  rdfs:label "cryptogenic"@en;
@@ -176,7 +184,7 @@ taxrefbgs:C
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#DoubtfullyIntroduced>.
 
 taxrefbgs:I
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Introduit"@fr;
  rdfs:label "Introduced"@en;
@@ -185,7 +193,7 @@ taxrefbgs:I
  skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Naturalized>.
 
 taxrefbgs:J
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit envahissant"@fr;
  rdfs:label "introduced invasive"@en;
@@ -194,7 +202,7 @@ taxrefbgs:J
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Naturalized>.
 
 taxrefbgs:M
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit non établi (dont domestique)"@fr;
  rdfs:label "introduced casual"@en;
@@ -204,7 +212,7 @@ taxrefbgs:M
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#CasualAlien>.
 
 taxrefbgs:D
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "douteux"@fr;
  rdfs:label "doubtful"@en;
@@ -213,7 +221,7 @@ taxrefbgs:D
  skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus_doubtful>.
 
 taxrefbgs:A
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "absent"@fr;
  rdfs:label "absent"@en;
@@ -221,7 +229,7 @@ taxrefbgs:A
  skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#OccurrenceStatus_absent>.
 
 taxrefbgs:W
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "disparu"@fr;
  rdfs:label "disappeared"@en;
@@ -229,7 +237,7 @@ taxrefbgs:W
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
 
 taxrefbgs:X
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "éteint"@fr;
  rdfs:label "extinct"@en;
@@ -238,7 +246,7 @@ taxrefbgs:X
  skos:exactMatch wd:Q237350.
 
 taxrefbgs:Y
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "introduit éteint/disparu"@fr;
  rdfs:label "introduced extinct/disappeared"@en;
@@ -247,7 +255,7 @@ taxrefbgs:Y
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
 
 taxrefbgs:Z
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "endémique éteint"@fr;
  rdfs:label "endemic extinct"@en;
@@ -256,7 +264,7 @@ taxrefbgs:Z
  skos:relatedMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#Extinct>.
 
 taxrefbgs:Q
- a taxrefbgs:BioGeographicalStatus;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "mentionné par erreur "@fr;
  rdfs:label "reported in error"@en;

@@ -36,10 +36,18 @@ taxrefrk:TaxonomicRank
  rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  owl:equivalentClass <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>;
  rdfs:label "Class of taxonomical ranks"@en;
- dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en.
+ dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en;
+ owl:deprecated "true"^^xsd:boolean.
+
+
+taxrefrk:TaxonomicRankCollection
+ a skos:Collection;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Collection of taxonomical ranks"@en;
+ skos:member taxrefrk:Domain.
  
 taxrefrk:Domain
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Domain"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankDomain>;
@@ -49,7 +57,7 @@ taxrefrk:Domain
  .
  
 taxrefrk:Superkingdom
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Super-kingdom"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperkingdom>;
@@ -58,7 +66,7 @@ taxrefrk:Superkingdom
  .
 
 taxrefrk:Kingdom
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Kingdom"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankKingdom>;
@@ -69,7 +77,7 @@ taxrefrk:Kingdom
  .
 
 taxrefrk:SubKingdom
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-kingdom"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubkingdom>;
@@ -80,7 +88,7 @@ taxrefrk:SubKingdom
  .
 
 taxrefrk:InfraKingdom
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Infra-kingdom"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000044>;
@@ -89,7 +97,7 @@ taxrefrk:InfraKingdom
  .
 
 taxrefrk:Phylum
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Phylum"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankPhylum>;
@@ -100,7 +108,7 @@ taxrefrk:Phylum
  .
 
 taxrefrk:SubPhylum
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-phylum"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubphylum>;
@@ -111,7 +119,7 @@ taxrefrk:SubPhylum
  .
 
 taxrefrk:InfraPhylum
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Infra-phylum"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000040>;
@@ -119,7 +127,7 @@ taxrefrk:InfraPhylum
  .
 
 taxrefrk:Division
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Division"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankDivision>;
@@ -127,7 +135,7 @@ taxrefrk:Division
  .
 
 taxrefrk:SubDivision
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-division"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankRankSubdivision>;
@@ -135,7 +143,7 @@ taxrefrk:SubDivision
  .
 
 taxrefrk:SuperClass
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Super-class"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperclass>;
@@ -145,12 +153,12 @@ taxrefrk:SuperClass
  .
 
 taxrefrk:Cladus
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Cladus"@en.
 
 taxrefrk:Class
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Class"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankClass>;
@@ -161,7 +169,7 @@ taxrefrk:Class
  .
 
 taxrefrk:SubClass
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-class"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubclass>;
@@ -172,7 +180,7 @@ taxrefrk:SubClass
  .
 
 taxrefrk:InfraClass
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Infra-class"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraclass>;
@@ -182,12 +190,12 @@ taxrefrk:InfraClass
  .
 
 taxrefrk:Legio
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Legio"@en.
 
 taxrefrk:SuperOrder
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Super-order"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperorder>;
@@ -197,12 +205,12 @@ taxrefrk:SuperOrder
  .
 
 taxrefrk:Cohort
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Cohort"@en.
 
 taxrefrk:Order
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Order"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankOrder>;
@@ -213,7 +221,7 @@ taxrefrk:Order
  .
  
 taxrefrk:SubOrder
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-order"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuborder>;
@@ -224,7 +232,7 @@ taxrefrk:SubOrder
  .
  
 taxrefrk:InfraOrder
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Infra-order"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankInfraorder>;
@@ -235,7 +243,7 @@ taxrefrk:InfraOrder
  .
  
 taxrefrk:SuperFamily
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Super-family"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSuperfamily>;
@@ -245,7 +253,7 @@ taxrefrk:SuperFamily
  .
 
 taxrefrk:Family
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Family"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankFamily>;
@@ -256,7 +264,7 @@ taxrefrk:Family
  .
 
 taxrefrk:SubFamily
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-family"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubfamily>;
@@ -267,7 +275,7 @@ taxrefrk:SubFamily
  .
 
 taxrefrk:Tribe
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Tribe"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankTribe>;
@@ -277,7 +285,7 @@ taxrefrk:Tribe
  .
 
 taxrefrk:SubTribe
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-tribe"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_subtribe>;
@@ -286,7 +294,7 @@ taxrefrk:SubTribe
  .
 
 taxrefrk:Genus
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Genus"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankGenus>;
@@ -297,7 +305,7 @@ taxrefrk:Genus
  .
 
 taxrefrk:SubGenus
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-genus"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubgenus>;
@@ -308,7 +316,7 @@ taxrefrk:SubGenus
  .
 
 taxrefrk:Section
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Section"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000030>;
@@ -317,7 +325,7 @@ taxrefrk:Section
  .
 
 taxrefrk:SubSection
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-section"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000053>;
@@ -326,7 +334,7 @@ taxrefrk:SubSection
  .
 
 taxrefrk:Series
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Series"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000031>;
@@ -334,7 +342,7 @@ taxrefrk:Series
  .
 
 taxrefrk:SubSeries
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-series"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000054>;
@@ -342,14 +350,14 @@ taxrefrk:SubSeries
  .
 
 taxrefrk:Agregate
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Agregate"@en;
  skos:exactMatch <http://rs.tdwg.org/ontology/voc/TaxonRank#SpeciesAggregate>;
  .
 
 taxrefrk:Species
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Species"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSpecies>;
@@ -360,17 +368,17 @@ taxrefrk:Species
  .
 
 taxrefrk:SemiSpecies
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Semi-species"@en.
 
 taxrefrk:MicroSpecies
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Micro-species"@en.
 
 taxrefrk:SubSpecies
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-species"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankSubpecies>;
@@ -381,12 +389,12 @@ taxrefrk:SubSpecies
  .
 
 taxrefrk:Natio
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Natio"@en.
 
 taxrefrk:Varietas
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Varietas"@en;
  skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#RankVariety>;
@@ -396,7 +404,7 @@ taxrefrk:Varietas
  .
 
 taxrefrk:SubVarietas
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-varietas"@en;
  skos:exactMatch <http://rdf.geospecies.org/ont/geospecies#TaxonRank_subvariety>;
@@ -404,7 +412,7 @@ taxrefrk:SubVarietas
  .
 
 taxrefrk:Forma
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Forma"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/NCBITaxon_forma>;
@@ -414,7 +422,7 @@ taxrefrk:Forma
  .
 
 taxrefrk:SubForma
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Sub-forma"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000059>;
@@ -423,27 +431,27 @@ taxrefrk:SubForma
  .
 
 taxrefrk:FormaSpecies
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Forma species"@en.
 
 taxrefrk:Linea
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Linea"@en.
 
 taxrefrk:Clone
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Clone"@en.
 
 taxrefrk:Race
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Race"@en.
 
 taxrefrk:Cultivar
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Cultivar"@en;
  skos:exactMatch <http://purl.obolibrary.org/obo/TAXRANK_0000034>;
@@ -452,11 +460,11 @@ taxrefrk:Cultivar
  .
 
 taxrefrk:Morpha
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Morpha"@en.
 
 taxrefrk:Abberatio
- a taxrefrk:TaxonomicRank;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Abberatio"@en.
