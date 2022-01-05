@@ -27,6 +27,7 @@
 @prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
 @prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
 @prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+@prefix taxrefspec:     <http://taxref.mnhn.fr/lod/specificity/>.
 
 @prefix xrr:            <http://i3s.unice.fr/xr2rml#> .
 @prefix rr:             <http://www.w3.org/ns/r2rml#> .
@@ -55,106 +56,152 @@
 # PREDATEUR       http://purl.obolibrary.org/obo/RO_0002439   preys on
 #                 http://purl.obolibrary.org/obo/RO_0002458   preyed upon by
 
+# MANDATORY       http://purl.obolibrary.org/obo/NCIT_C25652
+# PRINCIPAL       http://purl.obolibrary.org/obo/NCIT_C25628
+# REGULAR         http://purl.obolibrary.org/obo/NCIT_C102843
+# OPTIONAL        http://purl.obolibrary.org/obo/NCIT_C25603
+# SPORADIC        http://purl.obolibrary.org/obo/NCIT_C64954
+
 # GALLES: almost a ternary relation: A induces GALL on B
 # Unused relations in the current data: MUTUEl, ENDOSYMBIOTE, PHORETIC
 
 
-<#SM_INTERACTION> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/interact/{$.taxon.id}-{$.target.id}-{$.source.id}";
+<#SM_Interaction> a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/interact/{$.taxon.id}-{$.target.id}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
     rr:class <http://purl.org/biotop/biotop.owl#OrganismInteraction>, rdf:Statement.
-<#SM_INTERACTION_INV> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/interact/{$.target.id}-{$.taxon.id}-{$.source.id}";
+<#SM_Interaction_Inv> a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/interact/{$.target.id}-{$.taxon.id}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
     rr:class <http://purl.org/biotop/biotop.owl#OrganismInteraction>, rdf:Statement.
 
-<#TPL_TAXON_SOURCE> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}".
-<#TPL_TAXON_TARGET> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}".
-<#TPL_DOC>          rr:template "http://taxref.mnhn.fr/lod/bib/{$.source.id}".
+# Standard taxa URIs: involved in interactions without biological stage or sex
+<#TPL_Taxon_Source> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}".
+<#TPL_Taxon_Target> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}".
+
+# Extended taxa URIS: involved in interactions with biological stage and/or sex
+<#TPL_Taxon_Source_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}_sha1({$.taxonStage}_{$.taxonSex})".
+<#TPL_Taxon_Target_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}_sha1({$.targetStage})".
+
+<#TPL_Doc> rr:template "http://taxref.mnhn.fr/lod/bib/{$.source.id}".
+
+
+# ------------------------------------------------
+# Set interaction specificity
+
+<#Specificity_Mandatory> a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.interactions.find({ 'specificity': 'obligatoire'})""" ];
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate taxrefprop:hasSpecificity; rr:objectMap [ rr:constant taxrefspec:Mandatory; rr:termType rr:IRI ]].
+
+<#Specificity_Principal> a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.interactions.find({ 'specificity': 'principale'})""" ];
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate taxrefprop:hasSpecificity; rr:objectMap [ rr:constant taxrefspec:Principal; rr:termType rr:IRI ]].
+
+<#Specificity_Regular> a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.interactions.find({ 'specificity': 'régulière'})""" ];
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate taxrefprop:hasSpecificity; rr:objectMap [ rr:constant taxrefspec:Regular; rr:termType rr:IRI ]].
+
+<#Specificity_Optional> a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.interactions.find({ 'specificity': 'facultative'})""" ];
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate taxrefprop:hasSpecificity; rr:objectMap [ rr:constant taxrefspec:Optional; rr:termType rr:IRI ]].
+
+<#Specificity_Sporadic> a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.interactions.find({ 'specificity': 'occasionnelle / exceptionnelle'})""" ];
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate taxrefprop:hasSpecificity; rr:objectMap [ rr:constant taxrefspec:Sporadic; rr:termType rr:IRI ]].
+
+# ========================================================================================
+# Case where SOURCE and TARGET taxa have no biological stage nor sex
+# ========================================================================================
 
 # See doc on https://taxref.mnhn.fr/taxref-web/api/doc about https://taxref.mnhn.fr/api/interactions/types
-<#LS_ASSOCIE>       xrr:query """db.interactions.find( { 'relationId': 'ASSOCIE' } )""".
-<#LS_COMMENSAL>     xrr:query """db.interactions.find( { 'relationId': 'COMMENSAL' } )""".
-<#LS_DISPERSEUR>    xrr:query """db.interactions.find( { 'relationId': 'DISPERSEUR' } )""".
-<#LS_ECTOPARASITE>  xrr:query """db.interactions.find( { 'relationId': 'ECTOPARASITE' } )""".
-<#LS_ENDOPARASITE>  xrr:query """db.interactions.find( { 'relationId': 'ENDOPARASITE' } )""".
-<#LS_ENDOSYMBIOTE>  xrr:query """db.interactions.find( { 'relationId': 'ENDOSYMBIOTE' } )""".
-<#LS_GALLES>        xrr:query """db.interactions.find( { 'relationId': 'GALLES' } )""".
-<#LS_MUTUEL>        xrr:query """db.interactions.find( { 'relationId': 'MUTUEL' } )""".
-<#LS_NUTRIMENT>     xrr:query """db.interactions.find( { 'relationId': 'NUTRIMENT' } )""".
-<#LS_PARASITE>      xrr:query """db.interactions.find( { 'relationId': 'PARASITE' } )""".
-<#LS_PARASITOIDE>   xrr:query """db.interactions.find( { 'relationId': 'PARASITOIDE' } )""".
-<#LS_PHORETIC>      xrr:query """db.interactions.find( { 'relationId': 'PHORETIC' } )""".
-<#LS_POLLINISATEUR> xrr:query """db.interactions.find( { 'relationId': 'POLLINISATEUR' } )""".
-<#LS_PREDATEUR>     xrr:query """db.interactions.find( { 'relationId': 'PREDATEUR' } )""".
+<#LS_ASSOCIE>       xrr:query """db.interactions.find({$and: [{'relationId': 'ASSOCIE'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_COMMENSAL>     xrr:query """db.interactions.find({$and: [{'relationId': 'COMMENSAL'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_DISPERSEUR>    xrr:query """db.interactions.find({$and: [{'relationId': 'DISPERSEUR'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_ECTOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ECTOPARASITE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_ENDOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOPARASITE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_ENDOSYMBIOTE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOSYMBIOTE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_GALLES>        xrr:query """db.interactions.find({$and: [{'relationId': 'GALLES'},        {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_MUTUEL>        xrr:query """db.interactions.find({$and: [{'relationId': 'MUTUEL'},        {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_NUTRIMENT>     xrr:query """db.interactions.find({$and: [{'relationId': 'NUTRIMENT'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_PARASITE>      xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITE'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_PARASITOIDE>   xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITOIDE'},   {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_PHORETIC>      xrr:query """db.interactions.find({$and: [{'relationId': 'PHORETIC'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_POLLINISATEUR> xrr:query """db.interactions.find({$and: [{'relationId': 'POLLINISATEUR'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_PREDATEUR>     xrr:query """db.interactions.find({$and: [{'relationId': 'PREDATEUR'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+
 
 # -------------------------------------------------------------------------
 # Is associated with (symbiotically interacts with)
 
-<#Associate_Direct> a rr:TriplesMap;
+<#ASSOCIATE_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_ASSOCIE>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Target>; ].
     
-<#Assciate_Direct_Inv> a rr:TriplesMap;
+<#ASSOCIATE_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ASSOCIE>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Source>; ].
     
-<#Assciate_Reif> a rr:TriplesMap;
+<#ASSOCIATE_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_ASSOCIE>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];        # stated in
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];        # stated in
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
 
-<#Assciate_Reif_Inv> a rr:TriplesMap;
+<#ASSOCIATE_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ASSOCIE>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} symbiotically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Commensal of
 
 <#COMMENSAL_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_COMMENSAL>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#COMMENSAL_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_COMMENSAL>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#COMMENSAL_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_COMMENSAL>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#COMMENSAL_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_COMMENSAL>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} commensually interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 
 # -------------------------------------------------------------------------
@@ -162,70 +209,70 @@
 
 <#ECTOPARASITE_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_ECTOPARASITE>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002632; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002632; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#ECTOPARASITE_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ECTOPARASITE>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002633; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002633; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#ECTOPARASITE_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_ECTOPARASITE>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "ectoparasite of (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#ECTOPARASITE_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ECTOPARASITE>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has ectoparasite (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002633; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Endoparasite of
 
 <#ENDOPARASITE_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_ENDOPARASITE>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002634; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002634; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#ENDOPARASITE_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ENDOPARASITE>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002635; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002635; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#ENDOPARASITE_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_ENDOPARASITE>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "endoparasite of (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002634; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is endoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} is endoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#ENDOPARASITE_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_ENDOPARASITE>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has endoparasite (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002635; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
     
 
 # -------------------------------------------------------------------------
@@ -233,227 +280,1398 @@
 
 <#MUTUEL_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_MUTUEL>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#MUTUEL_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_MUTUEL>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#MUTUEL_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_MUTUEL>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#MUTUEL_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_MUTUEL>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} mutualistically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Acquires nutrient from
 
 <#Nutriment_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_NUTRIMENT>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002457; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002457; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#Nutriment_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_NUTRIMENT>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002469; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002469; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#Nutriment_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_NUTRIMENT>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "acquires nutrients from (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002457; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} acquires nutrients from {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} acquires nutrients from {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#Nutriment_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_NUTRIMENT>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "provides nutrients for (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002469; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Parasite of
 
 <#Parasite_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITE>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002444; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002444; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#Parasite_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITE>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002445; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002445; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#Parasite_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITE>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasite of (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002444; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is parasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} is parasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#Parasite_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITE>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitized by (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002445; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Parasitoide of
 
 <#PARASITOIDE_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITOIDE>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002208; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002208; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#PARASITOIDE_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITOIDE>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002209; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002209; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#PARASITOIDE_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITOIDE>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitoid of (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002208; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is parasitoid of {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} is parasitoid of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#PARASITOIDE_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PARASITOIDE>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has parasitoid (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002209; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Phoretic of (transports)
 
 <#PHORETIC_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_PHORETIC>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002020; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002020; rr:objectMap <#TPL_Taxon_Target>; ].
 
 <#PHORETIC_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_PHORETIC>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "phoretic of (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002020; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} is phoretic of {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} is phoretic of {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 # -------------------------------------------------------------------------
 # Pollinates
 
 <#POLLINISATEUR_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_POLLINISATEUR>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002455; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002455; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#POLLINISATEUR_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_POLLINISATEUR>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002456; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002456; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#POLLINISATEUR_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_POLLINISATEUR>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinates (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002455; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} pollinates {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} pollinates {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#POLLINISATEUR_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_POLLINISATEUR>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinated by (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002456; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
     
 # -------------------------------------------------------------------------
 # Preys on
 
 <#PREDATEUR_Direct> a rr:TriplesMap;
     xrr:logicalSource <#LS_PREDATEUR>;
-    rr:subjectMap <#TPL_TAXON_SOURCE>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002439; rr:objectMap <#TPL_TAXON_TARGET>; ].
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002439; rr:objectMap <#TPL_Taxon_Target>; ].
     
 <#PREDATEUR_Direct_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PREDATEUR>;
-    rr:subjectMap <#TPL_TAXON_TARGET>;
-    rr:predicateObjectMap [ rr:predicate ro:RO_0002458; rr:objectMap <#TPL_TAXON_SOURCE>; ].
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002458; rr:objectMap <#TPL_Taxon_Source>; ].
     
 <#PREDATEUR_Reif> a rr:TriplesMap;
     xrr:logicalSource <#LS_PREDATEUR>;
-    rr:subjectMap <#SM_INTERACTION>;
+    rr:subjectMap <#SM_Interaction>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preys on (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002439; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.taxon.scientificName} preys on {$.target.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.taxon.scientificName} preys on {$.target.scientificName}"; rr:termType rr:Literal ]].
 
 <#PREDATEUR_Reif_Inv> a rr:TriplesMap;
     xrr:logicalSource <#LS_PREDATEUR>;
-    rr:subjectMap <#SM_INTERACTION_INV>;
+    rr:subjectMap <#SM_Interaction_Inv>;
     rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preyed upon by (statement)" ];
-    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_DOC> ];
-    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_TAXON_TARGET> ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
     rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002458; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_TAXON_SOURCE> ];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
     rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
-        rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+
+# ========================================================================================
+# Case where both SOURCE and TARGET taxa have biological stage and/or sex
+# ========================================================================================
+
+<#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_DISPERSEUR_EXTENDED_SOURCE_AND_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_GALLES_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PHORETIC_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+
+# -------------------------------------------------------------------------
+# Is associated with (symbiotically interacts with)
+
+<#ASSOCIATE_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ASSOCIATE_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ASSOCIATE_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];        # stated in
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ASSOCIATE_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} symbiotically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Commensal of
+
+<#COMMENSAL_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#COMMENSAL_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#COMMENSAL_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#COMMENSAL_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} commensually interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+
+# -------------------------------------------------------------------------
+# Ectoparasite of
+
+<#ECTOPARASITE_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002632; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ECTOPARASITE_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002633; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ECTOPARASITE_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "ectoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ECTOPARASITE_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has ectoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002633; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Endoparasite of
+
+<#ENDOPARASITE_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002634; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ENDOPARASITE_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002635; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ENDOPARASITE_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "endoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002634; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is endoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ENDOPARASITE_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has endoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002635; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+
+# -------------------------------------------------------------------------
+# Mutualistically interacts with
+
+<#MUTUEL_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#MUTUEL_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#MUTUEL_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#MUTUEL_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} mutualistically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Acquires nutrient from
+
+<#Nutriment_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002457; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#Nutriment_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002469; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#Nutriment_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "acquires nutrients from (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002457; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} acquires nutrients from {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Nutriment_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "provides nutrients for (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002469; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasite of
+
+<#Parasite_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002444; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#Parasite_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002445; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#Parasite_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002444; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Parasite_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitized by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002445; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasitoide of
+
+<#PARASITOIDE_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002208; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#PARASITOIDE_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002209; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#PARASITOIDE_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitoid of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002208; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasitoid of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PARASITOIDE_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has parasitoid (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002209; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Phoretic of (transports)
+
+<#PHORETIC_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002020; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+
+<#PHORETIC_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "phoretic of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002020; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is phoretic of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Pollinates
+
+<#POLLINISATEUR_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002455; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#POLLINISATEUR_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002456; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#POLLINISATEUR_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinates (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002455; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} pollinates {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#POLLINISATEUR_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinated by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002456; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+# -------------------------------------------------------------------------
+# Preys on
+
+<#PREDATEUR_Direct_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002439; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#PREDATEUR_Direct_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002458; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#PREDATEUR_Reif_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preys on (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002439; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} preys on {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PREDATEUR_Reif_Inv_Ext_Source_And_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preyed upon by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002458; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# ========================================================================================
+# Case where only SOURCE taxon has biological stage and/or sex
+# ========================================================================================
+
+<#LS_ASSOCIE_EXTENDED_SOURCE>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': '' }]})""".
+<#LS_COMMENSAL_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_DISPERSEUR_EXTENDED_SOURCE>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_ECTOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_ENDOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_GALLES_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_MUTUEL_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_NUTRIMENT_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_PARASITE_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_PARASITOIDE_EXTENDED_SOURCE>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_PHORETIC_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_POLLINISATEUR_EXTENDED_SOURCE>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_PREDATEUR_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+
+# -------------------------------------------------------------------------
+# Is associated with (symbiotically interacts with)
+
+<#ASSOCIATE_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#ASSOCIATE_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ASSOCIATE_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];        # stated in
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ASSOCIATE_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} symbiotically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Commensal of
+
+<#COMMENSAL_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#COMMENSAL_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#COMMENSAL_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#COMMENSAL_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} commensually interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+
+# -------------------------------------------------------------------------
+# Ectoparasite of
+
+<#ECTOPARASITE_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002632; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#ECTOPARASITE_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002633; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ECTOPARASITE_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "ectoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ECTOPARASITE_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has ectoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002633; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Endoparasite of
+
+<#ENDOPARASITE_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002634; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#ENDOPARASITE_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002635; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#ENDOPARASITE_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "endoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002634; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is endoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ENDOPARASITE_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has endoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002635; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+
+# -------------------------------------------------------------------------
+# Mutualistically interacts with
+
+<#MUTUEL_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#MUTUEL_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#MUTUEL_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#MUTUEL_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} mutualistically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Acquires nutrient from
+
+<#Nutriment_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002457; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#Nutriment_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002469; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#Nutriment_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "acquires nutrients from (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002457; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} acquires nutrients from {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Nutriment_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "provides nutrients for (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002469; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasite of
+
+<#Parasite_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002444; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#Parasite_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002445; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#Parasite_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002444; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Parasite_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitized by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002445; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasitoide of
+
+<#PARASITOIDE_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002208; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#PARASITOIDE_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002209; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#PARASITOIDE_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitoid of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002208; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasitoid of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PARASITOIDE_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has parasitoid (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002209; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Phoretic of (transports)
+
+<#PHORETIC_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002020; rr:objectMap <#TPL_Taxon_Target>; ].
+
+<#PHORETIC_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "phoretic of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002020; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is phoretic of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Pollinates
+
+<#POLLINISATEUR_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002455; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#POLLINISATEUR_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002456; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#POLLINISATEUR_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinates (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002455; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} pollinates {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#POLLINISATEUR_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinated by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002456; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+# -------------------------------------------------------------------------
+# Preys on
+
+<#PREDATEUR_Direct_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Source_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002439; rr:objectMap <#TPL_Taxon_Target>; ].
+    
+<#PREDATEUR_Direct_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#TPL_Taxon_Target>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002458; rr:objectMap <#TPL_Taxon_Source_Extd>; ].
+    
+<#PREDATEUR_Reif_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preys on (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002439; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} preys on {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PREDATEUR_Reif_Inv_Ext_Source> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_SOURCE>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preyed upon by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002458; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# ========================================================================================
+# Case where only TARGET taxon has biological stage and/or sex
+# ========================================================================================
+
+<#LS_ASSOCIE_EXTENDED_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_COMMENSAL_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_DISPERSEUR_EXTENDED_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ECTOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ENDOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_GALLES_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_MUTUEL_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_NUTRIMENT_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PARASITE_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PARASITOIDE_EXTENDED_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PHORETIC_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_POLLINISATEUR_EXTENDED_TARGET>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_PREDATEUR_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+
+# -------------------------------------------------------------------------
+# Is associated with (symbiotically interacts with)
+
+<#ASSOCIATE_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ASSOCIATE_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002440; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#ASSOCIATE_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];        # stated in
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} symbiotically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ASSOCIATE_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ASSOCIE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "symbiotically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002440; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} symbiotically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Commensal of
+
+<#COMMENSAL_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#COMMENSAL_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002441; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#COMMENSAL_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} commensually interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#COMMENSAL_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_COMMENSAL_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "commensually interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002441; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} commensually interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+
+# -------------------------------------------------------------------------
+# Ectoparasite of
+
+<#ECTOPARASITE_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002632; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ECTOPARASITE_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002633; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#ECTOPARASITE_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "ectoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002632; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is ectoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ECTOPARASITE_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ECTOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has ectoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002633; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has ectoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Endoparasite of
+
+<#ENDOPARASITE_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002634; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#ENDOPARASITE_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002635; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#ENDOPARASITE_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "endoparasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002634; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is endoparasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#ENDOPARASITE_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_ENDOPARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has endoparasite (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002635; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has endoparasite {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+
+# -------------------------------------------------------------------------
+# Mutualistically interacts with
+
+<#MUTUEL_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#MUTUEL_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002442; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#MUTUEL_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} mutualistically interacts with {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#MUTUEL_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_MUTUEL_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "mutualistically interacts with (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002442; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} mutualistically interacts with {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Acquires nutrient from
+
+<#Nutriment_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002457; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#Nutriment_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002469; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#Nutriment_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "acquires nutrients from (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002457; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} acquires nutrients from {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Nutriment_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_NUTRIMENT_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "provides nutrients for (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002469; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} provides nutrients for {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasite of
+
+<#Parasite_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002444; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#Parasite_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002445; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#Parasite_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasite of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002444; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasite of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#Parasite_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitized by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002445; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is parasitized by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Parasitoide of
+
+<#PARASITOIDE_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002208; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#PARASITOIDE_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002209; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#PARASITOIDE_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "parasitoid of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002208; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is parasitoid of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PARASITOIDE_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PARASITOIDE_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "has parasitoid (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002209; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} has parasitoid {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Phoretic of (transports)
+
+<#PHORETIC_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002020; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+
+<#PHORETIC_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PHORETIC_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "phoretic of (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002020; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} is phoretic of {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+# -------------------------------------------------------------------------
+# Pollinates
+
+<#POLLINISATEUR_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002455; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#POLLINISATEUR_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002456; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#POLLINISATEUR_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinates (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002455; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} pollinates {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#POLLINISATEUR_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_POLLINISATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "pollinated by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002456; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is pollinated by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
+    
+# -------------------------------------------------------------------------
+# Preys on
+
+<#PREDATEUR_Direct_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Source>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002439; rr:objectMap <#TPL_Taxon_Target_Extd>; ].
+    
+<#PREDATEUR_Direct_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#TPL_Taxon_Target_Extd>;
+    rr:predicateObjectMap [ rr:predicate ro:RO_0002458; rr:objectMap <#TPL_Taxon_Source>; ].
+    
+<#PREDATEUR_Reif_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preys on (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002439; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.taxon.scientificName} preys on {$.target.scientificName}"; rr:termType rr:Literal ]].
+
+<#PREDATEUR_Reif_Inv_Ext_Targ> a rr:TriplesMap;
+    xrr:logicalSource <#LS_PREDATEUR_EXTENDED_TARGET>;
+    rr:subjectMap <#SM_Interaction_Inv>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label;    rr:object "preyed upon by (statement)" ];
+    rr:predicateObjectMap [ rr:predicate wdt:P248;      rr:objectMap <#TPL_Doc> ];
+    rr:predicateObjectMap [ rr:predicate rdf:subject;   rr:objectMap <#TPL_Taxon_Target_Extd> ];
+    rr:predicateObjectMap [ rr:predicate rdf:predicate; rr:objectMap [ rr:constant ro:RO_0002458; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:object;    rr:objectMap <#TPL_Taxon_Source> ];
+    rr:predicateObjectMap [ rr:predicate dct:description; rr:objectMap [
+    rr:template "{$.target.scientificName} is preyed upon by {$.taxon.scientificName}"; rr:termType rr:Literal ]].
 

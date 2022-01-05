@@ -196,8 +196,14 @@ taxrefprop:habitat
  rdfs:subPropertyOf taxrefprop:habitat;
  rdfs:comment "Property http://lod.taxonconcept.org/ontology/txn.owl#habitat is defined as an equivalent property of http://purl.org/ontology/wo/habitat (BBC WO) whose domain is http://purl.org/ontology/wo/TaxonRank. This is possibly a mistake, since an habitat should typically be associated with a species (an instance of taxon rank Species), not with a rank. Hence, to avoid any unexpected inference, TAXREF-LD defines the habitat property as a super-property of http://lod.taxonconcept.org/ontology/txn.owl#habitat with no domain restriction."@en.
 
+taxrefprop:hasTrophicLevel
+ a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "has trophic level"@en;
+ dct:description "Relates a taxon to its tophic level"@en.
 
-#----------------- Properties to relate a taxon with its statuses ----------------------#
+
+#----------------- Properties to relate a taxon with its statuses ----------------------
 
 taxrefprop:hasStatus
     a owl:ObjectProperty;
@@ -219,6 +225,29 @@ taxrefprop:statusType
     rdfs:label "status type"@en;
     rdfs:domain taxrefstatus:TaxonStatus; 
     dct:description "Relates a taxon status with the type of status which is an instance of taxrefstatus:TaxonStatusType"@en.
+
+
+#----------------- Properties to describe interactions ----------------------
+
+taxrefprop:hasSex
+ a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ owl:equivalentProperty <http://www.wikidata.org/prop/direct/P21>;
+ rdfs:label "has sex"@en;
+ dct:description "Relates a taxon to its sex"@en.
+
+taxrefprop:hasBiologicalStage
+ a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ owl:equivalentProperty <http://www.wikidata.org/prop/direct/P4774>;
+ rdfs:label "has biological stage"@en;
+ dct:description "Relates a taxon to its biological stage"@en.
+
+taxrefprop:hasSpecificity
+ a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "has a specificity"@en;
+ dct:description "Specificity of the interaction"@en.
 
 
 # --- Deprecated terms ---

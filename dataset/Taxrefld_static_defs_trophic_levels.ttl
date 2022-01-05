@@ -1,0 +1,314 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxreftl:      <http://taxref.mnhn.fr/lod/trophicLevel/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
+taxreftl:TrophicLevelCollection
+ a skos:Collection;
+ rdfs:label "Collection of trophic levels"@en;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ skos:member taxreftl:Unknown, taxreftl:Autotroph, taxreftl:Chemoautotroph, taxreftl:Photoautotroph, taxreftl:Heterotroph, taxreftl:Herbivore, taxreftl:Graminivore, taxreftl:Folivore, taxreftl:Rhizovore, taxreftl:Algivore, taxreftl:Frugivore, taxreftl:Granivore, taxreftl:Xylophage, taxreftl:Florivore, taxreftl:Palynivore, taxreftl:Nectarivore, taxreftl:Decomposer, taxreftl:Saprotroph, taxreftl:Saproxylotroph, taxreftl:Coprophage, taxreftl:Detritivore, taxreftl:Carnivore, taxreftl:Predator, taxreftl:Scavenger, taxreftl:Fungivore, taxreftl:Xylofungivore.
+ 
+ 
+# --- Types of Trophic Level
+
+taxreftl:Unknown
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Unknown"@en;
+ skos:prefLabel "Unknown"@en;
+ skos:prefLabel "Inconnu"@fr;
+ skos:definition "We don't know the species trophic level"@en;
+ skos:definition "On ne connait pas le niveau trophique de l'espèce"@fr.
+
+taxreftl:Autotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Autotroph"@en;
+ skos:prefLabel "Autotroph"@en;
+ skos:prefLabel "Producteur primaire"@fr;
+ skos:definition "An organism which is capable of incorporating abiogenic (inorganic) carbon into its biomass"@en;
+ skos:definition "Organisme capable d'incorporer du carbone abiogène (inorganique) dans sa biomasse"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000023>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q131427>.
+
+taxreftl:Chemoautotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Chemoautotroph"@en;
+ skos:prefLabel "Chemoautotroph"@en;
+ skos:prefLabel "Chemoautotrophe"@fr;
+ skos:definition "An autotroph which is capable of obtaining energy from the bonds in a chemical compound"@en;
+ skos:definition "Autotrophe capable d'obtenir de l'énergie à partir des liaisons d'un composé chimique"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000129>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q747472>.
+
+taxreftl:Photoautotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Photoautotroph"@en;
+ skos:prefLabel "Photoautotroph"@en;
+ skos:prefLabel "Photoautotrophe"@fr;
+ skos:definition "An autotroph which is capable of transforming light into chemical energy"@en;
+ skos:definition "Un autotrophe capable de transformer la lumière en énergie chimique"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000130>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q335183>.
+
+taxreftl:Heterotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Heterotroph"@en;
+ skos:prefLabel "Heterotroph"@en;
+ skos:prefLabel "Hétérotrophe"@fr;
+ skos:definition "An organism that obtains carbon for growth and development by metabolizing biogenic organic compounds derived from living or dead material"@en;
+ skos:definition "Organisme qui obtient du carbone pour sa croissance et son développement en métabolisant des composés organiques biogènes dérivés de matières vivantes ou mortes"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000010>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q159344>.
+
+taxreftl:Herbivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Herbivore"@en;
+ skos:prefLabel "Herbivore"@en;
+ skos:prefLabel "Consommateur d’autotrophes"@fr;
+ skos:definition "A heterotroph which consumes plants or macroalgae via ingestion through a type of "mouth". Plant or algal matter is broken down through an internal digestion process"@en;
+ skos:definition "Un hétérotrophe qui consomme des plantes ou des macroalgues par ingestion par une sorte de "bouche". La matière végétale ou algale est décomposée par un processus de digestion interne"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000019>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q59099>.
+
+taxreftl:Graminivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Graminivore"@en;
+ skos:prefLabel "Graminivore"@en;
+ skos:prefLabel "Graminivore"@fr;
+ skos:definition "An herbivore that primarily consumes grasses"@en;
+ skos:definition "Un herbivore qui consomme principalement des graminées"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000083>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q5593647>.
+
+taxreftl:Folivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Folivore"@en;
+ skos:prefLabel "Folivore"@en;
+ skos:prefLabel "Folivore"@fr;
+ skos:definition "An herbivore that primarily consumes leaves"@en;
+ skos:definition "Un herbivore qui consomme principalement des feuilles"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000084>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q617573>.
+
+taxreftl:Rhizovore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Rhizovore"@en;
+ skos:prefLabel "Rhizovore"@en;
+ skos:prefLabel "Rhizovore"@fr;
+ skos:definition "An herbivore that primarily consumes roots"@en;
+ skos:definition "Un herbivore qui consomme principalement des racines"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000085>.
+
+taxreftl:Algivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Algivore"@en;
+ skos:prefLabel "Algivore"@en;
+ skos:prefLabel "Algivore"@fr;
+ skos:definition "An herbivore that primarily consumes algae"@en;
+ skos:definition "Un herbivore qui consomme principalement des algues"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000086>.
+
+taxreftl:Frugivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Frugivore"@en;
+ skos:prefLabel "Frugivore"@en;
+ skos:prefLabel "Frugivore"@fr;
+ skos:definition "An herbivore that primarily consumes fruits or fruit-like vegetables"@en;
+ skos:definition "Un herbivore qui consomme principalement des fruits ou des légumes ressemblant à des fruits"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000136>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q1470764>.
+
+taxreftl:Granivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Granivore"@en;
+ skos:prefLabel "Granivore"@en;
+ skos:prefLabel "Granivore"@fr;
+ skos:definition "An herbivore that primarily consumes seeds"@en;
+ skos:definition "Un herbivore qui consomme principalement des graines"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000143>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q1974986>.
+
+taxreftl:Xylophage
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Xylophage"@en;
+ skos:prefLabel "Xylophage"@en;
+ skos:prefLabel "Xylophage"@fr;
+ skos:definition "An herbivore that primarily consumes wood"@en;
+ skos:definition "Un herbivore qui consomme principalement d'aubier'"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000144>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q2072826>.
+
+taxreftl:Florivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Florivore"@en;
+ skos:prefLabel "Florivore"@en;
+ skos:prefLabel "Florivore"@fr;
+ skos:definition "An herbivore that primarily consumes flowers"@en;
+ skos:definition "Un herbivore qui consomme principalement des fleurs"@fr;
+ skos:exactMatch <http://www.wikidata.org/entity/Q48835467>.
+
+taxreftl:Palynivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Palynivore"@en;
+ skos:prefLabel "Palynivore"@en;
+ skos:prefLabel "Palynivore"@fr;
+ skos:definition "An herbivore that primarily consumes pollen"@en;
+ skos:definition "Un herbivore qui consomme principalement du pollen"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000137>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q3805698>.
+
+taxreftl:Nectarivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Nectarivore"@en;
+ skos:prefLabel "Nectarivore"@en;
+ skos:prefLabel "Nectarivore"@fr;
+ skos:definition "An herbivore that primarily consumes nectar"@en;
+ skos:definition "Un herbivore qui consomme principalement du nectar de plantes"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000140>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q120880>.
+
+taxreftl:Decomposer
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Decomposer"@en;
+ skos:prefLabel "Decomposer"@en;
+ skos:prefLabel "Décomposeur"@fr;
+ skos:definition "Organism that breaks down dead or decaying organisms"@en;
+ skos:definition "Organisme qui décompose les organismes morts ou en décomposition"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000054>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q842391>.
+
+taxreftl:Saprotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Saprotroph"@en;
+ skos:prefLabel "Saprotroph"@en;
+ skos:prefLabel "Saprophage"@fr;
+ skos:definition "A decomposer that obtains nutrition through extracellular digestion of decaying organic matter"@en;
+ skos:definition "Un décomposeur qui obtient la nutrition par digestion extracellulaire de la matière organique en décomposition"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000056>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q2224108>.
+
+taxreftl:Saproxylotroph
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Saproxylotroph"@en;
+ skos:prefLabel "Saproxylotroph"@en;
+ skos:prefLabel "Saproxylophage"@fr;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q770791>.
+
+taxreftl:Coprophage
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Coprophage"@en;
+ skos:prefLabel "Coprophage"@en;
+ skos:prefLabel "Coprophage"@fr;
+ skos:definition "A decomposer which obtains nutrition by consuming feces"@en;
+ skos:definition "Un décomposeur qui se nourrit en consommant des matières fécales"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000176>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q45845947>.
+
+taxreftl:Detritivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Detritivore"@en;
+ skos:prefLabel "Detritivore"@en;
+ skos:prefLabel "Detritivore"@fr;
+ skos:definition "A decomposer which obtains nutrition by consuming detritus"@en;
+ skos:definition "Un décomposeur qui se nourrit en consommant des détritus"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000055>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q2750657>.
+
+taxreftl:Carnivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Carnivore"@en;
+ skos:prefLabel "Carnivore"@en;
+ skos:prefLabel "Consommateur d’hétérotrophes"@fr;
+ skos:definition "A heterotroph that consumes animals in whole or in part via ingestion through a type of "mouth". Animal matter is broken down through an internal digestion process."@en;
+ skos:definition "Un hétérotrophe qui consomme des animaux en tout ou en partie par ingestion par une sorte de "bouche". La matière animale est décomposée par un processus de digestion interne."@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000088>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q220314>.
+
+taxreftl:Predator
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Predator"@en;
+ skos:prefLabel "Predator"@en;
+ skos:prefLabel "Prédateur"@fr;
+ skos:definition "A carnivore that actively captures and consumes other animals, causing their immediate or imminent death"@en;
+ skos:definition "Un carnivore qui capture et consomme activement d'autres animaux, causant leur mort immédiate ou imminente"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000089>;
+ skos:relatedMatch <http://www.wikidata.org/entity/Q29017578>.
+
+taxreftl:Scavenger
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Scavenger"@en;
+ skos:prefLabel "Scavenger"@en;
+ skos:prefLabel "Nécrophage / Charognard"@fr;
+ skos:definition "A carnivore that feeds on dead and decaying animal matter"@en;
+ skos:definition "Un carnivore qui se nourrit de matières animales mortes et en décomposition"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000090>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q25524623>.
+
+taxreftl:Fungivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Fungivore"@en;
+ skos:prefLabel "Fungivore"@en;
+ skos:prefLabel "Mycétophage"@fr;
+ skos:definition "A heterotroph which consumes fungi"@en;
+ skos:definition "Un hétérotrophe qui consomme des champignons"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000015>;
+ skos:exactMatch <http://www.wikidata.org/entity/Q3331325>.
+
+taxreftl:Xylofungivore
+ a taxreftl:TrophicLevel;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Xylofungivore"@en;
+ skos:prefLabel "Xylofungivore"@en;
+ skos:prefLabel "Xylomycétophage"@fr.
+ 

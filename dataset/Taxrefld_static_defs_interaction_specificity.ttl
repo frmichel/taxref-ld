@@ -1,0 +1,93 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxreftl:       <http://taxref.mnhn.fr/lod/trophicLevel/>.
+@prefix taxrefsex:      <http://taxref.mnhn.fr/lod/sex/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+@prefix taxrefspec:     <http://taxref.mnhn.fr/lod/specificity/>.
+
+taxrefspec:SpecificityCollection
+ a skos:Collection;
+ rdfs:label "Collection of interaction specificities"@en;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ skos:member taxrefspec:Mandatory, taxrefspec:Principal, taxrefspec:Regular, taxrefspec:Optional, taxrefspec:Sporadic.
+
+
+# --- Types of Specificity
+
+taxrefspec:Mandatory
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Mandatory"@en;
+ skos:prefLabel "Mandatory"@en;
+ skos:prefLabel "Obligatoire"@fr;
+ skos:definition "The interaction is mandatory to the survival of the individual"@en;
+ skos:definition "L'interaction est obligatoire à la survie de l'individu"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25652>;
+ skos:relatedMatch <https://www.wikidata.org/wiki/Q29557567>.
+
+taxrefspec:Principal
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Principal"@en;
+ skos:prefLabel "Principal"@en;
+ skos:prefLabel "Principale"@fr;
+ skos:definition "The interaction is principal to the survival of the individual"@en;
+ skos:definition "L'interaction est principale à la survie de l'individu"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25628>.
+
+taxrefspec:Regular
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Regular"@en;
+ skos:prefLabel "Regular"@en;
+ skos:prefLabel "Régulière"@fr;
+ skos:definition "The interaction is made regularly"@en;
+ skos:definition "L'interaction est faire régulièrement"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C102843>.
+
+taxrefspec:Optional
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Optional"@en;
+ skos:prefLabel "Optional"@en;
+ skos:prefLabel "Facultative"@fr;
+ skos:definition "The interaction is optional to the survival of the individual"@en;
+ skos:definition "L'interaction est facultative à la survie de l'individu"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25603>;
+ skos:relatedMatch <https://www.wikidata.org/wiki/Q59864995>.
+
+taxrefspec:Sporadic
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Sporadic"@en;
+ skos:prefLabel "Sporadic"@en;
+ skos:prefLabel "occasionnelle / exceptionnelle"@fr;
+ skos:definition "The interaction is made sporadically"@en;
+ skos:definition "L'interaction est faite de manière occasionnelle / exceptionnelle"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C64954>.

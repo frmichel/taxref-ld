@@ -1,0 +1,334 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix dcat:           <http://www.w3.org/ns/dcat#>.
+@prefix dce:            <http://purl.org/dc/elements/1.1/>.
+@prefix dct:            <http://purl.org/dc/terms/>.
+@prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
+@prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix prov:           <http://www.w3.org/ns/prov#>.
+@prefix ro:             <http://purl.obolibrary.org/obo/>.
+@prefix schema:         <http://schema.org/>.
+@prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix void:           <http://rdfs.org/ns/void#>.
+@prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
+@prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxreftl:       <http://taxref.mnhn.fr/lod/trophicLevel/>.
+@prefix taxrefbs:       <http://taxref.mnhn.fr/lod/biologicalStage/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+
+
+taxrefbs:BiologicalStageCollection
+ a skos:Collection;
+ rdfs:label "Collection of biological stages"@en;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ skos:member taxrefbs:Adult, taxrefbs:Polyp, taxrefbs:Medusa, taxrefbs:Ephyra, taxrefbs:Juvenile, taxrefbs:Manca, taxrefbs:Egg, taxrefbs:Larva, taxrefbs:Nauplius, taxrefbs:Planula, taxrefbs:Postlarva, taxrefbs:Spat, taxrefbs:Subadult, taxrefbs:Zoea, taxrefbs:Megalopa, taxrefbs:Hydroid, taxrefbs:Cypris, taxrefbs:Hatchling, taxrefbs:CopepoditeI, taxrefbs:CopepoditeII,  taxrefbs:CopepoditeIII,  taxrefbs:CopepoditeIV,  taxrefbs:CopepoditeV,  taxrefbs:CopepoditeVI, taxrefbs:Gametophyte, taxrefbs:Sporophyte, taxrefbs:Macrothallus, taxrefbs:Microthallus, taxrefbs:1YearOld, taxrefbs:Fetus;
+ .
+
+# --- Types of Biological Stage
+
+taxrefbs:Adult
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Adult"@en;
+ skos:prefLabel "Adult"@en;
+ skos:prefLabel "Adulte"@fr;
+ skos:definition "Organism that reaches adult stage"@en;
+ skos:definition "Organisme qui atteint le stade adulte"@fr;
+ skos:exactMatch <http://www.wikidata.org/entity/Q80994>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0018241>.
+
+taxrefbs:Polyp
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Polyp"@en;
+ skos:prefLabel "Polyp"@en;
+ skos:prefLabel "Polype"@fr;
+ skos:definition "Organism that reaches polyp stage"@en;
+ skos:definition "Organisme qui atteint le stade polype"@fr.
+
+taxrefbs:Medusa
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Medusa"@en;
+ skos:prefLabel "Medusa"@en;
+ skos:prefLabel "Méduse"@fr;
+ skos:definition "Organism that reaches medusa stage"@en;
+ skos:definition "Organisme qui atteint le stade méduse"@fr.
+
+taxrefbs:Ephyra
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Ephyra"@en;
+ skos:prefLabel "Ephyra"@en;
+ skos:prefLabel "Ephyra"@fr;
+ skos:definition "Organism that reaches ephyra stage"@en;
+ skos:definition "Organisme qui atteint le stade ephyra"@fr.
+
+taxrefbs:Juvenile
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Juvenile"@en;
+ skos:prefLabel "Juvenile"@en;
+ skos:prefLabel "Juvénile"@fr;
+ skos:definition "Organism that reaches juvenile stage"@en;
+ skos:definition "Organisme qui atteint le stade juvénile"@fr;
+ skos:exactMatch <http://www.wikidata.org/entity/Q1516282>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0034919>.
+
+taxrefbs:Manca
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Manca"@en;
+ skos:prefLabel "Manca"@en;
+ skos:prefLabel "Manca"@fr;
+ skos:definition "Organism that reaches manca stage"@en;
+ skos:definition "Organisme qui atteint le stade manca"@fr.
+
+taxrefbs:Egg
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Egg"@en;
+ skos:prefLabel "Egg"@en;
+ skos:prefLabel "Œuf"@fr;
+ skos:definition "Organism that reaches egg stage"@en;
+ skos:definition "Organisme qui atteint le stade Œuf"@fr.
+
+taxrefbs:Larva
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Larva"@en;
+ skos:prefLabel "Larva"@en;
+ skos:prefLabel "Larve"@fr;
+ skos:definition "Organism that reaches larva stage"@en;
+ skos:definition "Organisme qui atteint le stade larve"@fr.
+ skos:exactMatch <http://www.wikidata.org/entity/Q129270>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0000069>.
+
+taxrefbs:Nauplius
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Nauplius"@en;
+ skos:prefLabel "Nauplius"@en;
+ skos:prefLabel "Nauplius"@fr;
+ skos:definition "Organism that reaches nauplius stage"@en;
+ skos:definition "Organisme qui atteint le stade nauplius"@fr;
+ skos:exactMatch <http://www.wikidata.org/entity/Q570505>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0014406>.
+
+taxrefbs:Planula
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Planula"@en;
+ skos:prefLabel "Planula"@en;
+ skos:prefLabel "Planula"@fr;
+ skos:definition "Organism that reaches planula stage"@en;
+ skos:definition "Organisme qui atteint le stade planula"@fr.
+
+taxrefbs:Postlarva
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Postlarva"@en;
+ skos:prefLabel "Postlarva"@en;
+ skos:prefLabel "Post-larve"@fr;
+ skos:definition "Organism that reaches postlarva stage"@en;
+ skos:definition "Organisme qui atteint le stade post-larve"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/UBERON_0014406>.
+
+taxrefbs:Spat
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Spat"@en;
+ skos:prefLabel "Spat"@en;
+ skos:prefLabel "Au nid"@fr;
+ skos:definition "Organism that reaches spat stage"@en;
+ skos:definition "Organisme qui atteint le stade au nid"@fr.
+
+taxrefbs:Subadult
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Subadult"@en;
+ skos:prefLabel "Subadult"@en;
+ skos:prefLabel "Subadulte"@fr;
+ skos:definition "Organism that reaches subadult stage"@en;
+ skos:definition "Organisme qui atteint le stade subadulte"@fr.
+
+taxrefbs:Zoea
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Zoea"@en;
+ skos:prefLabel "Zoea"@en;
+ skos:prefLabel "Zoea"@fr;
+ skos:definition "Organism that reaches zoea stage"@en;
+ skos:definition "Organisme qui atteint le stade zoea"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0014857>.
+
+taxrefbs:Megalopa
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Megalopa"@en;
+ skos:prefLabel "Megalopa"@en;
+ skos:prefLabel "Megalopa"@fr;
+ skos:definition "Organism that reaches megalopa stage"@en;
+ skos:definition "Organisme qui atteint le stade megalopa"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_0014859>.
+
+taxrefbs:Hydroid
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Hydroid"@en;
+ skos:prefLabel "Hydroid"@en;
+ skos:prefLabel "Hydroïde"@fr;
+ skos:definition "Organism that reaches hydroid stage"@en;
+ skos:definition "Organisme qui atteint le stade hydroïde"@fr.
+
+taxrefbs:Cypris
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Cypris"@en;
+ skos:prefLabel "Cypris"@en;
+ skos:prefLabel "Cypris"@fr;
+ skos:definition "Organism that reaches cypris stage"@en;
+ skos:definition "Organisme qui atteint le stade cypris"@fr.
+
+taxrefbs:Hatchling
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Hatchling"@en;
+ skos:prefLabel "Hatchling"@en;
+ skos:prefLabel "Nouveau-né"@fr;
+ skos:definition "Organism that reaches hatchling stage"@en;
+ skos:definition "Organisme qui atteint le stade nouveau-né"@fr.
+
+taxrefbs:CopepoditeI
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite I"@en;
+ skos:prefLabel "Copepodite I"@en;
+ skos:prefLabel "Copepodite I"@fr;
+ skos:definition "Organism that reaches copepodite I stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite I"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200002>.
+
+taxrefbs:CopepoditeII
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite II"@en;
+ skos:prefLabel "Copepodite II"@en;
+ skos:prefLabel "Copepodite II"@fr;
+ skos:definition "Organism that reaches copepodite II stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite II"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200003>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000034>.
+ 
+taxrefbs:CopepoditeIII
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite III"@en;
+ skos:prefLabel "Copepodite III"@en;
+ skos:prefLabel "Copepodite III"@fr;
+ skos:definition "Organism that reaches copepodite III stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite III"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200004>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000035>.
+
+taxrefbs:CopepoditeIV
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite IV"@en;
+ skos:prefLabel "Copepodite IV"@en;
+ skos:prefLabel "Copepodite IV"@fr;
+ skos:definition "Organism that reaches copepodite IV stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite IV"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200005>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000036>.
+
+taxrefbs:CopepoditeV
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite V"@en;
+ skos:prefLabel "Copepodite V"@en;
+ skos:prefLabel "Copepodite V"@fr;
+ skos:definition "Organism that reaches copepodite V stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite V"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200006>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000037>.
+
+taxrefbs:CopepoditeVI
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Copepodite VI"@en;
+ skos:prefLabel "Copepodite VI"@en;
+ skos:prefLabel "Copepodite VI"@fr;
+ skos:definition "Organism that reaches copepodite VI stage"@en;
+ skos:definition "Organisme qui atteint le stade copepodite VI"@fr;
+ skos:exactMatch <http://purl.obolibrary.org/obo/UBERON_8200007>;
+ skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000038>.
+
+taxrefbs:Gametophyte
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Gametophyte"@en;
+ skos:prefLabel "Gametophyte"@en;
+ skos:prefLabel "Gametophyte"@fr;
+ skos:definition "Organism that reaches gametophyte stage"@en;
+ skos:definition "Organisme qui atteint le stade gametophyte"@fr.
+
+taxrefbs:Sporophyte
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Sporophyte"@en;
+ skos:prefLabel "Sporophyte"@en;
+ skos:prefLabel "Sporophyte"@fr;
+ skos:definition "Organism that reaches sporophyte stage"@en;
+ skos:definition "Organisme qui atteint le stade sporophyte"@fr.
+ 
+taxrefbs:Macrothallus
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Macrothallus"@en;
+ skos:prefLabel "Macrothallus"@en;
+ skos:prefLabel "Macrothallus"@fr;
+ skos:definition "Organism that reaches macrothallus stage"@en;
+ skos:definition "Organisme qui atteint le stade macrothallus"@fr.
+
+taxrefbs:Microthallus
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Microthallus"@en;
+ skos:prefLabel "Microthallus"@en;
+ skos:prefLabel "Microthallus"@fr;
+ skos:definition "Organism that reaches microthallus stage"@en;
+ skos:definition "Organisme qui atteint le stade microthallus"@fr.
+
+taxrefbs:1YearOld
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "1-year old"@en;
+ skos:prefLabel "1-year old"@en;
+ skos:prefLabel "De l'année"@fr;
+ skos:definition "Organism that reaches 1-year old stage"@en;
+ skos:definition "Organisme qui atteint le stade de l'année"@fr.
+
+taxrefbs:Fetus
+ a skos:Concept;
+ skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Fetus"@en;
+ skos:prefLabel "Fetus"@en;
+ skos:prefLabel "Foetus"@fr;
+ skos:definition "Organism that reaches fetus stage"@en;
+ skos:definition "Organisme qui atteint le stade foetus"@fr;
+ skos:relatedMatch <http://purl.obolibrary.org/obo/UBERON_0000068>.
