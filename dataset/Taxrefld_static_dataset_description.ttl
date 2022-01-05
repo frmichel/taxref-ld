@@ -63,8 +63,8 @@ taxref:Catalog
 
     dct:licence     <https://creativecommons.org/licenses/by/3.0/fr/>;
     schema:licence  <https://creativecommons.org/licenses/by/3.0/fr/>;
-    owl:versionInfo "14.0";
-    dct:issued      "2020-06-23"^^xsd:date; schema:datePublished "2020-06-23"^^xsd:date;
+    owl:versionInfo "15.0";
+    dct:issued      "2022-xx-xx"^^xsd:date; schema:datePublished "2022-xx-xx"^^xsd:date;
     dct:publisher
         <https://ror.org/03wkt5x30>, taxref:INPN,
         <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
@@ -91,7 +91,7 @@ taxref:Catalog
     a prov:Entity;
     prov:wasDerivedFrom     <http://taxref.mnhn.fr/lod/taxref>;
     prov:wasGeneratedBy     taxref:RdfGeneration;
-    prov:wasGeneratedAtTime "2020-06-23"^^xsd:date;
+    prov:wasGeneratedAtTime "2022-xx-xx"^^xsd:date;
 
     dct:spatial
         <http://sws.geonames.org/3017382/>, <http://sws.geonames.org/3381670/>, <http://sws.geonames.org/3570311/>, <http://sws.geonames.org/3579143/>, <http://sws.geonames.org/3578421/>, <http://sws.geonames.org/3578476/>, <http://sws.geonames.org/3424932/>, <http://sws.geonames.org/1024031/>, <http://sws.geonames.org/935317/>, <http://sws.geonames.org/6690916/>, <http://sws.geonames.org/1546748/>, <http://sws.geonames.org/4030656/>, <http://sws.geonames.org/2139685/>, <http://sws.geonames.org/4034749/>, <http://sws.geonames.org/4020092/>;
@@ -126,8 +126,8 @@ taxref:Catalog
 
     dct:licence             <https://creativecommons.org/licenses/by/3.0/fr/>;
     schema:licence          <https://creativecommons.org/licenses/by/3.0/fr/>;
-    owl:versionInfo         "14.0";
-    dct:issued              "2019-12-06"^^xsd:date;
+    owl:versionInfo         "15.0";
+    dct:issued              "2021-12-16"^^xsd:date;
     dct:creator 
                             "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
     dct:publisher           <https://ror.org/03wkt5x30>, taxref:INPN;
@@ -298,11 +298,11 @@ taxref:hal01617708
 
 taxref:taxrefmethodo
     a <https://data.archives-ouvertes.fr/doctype/Report>, <https://schema.org/Article>;
-    dct:title "TAXREF v14, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    schema:name "TAXREF v14, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    dct:issued "2020"^^xsd:gYear; schema:datePublished "2020"^^xsd:gYear;
-    dct:bibliographicCitation "Gargominy O., Tercerie S., Régnier C., Ramage T., Dupont P., Daszkiewicz P. & Poncet L. (2018). TAXREF v12, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion. Muséum national d’Histoire naturelle, Paris";
+    dct:title "TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    schema:name "TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    dct:issued "2021"^^xsd:gYear; schema:datePublished "2021"^^xsd:gYear;
+    dct:bibliographicCitation "Gargominy O., Tercerie S., Régnier C., Ramage T., Dupont P., Daszkiewicz P. & Poncet L. (2021). TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion. Muséum national d’Histoire naturelle, Paris";
     dct:creator taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
     schema:author taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
-    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/354850>;
+    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/396404>;
     .
