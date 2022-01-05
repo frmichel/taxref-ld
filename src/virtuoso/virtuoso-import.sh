@@ -2,21 +2,20 @@
 # Author: Franck MICHEL, University Cote d'Azur, CNRS, Inria
 # Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
 
-# This script requires an $isql_dba variable set like this:
-isql_dba="$VIRTUOSO/bin/isql -H localhost -U dba -P your_password"
-
 help()
 {
   echo
-  echo "$0 imports a set of RDF files as a named graph into Virtuoso."
+  echo "$0 imports a set of RDF files (Turtle or NTriples) as a named graph into Virtuoso."
   echo
   echo "Usage:"
   echo "$0 --graph <graph URI> [--cleargraph] [--path <path of data files>] file1 file2 ... fileN"
   echo "$0 [-h|--help]"
   echo
-  echo "Path defaults to current directory if not provided."
+  echo "The path of files to import defaults to the current directory if not provided."
   echo "If option --cleargraph is mentioned, the graph is cleared before importing files."
   echo
+  echo "Example:"
+  echo "    ./virtuoso-import.sh --cleargraph --graph "http://localhost/graph_name" --path /home/user/rdf  *.nt  *.ttl"
   exit 1
 }
 
@@ -25,7 +24,7 @@ path=`pwd`
 unset cleargraph
 unset graph
 
-while [ "$1" == "--graph" -o  "$1" == "--path" -o  "$1" == "--cleargraph" ]; do
+while [ "$1" == "-h" -o "$1" == "--help" -o  "$1" == "--graph" -o  "$1" == "--path" -o  "$1" == "--cleargraph" ]; do
   case "$1" in
     --graph ) graph=$2; shift;;
     --path ) path=$2; shift;;
@@ -47,6 +46,7 @@ tempfile=temp.${$}.isql
 echo -n "" > $tempfile
 
 if [ ! -z "$cleargraph" ]; then
+    echo "log_enable(3,1);" >> $tempfile
     echo "SPARQL CLEAR GRAPH  <${graph}>;" >> $tempfile
 fi
 
@@ -60,6 +60,6 @@ echo "rdf_loader_run();"  >> $tempfile
 cat $tempfile
 
 #--- Run file against isql
-cat $tempfile | $isql_dba
+cat $tempfile | /usr/local/virtuoso-opensource/bin/isql -H localhost -U dba -P 'your password'
 
 rm -f $tempfile

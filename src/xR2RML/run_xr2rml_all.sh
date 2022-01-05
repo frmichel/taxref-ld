@@ -1,38 +1,80 @@
 #!/bin/bash
 # Author: F. Michel, UCA, CNRS, Inria
 
-./run_xr2rml.sh biblio
-./run_xr2rml.sh externalIds_webpages
-./run_xr2rml.sh externalIds_worms
-./run_xr2rml.sh habitats
-./run_xr2rml.sh interactions
-./run_xr2rml.sh locations
-./run_xr2rml.sh media            
-./run_xr2rml.sh statuses
-./run_xr2rml.sh statusCodes
-./run_xr2rml.sh statusBiblio
-./run_xr2rml.sh taxonomy_classes
-./run_xr2rml.sh taxonomy_concepts
-./run_xr2rml.sh vernaculars
+# Environment variables
+. ../env.sh
 
-./run_xr2rml_externalIds_dbxref.sh  "AlgaeBase"                       "wdt:P1348"
-./run_xr2rml_externalIds_dbxref.sh  "Avibase"                         "wdt:P2026" 
-./run_xr2rml_externalIds_dbxref.sh  "BDTFX"                           "wdt:P3105" 
-./run_xr2rml_externalIds_dbxref.sh  "Fauna Europaea"                  "wdt:P1895" 
-./run_xr2rml_externalIds_dbxref.sh  "FishBase"                        "wdt:P938" 
-./run_xr2rml_externalIds_dbxref.sh  "GBIF"                            "wdt:P846"
-./run_xr2rml_externalIds_dbxref.sh  "IPNI"                            "wdt:P961"
-./run_xr2rml_externalIds_dbxref.sh  "Index Fungorum"                  "wdt:P1391" 
-./run_xr2rml_externalIds_dbxref.sh  "Mantodea Species File Online"    "wdt:P6055" 
-./run_xr2rml_externalIds_dbxref.sh  "Orthoptera Species File Online"  "wdt:P6050" 
-./run_xr2rml_externalIds_dbxref.sh  "Phasmida Species File Online"    "wdt:P4855" 
-./run_xr2rml_externalIds_dbxref.sh  "Psyl'list"                       "wdt:P6376" 
-./run_xr2rml_externalIds_dbxref.sh  "SANDRE"                          "wdt:P1717" 
-./run_xr2rml_externalIds_dbxref.sh  "TROPICOS"                        "wdt:P960" 
-./run_xr2rml_externalIds_dbxref.sh  "The Plant List (TPL)"            "wdt:P1070" 
-./run_xr2rml_externalIds_dbxref.sh  "The World Spider Catalog"        "wdt:P3288" 
-./run_xr2rml_externalIds_dbxref.sh  "VASCAN"                          "wdt:P1745" 
-./run_xr2rml_externalIds_dbxref.sh  "WoRMS"                           "wdt:P850" 
+# Directory where the output files are stored (relative to the current directory)
+ODIR=${pwd}/$DATASET_DIR
+mkdir -p $ODIR
+
+
+./run_xr2rml.sh locations               $ODIR
+./run_xr2rml.sh media                   $ODIR    
+./run_xr2rml.sh statuses                $ODIR
+./run_xr2rml.sh statusCodes             $ODIR
+./run_xr2rml.sh statusBiblio            $ODIR
+./run_xr2rml.sh taxonomy_classes        $ODIR
+./run_xr2rml.sh taxonomy_concepts       $ODIR
+./run_xr2rml.sh vernaculars             $ODIR
+
+datatype=biblio
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=externalIds_webpages
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=externalIds_worms
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=habitats
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=interactions
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=locations
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=media
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=statuses
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=statusCodes
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=statusBiblio
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=taxonomy_classes
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=taxonomy_concepts
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+datatype=vernaculars
+./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
+
+./run_xr2rml_externalIds_dbxref.sh  "AlgaeBase"                       "wdt:P1348"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Avibase"                         "wdt:P2026"   $ODIR 
+./run_xr2rml_externalIds_dbxref.sh  "BDTFX"                           "wdt:P3105"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Fauna Europaea"                  "wdt:P1895"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "FishBase"                        "wdt:P938"    $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "GBIF"                            "wdt:P846"    $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "IPNI"                            "wdt:P961"    $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Index Fungorum"                  "wdt:P1391"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Mantodea Species File Online"    "wdt:P6055"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Orthoptera Species File Online"  "wdt:P6050"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Phasmida Species File Online"    "wdt:P4855"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "Psyl'list"                       "wdt:P6376"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "SANDRE"                          "wdt:P1717"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "TROPICOS"                        "wdt:P960"    $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "The Plant List (TPL)"            "wdt:P1070"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "The World Spider Catalog"        "wdt:P3288"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "VASCAN"                          "wdt:P1745"   $ODIR
+./run_xr2rml_externalIds_dbxref.sh  "WoRMS"                           "wdt:P850"    $ODIR
 
 # > db.externalIds.distinct("externalDbName").sort()
 
