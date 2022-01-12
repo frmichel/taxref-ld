@@ -23,6 +23,7 @@ start=0
 size=10000
 limit=0
 
+echo "************** Querying external ids API **************"
 echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_externalIds_${TAXREFVER}_${start}.json \

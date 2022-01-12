@@ -23,6 +23,7 @@ start=0
 size=2000
 limit=0
 
+echo "************** Querying interactions API **************"
 echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_interactions_${TAXREFVER}_${start}.json \

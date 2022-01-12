@@ -40,7 +40,6 @@ DATATYPE=media
 tar cvfz dumps/${DATASET_VERSION}/taxref_${DATATYPE}.json.tgz  taxref_${DATATYPE}_${DATASET_VERSION}_*.json
 rm -f taxref_${DATATYPE}_${DATASET_VERSION}_*.json
 
-
 DATATYPE=taxonomy
 ./query_${DATATYPE}.sh           $DATASET_VERSION      &>> $log
 ./import_${DATATYPE}.sh          $DATASET_VERSION $DB  &>> $log
@@ -53,12 +52,11 @@ DATATYPE=externalIds
 tar cvfz dumps/${DATASET_VERSION}/taxref_${DATATYPE}.json.tgz  taxref_${DATATYPE}_${DATASET_VERSION}_*.json
 rm -f taxref_${DATATYPE}_${DATASET_VERSION}_*.json
 
-
 DATATYPE=status_types
 ./query_${DATATYPE}.sh           $DATASET_VERSION      &>> $log
 ./import_${DATATYPE}.sh          $DATASET_VERSION $DB  &>> $log
-tar cvfz dumps/${DATASET_VERSION}/taxref_${DATATYPE}.json.tgz  taxref_${DATATYPE}_${DATASET_VERSION}_*.json
-rm -f taxref_${DATATYPE}_${DATASET_VERSION}_*.json
+tar cvfz dumps/${DATASET_VERSION}/taxref_${DATATYPE}.json.tgz  taxref_${DATATYPE}_${DATASET_VERSION}*.json
+rm -f taxref_${DATATYPE}_${DATASET_VERSION}*.json
 
 DATATYPE=statuses
 ./query_${DATATYPE}.sh           $DATASET_VERSION      &>> $log

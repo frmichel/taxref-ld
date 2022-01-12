@@ -23,6 +23,7 @@ start=0
 size=5000
 limit=0
 
+echo "************** Querying vernacular names API **************"
 echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_vernaculars_${TAXREFVER}_${start}.json \

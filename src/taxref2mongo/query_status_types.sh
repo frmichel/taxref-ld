@@ -19,6 +19,7 @@ if [[ -z "$TAXREFVER" ]] ; then help; fi
 
 api_version=1.0
 
+echo "************** Querying status types API **************"
 curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_status_types_${TAXREFVER}.json \
          -X GET "https://taxref.mnhn.fr/api/status/types"

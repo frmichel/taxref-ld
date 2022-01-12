@@ -23,6 +23,7 @@ start=0
 size=10000
 limit=0
 
+echo "************** Querying statuses API **************"
 echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_statuses_${TAXREFVER}_${start}.json \
