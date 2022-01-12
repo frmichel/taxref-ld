@@ -81,3 +81,8 @@ wdt:P850    rdfs:label "WoRMS ID (Wikidata)".
 wdt:P3591   rdfs:label "World Checklist of Selected Plant Families ID (Wikidata)".
 wdt:P1746   rdfs:label "ZooBank ID (Wikidata)".
 wdt:P1076   rdfs:label "International Committee on Taxonomy of Viruses ID (Wikidata)".
+
+# ======= Misc
+wd:Q44148   rdfs:label "male organism".
+wd:Q43445   rdfs:label "female organism".
+wd:Q1811014 rdfs:label "phase of life".

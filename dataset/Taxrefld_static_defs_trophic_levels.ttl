@@ -39,7 +39,7 @@ taxreftl:TrophicLevelCollection
 # --- Types of Trophic Level
 
 taxreftl:Unknown
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Unknown"@en;
  skos:prefLabel "Unknown"@en;
@@ -48,7 +48,7 @@ taxreftl:Unknown
  skos:definition "On ne connait pas le niveau trophique de l'espèce"@fr.
 
 taxreftl:Autotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Autotroph"@en;
  skos:prefLabel "Autotroph"@en;
@@ -59,7 +59,7 @@ taxreftl:Autotroph
  skos:relatedMatch <http://www.wikidata.org/entity/Q131427>.
 
 taxreftl:Chemoautotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Chemoautotroph"@en;
  skos:prefLabel "Chemoautotroph"@en;
@@ -70,7 +70,7 @@ taxreftl:Chemoautotroph
  skos:relatedMatch <http://www.wikidata.org/entity/Q747472>.
 
 taxreftl:Photoautotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Photoautotroph"@en;
  skos:prefLabel "Photoautotroph"@en;
@@ -81,7 +81,7 @@ taxreftl:Photoautotroph
  skos:relatedMatch <http://www.wikidata.org/entity/Q335183>.
 
 taxreftl:Heterotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Heterotroph"@en;
  skos:prefLabel "Heterotroph"@en;
@@ -92,7 +92,7 @@ taxreftl:Heterotroph
  skos:relatedMatch <http://www.wikidata.org/entity/Q159344>.
 
 taxreftl:Herbivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Herbivore"@en;
  skos:prefLabel "Herbivore"@en;
@@ -103,7 +103,7 @@ taxreftl:Herbivore
  skos:relatedMatch <http://www.wikidata.org/entity/Q59099>.
 
 taxreftl:Graminivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Graminivore"@en;
  skos:prefLabel "Graminivore"@en;
@@ -114,7 +114,7 @@ taxreftl:Graminivore
  skos:exactMatch <http://www.wikidata.org/entity/Q5593647>.
 
 taxreftl:Folivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Folivore"@en;
  skos:prefLabel "Folivore"@en;
@@ -125,7 +125,7 @@ taxreftl:Folivore
  skos:exactMatch <http://www.wikidata.org/entity/Q617573>.
 
 taxreftl:Rhizovore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Rhizovore"@en;
  skos:prefLabel "Rhizovore"@en;
@@ -135,7 +135,7 @@ taxreftl:Rhizovore
  skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000085>.
 
 taxreftl:Algivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Algivore"@en;
  skos:prefLabel "Algivore"@en;
@@ -145,7 +145,7 @@ taxreftl:Algivore
  skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000086>.
 
 taxreftl:Frugivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Frugivore"@en;
  skos:prefLabel "Frugivore"@en;
@@ -156,7 +156,7 @@ taxreftl:Frugivore
  skos:exactMatch <http://www.wikidata.org/entity/Q1470764>.
 
 taxreftl:Granivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Granivore"@en;
  skos:prefLabel "Granivore"@en;
@@ -167,7 +167,7 @@ taxreftl:Granivore
  skos:exactMatch <http://www.wikidata.org/entity/Q1974986>.
 
 taxreftl:Xylophage
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Xylophage"@en;
  skos:prefLabel "Xylophage"@en;
@@ -178,7 +178,7 @@ taxreftl:Xylophage
  skos:exactMatch <http://www.wikidata.org/entity/Q2072826>.
 
 taxreftl:Florivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Florivore"@en;
  skos:prefLabel "Florivore"@en;
@@ -188,7 +188,7 @@ taxreftl:Florivore
  skos:exactMatch <http://www.wikidata.org/entity/Q48835467>.
 
 taxreftl:Palynivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Palynivore"@en;
  skos:prefLabel "Palynivore"@en;
@@ -199,7 +199,7 @@ taxreftl:Palynivore
  skos:relatedMatch <http://www.wikidata.org/entity/Q3805698>.
 
 taxreftl:Nectarivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Nectarivore"@en;
  skos:prefLabel "Nectarivore"@en;
@@ -210,7 +210,7 @@ taxreftl:Nectarivore
  skos:exactMatch <http://www.wikidata.org/entity/Q120880>.
 
 taxreftl:Decomposer
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Decomposer"@en;
  skos:prefLabel "Decomposer"@en;
@@ -221,7 +221,7 @@ taxreftl:Decomposer
  skos:exactMatch <http://www.wikidata.org/entity/Q842391>.
 
 taxreftl:Saprotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Saprotroph"@en;
  skos:prefLabel "Saprotroph"@en;
@@ -232,7 +232,7 @@ taxreftl:Saprotroph
  skos:exactMatch <http://www.wikidata.org/entity/Q2224108>.
 
 taxreftl:Saproxylotroph
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Saproxylotroph"@en;
  skos:prefLabel "Saproxylotroph"@en;
@@ -240,7 +240,7 @@ taxreftl:Saproxylotroph
  skos:relatedMatch <http://www.wikidata.org/entity/Q770791>.
 
 taxreftl:Coprophage
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Coprophage"@en;
  skos:prefLabel "Coprophage"@en;
@@ -251,7 +251,7 @@ taxreftl:Coprophage
  skos:exactMatch <http://www.wikidata.org/entity/Q45845947>.
 
 taxreftl:Detritivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Detritivore"@en;
  skos:prefLabel "Detritivore"@en;
@@ -262,7 +262,7 @@ taxreftl:Detritivore
  skos:exactMatch <http://www.wikidata.org/entity/Q2750657>.
 
 taxreftl:Carnivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Carnivore"@en;
  skos:prefLabel "Carnivore"@en;
@@ -273,7 +273,7 @@ taxreftl:Carnivore
  skos:relatedMatch <http://www.wikidata.org/entity/Q220314>.
 
 taxreftl:Predator
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Predator"@en;
  skos:prefLabel "Predator"@en;
@@ -284,7 +284,7 @@ taxreftl:Predator
  skos:relatedMatch <http://www.wikidata.org/entity/Q29017578>.
 
 taxreftl:Scavenger
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Scavenger"@en;
  skos:prefLabel "Scavenger"@en;
@@ -295,7 +295,7 @@ taxreftl:Scavenger
  skos:exactMatch <http://www.wikidata.org/entity/Q25524623>.
 
 taxreftl:Fungivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Fungivore"@en;
  skos:prefLabel "Fungivore"@en;
@@ -306,7 +306,7 @@ taxreftl:Fungivore
  skos:exactMatch <http://www.wikidata.org/entity/Q3331325>.
 
 taxreftl:Xylofungivore
- a taxreftl:TrophicLevel;
+ a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Xylofungivore"@en;
  skos:prefLabel "Xylofungivore"@en;
