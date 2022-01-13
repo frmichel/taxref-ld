@@ -18,7 +18,7 @@ help()
 }
 
 XR2RML=$(pwd)
-JAR=$XR2RML/morph-xr2rml-dist-1.3.2-20211126.142114-3-jar-with-dependencies.jar
+JAR=$XR2RML/morph-xr2rml-dist-1.3.2-20220112.165556-4-jar-with-dependencies.jar
 
 
 # --- Read input arguments
