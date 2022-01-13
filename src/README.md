@@ -9,14 +9,14 @@ In a first step, the pipeline queries the [TAXREF Web API](https://taxref.mnhn.f
 
 The JSON content retrieved from the Web API is then uploaded to a MongoDB database, and pre-processed with MongoDB aggregation queries to prepare the JSON documents for the next step.
 
-Directory [taxref2mongo](taxref2mongo) provides the scripts involved in this step, together will further documentation.
+Directory [mongo](mongo) provides the scripts involved in this step, together will further documentation.
 
 
 ### RDF files generation
 
 In a second step, the translation to RDF is carried out using [Morph-xR2RML](https://github.com/frmichel/morph-xr2rml/), an implementation of the [xR2RML mapping language](http://i3s.unice.fr/~fmichel/xr2rml_specification.html) [1] for MongoDB databases.
 
-The scripts, configuration and mapping files are provided in directory [xR2RML](xR2RML).
+The scripts, configuration and mapping files are provided in directory [xr2rml](xr2rml).
 
 
 ### RDF files import into Virtuoso
