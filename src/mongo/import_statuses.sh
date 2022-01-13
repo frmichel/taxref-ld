@@ -26,7 +26,7 @@ collection=statuses
 
 mongo --eval "db.${collection}.drop()" localhost/$db
 
-for FILE in `ls taxref_status_${version}_*.json`; do
+for FILE in `ls taxref_statuses_${version}_*.json`; do
     echo "Processing $FILE"
 
     awk -f import_statuses.awk $FILE > ${FILE}.tmp

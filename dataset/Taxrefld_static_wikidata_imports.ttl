@@ -50,7 +50,7 @@ wdt:P5354   rdfs:label "Amphibian Species of the World ID (Wikidata)".
 wdt:P2026   rdfs:label "Avibase ID (Wikidata)".
 wdt:P5257   rdfs:label "BirdLife ID (Wikidata)".
 wdt:P3105   rdfs:label "Tela Botanica ID".
-wdt:P6052   rdfs:label "Cockroach\r Species File Online ID (Wikidata)".
+wdt:P6052   rdfs:label "Cockroach Species File Online ID (Wikidata)".
 wdt:P6053   rdfs:label "Coreoidea Species File Online ID (Wikidata)".
 wdt:P4630   rdfs:label "DORIS ID (Wikidata)".
 wdt:P3031   rdfs:label "EPPO Global Database ID (Wikidata)".
@@ -59,6 +59,7 @@ wdt:P938    rdfs:label "FishBase ID (Wikidata)".
 wdt:P846    rdfs:label "GBIF ID (Wikidata)".
 wdt:P5626   rdfs:label "Global Invasive Species Database ID (Wikidata)".
 wdt:P961    rdfs:label "IPNI ID (Wikidata)".
+wdt:P627    rdfs:label "IUCN taxon ID".
 wdt:P1391   rdfs:label "Index Fungorum ID (Wikidata)".
 wdt:P2794   rdfs:label "Index Hepaticarum ID (Wikidata)".
 wdt:P959    rdfs:label "Mammal Species of the World ID (Wikidata)".
@@ -81,6 +82,7 @@ wdt:P850    rdfs:label "WoRMS ID (Wikidata)".
 wdt:P3591   rdfs:label "World Checklist of Selected Plant Families ID (Wikidata)".
 wdt:P1746   rdfs:label "ZooBank ID (Wikidata)".
 wdt:P1076   rdfs:label "International Committee on Taxonomy of Viruses ID (Wikidata)".
+wdt:P7715   rdfs:label "World Flora Online ID".
 
 # ======= Misc
 wd:Q44148   rdfs:label "male organism".

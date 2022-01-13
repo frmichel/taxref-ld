@@ -31,6 +31,9 @@
 @prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
 @prefix taxrefspec:     <http://taxref.mnhn.fr/lod/specificity/>.
 
+# List of terms from NCI Thesaurus: https://www.ebi.ac.uk/ols/ontologies/ncit
+
+
 taxrefspec:SpecificityCollection
  a skos:Collection;
  rdfs:label "Collection of interaction specificities"@en;
@@ -46,10 +49,9 @@ taxrefspec:Mandatory
  rdfs:label "Mandatory"@en;
  skos:prefLabel "Mandatory"@en;
  skos:prefLabel "Obligatoire"@fr;
- skos:definition "The interaction is mandatory to the survival of the individual"@en;
+ skos:definition "The interaction is mandatory for the survival of the individual"@en;
  skos:definition "L'interaction est obligatoire à la survie de l'individu"@fr;
- skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25652>;
- skos:relatedMatch <https://www.wikidata.org/wiki/Q29557567>.
+ skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25652>.
 
 taxrefspec:Principal
  a skos:Concept;
@@ -57,8 +59,8 @@ taxrefspec:Principal
  rdfs:label "Principal"@en;
  skos:prefLabel "Principal"@en;
  skos:prefLabel "Principale"@fr;
- skos:definition "The interaction is principal to the survival of the individual"@en;
- skos:definition "L'interaction est principale à la survie de l'individu"@fr;
+ skos:definition "A principal interaction is not mandatory, it can be remplaced by an optional interaction with another species";
+ skos:definition "Une interaction principale n'est pas obligatoire, elle peut être remplacée par une autre interaction occasionelle avec une autre espèce"@fr;
  skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25628>.
 
 taxrefspec:Regular
@@ -67,8 +69,8 @@ taxrefspec:Regular
  rdfs:label "Regular"@en;
  skos:prefLabel "Regular"@en;
  skos:prefLabel "Régulière"@fr;
- skos:definition "The interaction is made regularly"@en;
- skos:definition "L'interaction est faire régulièrement"@fr;
+ skos:definition "The interaction is regularly observed"@en;
+ skos:definition "L'interaction est régulièrement observée"@fr;
  skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C102843>.
 
 taxrefspec:Optional
@@ -77,8 +79,8 @@ taxrefspec:Optional
  rdfs:label "Optional"@en;
  skos:prefLabel "Optional"@en;
  skos:prefLabel "Facultative"@fr;
- skos:definition "The interaction is optional to the survival of the individual"@en;
- skos:definition "L'interaction est facultative à la survie de l'individu"@fr;
+ skos:definition "An optional interaction is not mandatory for the survival of the individual"@en;
+ skos:definition "Une interaction facultative n'est pas obligatoire à la survie de l'individu"@fr;
  skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C25603>;
  skos:relatedMatch <https://www.wikidata.org/wiki/Q59864995>.
 
@@ -88,6 +90,6 @@ taxrefspec:Sporadic
  rdfs:label "Sporadic"@en;
  skos:prefLabel "Sporadic"@en;
  skos:prefLabel "occasionnelle / exceptionnelle"@fr;
- skos:definition "The interaction is made sporadically"@en;
- skos:definition "L'interaction est faite de manière occasionnelle / exceptionnelle"@fr;
+ skos:definition "The interaction is observed sporadically"@en;
+ skos:definition "L'interaction est observée de manière occasionnelle/exceptionnelle"@fr;
  skos:relatedMatch <http://purl.obolibrary.org/obo/NCIT_C64954>.
