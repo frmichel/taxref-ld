@@ -117,20 +117,20 @@
 # ========================================================================================
 
 # See doc on https://taxref.mnhn.fr/taxref-web/api/doc about https://taxref.mnhn.fr/api/interactions/types
-<#LS_ASSOCIE>       xrr:query """db.interactions.find({$and: [{'relationId': 'ASSOCIE'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_COMMENSAL>     xrr:query """db.interactions.find({$and: [{'relationId': 'COMMENSAL'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_DISPERSEUR>    xrr:query """db.interactions.find({$and: [{'relationId': 'DISPERSEUR'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_ECTOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ECTOPARASITE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_ENDOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOPARASITE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_ENDOSYMBIOTE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOSYMBIOTE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_GALLES>        xrr:query """db.interactions.find({$and: [{'relationId': 'GALLES'},        {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_MUTUEL>        xrr:query """db.interactions.find({$and: [{'relationId': 'MUTUEL'},        {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_NUTRIMENT>     xrr:query """db.interactions.find({$and: [{'relationId': 'NUTRIMENT'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_PARASITE>      xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITE'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_PARASITOIDE>   xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITOIDE'},   {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_PHORETIC>      xrr:query """db.interactions.find({$and: [{'relationId': 'PHORETIC'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_POLLINISATEUR> xrr:query """db.interactions.find({$and: [{'relationId': 'POLLINISATEUR'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
-<#LS_PREDATEUR>     xrr:query """db.interactions.find({$and: [{'relationId': 'PREDATEUR'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': ''}]})""".
+<#LS_ASSOCIE>       xrr:query """db.interactions.find({$and: [{'relationId': 'ASSOCIE'},       {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_COMMENSAL>     xrr:query """db.interactions.find({$and: [{'relationId': 'COMMENSAL'},     {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_DISPERSEUR>    xrr:query """db.interactions.find({$and: [{'relationId': 'DISPERSEUR'},    {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_ECTOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ECTOPARASITE'},  {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_ENDOPARASITE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOPARASITE'},  {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_ENDOSYMBIOTE>  xrr:query """db.interactions.find({$and: [{'relationId': 'ENDOSYMBIOTE'},  {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_GALLES>        xrr:query """db.interactions.find({$and: [{'relationId': 'GALLES'},        {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_MUTUEL>        xrr:query """db.interactions.find({$and: [{'relationId': 'MUTUEL'},        {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_NUTRIMENT>     xrr:query """db.interactions.find({$and: [{'relationId': 'NUTRIMENT'},     {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_PARASITE>      xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITE'},      {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_PARASITOIDE>   xrr:query """db.interactions.find({$and: [{'relationId': 'PARASITOIDE'},   {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_PHORETIC>      xrr:query """db.interactions.find({$and: [{'relationId': 'PHORETIC'},      {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_POLLINISATEUR> xrr:query """db.interactions.find({$and: [{'relationId': 'POLLINISATEUR'}, {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
+<#LS_PREDATEUR>     xrr:query """db.interactions.find({$and: [{'relationId': 'PREDATEUR'},     {'taxonStage': null}, {'taxonSex': null}, {'targetStage': null}]})""".
 
 
 # -------------------------------------------------------------------------
@@ -509,20 +509,20 @@
 # Case where both SOURCE and TARGET taxa have biological stage and/or sex
 # ========================================================================================
 
-<#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_DISPERSEUR_EXTENDED_SOURCE_AND_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_GALLES_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PHORETIC_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ASSOCIE_EXTENDED_SOURCE_AND_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_COMMENSAL_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_DISPERSEUR_EXTENDED_SOURCE_AND_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_ECTOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_ENDOPARASITE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE_AND_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_GALLES_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_MUTUEL_EXTENDED_SOURCE_AND_TARGET>        xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_NUTRIMENT_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_PARASITE_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_PARASITOIDE_EXTENDED_SOURCE_AND_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_PHORETIC_EXTENDED_SOURCE_AND_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_POLLINISATEUR_EXTENDED_SOURCE_AND_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
+<#LS_PREDATEUR_EXTENDED_SOURCE_AND_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': {$ne: null}}]})""".
 
 # -------------------------------------------------------------------------
 # Is associated with (symbiotically interacts with)
@@ -899,20 +899,20 @@
 # Case where only SOURCE taxon has biological stage and/or sex
 # ========================================================================================
 
-<#LS_ASSOCIE_EXTENDED_SOURCE>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': '' }]})""".
-<#LS_COMMENSAL_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_DISPERSEUR_EXTENDED_SOURCE>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_ECTOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_ENDOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_GALLES_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_MUTUEL_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_NUTRIMENT_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_PARASITE_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_PARASITOIDE_EXTENDED_SOURCE>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_PHORETIC_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_POLLINISATEUR_EXTENDED_SOURCE>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
-<#LS_PREDATEUR_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: ''}}, {'taxonSex': {$ne: ''}}]}, {'targetStage': ''}]})""".
+<#LS_ASSOCIE_EXTENDED_SOURCE>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_COMMENSAL_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_DISPERSEUR_EXTENDED_SOURCE>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_ECTOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_ENDOPARASITE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_SOURCE> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_GALLES_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_MUTUEL_EXTENDED_SOURCE>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_NUTRIMENT_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_PARASITE_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_PARASITOIDE_EXTENDED_SOURCE>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_PHORETIC_EXTENDED_SOURCE>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_POLLINISATEUR_EXTENDED_SOURCE>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
+<#LS_PREDATEUR_EXTENDED_SOURCE>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {$or: [{'taxonStage': {$ne: null}}, {'taxonSex': {$ne: null}}]}, {'targetStage': null}]})""".
 
 # -------------------------------------------------------------------------
 # Is associated with (symbiotically interacts with)
@@ -1289,20 +1289,20 @@
 # Case where only TARGET taxon has biological stage and/or sex
 # ========================================================================================
 
-<#LS_ASSOCIE_EXTENDED_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_COMMENSAL_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_DISPERSEUR_EXTENDED_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ECTOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ENDOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_ENDOSYMBIOTE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_GALLES_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_MUTUEL_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_NUTRIMENT_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PARASITE_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PARASITOIDE_EXTENDED_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PHORETIC_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_POLLINISATEUR_EXTENDED_TARGET>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
-<#LS_PREDATEUR_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {'taxonStage': ''}, {'taxonSex': ''}, {'targetStage': {$ne: ''}}]})""".
+<#LS_ASSOCIE_EXTENDED_TARGET>      xrr:query """db.interactions.find({$and: [{'relationId':'ASSOCIE'},      {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_COMMENSAL_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'COMMENSAL'},    {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_DISPERSEUR_EXTENDED_TARGET>   xrr:query """db.interactions.find({$and: [{'relationId':'DISPERSEUR'},   {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_ECTOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ECTOPARASITE'}, {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_ENDOPARASITE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOPARASITE'}, {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_ENDOSYMBIOTE_EXTENDED_TARGET> xrr:query """db.interactions.find({$and: [{'relationId':'ENDOSYMBIOTE'}, {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_GALLES_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'GALLES'},       {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_MUTUEL_EXTENDED_TARGET>       xrr:query """db.interactions.find({$and: [{'relationId':'MUTUEL'},       {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_NUTRIMENT_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'NUTRIMENT'},    {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_PARASITE_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PARASITE'},     {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_PARASITOIDE_EXTENDED_TARGET>  xrr:query """db.interactions.find({$and: [{'relationId':'PARASITOIDE'},  {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_PHORETIC_EXTENDED_TARGET>     xrr:query """db.interactions.find({$and: [{'relationId':'PHORETIC'},     {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_POLLINISATEUR_EXTENDED_TARGET>xrr:query """db.interactions.find({$and: [{'relationId':'POLLINISATEUR'},{'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
+<#LS_PREDATEUR_EXTENDED_TARGET>    xrr:query """db.interactions.find({$and: [{'relationId':'PREDATEUR'},    {'taxonStage': null}, {'taxonSex': null}, {'targetStage': {$ne: null}}]})""".
 
 # -------------------------------------------------------------------------
 # Is associated with (symbiotically interacts with)

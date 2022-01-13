@@ -1,0 +1,156 @@
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl:            <http://www.w3.org/2002/07/owl#>.
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#>.
+@prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
+
+@prefix taxref:         <http://taxref.mnhn.fr/lod/>.
+@prefix taxrefbgs:      <http://taxref.mnhn.fr/lod/bioGeoStatus/>.
+@prefix taxrefhab:      <http://taxref.mnhn.fr/lod/habitat/>.
+@prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
+@prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
+@prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
+@prefix taxrefspec:     <http://taxref.mnhn.fr/lod/specificity/>.
+
+@prefix xrr:            <http://i3s.unice.fr/xr2rml#> .
+@prefix rr:             <http://www.w3.org/ns/r2rml#> .
+@prefix rml:            <http://semweb.mmlab.be/ns/rml#> .
+
+
+# -------------------------------------------------------------------------
+# Generate the classes for SOURCE TAXON with stage and/or sex
+#
+# Example of what we want to generatye
+# <http://taxref.mnhn.fr/lod/taxon/123456_94a0e5df69173fafa8059af798f69eef0f8c7d13>
+#  owl:equivalentClass [
+#    owl:intersectionOf (
+#        <http://taxref.mnhn.fr/lod/taxon/53668/14.0>
+#        taxref:Organisms_in_larve_stage
+#        taxref:femelle_Organisms
+#    )
+#  ].
+
+<#SM_Extd> a rr:SubjectMap;
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}_sha1({$.taxonStage}_{$.taxonSex})";
+    rr:class owl:Class.
+
+<#TPL_intersectionOf_BN>
+    rr:template "intersectionOf_{$.taxon.id}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
+    
+<#TPL_intersectionOf_list1>
+    rr:template "list1_{$.taxon.id}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
+
+
+# Stage and no sex
+<#LS_Extd_Stage> xrr:query """db.interactions.find({$and:[{'taxonStage': {$ne: null}}, {'taxonSex': null}]})""".
+<#TM_Extd_Stage> a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage>;
+    rr:subjectMap <#SM_Extd>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:objectMap [ rr:template "{$.taxon.scientificName}, {$.taxonStage}"; rr:termType rr:Literal ]];
+    rr:predicateObjectMap [ rr:predicate owl:equivalentClass; rr:objectMap <#TPL_intersectionOf_BN> ].
+<#TM_intersectionOf_Stage>
+    xrr:logicalSource <#LS_Extd_Stage>;
+    rr:subjectMap <#TPL_intersectionOf_BN>;
+    rr:predicateObjectMap [ rr:predicate owl:intersectionOf; rr:objectMap <#TPL_intersectionOf_list1> ].
+
+# No stage and sex
+<#LS_Extd_Sex> xrr:query """db.interactions.find({$and:[{'taxonStage': null},{'taxonSex': {$ne: null}}]})""".
+<#SM_Extd_Sex> a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Sex>;
+    rr:subjectMap <#SM_Extd>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:objectMap [ rr:template "{$.taxon.scientificName}, {$.taxonSex}"; rr:termType rr:Literal ]];
+    rr:predicateObjectMap [ rr:predicate owl:equivalentClass; rr:objectMap <#TPL_intersectionOf_BN> ].
+<#TM_intersectionOf_Sex>
+    xrr:logicalSource <#LS_Extd_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_BN>;
+    rr:predicateObjectMap [ rr:predicate owl:intersectionOf; rr:objectMap <#TPL_intersectionOf_list1> ].
+
+# Stage and sex
+<#LS_Extd_Stage_Sex> xrr:query """db.interactions.find({$and:[{'taxonStage': {$ne: null}},{'taxonSex': {$ne: null}}]})""".
+<#SM_Extd_Stage_Sex> a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage_Sex>;
+    rr:subjectMap <#SM_Extd>;
+    rr:predicateObjectMap [ rr:predicate rdfs:label; rr:objectMap [ rr:template "{$.taxon.scientificName}, {$.taxonStage}, {$.taxonSex}"; rr:termType rr:Literal ]];
+    rr:predicateObjectMap [ rr:predicate owl:equivalentClass; rr:objectMap <#TPL_intersectionOf_BN> ].
+<#TM_intersectionOf_Stage_Sex>
+    xrr:logicalSource <#LS_Extd_Stage_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_BN>;
+    rr:predicateObjectMap [ rr:predicate owl:intersectionOf; rr:objectMap <#TPL_intersectionOf_list1> ].
+
+
+# The first element of the intersection is the taxon, the 2nd is the stage class
+<#TM_intersectionOf_list1_taxon_stage>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage>;
+    rr:subjectMap <#TPL_intersectionOf_list1>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage> ].
+
+<#TPL_intersectionOf_list2_taxon_stage>
+    rr:template "list2_{$.taxon.id}_{$.taxonStage}"; rr:termType rr:BlankNode.
+
+<#TM_intersectionOf_list2_taxon_stage>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage>;
+    rr:subjectMap <#TPL_intersectionOf_list2_taxon_stage>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/Organisms_in_{$.taxonStage}_stage" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap [ rr:constant rdf:nil; rr:termType rr:IRI ]].
+
+
+# The first element of the intersection is the taxon, the 2nd is the sex class
+<#TM_intersectionOf_list1_taxon_sex>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_list1>;
+    rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_sex> ].
+
+<#TPL_intersectionOf_list2_taxon_sex>
+    rr:template "list2_{$.taxon.id}_{$.taxonSex}"; rr:termType rr:BlankNode.
+
+<#TM_intersectionOf_list2_taxon_sex>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_list2_taxon_sex>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/{$.taxonSex}_Organisms" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap [ rr:constant rdf:nil; rr:termType rr:IRI ]].
+
+
+# The first element of the intersection is the taxon, the 2nd is a stage and the 3rd is the sex
+<#TM_intersectionOf_list1_taxon_stage_sex>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_list1>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage_sex> ].
+
+<#TPL_intersectionOf_list2_taxon_stage_sex>
+    rr:template "list2_{$.taxon.id}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
+
+<#TM_intersectionOf_list2_taxon_stage_sex>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_list2_taxon_stage_sex>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/Organisms_in_{$.taxonStage}_stage" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list3_taxon_stage_sex> ].
+
+<#TPL_intersectionOf_list3_taxon_stage_sex>
+    rr:template "list3_{$.taxon.id}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
+
+<#TM_intersectionOf_list3_taxon_stage_sex>
+    a rr:TriplesMap;
+    xrr:logicalSource <#LS_Extd_Stage_Sex>;
+    rr:subjectMap <#TPL_intersectionOf_list3_taxon_stage_sex>;
+    rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/{$.taxonSex}_Organisms" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap [ rr:constant rdf:nil; rr:termType rr:IRI ]].
+
+
