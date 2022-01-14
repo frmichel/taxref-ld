@@ -48,13 +48,17 @@ As of v15, TAXREF-LD dump is made available from Zenodo. Previous versions are a
 | 12.0 | https://github.com/frmichel/taxref-ld/tree/12.0/dataset |
 | 13.0 | https://github.com/frmichel/taxref-ld/tree/13.0/dataset |
 
-## Downloading, SPARQL Querying, URI dereferencing
+## Downloading and Querying
+
+### Data dumps
 
 The dataset is downloadable as a set of RDF dumps (in Turtle syntax) from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5848916)](https://doi.org/10.5281/zenodo.5848916)
 
 The dataset metadata (in DCAT, VOID and SPARQL SD) as well as the definition of vocabulary terms (classes, concepts, properties) used to represent taxonomic data are provided in `dataset/Taxrefld_static*.ttl`. Whenever possible, these terms are aligned with their counterparts in thrid-party ontologies.
 
-TAXREF-LD can also be queried through our public Virtuoso OS SPARQL endpoint http://taxref.mnhn.fr/sparql.
+### SPARQL endpoint
+
+TAXREF-LD can also be queried through our public Virtuoso OS **SPARQL endpoint http://taxref.mnhn.fr/sparql**.
 
 You may use the [Faceted Browser](http://taxref.i3s.unice.fr/fct/) to look up text or URIs.
 As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878](http://taxref.mnhn.fr/lod/taxon/60878).
