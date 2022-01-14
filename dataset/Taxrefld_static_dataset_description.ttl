@@ -103,7 +103,7 @@ taxref:Catalog
     a                   void:Dataset;
     void:uriSpace       "http://taxref.mnhn.fr/lod/";
     void:rootResource   <http://taxref.mnhn.fr/lod/name/349525>;
-    void:triples        "33898433"^^xsd:integer;
+    void:triples        "35280107"^^xsd:integer;
     void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
     void:dataDump       <https://doi.org/10.5281/zenodo.5848916>;
 
@@ -160,7 +160,10 @@ taxref:sparql-service
             <http://taxref.mnhn.fr/lod/graph/habitats/15.0>,
             <http://taxref.mnhn.fr/lod/graph/statuses/15.0>,
             <http://taxref.mnhn.fr/lod/graph/vernacular/15.0>,
-            <http://taxref.mnhn.fr/lod/graph/dbxref/15.0>
+            <http://taxref.mnhn.fr/lod/graph/dbxref/15.0>,
+            <http://taxref.mnhn.fr/lod/graph/links-ncbi>,
+            <http://taxref.mnhn.fr/lod/graph/links-agrovoc>,
+            <http://taxref.mnhn.fr/lod/graph/links-worms>,
     ].
 
 

@@ -72,7 +72,7 @@ The following **named graphs** can be queried from our SPARQL endpoint:
 | `http://taxref.mnhn.fr/lod/graph/locations` | regions, departements, territories etc. |320,599|
 | `http://taxref.mnhn.fr/lod/graph/media` | media (photos) linked to taxa |690,508|
 | `http://taxref.mnhn.fr/lod/graph/statuscodes` | description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `statusCodes.ttl` and `statusBiblio.ttl`) |1,804|
-| `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}` | description of taxa as OWL classes |2,918,918|
+| `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}` | description of taxa as OWL classes |4,300,619|
 | `http://taxref.mnhn.fr/lod/graph/concepts/{TAXREF version}` | description of scientific names as SKOS concepts |7,739,313|
 | `http://taxref.mnhn.fr/lod/graph/interactions/{TAXREF version}` | species interactions |303,025|
 | `http://taxref.mnhn.fr/lod/graph/statuses/{TAXREF version}` | all taxa statuses (legal, biogeographical, red list) |7,846,358|
@@ -80,7 +80,7 @@ The following **named graphs** can be queried from our SPARQL endpoint:
 | `http://taxref.mnhn.fr/lod/graph/dbxref/{TAXREF version}` | cross-references to identifiers of third-party data sources such as GBIF, WoRMS, the Plant List etc. |10,330,904|
 | `http://taxref.mnhn.fr/lod/graph/webpages/{TAXREF version}` | `foaf:page` links to webpages |2,567,841|
 | `http://taxref.mnhn.fr/lod/graph/links-*/{TAXREF version}` | interllinking to equivalent URIs from NCBI, Agrovoc, WoRMS |250,249|
-| Total | | 33,898,433 |
+| Total | | 35,280,107 |
 
 ## License
 
