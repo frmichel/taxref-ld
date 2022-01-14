@@ -136,7 +136,7 @@
     rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
-        rr:objectMap [ rr:constant taxrefrk:superkingdom; rr:termType rr:IRI; ];
+        rr:objectMap [ rr:constant taxrefrk:SuperKingdom; rr:termType rr:IRI; ];
     ].
 
 <#TM_Name_TaxonomicalRank_Kingdom>
@@ -145,7 +145,7 @@
     rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
-        rr:objectMap [ rr:constant taxrefrk:kingdom; rr:termType rr:IRI; ];
+        rr:objectMap [ rr:constant taxrefrk:Kingdom; rr:termType rr:IRI; ];
     ].
 
 <#TM_Name_TaxonomicalRank_SubKingdom>
@@ -154,7 +154,7 @@
     rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
-        rr:objectMap [ rr:constant taxrefrk:subkingdom; rr:termType rr:IRI; ];
+        rr:objectMap [ rr:constant taxrefrk:SubKingdom; rr:termType rr:IRI; ];
     ].
 
 <#TM_Name_TaxonomicalRank_InfraKingdom>
@@ -163,7 +163,7 @@
     rr:subjectMap <#SM_Name>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:hasRank;
-        rr:objectMap [ rr:constant taxrefrk:Infrakingdom; rr:termType rr:IRI; ];
+        rr:objectMap [ rr:constant taxrefrk:InfraKingdom; rr:termType rr:IRI; ];
     ].
 
 <#TM_Name_TaxonomicalRank_Phylum>
