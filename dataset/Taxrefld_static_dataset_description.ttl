@@ -77,12 +77,13 @@ taxref:Catalog
     schema:author
         <https://orcid.org/0000-0001-9064-0463>, <https://orcid.org/0000-0001-5959-5561>, 
         taxref:oliviergargominy, taxref:sandrinetercerie;
+    dct:contributor <https://orcid.org/0000-0003-4868-2584>, "Julien Kaplan";
 
     schema:subjectOf taxref:hal01617708;
     dct:language    <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
     dct:language    <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
-    dct:subject     "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences";
-    schema:keywords "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences";
+    dct:subject     "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "fungus";
+    schema:keywords "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "fungus";
     dcat:keyword
         "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "lifesciences", "schemata", "lod",
         "deref-vocab", "vocab-mappings", "provenance-metadata", "published-by-producer", "license-metadata",
@@ -102,9 +103,9 @@ taxref:Catalog
     a                   void:Dataset;
     void:uriSpace       "http://taxref.mnhn.fr/lod/";
     void:rootResource   <http://taxref.mnhn.fr/lod/name/349525>;
-    void:triples        "26773706"^^xsd:integer;
+    void:triples        "33898433"^^xsd:integer;
     void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
-    void:dataDump       <############### TO BE COMPLETED ########################>;
+    void:dataDump       <https://doi.org/10.5281/zenodo.5848916>;
 
     void:vocabulary 
         skos:, skosxl:, dct:, foaf:, schema:, bibo:, <http://www.wikidata.org/>, <http://sws.geonames.org/>,
@@ -215,6 +216,12 @@ taxref:INPN
     schema:sameAs <https://cv.archives-ouvertes.fr/catherine-faron-zucker>,
         <https://www.researchgate.net/profile/Catherine_Faron-Zucker>.
 
+<https://orcid.org/0000-0003-4868-2584>
+    a foaf:Person; 
+    schema:name "Antonia ETTORRE";
+    foaf:name "Antonia ETTORRE";
+    schema:sameAs <https://www.linkedin.com/in/antonia-ettorre-105271175>.
+
 taxref:johanmontagnat a schema:Person;
     schema:name "Johan MONTAGNAT";
     foaf:name "Johan MONTAGNAT";
@@ -235,13 +242,7 @@ taxref:oliviergargominy a schema:Person;
     schema:name "Olivier GARGOMINY";
     foaf:name "Olivier GARGOMINY";
     schema:sameAs <https://www.researchgate.net/profile/Gargominy_Olivier>, <https://mnhn.academia.edu/GargominyOlivier>.
-    
-taxref:antoniaettorre a schema:Person;
-    schema:name "Antonia ETTORRE";
-    foaf:name "Antonia ETTORRE";
-    schema:sameAs <https://www.linkedin.com/in/antonia-ettorre-105271175>.
-    
-    
+        
 # ------------------------------------------------------------------------------
 # Provenance information
 
