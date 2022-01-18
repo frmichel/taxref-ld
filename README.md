@@ -59,7 +59,7 @@ The dataset metadata (in DCAT, VOID and SPARQL SD) as well as the definition of 
 
 ### SPARQL endpoint
 
-TAXREF-LD can also be queried through our public Virtuoso OS **SPARQL endpoint http://taxref.mnhn.fr/sparql**.
+TAXREF-LD can also be queried through our public Virtuoso OS **SPARQL endpoint https://taxref.mnhn.fr/sparql**.
 
 You may use the [Faceted Browser](http://taxref.i3s.unice.fr/fct/) to look up text or URIs.
 As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878](http://taxref.mnhn.fr/lod/taxon/60878).

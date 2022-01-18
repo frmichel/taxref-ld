@@ -36,10 +36,10 @@
     rr:class owl:Class.
 
 <#TPL_intersectionOf_BN>
-    rr:template "intersectionOf_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "intersectionOf_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
     
 <#TPL_intersectionOf_list1>
-    rr:template "list_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "list_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
 
 
 <#LS_Extd_Stage> xrr:query """db.interactions.find({'targetStage': {$ne: null}})""".
@@ -64,7 +64,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage> ].
 
 <#TPL_intersectionOf_list2_taxon_stage>
-    rr:template "sublist_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "sublist_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list2_taxon_stage>
     a rr:TriplesMap;
