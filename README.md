@@ -44,16 +44,15 @@ A new version of TAXREF is released yearly. TAXREF-LD bears the same major versi
 
 ### Data dumps
 
-The dataset is downloadable as a set of RDF dumps (in Turtle syntax) from Zenodo: 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5876775.svg)](https://doi.org/10.5281/zenodo.5876775)
-
+The dataset is downloadable as a set of RDF dumps (in Turtle syntax). As of version 15, the dumps are available from Zenodo.
 Previous versions are still aviable on this Github repo:
 
 | Version  | Download link |
 | ----  | ---- |
-| 10.0 | https://github.com/frmichel/taxref-ld/tree/10.0/dataset |
-| 12.0 | https://github.com/frmichel/taxref-ld/tree/12.0/dataset |
+| 15.1 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5876775.svg)](https://doi.org/10.5281/zenodo.5876775) |
 | 13.0 | https://github.com/frmichel/taxref-ld/tree/13.0/dataset |
+| 12.0 | https://github.com/frmichel/taxref-ld/tree/12.0/dataset |
+| 10.0 | https://github.com/frmichel/taxref-ld/tree/10.0/dataset |
 
 
 The dataset metadata (in DCAT, VOID and SPARQL SD) as well as the definition of vocabulary terms (classes, concepts, properties) used to represent taxonomic data are provided in `dataset/Taxrefld_static*.ttl`. Whenever possible, these terms are aligned with their counterparts in thrid-party ontologies.
