@@ -67,6 +67,7 @@
 		rr:objectMap [ xrr:reference "$.ignUri"; rr:termType rr:IRI; ];
 		rr:objectMap [ xrr:reference "$.wikidataUri"; rr:termType rr:IRI; ];
 		rr:objectMap [ xrr:reference "$.geonamesUri"; rr:termType rr:IRI; ];
+		rr:objectMap [ xrr:reference "$.sandreUri"; rr:termType rr:IRI; ];
     ];
     .
 

@@ -53,7 +53,7 @@ As of v15, TAXREF-LD dump is made available from Zenodo. Previous versions are a
 ### Data dumps
 
 The dataset is downloadable as a set of RDF dumps (in Turtle syntax) from Zenodo: 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5848916.svg)](https://doi.org/10.5281/zenodo.5848916)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5876775.svg)](https://doi.org/10.5281/zenodo.5876775)
 
 The dataset metadata (in DCAT, VOID and SPARQL SD) as well as the definition of vocabulary terms (classes, concepts, properties) used to represent taxonomic data are provided in `dataset/Taxrefld_static*.ttl`. Whenever possible, these terms are aligned with their counterparts in thrid-party ontologies.
 

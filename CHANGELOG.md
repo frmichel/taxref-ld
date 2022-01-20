@@ -1,12 +1,13 @@
 # TAXREF-LD changelog
 
 
-## [15.0] 2022-01-04 - TAXREF v15
+## [15.1] 2022-01-19 - TAXREF v15
 
 ### Added
 - Development stages and sex as part of the species interactions, e.g.: species A in larva stage feeds on B.
 - Links with External IDs for Cockroach Species File Online, IUCN Red List, World Flora Online, ZooBank
 - For each taxon, add Darwin Core properties with higher levels ranks: `dwc:subgenus`, `dwc:genus`, `dwc:subfamily`, `dwc:family`, `dwc:order`, `dwc:kingdom` (issue #8)
+- Add owl:sameAs links from locations to SANDRE URIs
 
 ### Changed
 - Update to TAXREF version 15
