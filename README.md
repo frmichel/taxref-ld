@@ -1,4 +1,4 @@
-  # TAXREF-LD: Knowledge Graph of the French taxonomic registery
+  # TAXREF-LD: Knowledge Graph of the French taxonomic registry
 
 TAXREF-LD is the Linked Data knowledge graph representing of [TAXREF](https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en), the French national taxonomical register for fauna, flora and fungus, that covers mainland France and overseas territories.
 
