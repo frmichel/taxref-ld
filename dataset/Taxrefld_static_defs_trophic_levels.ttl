@@ -97,8 +97,8 @@ taxreftl:Herbivore
  rdfs:label "Herbivore"@en;
  skos:prefLabel "Herbivore"@en;
  skos:prefLabel "Consommateur d’autotrophes"@fr;
- skos:definition "A heterotroph which consumes plants or macroalgae via ingestion through a type of "mouth". Plant or algal matter is broken down through an internal digestion process"@en;
- skos:definition "Un hétérotrophe qui consomme des plantes ou des macroalgues par ingestion par une sorte de "bouche". La matière végétale ou algale est décomposée par un processus de digestion interne"@fr;
+ skos:definition "A heterotroph which consumes plants or macroalgae via ingestion through a type of 'mouth'. Plant or algal matter is broken down through an internal digestion process"@en;
+ skos:definition "Un hétérotrophe qui consomme des plantes ou des macroalgues par ingestion par une sorte de 'bouche'. La matière végétale ou algale est décomposée par un processus de digestion interne"@fr;
  skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000019>;
  skos:relatedMatch <http://www.wikidata.org/entity/Q59099>.
 
@@ -267,8 +267,8 @@ taxreftl:Carnivore
  rdfs:label "Carnivore"@en;
  skos:prefLabel "Carnivore"@en;
  skos:prefLabel "Consommateur d’hétérotrophes"@fr;
- skos:definition "A heterotroph that consumes animals in whole or in part via ingestion through a type of "mouth". Animal matter is broken down through an internal digestion process."@en;
- skos:definition "Un hétérotrophe qui consomme des animaux en tout ou en partie par ingestion par une sorte de "bouche". La matière animale est décomposée par un processus de digestion interne."@fr;
+ skos:definition "A heterotroph that consumes animals in whole or in part via ingestion through a type of 'mouth'. Animal matter is broken down through an internal digestion process."@en;
+ skos:definition "Un hétérotrophe qui consomme des animaux en tout ou en partie par ingestion par une sorte de 'bouche'. La matière animale est décomposée par un processus de digestion interne."@fr;
  skos:exactMatch <http://purl.obolibrary.org/obo/ECOCORE_00000088>;
  skos:relatedMatch <http://www.wikidata.org/entity/Q220314>.
 

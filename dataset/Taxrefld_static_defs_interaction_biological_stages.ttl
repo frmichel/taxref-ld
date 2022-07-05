@@ -235,7 +235,7 @@ taxrefbs:Fetus
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Fetus"@en;
  skos:prefLabel "Foetus"@fr;
- skos:exactMatch <http://www.wikidata.org/entity/Q17013437>.
+ skos:exactMatch <http://www.wikidata.org/entity/Q17013437>;
  skos:relatedMatch <http://purl.obolibrary.org/obo/UBERON_0000068>.
 
 
