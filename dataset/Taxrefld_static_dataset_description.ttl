@@ -38,12 +38,12 @@ taxref:Catalog
     rdfs:label "Catalog of TAXREF-LD datasets"@en;
     dct:title  "Catalogue des jeux de données TAXREF-LD"@fr;
     rdfs:label "Catalogue des jeux de données TAXREF-LD"@fr;
-    foaf:homepage <https://github.com/frmichel/taxref-ld/>;
+    foaf:page <https://github.com/frmichel/taxref-ld/>;
     schema:sameAs <https://datahub.ckan.io/dataset/taxref-ld>;
     dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
     dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
-    dcat:dataset <http://taxref.mnhn.fr/lod/taxref-ld>;
-    dcat:dataset <http://taxref.mnhn.fr/lod/taxref>;
+    dcat:dataset taxref:taxref-ld;
+    dcat:dataset taxref:taxref;
     dct:publisher
         <https://ror.org/03wkt5x30>, taxref:INPN,
         <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
@@ -51,20 +51,48 @@ taxref:Catalog
 
 # ------------------------------------------------------------------------------
 
+# TAXREF dataset DCAT definition
+taxref:taxref
+    a dcat:Dataset;
+    dct:title "TAXREF: Taxonomic register for flora and fauna of mainland France and overseas territories"@en;
+    dct:title "TAXREF : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
+    dct:description "TAXREF est le référentiel taxonomique national pour la faune, la flore et la fonge de France métropolitaine et d’outre-mer, élaboré et diffusé par le Muséum national d’Histoire naturelle (MNHN). TAXREF est téléchargeable depuis le site Web du MNHN. TAXREF-LD, la représentation Linked Data de TAXREF, est une initiative conjointe du MNHN et du laboratoire I3S (Université Côte d'Azur, CNRS, Inria)."@fr;
+    dct:description "TAXREF is the national taxonomical register for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). TAXREF is downloadable from the MNHN Web site and can be queriesd through a Web service. TAXREF-LD, the Linked Data representation of TAXREF, is a joint initiative of MNHN and the I3S laboratory (Université Côte d'Azur, CNRS, Inria)."@en;  
+
+    dcat:landingPage        <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+    schema:sameAs           <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+    foaf:page               <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
+    
+    dct:licence             <https://creativecommons.org/licenses/by/3.0/fr/>;
+    schema:licence          <https://creativecommons.org/licenses/by/3.0/fr/>;
+    owl:versionInfo         "15.0";
+    dcat:version            "15.0";
+    dct:issued              "2021-12-16"^^xsd:date;
+    dct:creator             "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
+    dct:publisher           <https://ror.org/03wkt5x30>, taxref:INPN;
+    schema:subjectOf        taxref:taxrefmethodo;
+    dct:accrualPeriodicity  <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
+    .
+
 # TAXREF-LD dataset DCAT definition
-<http://taxref.mnhn.fr/lod/taxref-ld>
+taxref:taxref-ld
     a dcat:Dataset, schema:Dataset;
     a owl:Ontology;
     a skos:ConceptScheme; skos:hasTopConcept <http://taxref.mnhn.fr/lod/name/349525>;
 
     dct:title "TAXREF-LD"; rdfs:label "TAXREF-LD"; schema:name "TAXREF-LD";
+    <http://qudt.org/schema/qudt/acronym> "taxref-ld";
     dct:description "Representation of the TAXREF taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientific names attached to the taxa."@en;
     dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
+    foaf:page <https://github.com/frmichel/taxref-ld/>;
 
+    dct:identifier  "https://doi.org/10.5281/zenodo.5848916";
     dct:licence     <https://creativecommons.org/licenses/by/3.0/fr/>;
     schema:licence  <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "15.1";
+    dcat:version    "15.1";
     dct:issued      "2022-01-19"^^xsd:date; schema:datePublished "2022-01-19"^^xsd:date;
+
     dct:publisher
         <https://ror.org/03wkt5x30>, taxref:INPN,
         <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
@@ -78,10 +106,15 @@ taxref:Catalog
         <https://orcid.org/0000-0001-9064-0463>, <https://orcid.org/0000-0001-5959-5561>, 
         taxref:oliviergargominy, taxref:sandrinetercerie;
     dct:contributor <https://orcid.org/0000-0003-4868-2584>, "Julien Kaplan";
+    foaf:fundedBy
+        <https://ror.org/03wkt5x30>, taxref:INPN,
+        <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
 
     schema:subjectOf taxref:hal01617708;
     dct:language    <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
     dct:language    <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
+    schema:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
+    schema:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
     dct:subject     "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "fungus";
     schema:keywords "biodiversity", "lifesciences", "taxonomy", "species", "fauna", "flora", "fungus";
     dcat:keyword
@@ -89,51 +122,38 @@ taxref:Catalog
         "deref-vocab", "vocab-mappings", "provenance-metadata", "published-by-producer", "license-metadata",
         "format-rdf", "format-rdfs", "format-skos", "format-dc", "format-foaf", "format-schema", "format-geonames", "format-geospecies", "format-txn", "format-ncbitaxon", "format-dwc", "format-ro", "format-bibo";
 
+    dcat:distribution [
+        a                   dcat:Distribution;
+        dct:description     "Distribution of TAXREF-LD as an archive of RDF Turtle files"
+        dcat:accessURL      <https://doi.org/10.5281/zenodo.5848916>;
+        dcat:downloadURL    <https://zenodo.org/record/5848916/files/taxrefld15.tar>;
+        dcat:mediaType      <http://www.iana.org/assignments/media-types/text/turtle>;
+        dcat:packageFormat  <http://publications.europa.eu/resource/authority/file-type/TAR>;
+        dcat:compressFormat <http://www.iana.org/assignments/media-types/application/zip>;
+    ];
+
     a prov:Entity;
-    prov:wasDerivedFrom     <http://taxref.mnhn.fr/lod/taxref>;
+    prov:hadPrimarySource   taxref:taxref;
     prov:wasGeneratedBy     taxref:RdfGeneration;
     prov:wasGeneratedAtTime "2022-01-19"^^xsd:date;
 
     dct:spatial
         <http://sws.geonames.org/3017382/>, <http://sws.geonames.org/3381670/>, <http://sws.geonames.org/3570311/>, <http://sws.geonames.org/3579143/>, <http://sws.geonames.org/3578421/>, <http://sws.geonames.org/3578476/>, <http://sws.geonames.org/3424932/>, <http://sws.geonames.org/1024031/>, <http://sws.geonames.org/935317/>, <http://sws.geonames.org/6690916/>, <http://sws.geonames.org/1546748/>, <http://sws.geonames.org/4030656/>, <http://sws.geonames.org/2139685/>, <http://sws.geonames.org/4034749/>, <http://sws.geonames.org/4020092/>;
     .
-    
+
 # TAXREF-LD dataset VOID description
-<http://taxref.mnhn.fr/lod/taxref-ld>
+taxref:taxref-ld
     a                   void:Dataset;
     void:uriSpace       "http://taxref.mnhn.fr/lod/";
     void:rootResource   <http://taxref.mnhn.fr/lod/name/349525>;
     void:triples        "35353007"^^xsd:integer;
     void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
-    void:dataDump       <https://doi.org/10.5281/zenodo.5848916>;
-
-    void:vocabulary 
+    void:dataDump       <https://zenodo.org/record/5848916/files/taxrefld15.tar>;
+    void:exampleResource <http://taxref.mnhn.fr/lod/taxon/60878>;
+    void:vocabulary
         skos:, skosxl:, dct:, foaf:, schema:, bibo:, <http://www.wikidata.org/>, <http://sws.geonames.org/>,
         ro:, dwc:, dwciri:,
         <http://aims.fao.org/aos/agrovoc/>, <http://lod.taxonconcept.org/ontology/txn.owl>, <http://purl.obolibrary.org/obo/ncbitaxon.owl>, <http://purl.obolibrary.org/obo/envo.owl>, <http://rdf.geospecies.org/ont/geospecies.owl>, <http://rs.tdwg.org/ontology/voc/TaxonRank>, <http://rs.tdwg.org/ontology/voc/TaxonName>, <http://rs.tdwg.org/dwc/terms/>;
-    .
-
-# TAXREF dataset DCAT definition
-<http://taxref.mnhn.fr/lod/taxref>
-    a dcat:Dataset;
-    dct:title "TAXREF: Taxonomic register for flora and fauna of mainland France and overseas territories"@en;
-    dct:title "TAXREF : Référentiel taxonomique pour la flore et la faune de France métropolitaine et outre-mer"@fr;
-    dct:description "TAXREF est le référentiel taxonomique national pour la faune, la flore et la fonge de France métropolitaine et d’outre-mer, élaboré et diffusé par le Muséum national d’Histoire naturelle (MNHN). TAXREF est téléchargeable depuis le site Web du MNHN. TAXREF-LD, la représentation Linked Data de TAXREF, est une initiative conjointe du MNHN et du laboratoire I3S (Université Côte d'Azur, CNRS, Inria)."@fr;
-    dct:description "TAXREF is the national taxonomical register for fauna and flora in mainland France and overseas territories, produced by the French National Museum of Natural History (MNHN). TAXREF is downloadable from the MNHN Web site and can be queriesd through a Web service. TAXREF-LD, the Linked Data representation of TAXREF, is a joint initiative of MNHN and the I3S laboratory (Université Côte d'Azur, CNRS, Inria)."@en;  
-
-    dcat:landingPage        <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
-    schema:sameAs           <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
-    foaf:homepage           <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
-
-    dct:licence             <https://creativecommons.org/licenses/by/3.0/fr/>;
-    schema:licence          <https://creativecommons.org/licenses/by/3.0/fr/>;
-    owl:versionInfo         "15.0";
-    dct:issued              "2021-12-16"^^xsd:date;
-    dct:creator 
-                            "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
-    dct:publisher           <https://ror.org/03wkt5x30>, taxref:INPN;
-    schema:subjectOf        taxref:taxrefmethodo;
-    dct:accrualPeriodicity  <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
     .
 
 # ------------------------------------------------------------------------------
@@ -145,7 +165,7 @@ taxref:sparql-service
     sd:endpoint          <http://taxref.mnhn.fr/sparql>;
     dcat:endpointURL     <http://taxref.mnhn.fr/sparql>;
     rdfs:label           "SPARQL endpoint serving the TAXREF-LD Knowledge Graph";
-    dcat:servesDataset   <http://taxref.mnhn.fr/lod/taxref-ld>;
+    dcat:servesDataset   taxref:taxref-ld;
     sd:availableGraphs [
         a                sd:GraphCollection;
         sd:namedGraph
@@ -163,7 +183,7 @@ taxref:sparql-service
             <http://taxref.mnhn.fr/lod/graph/dbxref/15.0>,
             <http://taxref.mnhn.fr/lod/graph/links-ncbi>,
             <http://taxref.mnhn.fr/lod/graph/links-agrovoc>,
-            <http://taxref.mnhn.fr/lod/graph/links-worms>,
+            <http://taxref.mnhn.fr/lod/graph/links-worms>
     ].
 
 
@@ -284,10 +304,11 @@ taxref:hal01207828
     dct:issued "2015"^^xsd:gYear; schema:datePublished "2015"^^xsd:gYear;
     dct:bibliographicCitation "Franck Michel, Loïc Djimenou, Catherine Faron Zucker, Johan Montagnat. Translation of Relational and Non-Relational Databases into RDF with xR2RML. Proceedings of the WebIST'15 Conference, 2015, Lisbon, Portugal. pp.443-454";
     bibo:doi "10.5220/0005448304430454";
-    dct:creator <https://orcid.org/0000-0001-9064-0463>, taxref:loicdjimenou, <https://orcid.org/0000-0001-5959-5561>, taxref:johanmontagnat;
-    schema:author <https://orcid.org/0000-0001-9064-0463>, taxref:loicdjimenou, <https://orcid.org/0000-0001-5959-5561>, taxref:johanmontagnat;
-    schema:sameAs <https://hal.archives-ouvertes.fr/hal-01207828>;
-    schema:about taxref:xR2RML.
+    dct:creator     <https://orcid.org/0000-0001-9064-0463>, taxref:loicdjimenou, <https://orcid.org/0000-0001-5959-5561>, taxref:johanmontagnat;
+    schema:author   <https://orcid.org/0000-0001-9064-0463>, taxref:loicdjimenou, <https://orcid.org/0000-0001-5959-5561>, taxref:johanmontagnat;
+    schema:sameAs   <https://hal.archives-ouvertes.fr/hal-01207828>;
+    schema:about    taxref:xR2RML;
+    dct:references  taxref:xR2RML.
     
 taxref:hal01617708
     a <https://data.archives-ouvertes.fr/doctype/Article>, <http://purl.org/ontology/bibo/AcademicArticle>, <https://schema.org/ScholarlyArticle>;
@@ -295,10 +316,11 @@ taxref:hal01617708
     schema:name "A Model to Represent Nomenclatural and Taxonomic Information as Linked Data. Application to the French Taxonomic Register, TAXREF";
     dct:issued "2017"^^xsd:gYear; schema:datePublished "2017"^^xsd:gYear;
     dct:bibliographicCitation "Franck Michel, Olivier Gargominy, Sandrine Tercerie, Catherine Faron Zucker. A Model to Represent Nomenclatural and Taxonomic Information as Linked Data. Application to the French Taxonomic Register, TAXREF. In Proceedings of the 2nd International Workshop on Semantics for Biodiversity (S4Biodiv) co-located with ISWC 2017, Oct 2017, Vienna, Austria. CEUR Vol. 1933, pp.1-12, 2017";
-    dct:creator <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
-    schema:author <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
-    schema:sameAs <https://hal.archives-ouvertes.fr/hal-01617708>, <http://fusion.cs.uni-jena.de/s4biodiv2017>;
-    schema:about <http://taxref.mnhn.fr/lod/taxref-ld>.
+    dct:creator     <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
+    schema:author   <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
+    schema:sameAs   <https://hal.archives-ouvertes.fr/hal-01617708>, <http://fusion.cs.uni-jena.de/s4biodiv2017>;
+    schema:about    taxref:taxref-ld:
+    dct:references  taxref:taxref-ld.
 
 taxref:taxrefmethodo
     a <https://data.archives-ouvertes.fr/doctype/Report>, <https://schema.org/Article>;
