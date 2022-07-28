@@ -1,6 +1,6 @@
   # TAXREF-LD: Knowledge Graph of the French taxonomic registry
 
-TAXREF-LD is the Linked Data knowledge graph representing of [TAXREF](https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en), the French national taxonomical register for fauna, flora and fungus, that covers mainland France and overseas territories.
+TAXREF-LD is the Linked Data knowledge graph representing [TAXREF](https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en), the French national taxonomical register for fauna, flora and fungus, that covers mainland France and overseas territories.
 
 In version 15, TAXREF-LD registers **657,000+ scientific names** and **199,000+ species**.
 
