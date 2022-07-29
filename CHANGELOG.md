@@ -1,7 +1,16 @@
 # TAXREF-LD changelog
 
 
-## [15.1] 2022-01-19 - TAXREF v15
+## [15.2] 2022-07-29
+
+### Changed
+- Fixed issues in the ontology (owl:AnnotationProperties instead of owl:ObjectProperties)
+- Update of dataset metadata (fixed issues, added dcat:Distribution, better named graphs description...)
+- Regenerate taxonomy (taxa and names) to fix an issue with missing taxa (detected with Agroportal)
+- Reorganize data dump as a zip file with subfolders rather than a tar of zip files
+
+
+## [15.1] 2022-01-19
 
 ### Added
 - Development stages and sex as part of the species interactions, e.g.: species A in larva stage feeds on B.

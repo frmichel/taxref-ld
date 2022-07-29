@@ -55,12 +55,7 @@
     rr:predicateObjectMap [
         rr:predicate {{WDTPROP}};
         rr:objectMap [ xrr:reference "$.externalId"; xsd:datatype xsd:string ];
-    ].
-
-<#TM_Taxon_XRef>
-    a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}"}, $where: 'this.taxrefId == this.taxonReferenceId'})""" ];
-    rr:subjectMap <#SM_Taxon>;
+    ];
     rr:predicateObjectMap [
         rr:predicate schema:identifier;
         rr:objectMap [ rr:template "{$.taxrefId}{$.externalDbName}{$.externalId}"; rr:termType rr:BlankNode ];
@@ -76,12 +71,7 @@
     rr:predicateObjectMap [
         rr:predicate {{WDTPROP}};
         rr:objectMap [ xrr:reference "$.externalId"; xsd:datatype xsd:string ];
-    ].
-
-<#TM_Name_XRef>
-    a rr:TriplesMap;
-    xrr:logicalSource [ xrr:query """db.externalIds.find({externalDbName: "{{EXTDBNAME}}"})""" ];
-    rr:subjectMap <#SM_Name>;
+    ];
     rr:predicateObjectMap [
         rr:predicate schema:identifier;
         rr:objectMap [ rr:template "{$.taxrefId}{$.externalDbName}{$.externalId}"; rr:termType rr:BlankNode ];

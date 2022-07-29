@@ -31,11 +31,11 @@
 
 # ================================== Interaction between two species =====================================
 
-# Direct link to the vernacular name (here: pollinates)
+# Direct link (here: pollinates)
 <http://taxref.mnhn.fr/lod/taxon/838621/13.0>
     ro:RO_0002455               <http://taxref.mnhn.fr/lod/taxon/630004/13.0> .
 
-# Reified link to the vernacular name (adds location and bibliographic reference)
+# Reified link (adds location and bibliographic reference)
 <http://taxref.mnhn.fr/lod/interact/838621-630004-178398>
     a                           <http://purl.org/biotop/biotop.owl#OrganismInteraction> , rdf:Statement ;
     rdfs:label                  "pollinates (statement)" ;

@@ -3,7 +3,7 @@
 # Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
 
 export DATASET_VERSION=15.0
-export DATASET_DATE=2022-01-13
+export DATASET_DATE=2022-07-29
 
 # MongoDB database
 export DB=taxrefv15
