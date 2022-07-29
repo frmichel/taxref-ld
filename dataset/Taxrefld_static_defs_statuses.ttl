@@ -48,7 +48,7 @@ taxrefstatus:BioGeographicalStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Biogeographical status of a taxon in a geographical area, according to a bibliographic source"@en;
-    rdfs:comment "Relates a biogeographical status of a taxon with the geographical area where this status applies and the bibliographic source that assigned this status to that taxon"@en.
+    rdfs:comment "The biogeographical status of a taxon with the geographical area where this status applies and the bibliographic source that assigned this status to that taxon"@en.
 
 taxrefstatus:LegalStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;

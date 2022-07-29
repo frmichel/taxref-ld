@@ -86,12 +86,13 @@ taxref:taxref-ld
     dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
     foaf:page <https://github.com/frmichel/taxref-ld/>;
 
-    dct:identifier  "https://doi.org/10.5281/zenodo.5848916";
+    dct:identifier  "https://doi.org/10.5281/zenodo.6940891";
     dct:licence     <https://creativecommons.org/licenses/by/3.0/fr/>;
     schema:licence  <https://creativecommons.org/licenses/by/3.0/fr/>;
-    owl:versionInfo "15.1";
-    dcat:version    "15.1";
+    owl:versionInfo "15.2";
+    dcat:version    "15.2";
     dct:issued      "2022-01-19"^^xsd:date; schema:datePublished "2022-01-19"^^xsd:date;
+    dct:modified    "2022-07-29"^^xsd:date;
 
     dct:publisher
         <https://ror.org/03wkt5x30>, taxref:INPN,
@@ -124,18 +125,17 @@ taxref:taxref-ld
 
     dcat:distribution [
         a                   dcat:Distribution;
-        dct:description     "Distribution of TAXREF-LD as an archive of RDF Turtle files"
-        dcat:accessURL      <https://doi.org/10.5281/zenodo.5848916>;
-        dcat:downloadURL    <https://zenodo.org/record/5848916/files/taxrefld15.tar>;
+        dct:description     "Distribution of TAXREF-LD as an archive of RDF Turtle files";
+        dcat:accessURL      <https://doi.org/10.5281/zenodo.6940891>;
+        dcat:downloadURL    <https://zenodo.org/record/6940891/files/taxrefld15.2.zip>;
         dcat:mediaType      <http://www.iana.org/assignments/media-types/text/turtle>;
-        dcat:packageFormat  <http://publications.europa.eu/resource/authority/file-type/TAR>;
         dcat:compressFormat <http://www.iana.org/assignments/media-types/application/zip>;
     ];
 
     a prov:Entity;
     prov:hadPrimarySource   taxref:taxref;
     prov:wasGeneratedBy     taxref:RdfGeneration;
-    prov:wasGeneratedAtTime "2022-01-19"^^xsd:date;
+    prov:wasGeneratedAtTime "2022-07-29"^^xsd:date;
 
     dct:spatial
         <http://sws.geonames.org/3017382/>, <http://sws.geonames.org/3381670/>, <http://sws.geonames.org/3570311/>, <http://sws.geonames.org/3579143/>, <http://sws.geonames.org/3578421/>, <http://sws.geonames.org/3578476/>, <http://sws.geonames.org/3424932/>, <http://sws.geonames.org/1024031/>, <http://sws.geonames.org/935317/>, <http://sws.geonames.org/6690916/>, <http://sws.geonames.org/1546748/>, <http://sws.geonames.org/4030656/>, <http://sws.geonames.org/2139685/>, <http://sws.geonames.org/4034749/>, <http://sws.geonames.org/4020092/>;
@@ -146,9 +146,9 @@ taxref:taxref-ld
     a                   void:Dataset;
     void:uriSpace       "http://taxref.mnhn.fr/lod/";
     void:rootResource   <http://taxref.mnhn.fr/lod/name/349525>;
-    void:triples        "35353007"^^xsd:integer;
+    void:triples        "35486931"^^xsd:integer;
     void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>;
-    void:dataDump       <https://zenodo.org/record/5848916/files/taxrefld15.tar>;
+    void:dataDump       <https://zenodo.org/record/6940891/files/taxrefld15.2.zip>;
     void:exampleResource <http://taxref.mnhn.fr/lod/taxon/60878>;
     void:vocabulary
         skos:, skosxl:, dct:, foaf:, schema:, bibo:, <http://www.wikidata.org/>, <http://sws.geonames.org/>,
@@ -319,7 +319,7 @@ taxref:hal01617708
     dct:creator     <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
     schema:author   <https://orcid.org/0000-0001-9064-0463>, taxref:oliviergargominy, taxref:sandrinetercerie, <https://orcid.org/0000-0001-5959-5561>;
     schema:sameAs   <https://hal.archives-ouvertes.fr/hal-01617708>, <http://fusion.cs.uni-jena.de/s4biodiv2017>;
-    schema:about    taxref:taxref-ld:
+    schema:about    taxref:taxref-ld;
     dct:references  taxref:taxref-ld.
 
 taxref:taxrefmethodo

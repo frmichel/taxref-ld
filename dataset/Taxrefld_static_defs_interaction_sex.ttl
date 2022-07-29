@@ -5,18 +5,30 @@
 @prefix skosxl:         <http://www.w3.org/2008/05/skos-xl#>.
 @prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
 
+@prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
 
 
-# --- Classes of individuals with a each sex
+# --- Classes of male and female individuals 
 
 <http://taxref.mnhn.fr/lod/mâle_Organisms>
     rdfs:label "male oganisms"@en;
     rdfs:label "oganismes mâles"@fr;
+    owl:equivalentClass [
+        a owl:Restriction;
+        owl:onProperty    taxrefprop:hasSex;
+        owl:hasValue      <http://www.wikidata.org/entity/Q6581097>
+    ];
     owl:equivalentClass <http://purl.obolibrary.org/obo/BILA_0000027>;
     owl:equivalentClass <http://www.wikidata.org/entity/Q44148>.
+
 
 <http://taxref.mnhn.fr/lod/femelle_Organisms>
     rdfs:label "female oganisms"@en;
     rdfs:label "oganismes femelles"@fr;
+    owl:equivalentClass [
+        a owl:Restriction;
+        owl:onProperty    taxrefprop:hasSex;
+        owl:hasValue      <http://www.wikidata.org/entity/Q6581072>
+    ];
     owl:equivalentClass <http://purl.obolibrary.org/obo/BILA_0000028>;
     owl:equivalentClass <http://www.wikidata.org/entity/Q43445>.
