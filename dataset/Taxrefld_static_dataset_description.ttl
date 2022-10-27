@@ -13,10 +13,12 @@
 @prefix dwc:            <http://rs.tdwg.org/dwc/terms/> .
 @prefix dwciri:         <http://rs.tdwg.org/dwc/iri/> .
 @prefix foaf:           <http://xmlns.com/foaf/0.1/>.
+@prefix pav:            <http://purl.org/pav/>.
 @prefix prov:           <http://www.w3.org/ns/prov#>.
 @prefix ro:             <http://purl.obolibrary.org/obo/>.
 @prefix schema:         <http://schema.org/>.
 @prefix tn:             <http://rs.tdwg.org/ontology/voc/TaxonName#>.
+@prefix vann:           <http://purl.org/vocab/vann/> .
 @prefix void:           <http://rdfs.org/ns/void#>.
 @prefix wd:             <http://www.wikidata.org/entity/>.           # Wikibase entity
 @prefix wdt:            <http://www.wikidata.org/prop/direct/>.      # truthy assertions
@@ -39,7 +41,6 @@ taxref:Catalog
     dct:title  "Catalogue des jeux de données TAXREF-LD"@fr;
     rdfs:label "Catalogue des jeux de données TAXREF-LD"@fr;
     foaf:page <https://github.com/frmichel/taxref-ld/>;
-    schema:sameAs <https://datahub.ckan.io/dataset/taxref-ld>;
     dct:language <http://id.loc.gov/vocabulary/iso639-1/fr>, <http://data.bnf.fr/ark:/12148/cb11935375d>;
     dct:language <http://id.loc.gov/vocabulary/iso639-1/en>, <http://data.bnf.fr/ark:/12148/cb119308987>;
     dcat:dataset taxref:taxref-ld;
@@ -63,8 +64,8 @@ taxref:taxref
     schema:sameAs           <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     foaf:page               <https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en>;
     
-    dct:licence             <https://creativecommons.org/licenses/by/3.0/fr/>;
-    schema:licence          <https://creativecommons.org/licenses/by/3.0/fr/>;
+    dct:license             <https://creativecommons.org/licenses/by/3.0/fr/>;
+    schema:license          <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo         "15.0";
     dcat:version            "15.0";
     dct:issued              "2021-12-16"^^xsd:date;
@@ -85,14 +86,19 @@ taxref:taxref-ld
     dct:description "Representation of the TAXREF taxonomic register as linked data. This resource is at the same time an ontology of classes depicting the taxa and a thesaurus (SKOS concept scheme) of the scientific names attached to the taxa."@en;
     dct:description "Représentation du référentiel taxonomique TAXREF comme un jeu de données liées. Cette ressource est à la fois une ontologies des classes représentant les taxons, et un thésaurus (SKOS concept scheme) des noms scientifiques désignant ces taxons."@fr;
     foaf:page <https://github.com/frmichel/taxref-ld/>;
+    dct:bibliographicCitation "Franck Michel, Olivier Gargominy, Sandrine Tercerie, Catherine Faron Zucker. A Model to Represent Nomenclatural and Taxonomic Information as Linked Data. Application to the French Taxonomic Register, TAXREF. In Proceedings of the 2nd International Workshop on Semantics for Biodiversity (S4Biodiv) co-located with ISWC 2017, Oct 2017, Vienna, Austria. CEUR Vol. 1933, pp.1-12, 2017";
 
     dct:identifier  "https://doi.org/10.5281/zenodo.6940891";
-    dct:licence     <https://creativecommons.org/licenses/by/3.0/fr/>;
-    schema:licence  <https://creativecommons.org/licenses/by/3.0/fr/>;
+    bibo:doi        "10.5281/zenodo.6940891";
+    dct:license     <https://creativecommons.org/licenses/by/3.0/fr/>;
+    schema:license  <https://creativecommons.org/licenses/by/3.0/fr/>;
     owl:versionInfo "15.2";
+    owl:versionIRI  <http://taxref.mnhn.fr/lod/taxref-ld/15.2>;
     dcat:version    "15.2";
-    dct:issued      "2022-01-19"^^xsd:date; schema:datePublished "2022-01-19"^^xsd:date;
-    dct:modified    "2022-07-29"^^xsd:date;
+
+    pav:createdOn "2015"^^xsd:gYear; dct:created "2015"^^xsd:gYear; schema:dateCreated "2015"^^xsd:gYear;
+    dct:issued    "2022-07-29"^^xsd:date; schema:datePublished "2022-07-29"^^xsd:date;
+    dct:modified  "2022-07-29"^^xsd:date; schema:dateModified "2022-07-29"^^xsd:date;
 
     dct:publisher
         <https://ror.org/03wkt5x30>, taxref:INPN,
@@ -108,6 +114,11 @@ taxref:taxref-ld
         taxref:oliviergargominy, taxref:sandrinetercerie;
     dct:contributor <https://orcid.org/0000-0003-4868-2584>, "Julien Kaplan";
     foaf:fundedBy
+        <https://ror.org/03wkt5x30>, taxref:INPN,
+        <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
+
+    dct:accessRights <http://purl.org/coar/access_right/c_abf2>, <http://publications.europa.eu/resource/authority/access-right/PUBLIC>;
+    dct:rightsHolder 
         <https://ror.org/03wkt5x30>, taxref:INPN,
         <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
 
@@ -134,11 +145,15 @@ taxref:taxref-ld
 
     a prov:Entity;
     prov:hadPrimarySource   taxref:taxref;
+    prov:wasDerivedFrom     taxref:taxref;
     prov:wasGeneratedBy     taxref:RdfGeneration;
     prov:wasGeneratedAtTime "2022-07-29"^^xsd:date;
 
     dct:spatial
         <http://sws.geonames.org/3017382/>, <http://sws.geonames.org/3381670/>, <http://sws.geonames.org/3570311/>, <http://sws.geonames.org/3579143/>, <http://sws.geonames.org/3578421/>, <http://sws.geonames.org/3578476/>, <http://sws.geonames.org/3424932/>, <http://sws.geonames.org/1024031/>, <http://sws.geonames.org/935317/>, <http://sws.geonames.org/6690916/>, <http://sws.geonames.org/1546748/>, <http://sws.geonames.org/4030656/>, <http://sws.geonames.org/2139685/>, <http://sws.geonames.org/4034749/>, <http://sws.geonames.org/4020092/>;
+        
+    vann:preferredNamespaceUri      "http://taxref.mnhn.fr/lod/";
+    vann:preferredNamespacePrefix   "taxref";
     .
 
 # TAXREF-LD dataset VOID description
@@ -282,7 +297,7 @@ taxref:xR2RML
     dct:title "Morph-xR2RML"; rdfs:label "Morph-xR2RML";
     dct:description "Implementation of the xR2RML mapping language";
     dct:creator <https://orcid.org/0000-0001-9064-0463>; schema:author <https://orcid.org/0000-0001-9064-0463>;
-    dct:licence <http://www.apache.org/licenses/LICENSE-2.0>;
+    dct:license <http://www.apache.org/licenses/LICENSE-2.0>;
     owl:versionInfo "1.3.2";
     schema:subjectOf taxref:hal01207828.
   
