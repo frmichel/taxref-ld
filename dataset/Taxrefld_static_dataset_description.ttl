@@ -7,6 +7,7 @@
 @prefix xsd:            <http://www.w3.org/2001/XMLSchema#>.
 
 @prefix bibo:           <http://purl.org/ontology/bibo/> .
+@prefix cc:             <https://creativecommons.org/ns#>.
 @prefix dcat:           <http://www.w3.org/ns/dcat#>.
 @prefix dce:            <http://purl.org/dc/elements/1.1/>.
 @prefix dct:            <http://purl.org/dc/terms/>.
@@ -108,10 +109,10 @@ taxref:taxref-ld
         <https://ror.org/0496p8026>, <https://ror.org/02kvxyf05>, <https://ror.org/02feahw73>;
     dct:creator 
         <https://orcid.org/0000-0001-9064-0463>, <https://orcid.org/0000-0001-5959-5561>, 
-        taxref:oliviergargominy, taxref:sandrinetercerie;
+        <https://orcid.org/0000-0001-7807-944X>, <https://orcid.org/0000-0002-4341-062X>;
     schema:author
         <https://orcid.org/0000-0001-9064-0463>, <https://orcid.org/0000-0001-5959-5561>, 
-        taxref:oliviergargominy, taxref:sandrinetercerie;
+        <https://orcid.org/0000-0001-7807-944X>, <https://orcid.org/0000-0002-4341-062X>;
     dct:contributor <https://orcid.org/0000-0003-4868-2584>, "Julien Kaplan";
     foaf:fundedBy
         <https://ror.org/03wkt5x30>, taxref:INPN,
@@ -147,13 +148,22 @@ taxref:taxref-ld
     prov:hadPrimarySource   taxref:taxref;
     prov:wasDerivedFrom     taxref:taxref;
     prov:wasGeneratedBy     taxref:RdfGeneration;
-    prov:wasGeneratedAtTime "2022-07-29"^^xsd:date;
+    prov:generatedAtTime "2022-07-29"^^xsd:date;
 
     dct:spatial
         <http://sws.geonames.org/3017382/>, <http://sws.geonames.org/3381670/>, <http://sws.geonames.org/3570311/>, <http://sws.geonames.org/3579143/>, <http://sws.geonames.org/3578421/>, <http://sws.geonames.org/3578476/>, <http://sws.geonames.org/3424932/>, <http://sws.geonames.org/1024031/>, <http://sws.geonames.org/935317/>, <http://sws.geonames.org/6690916/>, <http://sws.geonames.org/1546748/>, <http://sws.geonames.org/4030656/>, <http://sws.geonames.org/2139685/>, <http://sws.geonames.org/4034749/>, <http://sws.geonames.org/4020092/>;
         
     vann:preferredNamespaceUri      "http://taxref.mnhn.fr/lod/";
     vann:preferredNamespacePrefix   "taxref";
+    
+    # Added based on Agroportal's recommendations
+    cc:morePermissions              <http://purl.org/coar/access_right/c_abf2>;
+    pav:createdWith                 taxref:xR2RML;
+    dct:accrualMethod               <https://inpn.mnhn.fr/docs-web/docs/download/396404>;
+    dct:accrualPeriodicity          <http://purl.org/linked-data/sdmx/2009/code#freq-A>;
+    dct:isFormatOf                  taxref:taxref;
+    schema:includedInDataCatalog    <https://zenodo.org>;
+    foaf:depiction                  <https://image.slidesharecdn.com/tdwg2017presentation-180312130445/95/taxrefld-a-reference-thesaurus-for-biodiversity-on-the-web-of-linked-data-11-638.jpg?cb=1527149751>;
     .
 
 # TAXREF-LD dataset VOID description
