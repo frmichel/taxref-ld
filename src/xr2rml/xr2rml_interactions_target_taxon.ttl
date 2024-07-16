@@ -32,14 +32,14 @@
 #  ].
 
 <#SM_Extd> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}_sha1({$.targetStage})";
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.referenceId}_sha1({$.targetStage})";
     rr:class owl:Class.
 
 <#TPL_intersectionOf_BN>
-    rr:template "intersectionOf_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "intersectionOf_{$._id}_{$.target.referenceId}_{$.targetStage}"; rr:termType rr:BlankNode.
     
 <#TPL_intersectionOf_list1>
-    rr:template "list_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "list_{$._id}_{$.target.referenceId}_{$.targetStage}"; rr:termType rr:BlankNode.
 
 
 <#LS_Extd_Stage> xrr:query """db.interactions.find({'targetStage': {$ne: null}})""".
@@ -60,11 +60,11 @@
     xrr:logicalSource <#LS_Extd_Stage>;
     rr:subjectMap <#TPL_intersectionOf_list1>;
     rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.referenceId}" ]];
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage> ].
 
 <#TPL_intersectionOf_list2_taxon_stage>
-    rr:template "sublist_{$._id}_{$.target.id}_{$.targetStage}"; rr:termType rr:BlankNode.
+    rr:template "sublist_{$._id}_{$.target.referenceId}_{$.targetStage}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list2_taxon_stage>
     a rr:TriplesMap;

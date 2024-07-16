@@ -33,14 +33,14 @@
 #  ].
 
 <#SM_Extd> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}_sha1({$.taxonStage}_{$.taxonSex})";
+    rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}_sha1({$.taxonStage}_{$.taxonSex})";
     rr:class owl:Class.
 
 <#TPL_intersectionOf_BN>
-    rr:template "intersectionOf_{$._id}_{$.taxon.id}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
+    rr:template "intersectionOf_{$._id}_{$.taxon.referenceId}_{$.taxonStage}_{$.taxonSex}"; rr:termType rr:BlankNode.
     
 <#TPL_intersectionOf_list1>
-    rr:template "list1_{$.taxon.id}_{$._id}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
+    rr:template "list1_{$.taxon.referenceId}_{$._id}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
 
 
 # Stage and no sex
@@ -86,11 +86,11 @@
     xrr:logicalSource <#LS_Extd_Stage>;
     rr:subjectMap <#TPL_intersectionOf_list1>;
     rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}" ]];
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage> ].
 
 <#TPL_intersectionOf_list2_taxon_stage>
-    rr:template "list2_{$._id}_{$.taxon.id}_stage_{$.taxonStage}"; rr:termType rr:BlankNode.
+    rr:template "list2_{$._id}_{$.taxon.referenceId}_stage_{$.taxonStage}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list2_taxon_stage>
     a rr:TriplesMap;
@@ -107,11 +107,11 @@
     xrr:logicalSource <#LS_Extd_Sex>;
     rr:subjectMap <#TPL_intersectionOf_list1>;
     rr:predicateObjectMap [ rr:predicate rdf:type; rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}" ]];
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_sex> ].
 
 <#TPL_intersectionOf_list2_taxon_sex>
-    rr:template "list2_{$._id}_{$.taxon.id}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
+    rr:template "list2_{$._id}_{$.taxon.referenceId}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list2_taxon_sex>
     a rr:TriplesMap;
@@ -128,11 +128,11 @@
     xrr:logicalSource <#LS_Extd_Stage_Sex>;
     rr:subjectMap <#TPL_intersectionOf_list1>;
     rr:predicateObjectMap [ rr:predicate rdf:type;  rr:objectMap [ rr:constant rdf:List; rr:termType rr:IRI ]];
-    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}" ]];
+    rr:predicateObjectMap [ rr:predicate rdf:first; rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}" ]];
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list2_taxon_stage_sex> ].
 
 <#TPL_intersectionOf_list2_taxon_stage_sex>
-    rr:template "list2_{$._id}_{$.taxon.id}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
+    rr:template "list2_{$._id}_{$.taxon.referenceId}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list2_taxon_stage_sex>
     a rr:TriplesMap;
@@ -143,7 +143,7 @@
     rr:predicateObjectMap [ rr:predicate rdf:rest;  rr:objectMap <#TPL_intersectionOf_list3_taxon_stage_sex> ].
 
 <#TPL_intersectionOf_list3_taxon_stage_sex>
-    rr:template "list3_{$._id}_{$.taxon.id}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
+    rr:template "list3_{$._id}_{$.taxon.referenceId}_stage_{$.taxonStage}_sex_{$.taxonSex}"; rr:termType rr:BlankNode.
 
 <#TM_intersectionOf_list3_taxon_stage_sex>
     a rr:TriplesMap;

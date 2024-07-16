@@ -67,19 +67,19 @@
 
 
 <#SM_Interaction> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/interact/{$.taxon.id}-{$.target.id}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
+    rr:template "http://taxref.mnhn.fr/lod/interact/{$.taxon.referenceId}-{$.target.referenceId}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
     rr:class <http://purl.org/biotop/biotop.owl#OrganismInteraction>, rdf:Statement.
 <#SM_Interaction_Inv> a rr:SubjectMap;
-    rr:template "http://taxref.mnhn.fr/lod/interact/{$.target.id}-{$.taxon.id}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
+    rr:template "http://taxref.mnhn.fr/lod/interact/{$.target.referenceId}-{$.taxon.referenceId}-{$.source.id}-sha1({$.taxonStage}{$.taxonSex}{$.targetStage}{$.relationId})";
     rr:class <http://purl.org/biotop/biotop.owl#OrganismInteraction>, rdf:Statement.
 
 # Standard taxa URIs: involved in interactions without biological stage or sex
-<#TPL_Taxon_Source> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}".
-<#TPL_Taxon_Target> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}".
+<#TPL_Taxon_Source> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}".
+<#TPL_Taxon_Target> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.referenceId}".
 
 # Extended taxa URIS: involved in interactions with biological stage and/or sex
-<#TPL_Taxon_Source_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.id}_sha1({$.taxonStage}_{$.taxonSex})".
-<#TPL_Taxon_Target_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.id}_sha1({$.targetStage})".
+<#TPL_Taxon_Source_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.taxon.referenceId}_sha1({$.taxonStage}_{$.taxonSex})".
+<#TPL_Taxon_Target_Extd> rr:template "http://taxref.mnhn.fr/lod/taxon/{$.target.referenceId}_sha1({$.targetStage})".
 
 <#TPL_Doc> rr:template "http://taxref.mnhn.fr/lod/bib/{$.source.id}".
 

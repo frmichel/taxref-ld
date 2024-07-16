@@ -47,7 +47,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; xrr:languageReference "$.langageId" ];
     ].
     
 # Bislame
@@ -57,7 +59,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "bi" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "bi" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "bi" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "bi" ];
     ].
 
 # Breton
@@ -67,7 +71,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "br" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "br" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "br" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "br" ];
     ].
     
 # Corse
@@ -77,7 +83,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "co" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "co" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "co" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "co" ];
     ].
     
 # English
@@ -87,7 +95,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "en" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "en" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "en" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "en" ];
     ].
     
 # Basque
@@ -97,7 +107,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "eu" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "eu" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "eu" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "eu" ];
     ].
     
 # French
@@ -107,7 +119,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "fr" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "fr" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "fr" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "fr" ];
     ].
     
 # Occitane
@@ -117,7 +131,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "oc" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "oc" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "oc" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "oc" ];
     ].
     
 # Tahitian
@@ -127,7 +143,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "ty" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "ty" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "ty" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "ty" ];
     ].
     
 # Portuguese
@@ -137,7 +155,9 @@
     rr:subjectMap <#SM_Taxon>;
     rr:predicateObjectMap [
         rr:predicate taxrefprop:vernacularName;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string; rr:language "pt" ];    
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string; rr:language "pt" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(1)"; rr:datatype xsd:string; rr:language "pt" ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(2)"; rr:datatype xsd:string; rr:language "pt" ];
     ].
     
     
@@ -150,7 +170,7 @@
     rr:class skosxl:Label.
 
 
-<#TM_Taxon>
+<#TM_TaxonX>
     a rr:TriplesMap;
     xrr:logicalSource [ xrr:query """db.vernaculars.find({$or: [{locationId: {$ne: null}}, {sourceId: {$ne: null}}]} )""" ];
     rr:subjectMap <#SM_Taxon>;
@@ -180,7 +200,7 @@
     ];
     rr:predicateObjectMap [ 
         rr:predicate rdfs:label;
-        rr:objectMap [ xrr:reference "$.name"; rr:datatype xsd:string ];
+        rr:objectMap [ xrr:reference "JSONPath($.name)/CSV(0)"; rr:datatype xsd:string ];
     ].
     
     
