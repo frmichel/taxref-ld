@@ -57,7 +57,10 @@ while [ ! -z "$1" ]; do
 done
 
 echo "rdf_loader_run();"  >> $tempfile
+echo "SELECT * FROM DB.DBA.load_list;"  >> $tempfile
+echo "checkpoint;"  >> $tempfile
 cat $tempfile
+
 
 #--- Run file against isql
 cat $tempfile | /usr/local/virtuoso-opensource/bin/isql -H localhost -U dba -P 'your password'

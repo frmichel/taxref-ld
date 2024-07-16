@@ -25,9 +25,9 @@ limit=0
 
 echo "************** Querying taxonomy API **************"
 echo "Retrieving page $page ($size entries starting at $start)..."
-    curl -H "Accept: application/hal+json;version=${api_version}" \
-         -o taxref_taxonomy_${TAXREFVER}_${start}.json \
-         -X GET "https://taxref.mnhn.fr/api/taxa/search?version=${taxref_version}&page=${page}&size=${size}"
+curl -H "Accept: application/hal+json;version=${api_version}" \
+     -o taxref_taxonomy_${TAXREFVER}_${start}.json \
+     -X GET "https://taxref.mnhn.fr/api/taxa/search?version=${taxref_version}&page=${page}&size=${size}"
 
 limit=$(jq 'getpath(["page","totalElements"])' taxref_taxonomy_${TAXREFVER}_${start}.json) 
 
@@ -38,7 +38,7 @@ page=$(($page + 1))
 
 while [ "$start" -lt "$limit" ]
 do
-  echo "Retrieving page $page ($size entries starting at $start)..."
+    echo "Retrieving page $page ($size entries starting at $start)..."
     curl -H "Accept: application/hal+json;version=${api_version}" \
          -o taxref_taxonomy_${TAXREFVER}_${start}.json \
          -X GET "https://taxref.mnhn.fr/api/taxa/search?version=${taxref_version}&page=${page}&size=${size}"

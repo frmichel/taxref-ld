@@ -2,6 +2,14 @@
 
 Several steps are involved in the generation of the TAXREF-LD RDF dataset. This folder provides the tools, scripts and mappings files involved in carrying out these steps.
 
+The following gives the procedure to generate a new release of the whole dataset.
+
+## Update environment
+
+Update file `env.sh` with the new version of TAXREF.
+
+In file `xr2rml/xr2rml.properties` update property `database.name[0]` to match the value of `$DB` in `env.sh`.
+
 
 ### Downloading TAXREF and loading it into MongoDB
 
@@ -24,6 +32,12 @@ The scripts, configuration and mapping files are provided in directory [xr2rml](
 RDF files generated at the previous step are imported into a Virtuoso OS instance as separate named graphs. 
 The scripts involved are provided in directory [virtuoso](virtuoso).
 
+### Generate the taxon and name ranks using Darwin Core properties
+
+Once the graph is loaded, run script `add_dwc_ranks.py`: this will generate files `dwc_*.ttl`.
+
+Then go back to directory [virtuoso](virtuoso) and run the command that imports these files.
+ 
 
 ### References
 

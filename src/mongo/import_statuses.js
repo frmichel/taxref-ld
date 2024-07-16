@@ -1,7 +1,7 @@
 // Together with each status, the statuses service provides
 // the status type name and status type group, e.g.:
 //    "statusTypeName" : "Statut biogéographique territorial (TAXREF)",
-//	  "statusTypeGroup" : "Statut biogéographique"
+//    "statusTypeGroup" : "Statut biogéographique"
 // but not the status type code, e.g.:
 //	"statusTypeCode" : "TAXREF_STATUT_BIOGEO",
 // But we need the status type code to build the URIs of legal statuses sources documents, e.g.:

@@ -12,11 +12,11 @@ Some imports include execution of aggregate queries to join separate collections
 - import_locations.sh
 - import_vernaculars.sh
 
-#### 2. The following scripts must be executed in this order:
+#### 2. The following scripts __must__ be executed in this order:
 - import_taxonomy.sh
 - import_externalIds.sh
 
-#### 3. The following scripts must be executed in this order:
+#### 3. The following scripts __must__ be executed in this order:
 - import_status_types.sh
 - import_statuses.sh
 - import_status_codes.sh

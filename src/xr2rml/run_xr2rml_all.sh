@@ -68,11 +68,11 @@ datatype=vernaculars
 ./run_xr2rml_externalIds_dbxref.sh  "The Plant List (TPL)"            "wdt:P1070"   $ODIR
 ./run_xr2rml_externalIds_dbxref.sh  "The World Spider Catalog"        "wdt:P3288"   $ODIR
 ./run_xr2rml_externalIds_dbxref.sh  "TROPICOS"                        "wdt:P960"    $ODIR
-./run_xr2rml_externalIds_dbxref.sh  "VASCAN"                          "wdt:P1745"   $ODIR
 ./run_xr2rml_externalIds_dbxref.sh  "WFO (World Flora Online)"        "wdt:P7715"   $ODIR
 ./run_xr2rml_externalIds_dbxref.sh  "WoRMS"                           "wdt:P850"    $ODIR
 ./run_xr2rml_externalIds_dbxref.sh  "ZooBank"                         "wdt:P1746"   $ODIR
 
+#./run_xr2rml_externalIds_dbxref.sh  "VASCAN"                          "wdt:P1745"   $ODIR
 #./run_xr2rml_externalIds_dbxref.sh  "Amphipoda > WoRMS"               "wdt:P850"    $ODIR
 #./run_xr2rml_externalIds_dbxref.sh  "Ascidiacea > WoRMS"              "wdt:P850"    $ODIR
 #./run_xr2rml_externalIds_dbxref.sh  "Asteroidea > WoRMS"              "wdt:P850"    $ODIR

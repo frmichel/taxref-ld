@@ -33,9 +33,6 @@ graph="http://taxref.mnhn.fr/lod/graph/concepts"
 graph="http://taxref.mnhn.fr/lod/graph/classes/$DATASET_VERSION"
 ./virtuoso-import.sh --cleargraph --path $DATA_DIR --graph $graph    taxonomy_classes.ttl
 
-graph="http://taxref.mnhn.fr/lod/graph/classes/$DATASET_VERSION"
-./virtuoso-import.sh  --path $DATA_DIR --graph $graph    dwc_%.ttl
-
 graph="http://taxref.mnhn.fr/lod/graph/habitats/$DATASET_VERSION"
 ./virtuoso-import.sh --cleargraph --path $DATA_DIR --graph $graph    habitats.ttl
 
@@ -60,7 +57,8 @@ graph="http://taxref.mnhn.fr/lod/graph/links-worms"
 
 # After the taxonomy is loaded, use add_dwc_ranks.py to generate files dwc_*.ttl
 graph="http://taxref.mnhn.fr/lod/graph/classes/$DATASET_VERSION"
-./virtuoso-import.sh --path .. --graph $graph    dwc_%.ttl
+./virtuoso-import.sh --path $DATA_DIR --graph $graph    dwc_%.ttl
+
 
 
 # Calculated links
