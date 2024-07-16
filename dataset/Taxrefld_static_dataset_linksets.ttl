@@ -42,12 +42,12 @@
 taxref:Agrovoc
    a void:Dataset;
    rdfs:label "AGROVOC Multilingual agricultural thesaurus"@en;
-   dct:issued "2021-03-02"^^xsd:date;
+   dct:issued "2024-07-04"^^xsd:date;
    foaf:homepage <http://aims.fao.org/agrovoc>, <https://datahub.io/dataset/agrovoc-skos>.
 taxref:NcbiTaxon
    a void:Dataset;
    rdfs:label "NCBI Organismal Classification"@en;
-   dct:issued "2021-02-15"^^xsd:date;
+   dct:issued "2024-05-08"^^xsd:date;
    foaf:homepage <http://bioportal.bioontology.org/ontologies/NCBITAXON>, <https://datahub.io/dataset/bioportal-ncbitaxon>.
 taxref:Worms
    a void:Dataset;

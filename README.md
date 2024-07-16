@@ -2,8 +2,6 @@
 
 TAXREF-LD is the Linked Data knowledge graph representing [TAXREF](https://inpn.mnhn.fr/programme/referentiel-taxonomique-taxref?lg=en), the French national taxonomical register for fauna, flora and fungus, that covers mainland France and overseas territories.
 
-In version 15, TAXREF-LD registers **657,000+ scientific names** and **199,000+ species**.
-
 TAXREF-LD is a joint initiative of the [UMS Patrinat](http://www.patrinat.fr/) of the [National Museum of Natural History](http://www.mnhn.fr/), and the [I3S laboratory](http://www.i3s.unice.fr/) of [University Côte d'Azur](https://univ-cotedazur.fr), [CNRS](https://www.cnrs.fr) and [Inria](https://www.inria.fr).
 
 
@@ -14,7 +12,7 @@ The main modelling choices in TAXREF-LD are as follows:
 - **each scientific name is modelled as a SKOS concept** (an instance of the skos:Concept class) as well as an instance of the TDWG ontology's TaxonName class.
 
 Additional information is provided for each taxon such as its taxonomic rank, parent taxon, vernacular names, habitat and biogeographical statuses.
-This RDF modeling is detailed are provided in [1], that applies to TAXREF-LD v10.0.
+This RDF modeling is detailed are provided in [1].
 
 Beyond strictly taxonomic information, additional data are provided: **species interactions**, **legal statuses** (conventions, directives, regulations, protections), **conservation statuses** (international/european/national/regional red lists), **location and bibliographical sources for vernacular names**, **cross-references to other datasources** by means of external IDs and webpages, **media** (photos of taxa).
 
@@ -49,6 +47,7 @@ Previous versions are still aviable on this Github repo:
 
 | Version  | Download link |
 | ----  | ---- |
+| 17.0 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12733630.svg)](https://doi.org/10.5281/zenodo.12733630) |
 | 15.2 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6940891.svg)](https://doi.org/10.5281/zenodo.6940891) |
 | 15.1 | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5876775.svg)](https://doi.org/10.5281/zenodo.5876775) |
 | 13.0 | https://github.com/frmichel/taxref-ld/tree/13.0/dataset |
@@ -75,14 +74,14 @@ The following **named graphs** can be queried from our SPARQL endpoint:
 | `http://taxref.mnhn.fr/lod/graph/locations` | regions, departements, territories etc. |393,496|
 | `http://taxref.mnhn.fr/lod/graph/media` | media (photos) linked to taxa |690,508|
 | `http://taxref.mnhn.fr/lod/graph/statuscodes` | description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `statusCodes.ttl` and `statusBiblio.ttl`) |1,804|
-| `http://taxref.mnhn.fr/lod/graph/classes/{TAXREF version}` | description of taxa as OWL classes |4,374,167|
-| `http://taxref.mnhn.fr/lod/graph/concepts/{TAXREF version}` | description of scientific names as SKOS concepts |7,799,394|
-| `http://taxref.mnhn.fr/lod/graph/interactions/{TAXREF version}` | species interactions |303,025|
-| `http://taxref.mnhn.fr/lod/graph/statuses/{TAXREF version}` | all taxa statuses (legal, biogeographical, red list) |7,846,358|
-| `http://taxref.mnhn.fr/lod/graph/vernacular/{TAXREF version}` | taxa vernacular names (direct and as SKOS-XL labels) |518,708|
-| `http://taxref.mnhn.fr/lod/graph/dbxref/{TAXREF version}` | cross-references to identifiers of third-party data sources such as GBIF, WoRMS, the Plant List etc. |10,330,904|
-| `http://taxref.mnhn.fr/lod/graph/webpages/{TAXREF version}` | `foaf:page` links to webpages |2,567,841|
-| `http://taxref.mnhn.fr/lod/graph/links-*/{TAXREF version}` | interllinking to equivalent URIs from NCBI, Agrovoc, WoRMS |250,249|
+| `http://taxref.mnhn.fr/lod/graph/classes` | description of taxa as OWL classes |4,374,167|
+| `http://taxref.mnhn.fr/lod/graph/concepts` | description of scientific names as SKOS concepts |7,799,394|
+| `http://taxref.mnhn.fr/lod/graph/interactions` | species interactions |303,025|
+| `http://taxref.mnhn.fr/lod/graph/statuses` | all taxa statuses (legal, biogeographical, red list) |7,846,358|
+| `http://taxref.mnhn.fr/lod/graph/vernacular` | taxa vernacular names (direct and as SKOS-XL labels) |518,708|
+| `http://taxref.mnhn.fr/lod/graph/dbxref` | cross-references to identifiers of third-party data sources such as GBIF, WoRMS, the Plant List etc. |10,330,904|
+| `http://taxref.mnhn.fr/lod/graph/webpages` | `foaf:page` links to webpages |2,567,841|
+| `http://taxref.mnhn.fr/lod/graph/links-*` | interllinking to equivalent URIs from NCBI, Agrovoc, WoRMS |250,249|
 | Total | | 35,486,931 |
 
 ## License
@@ -98,7 +97,7 @@ The code used to produce the dataset, provided in folder src, is licensed under 
 
 When mentioning TAXREF-LD in a publication or when redistributing it, please cite this way:
 
-TAXREF-LD: Knowledge Graph of the French taxonomic registery. Franck Michel, Catherine FARON, Sandrine TERCERIE, Olivier GARGOMINY. 2017-2022. https://doi.org/10.5281/zenodo.5848916
+TAXREF-LD: Knowledge Graph of the French taxonomic registery. Franck Michel, Catherine FARON, Sandrine TERCERIE, Olivier GARGOMINY. 2017-2022. DOI: [10.5281/zenodo.6940891](https://doi.org/10.5281/zenodo.6940891)
 
 
 ## Reference(s)

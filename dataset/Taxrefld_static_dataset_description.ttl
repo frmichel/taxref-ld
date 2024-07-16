@@ -39,6 +39,7 @@
 <http://taxref.mnhn.fr/lod/taxref-ld/14.0> owl:deprecated "true"^^xsd:boolean.
 <http://taxref.mnhn.fr/lod/taxref-ld/15.0> owl:deprecated "true"^^xsd:boolean.
 <http://taxref.mnhn.fr/lod/taxref-ld/15.1> owl:deprecated "true"^^xsd:boolean.
+<http://taxref.mnhn.fr/lod/taxref-ld/15.2> owl:deprecated "true"^^xsd:boolean.
 
 
 # ------------------------------------------------------------------------------
@@ -75,14 +76,14 @@ taxref:taxref
     dct:license             <https://creativecommons.org/licenses/by/3.0/fr/>;
     schema:license          <https://creativecommons.org/licenses/by/3.0/fr/>;
     
-    owl:versionInfo         "15.0";
-    dcat:version            "15.0";
-    pav:version             "15.0";
-    schema:version          "15.0";
+    owl:versionInfo         "17.0";
+    dcat:version            "17.0";
+    pav:version             "17.0";
+    schema:version          "17.0";
 
     pav:createdOn           "2008-02-15"^^xsd:date; dct:created "2008-02-15"^^xsd:date; schema:dateCreated "2008-02-15"^^xsd:date;
-    dct:issued              "2021-12-16"^^xsd:date; schema:datePublished "2021-12-16"^^xsd:date;
-    dct:modified            "2021-12-16"^^xsd:date; schema:dateModified  "2021-12-16"^^xsd:date;
+    dct:issued              "2024-01-10"^^xsd:date; schema:datePublished "2024-01-10"^^xsd:date;
+    dct:modified            "2024-01-10"^^xsd:date; schema:dateModified  "2024-01-10"^^xsd:date;
 
     dct:creator             "O. Gargominy", "S. Tercerie", "C. Régnier", "T. Ramage", "C. Schoelinck", "P. Dupont", "E. Vandel", "P. Daszkiewicz";
     dct:publisher           <https://ror.org/03wkt5x30>, taxref:INPN;
@@ -104,7 +105,7 @@ taxref:taxref-ld
     schema:subjectOf    taxref:hal01617708;
     dcat:langindgPage   <https://github.com/frmichel/taxref-ld/>;
     foaf:depiction      <https://image.slidesharecdn.com/tdwg2017presentation-180312130445/95/taxrefld-a-reference-thesaurus-for-biodiversity-on-the-web-of-linked-data-11-638.jpg?cb=1527149751>;
-    dct:bibliographicCitation "Franck MICHEL, Catherine FARON, Sandrine TERCERIE & Olivier GARGOMINY. (2022). TAXREF-LD: Knowledge Graph of the French taxonomic registry (15.2) [Data set]";
+    dct:bibliographicCitation "Franck MICHEL, Catherine FARON, Sandrine TERCERIE & Olivier GARGOMINY. (2024). TAXREF-LD: Knowledge Graph of the French taxonomic registry (17.0) [Data set]";
 
 
     # License, rights, citation, methodlogy ---------------------------------
@@ -120,20 +121,20 @@ taxref:taxref-ld
 
     
     # Versioning, dates -----------------------------------------------------
-    dct:identifier      "https://doi.org/10.5281/zenodo.6940891";
-    bibo:doi            "10.5281/zenodo.6940891";
-    owl:versionIRI      <http://taxref.mnhn.fr/lod/taxref-ld/15.2>;
-    owl:versionInfo     "15.2";
-    dcat:version        "15.2";
-    pav:version         "15.2";
-    schema:version      "15.2";
+    dct:identifier      "https://doi.org/10.5281/zenodo.12733630";
+    bibo:doi            "10.5281/zenodo.12733630";
+    owl:versionIRI      <http://taxref.mnhn.fr/lod/taxref-ld/17.0>;
+    owl:versionInfo     "17.0";
+    dcat:version        "17.0";
+    pav:version         "17.0";
+    schema:version      "17.0";
 
-    vann:changes        <https://github.com/frmichel/taxref-ld/blob/master/CHANGELOG.md#152-2022-07-29>;
-    owl:priorVersion    <http://taxref.mnhn.fr/lod/taxref-ld/15.1>;
+    vann:changes        <https://github.com/frmichel/taxref-ld/blob/master/CHANGELOG.md#170-2024-04-30>;
+    owl:priorVersion    <http://taxref.mnhn.fr/lod/taxref-ld/15.2>;
     
     pav:createdOn       "2015"^^xsd:gYear; dct:created "2015"^^xsd:gYear; schema:dateCreated "2015"^^xsd:gYear;
-    dct:issued          "2022-07-29"^^xsd:date; schema:datePublished "2022-07-29"^^xsd:date;
-    dct:modified        "2022-07-29"^^xsd:date; schema:dateModified "2022-07-29"^^xsd:date;
+    dct:issued          "2024-04-30"^^xsd:date; schema:datePublished "2024-04-30"^^xsd:date;
+    dct:modified        "2024-04-30"^^xsd:date; schema:dateModified "2024-04-30"^^xsd:date;
     
     dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/10.0>;
     dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/12.0>;
@@ -141,6 +142,7 @@ taxref:taxref-ld
     dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/14.0>;
     dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/15.0>;
     dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/15.1>;
+    dct:hasVersion      <http://taxref.mnhn.fr/lod/taxref-ld/15.2>;
     
     
     # Authoring, institutions ----------------------------------------------
@@ -179,8 +181,8 @@ taxref:taxref-ld
     dcat:distribution [
         a                   dcat:Distribution;
         dct:description     "Distribution of TAXREF-LD as an archive of RDF Turtle files";
-        dcat:accessURL      <https://doi.org/10.5281/zenodo.6940891>;
-        dcat:downloadURL    <https://zenodo.org/record/6940891/files/taxrefld15.2.zip>;
+        dcat:accessURL      <https://doi.org/10.5281/zenodo.12733630>;
+        dcat:downloadURL    <https://zenodo.org/record/12733630/files/taxrefld17.0.zip>;
         dcat:mediaType      <http://www.iana.org/assignments/media-types/text/turtle>;
         dcat:compressFormat <http://www.iana.org/assignments/media-types/application/zip>;
     ];
@@ -191,10 +193,9 @@ taxref:taxref-ld
     prov:hadPrimarySource   taxref:taxref;
     prov:wasDerivedFrom     taxref:taxref;
     prov:wasGeneratedBy     taxref:RdfGeneration;
-    prov:generatedAtTime    "2022-07-29"^^xsd:date;
+    prov:generatedAtTime    "2024-04-26"^^xsd:date;
     dct:isFormatOf          taxref:taxref;
     pav:createdWith         taxref:xR2RML;
-    
         
     vann:preferredNamespaceUri      "http://taxref.mnhn.fr/lod/";
     vann:preferredNamespacePrefix   "taxref";    
@@ -204,9 +205,9 @@ taxref:taxref-ld
     a                       void:Dataset;
     void:uriSpace           "http://taxref.mnhn.fr/lod/";
     void:rootResource       <http://taxref.mnhn.fr/lod/name/349525>;
-    void:triples            "35486931"^^xsd:integer;
+    void:triples            "37400000"^^xsd:integer;
     void:sparqlEndpoint     <https://taxref.mnhn.fr/sparql>;
-    void:dataDump           <https://zenodo.org/record/6940891/files/taxrefld15.2.zip>;
+    void:dataDump           <https://zenodo.org/record/12733630/files/taxrefld17.0.zip>;
     void:exampleResource    <http://taxref.mnhn.fr/lod/taxon/60878>;
     void:vocabulary         skos:, skosxl:, dct:, foaf:, schema:, bibo:, <http://www.wikidata.org/>, <http://sws.geonames.org/>, ro:, dwc:, dwciri:,
         <http://aims.fao.org/aos/agrovoc/>, <http://lod.taxonconcept.org/ontology/txn.owl>, <http://purl.obolibrary.org/obo/ncbitaxon.owl>, <http://purl.obolibrary.org/obo/envo.owl>, <http://rdf.geospecies.org/ont/geospecies.owl>, <http://rs.tdwg.org/ontology/voc/TaxonRank>, <http://rs.tdwg.org/ontology/voc/TaxonName>, <http://rs.tdwg.org/dwc/terms/>;
@@ -380,11 +381,11 @@ taxref:hal01617708
 
 taxref:taxrefmethodo
     a <https://data.archives-ouvertes.fr/doctype/Report>, <https://schema.org/Article>;
-    dct:title "TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    schema:name "TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    dct:issued "2021"^^xsd:gYear; schema:datePublished "2021"^^xsd:gYear;
-    dct:bibliographicCitation "Gargominy O., Tercerie S., Régnier C., Ramage T., Dupont P., Daszkiewicz P. & Poncet L. (2021). TAXREF v15, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion. Muséum national d’Histoire naturelle, Paris";
+    dct:title "TAXREF v17, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    schema:name "TAXREF v17, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    dct:issued "2024"^^xsd:gYear; schema:datePublished "2024"^^xsd:gYear;
+    dct:bibliographicCitation "Gargominy O., Tercerie S., Régnier C., Ramage T., Dupont P., Daszkiewicz P. & Poncet L. (2024). TAXREF v17, référentiel taxonomique pour la France: méthodologie, mise en œuvre et diffusion. Muséum national d’Histoire naturelle, Paris";
     dct:creator taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
     schema:author taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
-    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/396404>;
+    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/XXXXX>;
     .

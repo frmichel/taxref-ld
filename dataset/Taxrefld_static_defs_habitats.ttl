@@ -31,15 +31,6 @@
 
 # --- Types of Habitat
 
-taxrefhab:Habitat
-    rdfs:subClassOf skos:Concept;
-    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
-    owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
-    rdfs:label "Class of habitats"@en;
-    dct:description "Class of types of habitat (subclass of skos:Concept)"@en;
-    owl:deprecated "true"^^xsd:boolean.
-
-
 taxrefhab:HabitatCollection
     a skos:Collection;
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
@@ -89,3 +80,14 @@ taxrefhab:Terrestrial
     skos:definition "Espèces vivant uniquement en milieu terrestre"@fr;
     skos:exactMatch <http://purl.obolibrary.org/obo/ENVO_00000446>;
     skos:exactMatch <http://lod.taxonconcept.org/ontology/txn.owl#TerrestrialHabitat>.
+
+
+# --- Deprecated
+
+taxrefhab:Habitat
+    rdfs:subClassOf skos:Concept;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    owl:equivalentClass <http://lod.taxonconcept.org/ontology/txn.owl#Habitat>;
+    rdfs:label "Class of habitats"@en;
+    dct:description "Class of types of habitat (subclass of skos:Concept)"@en;
+    owl:deprecated "true"^^xsd:boolean.

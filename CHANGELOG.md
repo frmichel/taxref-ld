@@ -1,6 +1,21 @@
 # TAXREF-LD changelog
 
 
+## [17.0] 2024-04-30
+
+### Changed
+- Update to TAXREF version 17
+- Change URIs of graphs to non-versioned URIs
+- Fixed issue in the generation of the interactions: some interactions involve the TAXREF ids of synonyms, not reference names. As a results, the process was generating wrong URIs of taxa with ids of synonyms. The fix is to refer always to the referenceId field of the interaction.
+- Fixed issue in the generation of the DBXRefs: all ids were used as taxa whereas some ids are not reference ids. That lead to generating wrong URIs of taxa with ids of synonyms.
+- Fixed bug in the generation of vernacular names: names were generated with 3-letter language tags that must be mapped to 2-letter tagsn e.g. @fra instead of @fr
+
+### Added
+- Various properties in dataset metadata: `vann:changes`, `owl:deprecated`, `owl:deprecated`
+- Split vernacular names that contain a comma into multiple values (done with property `taxrefprop:vernacularName` but not with `taxrefprop:vernacularNameXL` as a `skosxl:Label` can have only one `skosxl:literalForm`)
+
+
+
 ## [15.2] 2022-07-29
 
 ### Changed
