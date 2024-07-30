@@ -52,7 +52,7 @@ graph="http://taxref.mnhn.fr/lod/graph/webpages/$DATASET_VERSION"
 ./virtuoso-import.sh --cleargraph --path $DATA_DIR --graph $graph    externalIds_webpages.ttl
 
 graph="http://taxref.mnhn.fr/lod/graph/links-worms"
-./virtuoso-import.sh --cleargraph --path $DATA_DIR --graph $graph    externalIds_worms.ttl
+./virtuoso-import.sh --cleargraph --path $DATA_DIR --graph $graph    links_worms.ttl
 
 
 # After the taxonomy is loaded, use add_dwc_ranks.py to generate files dwc_*.ttl

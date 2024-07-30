@@ -14,7 +14,7 @@ datatype=biblio
 datatype=externalIds_webpages
 ./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
 
-datatype=externalIds_worms
+datatype=links_worms
 ./run_xr2rml.sh         $datatype  xr2rml_${datatype}.ttl  $ODIR/${datatype}.ttl
 
 datatype=habitats
