@@ -126,6 +126,17 @@
 	.
 
 
+<#TM_Name_In_Collection>
+    a rr:TriplesMap;
+    xrr:logicalSource [ xrr:query """db.taxonomy.find()"""; ];
+    rr:subject taxref:TaxonomicNameCollection;
+    rr:predicateObjectMap [
+        rr:predicate skos:member;
+        rr:objectMap [ rr:template "http://taxref.mnhn.fr/lod/name/{$.id}"; rr:termType rr:IRI; ];
+    ].
+
+
+
 # ---------------------------------------------------------------------------------
 # Taxonomical rank for names
 # ---------------------------------------------------------------------------------
