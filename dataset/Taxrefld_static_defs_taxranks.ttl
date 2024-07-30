@@ -31,20 +31,19 @@
 
 # --- Taxonomical ranks linked with equivalent ranks from other ontologies
 
-taxrefrk:TaxonomicRank
- rdfs:subClassOf skos:Concept;
- rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
- owl:equivalentClass <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>;
- rdfs:label "Class of taxonomical ranks"@en;
- dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en;
- owl:deprecated "true"^^xsd:boolean.
-
-
 taxrefrk:TaxonomicRankCollection
  a skos:Collection;
  rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "Collection of taxonomical ranks"@en;
- skos:member taxrefrk:Domain.
+ skos:member 
+    taxrefrk:Domain, taxrefrk:Superkingdom, taxrefrk:Kingdom, taxrefrk:SubKingdom, taxrefrk:InfraKingdom,
+    taxrefrk:Phylum, taxrefrk:SubPhylum, taxrefrk:InfraPhylum, taxrefrk:Division, taxrefrk:SubDivision, taxrefrk:SuperClass, taxrefrk:Cladus, taxrefrk:Class, 
+    taxrefrk:SubClass, taxrefrk:InfraClass, taxrefrk:Legio, taxrefrk:SuperOrder, taxrefrk:Cohort, taxrefrk:Order, taxrefrk:SubOrder, taxrefrk:InfraOrder, 
+    taxrefrk:SuperFamily, taxrefrk:Family, taxrefrk:SubFamily, taxrefrk:Tribe, taxrefrk:SubTribe, taxrefrk:Genus, taxrefrk:SubGenus, taxrefrk:Section, 
+    taxrefrk:SubSection, taxrefrk:Series, taxrefrk:SubSeries, taxrefrk:Agregate, taxrefrk:Species, taxrefrk:SemiSpecies, taxrefrk:MicroSpecies, taxrefrk:SubSpecies, 
+    taxrefrk:Natio, taxrefrk:Varietas, taxrefrk:SubVarietas, taxrefrk:Forma, taxrefrk:SubForma, taxrefrk:FormaSpecies, taxrefrk:Linea, taxrefrk:Clone, 
+    taxrefrk:Race, taxrefrk:Cultivar, taxrefrk:Morpha, taxrefrk:Abberatio
+ .
  
 taxrefrk:Domain
  a skos:Concept;
@@ -468,3 +467,14 @@ taxrefrk:Abberatio
  a skos:Concept;
  skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
  skos:prefLabel "Abberatio"@en.
+
+
+# Deprecated
+
+taxrefrk:TaxonomicRank
+ rdfs:subClassOf skos:Concept;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ owl:equivalentClass <http://rs.tdwg.org/ontology/voc/TaxonRank#TaxonRankTerm>;
+ rdfs:label "Class of taxonomical ranks"@en;
+ dct:description "Class of taxonomical ranks, subclass of skos:Concept"@en;
+ owl:deprecated "true"^^xsd:boolean.

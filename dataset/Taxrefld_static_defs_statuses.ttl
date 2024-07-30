@@ -54,40 +54,37 @@ taxrefstatus:LegalStatus
     rdfs:subClassOf taxrefstatus:TaxonStatus;
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
     rdfs:label "Status of a taxon attested by a legal document"@en;
-    rdfs:comment "To be used jointly with http://taxref.mnhn.fr/lod/status/TaxonStatusType whose narrower concepts represent directives, conventions, regulations or protections"@en.
+    rdfs:comment "To be used jointly with http://taxref.mnhn.fr/lod/status/LegalStatusCollection whose member concepts represent directives, conventions, regulations or protections"@en.
     
     
 #------------------ Types of taxon legal statuses -------------------
 
-taxrefstatus:TaxonStatusType
-    a skos:Concept;
-    skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
-    skos:prefLabel "Top concept for types of taxon statuses"@en.
+taxrefstatus:LegalStatusCollection
+    a skos:Collection;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Collection of types of legal statuses"@en;
+    skos:member taxrefstatus:InternationalConvention, taxrefstatus:EuropeanDirective, taxrefstatus:Regulation, taxrefstatus:Protection.
     
 taxrefstatus:InternationalConvention
     a skos:Concept;
-    skos:broader taxrefstatus:TaxonStatusType ;
     skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "International Convention"@en;
     skos:prefLabel "Convention internationale"@fr.
     
 taxrefstatus:EuropeanDirective
     a skos:Concept;
-    skos:broader taxrefstatus:TaxonStatusType ;
     skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "European Directive"@en;
     skos:prefLabel "Directive européenne"@fr.    
     
 taxrefstatus:Regulation
     a skos:Concept;
-    skos:broader taxrefstatus:TaxonStatusType ;
     skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "Regulation"@en;
     skos:prefLabel "Règlementation"@fr.
     
 taxrefstatus:Protection
     a skos:Concept;
-    skos:broader taxrefstatus:TaxonStatusType ;
     skos:inScheme <http://taxref.mnhn.fr/lod/taxref-ld>;
     skos:prefLabel "Protection"@en;
     skos:prefLabel "Protection"@fr.    
@@ -124,13 +121,6 @@ taxrefstatus:Protection
 
 
 # --------------------------- Biogeographical status values -------------------------------
-
-taxrefbgs:BioGeographicalStatus
- rdfs:subClassOf skos:Concept;
- rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "Class of biogeographical status values"@en;
- dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en;
- owl:deprecated "true"^^xsd:boolean.
 
 
 taxrefbgs:BioGeographicalStatusCollection
@@ -270,4 +260,14 @@ taxrefbgs:Q
  rdfs:label "reported in error"@en;
  skos:definition "Taxon mentionné par erreur comme présent sur le territoire considéré."@fr;
  skos:exactMatch <http://rs.tdwg.org/ontology/voc/SPMInfoItems#AbsentButReportedInError>.
+
+
+# Deprecated
+
+taxrefbgs:BioGeographicalStatus
+ rdfs:subClassOf skos:Concept;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "Class of biogeographical status values"@en;
+ dct:description "Class of biogeographical status values (subclass of skos:Concept)"@en;
+ owl:deprecated "true"^^xsd:boolean.
 

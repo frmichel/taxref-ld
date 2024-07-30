@@ -205,13 +205,20 @@ taxref:taxref-ld
     a                       void:Dataset;
     void:uriSpace           "http://taxref.mnhn.fr/lod/";
     void:rootResource       <http://taxref.mnhn.fr/lod/name/349525>;
-    void:triples            "37400000"^^xsd:integer;
+    void:triples            "37800000"^^xsd:integer;
     void:sparqlEndpoint     <https://taxref.mnhn.fr/sparql>;
     void:dataDump           <https://zenodo.org/record/12733630/files/taxrefld17.0.zip>;
     void:exampleResource    <http://taxref.mnhn.fr/lod/taxon/60878>;
     void:vocabulary         skos:, skosxl:, dct:, foaf:, schema:, bibo:, <http://www.wikidata.org/>, <http://sws.geonames.org/>, ro:, dwc:, dwciri:,
         <http://aims.fao.org/aos/agrovoc/>, <http://lod.taxonconcept.org/ontology/txn.owl>, <http://purl.obolibrary.org/obo/ncbitaxon.owl>, <http://purl.obolibrary.org/obo/envo.owl>, <http://rdf.geospecies.org/ont/geospecies.owl>, <http://rs.tdwg.org/ontology/voc/TaxonRank>, <http://rs.tdwg.org/ontology/voc/TaxonName>, <http://rs.tdwg.org/dwc/terms/>;
     .
+
+
+taxref:TaxonomicNameCollection
+    a skos:Collection;
+    rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+    rdfs:label "Collection of taxonomic names"@en.
+
 
 # ------------------------------------------------------------------------------
 
@@ -381,11 +388,11 @@ taxref:hal01617708
 
 taxref:taxrefmethodo
     a <https://data.archives-ouvertes.fr/doctype/Report>, <https://schema.org/Article>;
-    dct:title "TAXREF v17, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    schema:name "TAXREF v17, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
-    dct:issued "2024"^^xsd:gYear; schema:datePublished "2024"^^xsd:gYear;
+    dct:title "TAXREF, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    schema:name "TAXREF, référentiel taxonomique pour la France : méthodologie, mise en œuvre et diffusion";
+    dct:issued "2022"^^xsd:gYear; schema:datePublished "2022"^^xsd:gYear;
     dct:bibliographicCitation "Gargominy O., Tercerie S., Régnier C., Ramage T., Dupont P., Daszkiewicz P. & Poncet L. (2024). TAXREF v17, référentiel taxonomique pour la France: méthodologie, mise en œuvre et diffusion. Muséum national d’Histoire naturelle, Paris";
     dct:creator taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
     schema:author taxref:oliviergargominy, taxref:sandrinetercerie, "Régnier C.", "Ramage T.", "Dupont P.", "Daszkiewicz P.", "Poncet L";
-    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/XXXXX>;
+    schema:url <https://inpn.mnhn.fr/docs-web/docs/download/413731>;
     .

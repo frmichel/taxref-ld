@@ -20,7 +20,7 @@ The modelling is exemplified in [dataset/examples](dataset/examples).
 
 ### URIs naming scheme
 
-TAXREF-LD namespace is `http://taxref.mnhn.fr/lod/`. All URIs are dereferenceable.
+TAXREF-LD namespace is `http://taxref.mnhn.fr/lod/`, registered as prefix `taxref` on prefix.cc. All URIs are dereferenceable.
 
 The dataset itslef is identified by URI [`http://taxref.mnhn.fr/lod/taxref-ld`](http://taxref.mnhn.fr/lod/taxref-ld). It comes with  descriptions in DCAT, VOID and SPARQL SD vocabularies.
 
@@ -67,22 +67,22 @@ As an example, you can look up taxon [http://taxref.mnhn.fr/lod/taxon/60878](htt
 
 The following **named graphs** can be queried from our SPARQL endpoint:
 
-| Named graph    | Description | No. RDF triples |
-| -------------  | ---- | ----: |
-| `http://taxref.mnhn.fr/lod/graph/metadata` | DCAT, VOID and SPARQL SD dataset descriptions + definition of various classes, concepts, properties (content of files `dataset/Taxrefld_static*.ttl`) |1,740|
-| `http://taxref.mnhn.fr/lod/graph/biblio` | bibliographic resources |408,737|
-| `http://taxref.mnhn.fr/lod/graph/locations` | regions, departements, territories etc. |393,496|
-| `http://taxref.mnhn.fr/lod/graph/media` | media (photos) linked to taxa |690,508|
-| `http://taxref.mnhn.fr/lod/graph/statuscodes` | description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `statusCodes.ttl` and `statusBiblio.ttl`) |1,804|
-| `http://taxref.mnhn.fr/lod/graph/classes` | description of taxa as OWL classes |4,374,167|
-| `http://taxref.mnhn.fr/lod/graph/concepts` | description of scientific names as SKOS concepts |7,799,394|
-| `http://taxref.mnhn.fr/lod/graph/interactions` | species interactions |303,025|
-| `http://taxref.mnhn.fr/lod/graph/statuses` | all taxa statuses (legal, biogeographical, red list) |7,846,358|
-| `http://taxref.mnhn.fr/lod/graph/vernacular` | taxa vernacular names (direct and as SKOS-XL labels) |518,708|
-| `http://taxref.mnhn.fr/lod/graph/dbxref` | cross-references to identifiers of third-party data sources such as GBIF, WoRMS, the Plant List etc. |10,330,904|
-| `http://taxref.mnhn.fr/lod/graph/webpages` | `foaf:page` links to webpages |2,567,841|
-| `http://taxref.mnhn.fr/lod/graph/links-*` | interllinking to equivalent URIs from NCBI, Agrovoc, WoRMS |250,249|
-| Total | | 35,486,931 |
+| Named graph    | Description |
+| -------------  | ---- |
+| `http://taxref.mnhn.fr/lod/graph/metadata` | DCAT, VOID and SPARQL SD dataset descriptions + definition of various classes, concepts, properties (content of files `dataset/Taxrefld_static*.ttl`) |
+| `http://taxref.mnhn.fr/lod/graph/biblio` | bibliographic resources |
+| `http://taxref.mnhn.fr/lod/graph/locations` | regions, departements, territories etc. |
+| `http://taxref.mnhn.fr/lod/graph/media` | media (photos) linked to taxa |
+| `http://taxref.mnhn.fr/lod/graph/statuscodes` | description of the status values of types international convention, european directive, protection and regulation. These are represented as instances of the class bibo:DocumentPart (e.g. http://taxref.mnhn.fr/lod/status/BONN/IBOAC) and related to the bibliographic source describing the document with property dct:isPartOf (content of files `statusCodes.ttl` and `statusBiblio.ttl`) |
+| `http://taxref.mnhn.fr/lod/graph/classes` | description of taxa as OWL classes |
+| `http://taxref.mnhn.fr/lod/graph/concepts` | description of scientific names as SKOS concepts |
+| `http://taxref.mnhn.fr/lod/graph/interactions` | species interactions |
+| `http://taxref.mnhn.fr/lod/graph/statuses` | all taxa statuses (legal, biogeographical, red list) |
+| `http://taxref.mnhn.fr/lod/graph/vernacular` | taxa vernacular names (direct and as SKOS-XL labels) |
+| `http://taxref.mnhn.fr/lod/graph/dbxref` | cross-references to identifiers of third-party data sources such as GBIF, WoRMS, the Plant List etc. |
+| `http://taxref.mnhn.fr/lod/graph/webpages` | `foaf:page` links to webpages |
+| `http://taxref.mnhn.fr/lod/graph/links-*` | interllinking to equivalent URIs from NCBI, Agrovoc, WoRMS |
+
 
 ## License
 

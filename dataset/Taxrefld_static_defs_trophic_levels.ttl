@@ -26,7 +26,7 @@
 @prefix taxrefloc:      <http://taxref.mnhn.fr/lod/loc/>.
 @prefix taxrefprop:     <http://taxref.mnhn.fr/lod/property/>.
 @prefix taxrefrk:       <http://taxref.mnhn.fr/lod/taxrank/>.
-@prefix taxreftl:      <http://taxref.mnhn.fr/lod/trophicLevel/>.
+@prefix taxreftl:       <http://taxref.mnhn.fr/lod/trophicLevel/>.
 @prefix taxrefstatus:   <http://taxref.mnhn.fr/lod/status/>.
 
 taxreftl:TrophicLevelCollection
@@ -44,7 +44,7 @@ taxreftl:Unknown
  rdfs:label "Unknown"@en;
  skos:prefLabel "Unknown"@en;
  skos:prefLabel "Inconnu"@fr;
- skos:definition "We don't know the species trophic level"@en;
+ skos:definition "The species trophic level is unknown"@en;
  skos:definition "On ne connait pas le niveau trophique de l'espèce"@fr.
 
 taxreftl:Autotroph

@@ -178,7 +178,7 @@ taxrefprop:hasTrophicLevel
 
 
 # ============================================================
-# ==== Properties associated with taxon names
+# ==== Properties associated to taxon names
 # ============================================================
 
 taxrefprop:hasAuthority
