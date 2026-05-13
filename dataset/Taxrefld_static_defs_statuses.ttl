@@ -122,7 +122,6 @@ taxrefstatus:Protection
 
 # --------------------------- Biogeographical status values -------------------------------
 
-
 taxrefbgs:BioGeographicalStatusCollection
     a skos:Collection;
     rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;

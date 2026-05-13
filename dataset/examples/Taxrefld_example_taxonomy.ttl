@@ -48,7 +48,7 @@
     foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en>, <https://www.gbif.org/species/8324617> ;
 
     # GBIF identifier (direct)
-    wdt:P846 "8324617" .
+    wdt:P846 "8324617" ;
 
     # GBIF identifier (through schema:identifier)
     schema:identifier [
@@ -73,8 +73,8 @@
     taxrefprop:hasAuthority     "Linnaeus, 1758" ;
     taxrefprop:hasRank          taxrefrk:Species ;
     taxrefprop:isReferenceNameOf <http://taxref.mnhn.fr/lod/taxon/60878/13.0> ;
-    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> .
-    dct:identifier              "60878";
+    foaf:page                   <https://inpn.mnhn.fr/espece/cd_nom/60878/?lg=en> ;
+    dct:identifier              "60878".
 
 <http://taxref.mnhn.fr/lod/name/361079>
     a                           skos:Concept, tn:TaxonName ;

@@ -133,7 +133,7 @@ taxrefprop:hasReferenceName
 taxrefprop:hasSynonym
  a owl:AnnotationProperty;
  rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
- rdfs:label "has synonym"@en;
+ rdfs:label "has synonym name"@en;
  dct:description "Relates a taxon to one of its synonyms"@en;
  rdfs:comment "DwC's scientificName property is recommended to be used with a literal object, and does not distinguish between reference vs. synonym names. Hence, in TAXREF-LD, we extend it with rdfs:subPropertyOf instead of asserting an equivalence."@en;
  rdfs:seeAlso dwc:scientificName.
@@ -168,6 +168,12 @@ taxrefprop:hasStatus
  rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
  rdfs:label "has status"@en;
  dct:description "Relates a taxon to one of its biogeographical, red list or legal statuses."@en.
+
+taxrefprop:hasTaxonomicStatus
+ a owl:ObjectProperty;
+ rdfs:isDefinedBy <http://taxref.mnhn.fr/lod/taxref-ld>;
+ rdfs:label "has taxonomic status"@en;
+ dct:description "Relates a scientific name to its taxonomic status."@en.
 
 # Unusued in TAXREF-LD v15 as the data is not available from the API
 taxrefprop:hasTrophicLevel

@@ -82,5 +82,5 @@
         # Bibliographic resource that states the status
         dct:source              <http://taxref.mnhn.fr/lod/status/BONN/IBO1> ;
         wdt:P248                <http://taxref.mnhn.fr/lod/status/BONN/IBO1> ;
-    ] ;
+    ] .
 
